@@ -1,0 +1,5 @@
+//MO011-012.TXT ANA00011 TO ANA00012
+Client		TAR	262	nouvelle taille enregistrement : 262
+Client	DateAchat	RUB+		DateAchat est une nouvelle rubrique
+Client	DateDerniereVisite	RUB+		DateDerniereVisite est une nouvelle rubrique
+Client	Batch	RUB+		Batch est une nouvelle rubrique

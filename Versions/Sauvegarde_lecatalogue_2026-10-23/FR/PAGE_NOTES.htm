@@ -1,0 +1,470 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- PAGE_NOTES 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%PAGE_NOTES..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PAGE_NOTES..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// STD_ChaineVersDate
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	d : chaine contenant la date
+//	f : format de la chaine
+function _CVD(d,f)
+{
+	// Normalise le masque
+	f = f.replace(/D/g, "J").replace(/Y/g, "A");
+	// Gere les format pour lesquel il manque une composante
+	var j = (-1 != f.indexOf("J")) ? "" : "01";
+	var m = (-1 != f.indexOf("M")) ? "" : "01";
+	var a = (-1 != f.indexOf("A")) ? "" : "" + (new Date()).getUTCFullYear();
+
+	// Traite caractere par caractere le masque
+	var nF = 0;
+	var nD = 0;
+	var fParseJM = function(c)
+	{
+		var s;
+		// Compte le nombre de caracteres
+		if (f.charAt(nF + 1) == c)
+		{
+			s = d.substr(nD, 2);
+			nF++;
+			nD++;
+		}
+		else if (isNaN(parseInt(d.charAt(nD + 1), 10)))
+		{
+			s = "0" + d.charAt(nD);
+		}
+		else
+		{
+			s = d.substr(nD, 2);
+			nD++;
+		}
+		return s;
+	};
+	for(;nF<f.length;nF++,nD++)
+	{
+		switch(f.charAt(nF))
+		{
+		case "J":
+			j = fParseJM("J");
+			break;
+
+		case "M":
+			m = fParseJM("M");
+			break;
+
+		case "A":
+		case "Y":
+			// Sur 2 ou sur 4 ?
+			if (f.indexOf("AAAA")==nF)
+			{
+				a = d.substr(nD, 4);
+				nF+=3;
+				nD+=3;
+			}
+			else
+			{
+				a = d.substr(nD, 2);
+				a= (parseInt(a)>50?"19":"20")+a;
+				nF++;
+				nD++;
+			}
+			break;
+		}
+	}
+
+	var sRes=a+m+j;
+	return (sRes.length==8)?sRes:"";
+}
+// MakeDateFromWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend une date au format AAAAMMJJHHMMSS avec MM dans 1..12 et retourne un objet date
+// La chaine peut etre tronquee a la date auquel cas l'heure sera nulle
+// Parametres :
+//	c : chaine contenant la date 
+// Variables locales :
+//	a : annee
+//	d : date resultat
+function _WMD(c)
+{
+	// on recupere l'annee
+	var a=c.substring(0,4);
+	// on construit la date
+	var d=new Date(a,parseInt(c.substring(4,6), 10) - 1,c.substring(6,8),c.substring(8,10),c.substring(10,12),c.substring(12,14),c.substring(14,16)+"0");
+	// si l'annee est inferieure a 100, on construit l'annee complete
+	if (parseInt(a, 10) < 100)
+	{
+		d.setFullYear(a);
+	}
+	// on renvoie la date resultat
+	return d;
+}
+// JS_DateToWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend un objet Date et retourne une date au format WL AAAAMMJJ (avec MM dans 1..12)
+// Parametres :
+//	d : objet Date 
+// Variables locales :
+//	s : date en chaine au format WL
+//	m : mois en entier entre 1 et 12
+//	j : j en entier
+function _JDTW(d)
+{
+	// Calcule l'annee
+	var s = d.getFullYear();
+	// Calcule le mois en chaine
+	var m = d.getMonth() + 1;
+	s += ((m < 10) ? "0" : "") + m;
+	// Calcule le jour en chaine
+	var j = d.getDate();
+	s += ((j < 10) ? "0" : "") + j;
+	// Renvoie la date resultat
+	return s;
+}
+// STD_DateVersChaineInterne
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	v : chaine contenant une partie de la valeur
+//	r : format courant de la chaine
+//	tf : Tableau des formats : tableau de couples format, longueur de chaine courte
+function _DVCI(v,r,tf)
+{
+	for (var i = 0; i < tf.length; i++)
+	{
+		// Recherche la position du jour dans le format
+		var j = r.indexOf(tf[i][0]);
+		if(j > -1)
+		{
+			// Supprime les 0 non significatifs
+			while ((v.charAt(0) == "0") && (tf[i][1] > 0))
+			{
+				v = v.substring(1);
+				tf[i][1]--;
+			}
+			// Retourne la chaine
+			return r.substring(0,j) + v + r.substring(j + tf[i][0].length, r.length);
+		}
+	}
+	return r;
+}
+// STD_DateVersChaine
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	d : chaine contenant la date au format AAAAMMJJ
+//	f : format de la chaine
+// Variables locales :
+//	r : resultat
+// 	a : position des annees
+//	m : position des mois
+//	j : position des jours
+function _DVC(d,f)
+{
+	if(d=="")return"";
+	var r=f;
+
+	r = _DVCI(d.substring(6,8),r,[["JJ", 0], ["DD", 0], ["J", 1], ["D", 1]]);
+	r = _DVCI(d.substring(4,6),r,[["MM", 0], ["M", 1]]);
+
+	var a=r.indexOf("AAAA");
+	if(a==-1)a=r.indexOf("YYYY");
+	if(a>-1)return r.substring(0,a)+d.substring(0,4)+r.substring(a+4,r.length);
+	a=r.indexOf("AA");
+	if(a==-1)a=r.indexOf("YY");
+	return r.substring(0,a)+d.substring(2,4)+r.substring(a+2,r.length);
+}
+// v : Date au format du champ
+// f : format de la date du champ
+// d : Nombre de jour du déclage
+function _JDJ(v,f,d)
+{
+	v=_CVD(v,f);
+	v=_WMD(v);
+	v.setTime(v.getTime()+d*86400000);
+	v=_JDTW(v);
+	return _DVC(v,f);
+}
+function _LOD_COM(event)
+{
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%PAGE_NOTES..HTMLENTETE%]<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.SAI_NOMENTREP!=null)try{_PAGE_.SAI_NOMENTREP.focus();}catch(e){}
+
+
+}
+</script>
+<style type="text/css">.wblien {text-align:center;  color:#379DC3;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">
+body{overflow:auto;width:100%;margin:0;  color:#2D2D2D;}#page {  background-color:#FFFFFF;height:614px;}.l-1 {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;color:#2D2D2D;vertical-align:middle;}
+.l-2 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;color:#2D2D2D;}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;color:#2D2D2D;}
+.l-4 {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;}
+.l-5 {background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb1.png);}
+.l-6 {color:#000000;}
+.l-7 {color:#FFFFFF;}
+.l-7:hover {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10pt;font-weight:bold;color:#0000FF;}
+.l-7:active,.l-7:focus {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10pt;font-weight:bold;color:#FFFFFF;}
+.l-8 {background-color:#E2E2E2;}
+.l-9 {background-color:#F4F4F4;}
+.l-10 {background-color:#808080;zoom:1;filter:alpha(opacity=89);opacity:0.89;}
+
+#con-ZONEREPETEE_NOTE_CLIENT{height:97px;}
+
+<CONTENEUR NAME="[%ZONEREPETEE_NOTE_CLIENT..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->#c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-NOTEDATE {text-align:right;width:73px;height:21px;}#lzSAI_NOTEDATE,#lztzSAI_NOTEDATE {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;color:#2D2D2D;vertical-align:middle;}#c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-NOTE {width:479px;height:86px;}#lzSAI_IDNOTE,#lztzSAI_IDNOTE {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;}#c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-IDNOTE {text-align:right;width:41px;height:21px;}
+<!--/REPEAT-->
+</CONTENEUR>#tzczCELLULE4 {opacity:0.89;}#lzSAI_NOMENTREP,#lztzSAI_NOMENTREP {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;}#SAI_NOMENTREP {width:396px;height:22px;}
+</style>
+</head>
+<body style="  background-color:#D3D3D3;" onload="chfocus();[%_CodeInfoError_%]">
+<script type="text/javascript">var bPCSFR=true;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS?c2bdf26"></script><form name="PAGE_NOTES" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.PAGE_NOTES</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+
+<table style="width:100.00%;height:646px">
+	<tr valign="top" style="height:6px">
+		<td style="width:1040px">
+		
+		</td>
+	
+	</tr>
+	<tr valign="top" style="height:640px">
+		<td style="width:100.00%"><table style="width:100%;height:640px;"><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);width:10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);height:10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% 0px;width:10px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td><td id="page" style="width:100%;">
+			<table style="width:100.00%;height:620px">
+				<tr valign="top" style="height:12px">
+					<td style="width:1020px">
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:46px">
+					<td style="width:100.00%">
+						<table style="width:100.00%;height:46px">
+							<tr valign="top" style="height:46px">
+								<td style="width:14px">
+									<div style="height:100%;min-width:14px;width:auto !important;width:14px;" class="lh0">
+									
+									</div>
+								
+								</td>
+								<td style="width:577px">
+									<div style="height:100%;min-width:577px;width:auto !important;width:577px;" class="lh0">
+										<div  style="float:left;display:inline;min-height:44px;height:auto !important;height:44px;">
+											<div  style="min-width:577px;width:auto !important;width:577px;"><table id="dzczCELLULE4"><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8c.png);width:12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8h.png);height:12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8c.png);background-position:100% 0px;width:12px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8v.png);background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td><td style="background-size:100% 100% !important;" id="CELLULE4" bgcolor="#808080" style="position:relative;" height="20" width="553" class="l-5" valign="top"><table width="553px" style="position:relative;height:20px;"><tr><td class="l-5 padding" valign="top" id="tzCELLULE4" style="background-image:none;background-color:transparent;"><div style="position:relative;">
+												<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+													<tr style="height:100%">
+														<td>
+														
+														</td>
+													
+													</tr>
+														<tr style="height:1px">
+															
+															<td><div id="dwwSAINOMENTREP" style="position:absolute;left:0px;top:-1px;width:541px;height:24px;z-index:0;"><table style="position:relative;">
+<tr><td height="24" width="541" valign="top"><div class="ff3fix63895rel" style=""><TABLE width="541" style="position:relative;">
+ <TR>
+  <TD class="l-4 padding" id="lzSAI_NOMENTREP" width="145" height="24">Nom de l'entreprise</TD>
+  <TD width="396px"><INPUT TYPE="text" SIZE="30" MAXLENGTH="60" NAME="SAI_NOMENTREP" VALUE="[%SAI_NOMENTREP%]" id="SAI_NOMENTREP" class="Verdana padding"></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+
+														
+														</td>
+													
+													</tr>
+												
+												</table></div></td></tr></table></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td></tr><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8c.png);background-position:0px -12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8h.png);background-position:0px 100%;height:-12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_b6a197e3_wwcb8c.png);background-position:100% -12px;"></td></tr></table>
+											
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</td>
+								<td style="width:100.00%"></td>
+								<td style="width:11px">
+									<div style="height:100%;min-width:11px;width:auto !important;width:11px;" class="lh0">
+									
+									</div>
+								
+								</td>
+								<td style="width:179px">
+									<div style="height:100%;min-width:179px;width:auto !important;width:179px;" class="lh0">
+										<div  style="float:left;margin:2px 0 0;display:inline;min-height:44px;height:auto !important;height:44px;">
+											<div  style="min-width:179px;width:auto !important;width:179px;"><table id="dzczBTN_CANCEL"><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8c.png);width:12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8h.png);height:12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8c.png);background-position:100% 0px;width:12px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8v.png);background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb1.png); background-color:#808080;background-size:100% 100% !important;"><table width="155px" style="text-align:left;height:20px;"><tr><td class="l-6" valign="middle" id="tzBTN_CANCEL"><a href="javascript:{_JSL(_PAGE_,'BTN_CANCEL','_self','','')}" onmouseout="document.getElementById('z_BTN_CANCEL_IMG').src='[%_PROJET_WEB_%]res/_Quitter%20sans%20sauver_C65FCF5C_.PNG';" onmouseover="document.getElementById('z_BTN_CANCEL_IMG').src='[%_PROJET_WEB_%]res/_Quitter%20sans%20sauver_C65FCF5C_.PNG';" id="BTN_CANCEL" class="l-6 wblien padding"  style="_height:20px;display:block;background-image:none;"><img id="z_BTN_CANCEL_IMG" src="[%_PROJET_WEB_%]res/_Quitter%20sans%20sauver_C65FCF5C_.PNG" alt="" style="width:155px;height:20px;"></a></td></tr></table></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td></tr><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8c.png);background-position:0px -12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8h.png);background-position:0px 100%;height:-12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_5bdc5dda_wwcb8c.png);background-position:100% -12px;"></td></tr></table>
+											
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</td>
+								<td style="width:6px">
+									<div style="height:100%;min-width:6px;width:auto !important;width:6px;" class="lh0">
+									
+									</div>
+								
+								</td>
+								<td style="width:168px">
+									<div style="height:100%;min-width:168px;width:auto !important;width:168px;" class="lh0">
+										<div  style="float:left;margin:2px 0 0;display:inline;min-height:44px;height:auto !important;height:44px;">
+											<div  style="min-width:168px;width:auto !important;width:168px;"><table id="dzczBTN_SAUVEQUIT"><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8c.png);width:12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8h.png);height:12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8c.png);background-position:100% 0px;width:12px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8v.png);background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb1.png); background-color:#B5CBF0;background-size:100% 100% !important;"><table width="144px" style="text-align:left;height:20px;"><tr><td class="l-7" valign="middle" id="tzBTN_SAUVEQUIT"><a href="javascript:{_JSL(_PAGE_,'BTN_SAUVEQUIT','_self','','')}" onmouseout="document.getElementById('z_BTN_SAUVEQUIT_IMG').src='[%_PROJET_WEB_%]res/_Sauver%20et%20Quitter_AC47E83D_.PNG';" onmouseover="document.getElementById('z_BTN_SAUVEQUIT_IMG').src='[%_PROJET_WEB_%]res/_Sauver%20et%20Quitter_A22EDCD9_.PNG';" id="BTN_SAUVEQUIT" class="l-7 wblien padding"  style="_height:20px;display:block;background-image:none;"><img id="z_BTN_SAUVEQUIT_IMG" src="[%_PROJET_WEB_%]res/_Sauver%20et%20Quitter_AC47E83D_.PNG" alt="" style="width:144px;height:20px;"></a></td></tr></table></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:12px;font-size:1px"></div></td></tr><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8c.png);background-position:0px -12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8h.png);background-position:0px 100%;height:-12px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010404_4a7f77e1_wwcb8c.png);background-position:100% -12px;"></td></tr></table>
+											
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</td>
+								<td style="width:65px">
+									<div style="height:100%;min-width:65px;width:auto !important;width:65px;" class="lh0">
+									
+									</div>
+								
+								</td>
+							
+							</tr>
+						
+						</table>
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:16px">
+					<td style="width:1020px">
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:97px">
+					<td style="width:1020px">
+						<div style="height:100%;min-width:1020px;width:auto !important;width:1020px;" class="lh0">
+							<div  style="clear:left;float:left;margin:0 0 0 88px;display:inline;">
+								<div  style="min-width:805px;width:auto !important;width:805px;" class="lh0"><input type=hidden name="ZONEREPETEE_NOTE_CLIENT" value="[%ZONEREPETEE_NOTE_CLIENT%]"><input type=hidden name="ZONEREPETEE_NOTE_CLIENT_DEB" value="[%ZONEREPETEE_NOTE_CLIENT..PREMIERVISIBLE%]"><input type=hidden name="_ZONEREPETEE_NOTE_CLIENT_OCC" value="[%ZONEREPETEE_NOTE_CLIENT..OCCURRENCE%]"><CONTENEUR NAME="[%ZONEREPETEE_NOTE_CLIENT..ALIAS%]"><table id="con-ZONEREPETEE_NOTE_CLIENT" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr style="height:97px"><td width="805" style=" [%SI%]ZDATE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=F4F4F4[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=E2E2E2[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ZDATE..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=F4F4F4[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=E2E2E2[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE!=1[%ALORS%]l-8[%FIN%][%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE=1[%ALORS%]l-9[%FIN%] padding"><div style="position:relative;  [%SI%]ZDATE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=F4F4F4[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_NOTE_CLIENT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_NOTE_CLIENT..COULEURFOND!=E2E2E2[%ALORS%]#[%ZDATE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZONEREPETEE_NOTE_CLIENT_[%ZONEREPETEE_NOTE_CLIENT%]">
+									<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+										<tr style="height:100%">
+											<td>
+												<div  style="float:left;margin:4px 0 0;display:inline;min-width:805px;width:auto !important;width:805px;">
+													<div  style="clear:left;float:left;margin:0 0 0 627px;display:inline;min-height:23px;height:auto !important;height:23px;">
+														<div  style="min-width:178px;width:auto !important;width:178px;"><TABLE width="130">
+ <TR>
+  <TD class="l-1 padding" style="font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;color:#2D2D2D;vertical-align:middle;" width="57" height="23">Date</TD>
+  <TD width="73px"><INPUT TYPE="text" SIZE="5" NAME="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZDATE" VALUE="[%ZDATE..VALEUR;1%]" onkeypress="return JJMMAA(event,'JJ/MM/AAAA');" onblur="reinit(event,'JJ/MM/AAAA');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');" onfocus="var b=(this.value.length==0);init(event,'JJ/MM/AAAA');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-NOTEDATE" class="Verdana padding"></TD>
+ </TR>
+</TABLE>
+
+														
+														</div>
+													
+													</div>
+													<div  style="clear:left;float:left;margin:6px 0 0 25px;display:inline;min-width:780px;width:auto !important;width:780px;">
+														<div  style="float:left;margin:25px 0 0;display:inline;min-height:23px;height:auto !important;height:23px;">
+															<div  style="min-width:93px;width:auto !important;width:93px;"><TABLE width="93">
+ <TR>
+  <TD width="93px"><table id="czc-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-IDNOTE" style="[%SI%]SAI_IDNOTE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+<tr><td height="23" width="93" valign="top"><TABLE width="93">
+ <TR>
+  <TD class="l-4 padding" style="font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;" width="52" height="23">IDNOTE</TD>
+  <TD width="41px"><INPUT TYPE="text" SIZE="3" NAME="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZIDNOTE" VALUE="[%ZIDNOTE..VALEUR;1%]" onkeypress="return VerifSaisieNombre(event,'99999999');" onblur="reinitNombre(event,'99999999');VerifRegExp(this,'^(\\d|'+_WW_SEPMILLIER_+'){1,8}$');" onfocus="var b=(this.value.length==0);initNombre(event,'99999999');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-IDNOTE" class="Verdana padding"></TD>
+ </TR>
+</TABLE>
+</td></tr></table></TD>
+ </TR>
+</TABLE>
+
+															
+															</div>
+														
+														</div>
+														<div  style="float:left;margin:0 0 0 504px;display:inline;min-height:60px;height:auto !important;height:60px;">
+															<div  style="min-width:100px;width:auto !important;width:100px;"><table class="l-3 zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:100px;"><label for="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE" value="1" id="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SI%]ZTYPE..VALEUR="1"[%ALORS%] CHECKED [%FIN%]>Formation</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:100px;"><label for="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_2" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE" value="2" id="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SI%]ZTYPE..VALEUR="2"[%ALORS%] CHECKED [%FIN%]>Commentaire</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:100px;"><label for="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_3" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE" value="3" id="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTYPE_3" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SI%]ZTYPE..VALEUR="3"[%ALORS%] CHECKED [%FIN%]>Autre</label></td></tr></table>
+															
+															</div>
+														
+														</div>
+													
+													</div>
+												
+												</div>
+											
+											</td>
+										
+										</tr>
+											<tr style="height:1px">
+												
+												<td><div id="dwwzrl[%ZONEREPETEE_NOTE_CLIENT%]ZTEXT" style="position:absolute;left:56px;top:4px;width:553px;height:88px;z-index:4;"><table style="position:relative;">
+<tr><td height="88" width="553" valign="top"><div class="ff3fix63895rel" style=""><TABLE width="553" style="position:relative;">
+ <TR>
+  <TD class="Verdana padding" width="74px" height="88px">Note</TD>
+  <TD width="479px"><textarea name="zrl_[%ZONEREPETEE_NOTE_CLIENT%]_ZTEXT" cols="35" rows="4" id="c-[%ZONEREPETEE_NOTE_CLIENT%]-SAI-NOTE" class="Verdana padding">[%ZTEXT..VALEUR;1%]</textarea></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+
+											
+											</td>
+										
+										</tr>
+									
+									</table></div></td></tr><!--/REPEAT--></table></CONTENEUR>
+								
+								</div>
+							
+							</div>
+						
+						</div>
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:449px">
+					<td style="width:1020px">
+					
+					</td>
+				
+				</tr>
+			
+			</table></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td></tr><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:0px -10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);background-position:0px 100%;height:-10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% -10px;"></td></tr></table>
+		
+		</td>
+	
+	</tr>
+
+</table>
+</form>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		_BTN_CANCEL_js = new Image(); _BTN_CANCEL_js.src="[%_PROJET_WEB_%]res/_Quitter%20sans%20sauver_C65FCF5C_.PNG";
+		_BTN_SAUVEQUIT_js = new Image(); _BTN_SAUVEQUIT_js.src="[%_PROJET_WEB_%]res/_Sauver%20et%20Quitter_A22EDCD9_.PNG";
+	}
+</script>
+[%PAGE_NOTES..HTMLFINPAGE%]</body>
+</html>
+<!--93223-->

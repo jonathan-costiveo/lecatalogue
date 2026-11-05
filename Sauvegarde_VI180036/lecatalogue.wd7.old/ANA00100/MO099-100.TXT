@@ -1,0 +1,8 @@
+//MO099-100.TXT ANA00099 TO ANA00100
+CACHEOPER		TAR	159	nouvelle taille enregistrement : 159
+CACHEOPER	IDENT_PLAN	RUB+		IDENT_PLAN est une nouvelle clé
+CACHEOPER	CLE_TRIOPER	RUB+		CLE_TRIOPER est une nouvelle clé
+CACHEOPER	IDCACHEDICO	RUB-		la clé IDCACHEDICO est supprimée
+CACHEDICO		TAR	809	nouvelle taille enregistrement : 809
+CACHEDICO	CLEPLAN	TAI+	420	la rubrique CLEPLAN a comme nouvelle taille 521 au lieu de 101
+CACHEDICO	IDENT_PLAN	RUB+		IDENT_PLAN est une nouvelle rubrique

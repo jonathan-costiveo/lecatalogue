@@ -1,0 +1,11 @@
+//MO127-128.TXT ANA00127 TO ANA00128
+PROVENANCE		TAR	699	nouvelle taille enregistrement : 699
+PROVENANCE	Telecopieur	TAI+	6	la rubrique Telecopieur a comme nouvelle taille 27 au lieu de 21
+PROVENANCE	Telephone	TAI+	6	la rubrique Telephone a comme nouvelle taille 27 au lieu de 21
+PROVENANCE	TelSansFrais	TAI+	6	la rubrique TelSansFrais a comme nouvelle taille 27 au lieu de 21
+Client		TAR	862	nouvelle taille enregistrement : 862
+Client	Telephone	TAI+	6	la rubrique Telephone a comme nouvelle taille 27 au lieu de 21
+Client	Fax1	TAI+	6	la rubrique Fax1 a comme nouvelle taille 27 au lieu de 21
+AAClient		TAR	1435	nouvelle taille enregistrement : 1435
+AAClient	Telephone	TAI+	11	la rubrique Telephone a comme nouvelle taille 27 au lieu de 16
+AAClient	Telephone2	TAI+	11	la rubrique Telephone2 a comme nouvelle taille 27 au lieu de 16

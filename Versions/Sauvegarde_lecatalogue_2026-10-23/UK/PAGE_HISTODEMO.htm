@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- PAGE_HISTODEMO 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%PAGE_HISTODEMO..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PAGE_HISTODEMO..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDChamp.js?11219ce6" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDXML.js?f52e3206" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDAJAX.js?bf6b10bd" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDTable.js?93bc80ee" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On dÈtecte les balises DispHTMLUnknownElement par la propriÈtÈ canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas trËs logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+function _LOD_COM(event)
+{
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%PAGE_HISTODEMO..HTMLENTETE%]<script type="text/javascript">var clTAB_HISTO=new WDTable("TAB_HISTO",0,22,2,4,[%TAB_HISTO..TABLESELECT%],["l-2","l-3","l-4"],["[%_PROJET_WEB_%]res/TableTri.gif","[%_PROJET_WEB_%]res/TableTriP.gif","[%_PROJET_WEB_%]res/TableTriM.gif"],["[%_PROJET_WEB_%]res/TableCherche.gif","[%_PROJET_WEB_%]res/TableChercheO.gif","[%_PROJET_WEB_%]res/TableChercheC.gif"]);</script><script type="text/javascript">function FinInitJS()
+{
+clTAB_HISTO.Init(-1,"[%TAB_HISTO..CODEHTML_17;3%]");}
+</script><style type="text/css">.wblien {text-align:center;  color:#379DC3;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">
+body{overflow:auto;width:100%;margin:0;text-align:center;  color:#2D2D2D;}#page {  background-color:#FFFFFF;height:568px;width:960px;}.l-0 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}
+.l-1 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}
+.l-2 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;color:#000000;vertical-align:middle;background-color:#FFFFFF;}
+.l-3 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;color:#000000;vertical-align:middle;background-color:#B9E0FD;}
+.l-4 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;color:#FFFFFF;vertical-align:middle;background-color:#183D78;}
+.l-6,.l-7 {text-align:left;}
+.l-8 {text-align:right;}
+
+#b-TAB_HISTO {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#lzTAB_HISTO {border-right:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzclzTAB_HISTO {border-right:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzdlzTAB_HISTO {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#ctzTAB_HISTO .l-0 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#ctzTAB_HISTO .l-3 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;color:#000000;vertical-align:middle;background-color:#B9E0FD;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#ctzTAB_HISTO .l-2 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;color:#000000;vertical-align:middle;background-color:#FFFFFF;}#tzlzTAB_HISTO,#bzlzTAB_HISTO {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+</style>
+</head>
+<body style="  background-color:#D3D3D3;" onload="FinInitJS();[%_CodeInfoError_%]">
+<div style="width: 980px;height: 594px; margin:auto;text-align: left;position:relative;">
+<form name="PAGE_HISTODEMO" action="[%_URL_ACTION_%]" target="_self" method="post" class="ancragecenter">
+<script type="text/javascript">_PAGE_=document.PAGE_HISTODEMO</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="BTN_RETOUR">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+
+<table style="height:100%;width:980px">
+	<tr valign="top" style="height:100%">
+		<td>
+			<table style="width:980px;height:600px">
+				<tr valign="top" style="height:6px">
+					<td style="width:980px">
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:594px">
+					<td style="width:980px"><table style="width:100%;height:594px;"><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);width:10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);height:10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% 0px;width:10px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td><td id="page" style="width:100%;">
+						<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+							<tr style="height:100%">
+								<td>
+								
+								</td>
+							
+							</tr>
+								<tr style="height:1px">
+									
+									<td><div id="dwwBTNRETOUR" style="position:absolute;left:846px;top:15px;width:80px;height:24px;z-index:0;"><table><tr><td style="width:80px;height:24px;"><a href="javascript:{_JSL(_PAGE_,'BTN_RETOUR','_self','','')}" onmouseout="document.getElementById('z_BTN_RETOUR_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Btn01_ActivXP__D59F037B_.PNG)';" onmouseover="document.getElementById('z_BTN_RETOUR_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Btn02_ActivXP__55DA5531_.PNG)';" id="BTN_RETOUR" class="Btn-Std wblien padding"  style="_height:24px;text-decoration:none;background-image:none;display:block;"><span id="z_BTN_RETOUR_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/Btn01_ActivXP__D59F037B_.PNG);;height:24px;overflow:hidden;cursor:pointer;"><span style="display:block;line-height:14px;margin-top:5px;">Return</span></span></a></td></tr></table></div>
+<div id="dwwTABHISTO" style="position:absolute;left:74px;top:61px;z-index:1;"><table width="852px" cellspacing=0 id="bzlzTAB_HISTO" style="height:458px;border-collapse:separate;"><tr><td class="l-5 padding" valign="top" id="tzlzTAB_HISTO" style="border:none;"><input type=hidden name="TAB_HISTO" value="[%TAB_HISTO%]"><input type=hidden name="TAB_HISTO_DEB" value="[%TAB_HISTO..PREMIERVISIBLE%]"><input type=hidden name="_TAB_HISTO_OCC" value="[%TAB_HISTO..OCCURRENCE%]"><table id="ctzTAB_HISTO" cellspacing=0 cellpadding=0 width="850">
+ <tr><td colspan=1  align="center" class="l-0 padding" id="lzTAB_HISTO">Historique client d√©mo</td><td></td></tr>
+ <tr style="border:0" id="ttTAB_HISTO">
+<td id="tzclzTAB_HISTO" style="width:100%;border-bottom-width:0"><div style="overflow:hidden;width:834px"><table id="TAB_HISTO_TITRES_POS" width="100%"><tr id="TAB_HISTO_TITRES">  <td class="l-1 padding" id="ttCOL_TIMESTAMP" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_0" style="width:169px;overflow:hidden;margin-left:10px;"></div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_TIMESTAMP..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_0" onclick="clTAB_HISTO.OnTriColonne(0,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_TIMESTAMP..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_0" onclick="clTAB_HISTO.OnRechercheColonne(0,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(0,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(0,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,0,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+  <td class="l-1 padding" id="ttCOL_VERSION" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_1" style="width:88px;overflow:hidden;margin-left:10px;">Colonne1</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_VERSION..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_1" onclick="clTAB_HISTO.OnTriColonne(1,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_VERSION..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_1" onclick="clTAB_HISTO.OnRechercheColonne(1,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(1,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(1,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,1,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+  <td class="l-1 padding" id="ttCOL_NOMMACHINE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_2" style="width:98px;overflow:hidden;margin-left:10px;">Colonne1</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_NOMMACHINE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_2" onclick="clTAB_HISTO.OnTriColonne(2,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_NOMMACHINE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_2" onclick="clTAB_HISTO.OnRechercheColonne(2,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(2,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(2,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,2,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+  <td class="l-1 padding" id="ttCOL_RESTEJOUR" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_3" style="width:88px;overflow:hidden;margin-left:10px;">Colonne1</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_RESTEJOUR..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_3" onclick="clTAB_HISTO.OnTriColonne(3,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_RESTEJOUR..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_3" onclick="clTAB_HISTO.OnRechercheColonne(3,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(3,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(3,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,3,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+  <td class="l-1 padding" id="ttCOL_IDENTCOMMON" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_4" style="width:155px;overflow:hidden;margin-left:10px;">Colonne1</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_IDENTCOMMON..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_4" onclick="clTAB_HISTO.OnTriColonne(4,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_IDENTCOMMON..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_4" onclick="clTAB_HISTO.OnRechercheColonne(4,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(4,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(4,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,4,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+  <td class="l-1 padding" id="ttCOL_TIMEORDI" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TAB_HISTO_TITRES_5" style="width:164px;overflow:hidden;margin-left:10px;">Colonne1</div><div style="width:14px;height:0"><!-- --></div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_TIMEORDI..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_TRI_5" onclick="clTAB_HISTO.OnTriColonne(5,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_TIMEORDI..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TAB_HISTO_TITRES_RECH_5" onclick="clTAB_HISTO.OnRechercheColonne(5,this)" onmouseover="clTAB_HISTO.OnRechercheSouris(5,this,true);" onmouseout="clTAB_HISTO.OnRechercheSouris(5,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,5,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>
+</tr></table></div></td><td></td> </tr>
+<tr><td id="tzdlzTAB_HISTO" style="width:100%;border-top-width:0;"><div style="overflow-x:auto;overflow-y:hidden;width:834px;height:420px;position:relative;z-index:1"><div style="position:relative;width:100%" id="TAB_HISTO_POS"><table id="TAB_HISTO_TB" width="100%" style="height:420px"><!-- 
+ <tr class="l-2 padding" id="TAB_HISTO_[%_INDICE_%]" style="visibility:hidden;height:22px">
+  <td height="22" class="l-6 communbc-COL_TIMESTAMP padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],0,event)" style="border-left-width:0;border-top-width:0;"><div style="width:179px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_0" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,0,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="22" class="l-7 communbc-COL_VERSION padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],1,event)" style="border-left-width:0;border-top-width:0;"><div style="width:98px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_1" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,1,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="22" class="l-7 communbc-COL_NOMMACHINE padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],2,event)" style="border-left-width:0;border-top-width:0;"><div style="width:108px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_2" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,2,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="22" class="l-8 communbc-COL_RESTEJOUR padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],3,event)" style="border-left-width:0;border-top-width:0;"><div style="width:98px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_3"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,3,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="22" class="l-7 communbc-COL_IDENTCOMMON padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],4,event)" style="border-left-width:0;border-top-width:0;"><div style="width:165px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_4" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,4,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="22" class="l-7 communbc-COL_TIMEORDI padding" onclick="clTAB_HISTO.OnSelectLigne([%_INDICE_%],5,event)" style="border-left-width:0;border-top-width:0;"><div style="width:174px;overflow-x:hidden"><div id="TAB_HISTO_[%_INDICE_%]_5" style="padding-left:1;"></div></div><div style="width:14px;height:0">[%COMMENT%]</div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTAB_HISTO.OnRedimCol(event,5,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td> </tr>
+ --><tr><td></td></tr></table></div><table style="position:absolute;top:0;left:0;width:100%;border:solid 2px #B4B4B4;height:100%;visibility:hidden;z-index:100" id="TAB_HISTO_MASQUE"><tr><td align="center" valign="middle"><img src="[%_PROJET_WEB_%]res/TableAttente.gif" alt="none"></td></tr></table><table style="position:absolute;top:0;left:0;width:100%;height:100%;visibility:hidden;z-index:101" id="TAB_HISTO_MASQUETR"><tr><td align="center" valign="middle"><!-- --></td></tr></table></div></td><td style="width:16;height:420px"><div style="position:relative;overflow-x:hidden;width:16px;height:420px"><div style="position:absolute;left:-4px;width:20px;height:420px;overflow-x:hidden;overflow-y:auto"><div style="width:1px;height:1px;overflow:hidden" id="TAB_HISTO_SB"></div></div></div></td></tr>
+</table></td></tr></table></div>
+
+								
+								</td>
+							
+							</tr>
+						
+						</table></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td></tr><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:0px -10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);background-position:0px 100%;height:-10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% -10px;"></td></tr></table>
+					
+					</td>
+				
+				</tr>
+			
+			</table>
+		
+		</td>
+	
+	</tr>
+
+</table>
+</form>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		_BTN_RETOUR_js = new Image(); _BTN_RETOUR_js.src="[%_PROJET_WEB_%]res/Btn02_ActivXP__55DA5531_.PNG";
+	}
+</script>
+<script type="text/javascript">if (bOpr) document.getElementsByTagName("head")[0].innerHTML+='<style type="text/css">.wbtablesep{position:static !important;}</style>';</script></div>
+[%PAGE_HISTODEMO..HTMLFINPAGE%]</body>
+</html>
+<!--43897-->

@@ -1,0 +1,4 @@
+//MO004-005.TXT ANA00004 TO ANA00005
+Itemcat	DESC_MAJ	CLEN*		la rubrique DESC_MAJ est maintenant une clé
+Itemcat	Categorie	CLEN*		la rubrique Categorie est maintenant une clé
+Itemcat	Secteur	CLEN*		la rubrique Secteur est maintenant une clé

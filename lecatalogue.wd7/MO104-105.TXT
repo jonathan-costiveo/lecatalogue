@@ -1,0 +1,3 @@
+//MO104-105.TXT ANA00104 TO ANA00105
+REPCOMMON		TAR	444	nouvelle taille enregistrement : 444
+REPCOMMON	ADDR_IP	RUB+		ADDR_IP est une nouvelle clé

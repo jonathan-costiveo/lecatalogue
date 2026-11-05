@@ -1,0 +1,3 @@
+//MO007-008.TXT ANA00007 TO ANA00008
+Multicat	NomCatalog	NNR	NomCatalogue	ATTENTION : la clé NomCatalogue a pour nouveau nom NomCatalog
+Multicat	TypeCatalog	NNR	TypeCatalogue	ATTENTION : la clé TypeCatalogue a pour nouveau nom TypeCatalog

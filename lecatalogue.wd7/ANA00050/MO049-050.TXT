@@ -1,0 +1,4 @@
+//MO049-050.TXT ANA00049 TO ANA00050
+Banniere		NFI		nouveau fichier
+Banniere2		NFI		nouveau fichier
+Banniere		FRN		

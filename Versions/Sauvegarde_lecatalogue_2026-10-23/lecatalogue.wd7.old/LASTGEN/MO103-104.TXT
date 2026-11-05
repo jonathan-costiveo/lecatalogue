@@ -1,0 +1,3 @@
+//MO103-104.TXT ANA00103 TO ANA00104
+AAClient		TAR	1308	nouvelle taille enregistrement : 1308
+AAClient	NUMVENDEUR	RUB+		NUMVENDEUR est une nouvelle clé

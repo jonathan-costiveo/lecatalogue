@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 .claude/scripts/gen_index.py)",
+      "Bash(strings:*)",
+      "Bash(file:*)",
+      "Bash(iconv:*)",
+      "WebFetch(domain:lecatalogue.ca)",
+      "WebFetch(domain:www.lecatalogue.ca)"
+    ],
+    "deny": [
+      "Read(./Exe/lecatalogue.ini)",
+      "Read(./Exe/lecatalogue - old.ini)",
+      "Read(./LECATALOGUE_WEB/lecatalogue.ini)",
+      "Read(./LECATALOGUE_WEB/bd/**)",
+      "Edit(./**/*.wwh)",
+      "Edit(./**/*.wdc)",
+      "Edit(./**/*.WDC)",
+      "Edit(./**/*.wdg)",
+      "Edit(./**/*.WDG)",
+      "Edit(./**/*.WWP)",
+      "Edit(./**/*.wdd)",
+      "Edit(./**/*.xdd)",
+      "Edit(./**/*.WDR)",
+      "Edit(./**/*.wws)",
+      "Edit(./**/*.WWS)",
+      "Edit(./**/*.wwt)",
+      "Edit(./**/*.wwn)",
+      "Edit(./**/*.fic)",
+      "Edit(./**/*.FIC)",
+      "Edit(./**/*.ndx)",
+      "Edit(./**/*.NDX)",
+      "Edit(./**/*.mmo)",
+      "Edit(./**/*.MMO)",
+      "Edit(./FR/**)",
+      "Edit(./UK/**)",
+      "Edit(./lecatalogue.wd7/**)"
+    ]
+  }
+}

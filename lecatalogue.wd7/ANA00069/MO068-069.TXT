@@ -1,0 +1,5 @@
+//MO068-069.TXT ANA00068 TO ANA00069
+NOTE_CLIENT		TAR	62	nouvelle taille enregistrement : 62
+NOTE_CLIENT	DATE_NOTE	TAI-	33	la rubrique DATE_NOTE a comme nouvelle taille 18 au lieu de 51
+NOTE_CLIENT	TYPE_NOTE	RUB+		TYPE_NOTE est une nouvelle rubrique
+TRADESTX		FIC-	AACOMMENT	Fichier supprimé AACOMMENT

@@ -1,0 +1,4 @@
+//MO152-153.TXT ANA00152 TO ANA00153
+INFOMACHINE		TAR	266	nouvelle taille enregistrement : 266
+INFOMACHINE	MONITEURS	TAI+	50	la rubrique MONITEURS a comme nouvelle taille 101 au lieu de 51
+INFOMACHINE	CARTE_RESEAU	RUB+		CARTE_RESEAU est une nouvelle rubrique

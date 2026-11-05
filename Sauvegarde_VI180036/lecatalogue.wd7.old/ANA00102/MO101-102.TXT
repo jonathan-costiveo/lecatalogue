@@ -1,0 +1,3 @@
+//MO101-102.TXT ANA00101 TO ANA00102
+CACHEOPER		TAR	163	nouvelle taille enregistrement : 163
+CACHEOPER	IDCACHEDICO	RUB+		IDCACHEDICO est une nouvelle clé

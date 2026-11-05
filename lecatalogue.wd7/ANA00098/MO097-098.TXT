@@ -1,0 +1,8 @@
+//MO097-098.TXT ANA00097 TO ANA00098
+SDPSTAT		TAR	61	nouvelle taille enregistrement : 61
+SDPSTAT	FL_DICO	RUB+		FL_DICO est une nouvelle rubrique
+SDPSTAT	FL_OPER	RUB+		FL_OPER est une nouvelle rubrique
+CACHEOPER		NFI		nouveau fichier
+CACHEDICO		NFI		nouveau fichier
+CACHEDICO		FRN		
+CACHEOPER		FRN		

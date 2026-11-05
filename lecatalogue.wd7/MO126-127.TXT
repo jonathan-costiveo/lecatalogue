@@ -1,0 +1,9 @@
+//MO126-127.TXT ANA00126 TO ANA00127
+TRADES		TAR	488	nouvelle taille enregistrement : 488
+TRADES	B_PRODDEF	RUB+		B_PRODDEF est une nouvelle rubrique
+TRADES	MO_NBRUNIT	RUB+		MO_NBRUNIT est une nouvelle rubrique
+TRADES	CODEUNITE	RUB+		CODEUNITE est une nouvelle clé
+TRADES	TEMPSPRODH	RUB+		TEMPSPRODH est une nouvelle rubrique
+TRADES	T_TUCLEUNIK	RUB+		T_TUCLEUNIK est une nouvelle rubrique
+TRADES	B_FIXEDOSS	RUB+		B_FIXEDOSS est une nouvelle rubrique
+TRADES	CLE_TYPEIDTRADES	NNR	TYPE_TRADEIDTRADES	ATTENTION : la clé TYPE_TRADEIDTRADES a pour nouveau nom CLE_TYPEIDTRADES

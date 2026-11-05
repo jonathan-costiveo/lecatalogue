@@ -1,0 +1,5 @@
+//MO066-067.TXT ANA00066 TO ANA00067
+AAClient		TAR	1479	nouvelle taille enregistrement : 1479
+AAClient	OptEPlans	RUB+		OptEPlans est une nouvelle rubrique
+AAClient	OptTPlans	RUB+		OptTPlans est une nouvelle rubrique
+AAClient	OptEPlan	RUB-		la rubrique OptEPlan est supprimée

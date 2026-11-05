@@ -1,0 +1,708 @@
+Licences
+Version;EG Achat;EG Achat Supp;EG Locat;EG Locat Supp;e-Plans Mono Achat;e-Plans Mono Achat Supp;e-Plans Mono Locat;e-Plans Mono Locat Supp;e-Plans Multi Achat;e-Plans Multi Achat Supp;e-Plans Multi Locat;e-Plans Multi Locat Supp;Ech Achat;Ech Achat Supp;Ech Locat;Ech Locat Supp;Inv Achat;Inv Achat Supp;Inv Locat;Inv Locat Supp;Comp Achat;Comp Achat Supp;Comp Locat;Comp Locat Supp;Vent Achat;Vent Achat Supp;Vent Locat;Vent Locat Supp;Rep Achat;Rep Achat Supp;Rep Locat;Rep Locat Supp;Opt e-Plans Mono Achat;Opt e-Plans Mono Achat Supp;Opt e-Plans Mono Locat;Opt e-Plans Mono Locat Supp;Opt e-Plans Multi Achat;Opt e-Plans Multi Achat Supp;Opt e-Plans Multi Locat;Opt e-Plans Multi Locat Supp;SDP
+Or;100;169;105;93;;;2;;1;;2;2;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Argent Plus;3;;3;3;;;;;;;1;1;;;;;1;;1;1;;;;;1;;1;1;1;;;;;;;;;;1;1;
+Argent;10;10;4;6;;;;;3;1;3;3;1;1;;;7;9;2;1;;;;;3;4;1;1;;;;;;;;;3;1;3;3;2
+Bronze;2;;1;3;;;;;2;;1;4;;;;;;;;;;;;;;;;;;;;;;;;;2;;2;3;
+Invitation;10;2;4;4;;;1;;3;3;4;4;;;;;;;;;;;;;;;;;;;;;;;1;;3;3;5;3;10
+e-Plans seul;;;;;70;14;191;64;70;67;60;71;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Or Essai;;;11;10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+Totaux;125;181;128;119;70;14;194;64;79;71;71;85;1;1;;;8;9;3;2;;;;;4;4;2;2;1;;;;;;1;;8;4;11;10;12
+
+Prix
+Or;995;545;2095;995
+Argent Plus;395;245;1195;425;;;;;;;;;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;95;95;295;295;195;95;495;195
+Argent;295;195;995;425;;;;;;;;;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;95;95;295;295;195;95;495;195
+Bronze;195;95;895;225;;;;;;;;;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;95;95;295;295;195;95;495;195
+Invitation;195;95;895;195;;;;;;;;;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;100;50;325;125;95;95;295;295;195;95;495;195
+e-Plans seul;;;;;95;95;295;295;195;95;495;195
+Or Essai;;;2095;995
+
+SousTotaux
+Or;99500;92105;219975;92535;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;504115
+Argent Plus;1185;;3585;1275;;;;;;;;;;;;;100;;325;125;;;;;100;;325;125;100;;;;;;;;;;495;195;;;7935
+Argent;2950;1950;3980;2550;;;;;;;;;100;50;;;700;450;650;125;;;;;300;200;325;125;;;;;;;;;585;95;1485;585;200;;17405
+Bronze;390;;895;675;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;390;;990;585;;;3925
+Invitation;1950;190;3580;780;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;295;;585;285;2475;585;750;;11475
+e-Plans seul;;;;;6650;1330;56345;18880;13650;6365;29700;13845;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;146765
+Or Essai;;;23045;9950;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;32995
+
+Totaux;105975;94245;255060;107765;6650;1330;56345;18880;13650;6365;29700;13845;100;50;0;0;800;450;975;250;0;0;0;0;400;200;650;250;100;0;0;0;0;0;295;0;1560;380;5445;1950;950;;724615
+
+Grand Total;724615
+
+Revenus des logiciels;# de licences V;Maj V $;#de licences L;Maj L $
+
+Estimateur Général Or;101;99500;118;243020
+Estimateur Général Or Supp;169;92105;105;102485
+
+Estimateur Général Argent Plus;3;1485;4;4235
+Estimateur Général Argent Plus Supp;;;4;1525
+
+Estimateur Général Argent;13;4050;7;4955
+Estimateur Général Argent Supp;11;2650;9;2800
+
+Estimateur Général Bronze;4;390;2;895
+Estimateur Général Bronze Supp;;;7;675
+
+e-Plans Réseau;70;15210;60;35145
+e-Plans Réseau Supp;67;6745;71;15795
+
+e-Plans Mono;70;6650;194;56640
+e-Plans Mono Supp;14;1330;64;18880
+
+Invitation à soumissionner;13;1950;8;3580
+Invitation à soumissionner Supp;5;190;8;780
+
+Total des revenus;;232255;;491410;;Salles de plans;950
+
+Nom;version;EG Achat;EG Locat;e-Plans Mono Achat;e-Plans Mono Locat;e-Plans Multi Achat;e-Plans Multi Locat;Tot Achat;Tot Locat;SDP;Date Début;Date Fin
+12122715 CANADA INC.- HARMONIE CONSTRUCTION / 9221-8544 QC I;e-Plans seul;;;;3;;;;885;;2020/10/27;2025/01/27
+12713306 Canada Inc. Constructions B Strong;e-Plans seul;;;;1;;;;295;;2022/03/28;2024/03/28
+2631-3270 Québec Inc / FL Électrique;e-Plans seul;;;;1;;;;295;;2023/01/25;2025/01/25
+9215-4491 Québec Inc / Jonathan Turenne;e-Plans seul;;;;1;;;;295;;2023/06/05;2024/09/05
+9218-2773 Québec Inc (Érik et Cie) Erik;Argent Plus;1;;;;;;395;;;2013/04/24;2024/04/24
+9349-2288 Québec inc JEFO Construction;Or;1;1;;;;;995;995;;2018/04/19;2024/04/19
+9371-1984 Québec Inc.;e-Plans seul;;;;2;;;;590;;2022/03/23;2024/03/23
+9374-9273 Quebec Inc /Marcela Zubati;Or;;1;;;;;;2095;;2022/09/30;2024/09/30
+9395-6662 Québec Inc. (Peinture HD);e-Plans seul;;;1;;;;95;;;2020/04/17;2024/04/17
+9456-5215 Québec Inc./ Pavage Cabano 2022;e-Plans seul;;;;;1;;195;;;2018/08/28;2024/08/28
+9465-0223 Québec Inc;e-Plans seul;;;;;;2;;690;;2022/06/27;2024/06/27
+A Plus Construction Inc.;Or;2;1;;;;;1540;995;;2004/08/10;2024/08/10
+A.G.M. Construction Inc;Or;;1;;;;;;2095;;2022/10/25;2024/10/25
+AB Gestion & Conception ( AGM  Construction);e-Plans seul;;;;1;;;;295;;2022/06/17;2024/06/17
+Abriart;e-Plans seul;;;;2;;;;590;;2023/01/20;2025/01/20
+Acsdeco;e-Plans seul;;;;1;;;;295;;2023/11/20;2024/11/20
+Action Peinture Inc.;e-Plans seul;;;1;;;;95;;;2017/05/02;2024/05/02
+Action RI Électrique Inc;e-Plans seul;;;;1;;;;295;;2023/06/22;2024/06/22
+AGL Construction inc.;Argent;1;;;;1;;590;;100;2019/08/13;2024/08/13
+Alain Lizotte Construction Inc;Or;;1;;;;;;2095;;2023/03/15;2024/03/15
+Alternéco Inc;Or Essai;;1;;;;;;2095;;2023/01/26;2024/01/26
+Aluminium Bouchard;e-Plans seul;;;;2;;;;590;;2021/02/02;2024/05/02
+Aluminium Dave Bourgeois Inc.;e-Plans seul;;;;1;;;;295;;2023/04/04;2024/04/04
+Aluminium Émile Forest 2022 Inc;e-Plans seul;;;;;;1;;495;;2021/02/22;2024/05/22
+AMÉNAGEMENT COTÉ JARDIN INC.;e-Plans seul;;;;;2;1;290;195;;2015/04/23;2024/04/23
+Amor Construction;Or;;1;;;;;;2095;;2023/06/26;2024/06/26
+An-Au Construction;e-Plans seul;;;;;;1;;495;;2001/02/05;2024/02/05
+Anjalec et SDL Maconnerie Inc;Or;3;1;;;;;2085;995;;2004/12/23;2024/12/23
+Antagon International Ltée;Or;2;;;;;;1540;;;2008/02/18;2024/02/18
+Appelle Fred;Invitation;;1;;;;;;895;;2020/11/24;2024/11/24
+Application Couture;e-Plans seul;;;;1;;;;295;;2024/01/08;2025/01/08
+AR Construction;Or Essai;;2;;;;;;3090;;2022/01/05;2025/01/05
+Aranda Construction Inc;Or Essai;;2;;;;;;3090;;2023/04/13;2024/04/13
+Area;e-Plans seul;;;;;;4;;1080;;2019/08/26;2024/06/22
+Armor Etancheite;e-Plans seul;;;;;2;;290;;;2016/03/08;2024/03/08
+Arqca Associés;e-Plans seul;;;1;;;;95;;;2016/01/11;2025/01/11
+Arri Construction Entrepreneur Général;Or;3;;;;;;2085;;;2003/05/14;2024/05/14
+Arvida décoration Inc. Flor déco;e-Plans seul;;;;;2;;290;;;2017/06/05;2024/06/05
+Ascension Construction;e-Plans seul;;;;;;1;;495;;2023/05/30;2024/05/30
+Ascimbec;e-Plans seul;;;1;;;;95;;;2017/11/30;2024/11/30
+ASP Contrôle Inc.;e-Plans seul;;;;1;;;;295;;2022/03/07;2024/03/07
+Athena Construction;Or;;2;;;;;;3090;;2020/12/01;2024/12/01
+Audet Armature;e-Plans seul;;;;1;;;;295;;2023/06/26;2024/06/26
+Axe Construction;e-Plans seul;;;;2;;;;590;;2021/03/22;2024/06/22
+B.L.D.L. Inc;e-Plans seul;;;;;;4;;1080;;2023/05/31;2024/05/31
+Bastio Inc.;e-Plans seul;;;;1;;;;295;;2020/01/22;2025/01/22
+BATI-CHABLAIS;e-Plans seul;;;;;2;;290;;;2016/05/25;2024/08/22
+BATRI DIAZ CONSTRUCTIONS;e-Plans seul;;;;1;;;;295;;2021/04/22;2024/07/22
+Beaudoin 3990591 CANADA inc.;Or;4;1;;;;;2630;995;;2003/05/29;2024/05/29
+Belamex inc.;e-Plans seul;;;1;;;;95;;;2018/04/04;2024/04/04
+Belmon Construction;Or;;2;;;;;;3090;;2022/09/22;2024/09/22
+Bernard Bélanger Entrepreneur Électricien Inc;e-Plans seul;;;;;;2;;690;;2022/11/03;2024/11/03
+Bernard Malo Inc.;Or;5;2;;;;;3175;1990;;2003/12/17;2024/12/17
+Bertolani & Fils;e-Plans seul;;;;2;2;;290;590;;2017/02/14;2025/02/14
+BESCO CONSTRUCTION;e-Plans seul;;;;;;2;;690;;2022/03/04;2024/03/04
+Béton GL;Or;;1;;;;;;2095;;2018/11/09;2024/12/13
+Béton Nova Finis, 9365 1339 Québec Inc.;e-Plans seul;;;1;;;;95;;;2019/06/11;2024/06/11
+BétonXpert Inc.;e-Plans seul;;;;2;;;;590;;2022/04/25;2024/04/25
+Blastrac P.L. Veilleux / 9134-1511 Québec Inc;e-Plans seul;;;;1;;;;295;;2023/01/30;2024/01/30
+Blum Construction Inc;e-Plans seul;;;;;;1;;495;;2023/02/07;2024/02/07
+Bocoum Construction  ( 9150-8363 Québec Inc);Or;;1;;;;;;2095;;2023/09/19;2024/09/19
+Bois Franc JFM;e-Plans seul;;;1;;;;95;;;2019/10/29;2024/10/29
+Boiseries Letendre;e-Plans seul;;;;;;2;;690;;2022/04/21;2024/07/21
+BR Écono-Gest Inc;e-Plans seul;;;;;1;;195;;;2014/10/27;2024/10/27
+Brago Construction inc.;Or;4;;;;;;2630;;;2007/09/13;2024/09/13
+Brijo Rénovation;Argent Plus;;1;;;;;;1195;;2023/04/25;2024/04/25
+Brique et Pavé Beaudry;e-Plans seul;;;;;2;;290;;;2019/09/24;2024/09/24
+C.A.L. Entrepreneur Général (cal);Or;4;;;;;;2630;;;2022/06/15;2024/06/15
+CADACO Électrique inc.;e-Plans seul;;;;1;;;;295;;2022/04/05;2024/04/05
+Cadillac construction;Or;1;;;;;;995;;;2016/10/06;2024/10/06
+Canevas Construction;Or;;1;;;;;;2095;;2023/11/02;2024/11/02
+Cappel Plâterie et Menuiserie;e-Plans seul;;;;;1;1;195;195;;2018/03/15;2024/03/15
+Carpette Multi-Design;e-Plans seul;;;;1;;;;295;;2020/10/28;2024/01/28
+Carrelage B.L.;e-Plans seul;;;;;2;;290;;;2016/10/18;2024/10/18
+CDO Rénovation Inc;e-Plans seul;;;;1;;;;295;;2023/02/09;2024/02/09
+Centurions Solutions;e-Plans seul;;;;1;;;;295;;2023/02/20;2024/02/20
+Céramique A. Pilot;e-Plans seul;;;;;1;1;195;195;;2016/07/11;2024/07/11
+Céramique Lambert;e-Plans seul;;;;1;;;;295;;2023/07/17;2024/07/17
+Ceramique Pavia Inc.;e-Plans seul;;;;1;;;;295;;2021/02/01;2024/05/01
+Ceramique Prestige;e-Plans seul;;;1;;;;95;;;2020/12/14;2024/12/14
+Cevico;Or Essai;;1;;;;;;2095;;2022/10/31;2024/10/31
+CGB;e-Plans seul;;;1;;;;95;;;2020/02/14;2025/02/14
+Christau Construction;Or;1;;;;;;995;;;2009/04/22;2024/04/22
+Chronopliage;e-Plans seul;;;;;5;;575;;;2020/03/18;2024/03/18
+Cimental Inc;e-Plans seul;;;;1;;;;295;;2023/01/30;2025/01/30
+Cimentier SN 9099-8857 Québec Inc;e-Plans seul;;;;1;;;;295;;2022/05/09;2024/05/09
+CJB INC.;e-Plans seul;;;;;;1;;495;;2021/03/29;2024/03/29
+CLP Services de Béton   1030-1817 Canada Inc;Or;;1;;;;;;2095;;2023/04/04;2024/04/04
+Coffrage Alca Inc;e-Plans seul;;;;1;;;;295;;2023/07/05;2024/07/05
+Coffrage Eco Inc;e-Plans seul;;;;1;;;;295;;2022/06/17;2024/06/17
+COMCO entrepreneur en bâtiment  (9192-6444 Québec Inc);Or;2;1;;;;;1540;995;;2015/07/29;2024/07/29
+Concept PVR Inc.;Or Essai;;2;;;;;;3090;;2022/01/06;2025/01/06
+Conception Chouinard;e-Plans seul;;;;1;;;;295;;2020/05/25;2024/06/05
+CONCEPTIONS DESROSIERS;Or;;2;;;;;;3090;;2022/08/18;2024/08/18
+CONCEPTIONS DESROSIERS 2;Or;;1;;;;;;2095;;2022/08/18;2024/08/18
+Concrea;Or;;3;;;;;;4085;;2021/01/31;2024/01/31
+Consortium Raymond Inc;Or;2;1;;;;;1540;995;;2010/05/01;2024/05/01
+Construction 3D Gervais & fils inc.;e-Plans seul;;;;;2;;290;;;2017/06/09;2024/06/09
+Construction Adco Inc;Or;;1;;;;;;2095;;2023/06/14;2024/06/14
+Construction Alain Morin;Or;;5;;;;;;6075;;2019/05/10;2024/05/10
+Construction Albert Inc;Or;;1;;;;;;2095;;2023/03/09;2024/03/09
+Construction Anjinnov Inc.;Or;5;;;;;;3175;;;2013/05/22;2024/05/22
+Construction Axeco;Or;1;1;;;;;995;995;;2005/01/24;2024/01/24
+Construction BBL;Argent Plus;1;2;;;;;495;1300;;2016/08/08;2024/08/08
+Construction Béton 4 saisons;Or;3;1;;;;;2085;995;;2016/05/25;2024/05/25
+Construction Bluesun Inc   (9408-5990 Québec Inc);Or;;1;;;;;;2095;;2023/10/11;2024/10/11
+Construction Bosquet;Or;;1;;;;;;2095;;2024/01/09;2025/01/09
+Construction Bouchard N.D.L. Inc;e-Plans seul;;;1;2;;;95;590;;2019/01/22;2024/01/22
+Construction Brault inc.  Groupe BR;Or;3;;;;;3;2085;;;2005/11/16;2024/11/16
+Construction CEH Inc;Argent;1;;;;;2;295;690;;2013/09/03;2024/09/03
+Construction Citadelle Inc.;Or;5;;;;;;3175;;;2014/05/13;2024/05/13
+Construction CL Inc;Or;;1;;;;;;2095;;2023/10/12;2024/10/12
+Construction Coté et Fils;Or;3;2;;;;;2085;1990;;2007/05/22;2024/05/22
+Construction de l'Avenir;Or;1;;;;;;995;;;2016/07/07;2024/07/07
+Construction des Rivages;e-Plans seul;;;1;5;;;95;1475;;2017/10/27;2024/10/27
+Construction DV Inc.;e-Plans seul;;;1;;;;95;;;2019/04/23;2024/04/23
+Construction E. Désilets Inc;e-Plans seul;;;;;;1;;495;;2022/09/09;2024/09/09
+Construction Éclair inc;Or;2;1;;;;;1540;995;;2015/10/07;2024/10/07
+Construction Emmanuel Demers inc.;e-Plans seul;;;;;1;;195;;;2017/09/12;2024/09/12
+Construction Frank Lefrançois Inc.;e-Plans seul;;;;1;;;;295;;2022/03/14;2024/03/14
+Construction FTH;Or;;1;;;;;;2095;;2023/10/17;2024/10/17
+Construction G.C.P.;e-Plans seul;;;;3;;;;885;;2020/01/31;2024/03/17
+Construction G.E.P. Inc;Or;;1;;;;;;2095;;2021/06/29;2024/06/29
+Construction G.N.F. inc. Gerald Noel;Or;;2;;;;;;3090;;2020/01/30;2024/01/30
+Construction Garbarino Inc.;Or;4;1;;;;;2630;995;;2006/04/27;2024/04/27
+Construction Gauthier Entrepreneur Général;Or;;4;;;;;;5080;;2009/05/13;2024/05/13
+Construction GCEG Inc;Or;1;;;;;;995;;;2012/04/30;2024/04/30
+Construction GDI;Invitation;1;;;;1;;390;;50;2016/05/13;2024/05/13
+Construction Général Biterroise;e-Plans seul;;;;1;;;;295;;2022/11/16;2024/11/16
+Construction Genfor Ltée;Or;3;;;;;;2085;;;2003/12/16;2024/12/16
+Construction Gératek ltée;Or;6;;;;;;3720;;;2017/01/12;2025/01/12
+Construction Gescon (Duclos);Or;1;;;;;;995;;;2010/02/26;2024/02/26
+Construction Hébert & Hébert;Or;;2;;;;;;3090;;2019/12/05;2024/12/05
+Construction J.G. Lessard & fils;Argent;2;;;;;2;640;690;;2022/01/21;2024/01/25
+Construction Jacques Junior Lebeau inc.;e-Plans seul;;;1;;;;95;;;2017/06/16;2024/06/16
+Construction Jean-Luc Groleau;Or;2;;;;;;1540;;;2010/03/28;2024/12/21
+Construction JF Samuel Inc;e-Plans seul;;;;1;;;;295;;2023/09/27;2024/09/27
+Construction Julien Dalpé;Or;3;;;;;;2085;;;2017/04/13;2024/04/13
+Construction K.Laporte Inc.;Or;;2;;;;;;3090;;2023/01/06;2025/01/06
+Construction KG2 Inc.;Or;1;1;;;;;995;995;;2017/05/31;2024/05/31
+Construction La Ray;e-Plans seul;;;;1;;;;295;;2019/12/19;2024/02/22
+Construction Langevin et frères enr.  139545 Canada;e-Plans seul;;;;1;;;;295;;2023/04/05;2024/04/05
+Construction Langis Normand Inc;Or;;1;;;;;;2095;;2022/10/19;2024/10/19
+Construction Larco;Or;4;;;;;;2630;;;2007/01/11;2025/01/11
+Construction Lavallée;e-Plans seul;;;1;1;;;95;295;;2019/03/19;2024/03/19
+Construction Longer inc ou Novoco / Gestion Tercera;Or;7;;;;;;4265;;;2004/08/17;2024/08/17
+Construction Lovail Inc.;Or;2;;;;;;1540;;;2009/02/03;2025/02/03
+Construction M.G. Inc;Argent;1;;;;;;395;;;2014/12/03;2024/12/03
+Construction Marc-André Dion Inc.;e-Plans seul;;;1;;;;95;;;2019/03/08;2024/03/08
+Construction Mario Blondin;e-Plans seul;;;;1;;;;295;;2015/04/17;2024/04/17
+Construction Michel Dubé (CMD);Or;1;;;;;;995;;;2009/11/10;2024/11/10
+Construction Mirage inc.;e-Plans seul;;;1;;;;95;;;2020/03/17;2024/03/17
+Construction Miric (2429 8689 Qc Inc.);Or;;2;;;;;;3090;;2019/05/02;2025/02/05
+Construction MLSR Inc.;Or;;4;;;;;;5080;;2020/12/04;2024/12/04
+Construction Morival Ltée;e-Plans seul;;;;2;;;;590;;2022/08/30;2024/08/30
+Construction P.L. Mondou Inc;e-Plans seul;;;;1;;;;295;;2022/05/13;2024/05/13
+Construction Paul Béland;Or;1;1;;;;;995;995;;2013/09/30;2024/09/30
+Construction Paul Thériault et Fils inc.;Or;1;;;;;;995;;;2019/02/06;2025/02/06
+Construction Philex;Or;;1;;;;;;2095;;2021/09/17;2024/09/17
+Construction Plan inc.;e-Plans seul;;;1;;;;95;;;2017/06/12;2024/06/12
+Construction R. Bélanger Inc.;Or;2;;;;;;1540;;;2012/11/13;2024/11/13
+Construction RDF      9225-8623 Québec Inc;Or;;1;;;;;;2095;;2023/02/01;2024/02/01
+Construction René Bouchard Inc.;Or;;3;;;;;;4085;;2019/01/23;2025/01/23
+Construction Rocart;Or;2;;;;;;1540;;;2012/06/19;2024/06/19
+Construction Ronald Beauséjour et Fils Inc;Or;;1;;;;;;2095;;2023/12/07;2024/12/07
+Construction S.M. Paquet;e-Plans seul;;;;2;;;;590;;2022/11/22;2024/11/22
+Construction S.R.J.;Or;;2;;;;;;3090;;2020/09/21;2024/03/16
+Construction Saint-Antoine;e-Plans seul;;;;;2;;290;;;2014/01/28;2024/01/28
+Construction Santerre Inc;Or;;1;;;;;;2095;;2023/12/18;2024/12/18
+Construction Sayeur Électrique Inc;e-Plans seul;;;;1;;;;295;;2023/08/29;2024/08/29
+Construction Sipro Inc.;Or;1;;;;;;995;;;2019/01/28;2024/01/28
+Construction SRS Inc;e-Plans seul;;;;1;;;;295;;2022/12/05;2024/12/05
+Construction St-Gelais;Invitation;1;;;1;;;195;295;;2016/11/30;2024/11/30
+Construction Steve Durand;Or;;1;;;;;;2095;;2020/11/04;2024/11/04
+Construction Technipro BSL;Invitation;1;1;;;;4;195;1275;200;2019/11/07;2024/11/07
+Construction Telva Inc.;Or;;1;;;;;;2095;;2020/09/29;2024/12/29
+Construction Trem-Nor Inc.;Or;2;4;;;;;1540;3980;;2017/05/20;2024/05/20
+Construction Vergo Inc.;Or;6;;;;;;3720;;;2011/11/28;2024/11/28
+Construction Vert Dure Inc.;e-Plans seul;;;;;;2;;690;;2021/12/01;2024/12/01
+Construction VMK;Bronze;1;1;;;1;2;390;915;;2015/04/22;2024/04/22
+Constructions & Toitures Summum inc;e-Plans seul;;;1;;;;95;;;2022/05/26;2024/08/21
+Constructions Bâtiments Québec Inc.;Or;2;;;;;;1540;;;2013/11/08;2024/11/08
+Constructions Doyle Inc;e-Plans seul;;;;;;2;;690;;2023/01/30;2024/01/30
+Constructions Gary Botelho    9201-7367 Québec Inc;e-Plans seul;;;;1;;;;295;;2023/04/17;2024/04/17
+Constructions Jacques Audet Inc;Or Essai;;4;;;;;;5080;;2022/09/15;2024/09/15
+Constructions Jacques Dubois & fils inc.;Or;1;1;;;;;995;995;;2015/04/08;2024/04/18
+Constructions Jean-Paul Plamondon Inc./ 2430-6250 Qc Inc;Or;2;;;;;;1540;;;2003/09/16;2024/09/16
+Constructions MCL /7809093 Canada Inc;e-Plans seul;;;;;1;;195;;;2017/01/23;2024/01/23
+Constructions R. Pétrin & fils inc.;e-Plans seul;;;;;1;;195;;;2017/06/16;2024/06/16
+Constructions Sawland;Or;;1;;;;;;2095;;2023/06/09;2024/06/09
+Constructions Valrive Inc.;e-Plans seul;;;;;1;;195;;;2019/10/29;2024/10/29
+ConstruQc - Intendance de Projet Inc;Or;;1;;;;;;2095;;2022/07/13;2024/07/13
+Corporation de Construction Germano;Or;;1;;;;;;2095;;2013/03/28;2024/03/28
+Couture & Tanguay Const.;Or;6;;;;;;3720;;;2010/03/03;2024/03/03
+Couvre-planchers M. Doyon Flordeco;e-Plans seul;;;;;2;;290;;;2014/04/02;2024/04/02
+Couvreur Denis Courville Inc.;e-Plans seul;;;;1;;;;295;;2022/02/01;2024/05/01
+COVEM CONSTRUCTION;Or;;3;;;;;;4085;;2020/09/09;2024/09/09
+CSA Construction Inc / 9229159 Canada Inc;Or Essai;;1;;;;;;2095;;2023/01/26;2024/01/26
+Cuisitec Ltée;e-Plans seul;;;;;3;;385;;;2019/11/18;2024/11/18
+CVS Construction  9477-2050 Inc;Or;;1;;;;;;2095;;2023/11/29;2024/11/29
+D2M;e-Plans seul;;;;;4;;480;;;2020/03/18;2024/03/18
+Dale Aspirot Electrique;e-Plans seul;;;1;;;;95;;;2020/10/20;2024/10/20
+Dama Construction;Or;11;;;;;;6445;;;2008/04/25;2024/04/25
+DC Acoustique;e-Plans seul;;;1;;;;95;;;2018/11/02;2024/11/02
+DecoBeton TBR;e-Plans seul;;;;1;;;;295;;2023/06/15;2024/06/15
+Decor Tapis Du Nord Ltee;e-Plans seul;;;;;1;;195;;;2014/03/05;2024/03/05
+Décorations Yvon Hubert et Fils inc.;e-Plans seul;;;1;;;;95;;;2020/05/25;2024/05/25
+Demathieu Bard Construction;e-Plans seul;;;;;3;;385;;;2017/02/21;2024/02/21
+Démo-Béton;e-Plans seul;;;;1;;;;295;;2022/11/16;2024/12/01
+DEMODEV;e-Plans seul;;;;1;;;;295;;2021/11/16;2024/11/16
+Démolition Fortin  ( 9202-8240 Québec inc);e-Plans seul;;;;;2;;290;;;2018/01/22;2024/01/22
+Demospec Deconstruction Inc;Bronze;;3;;;;3;;2230;;2020/10/28;2024/10/28
+Denis Poulin Inc;e-Plans seul;;;;1;;;;295;;2022/07/07;2024/07/07
+Desjardins & St-Denis Inc;Or;;1;;;;;;2095;;2023/05/01;2024/05/01
+Devcor (1994);Or;;3;;;;;;4085;;2021/03/26;2024/03/26
+Développement Cité Urbaine;e-Plans seul;;;;1;;;;295;;2023/03/28;2024/03/28
+Développements Les Cours Bellerive Inc;e-Plans seul;;;;1;;;;295;;2023/04/03;2024/04/03
+Di Paolo Construction;Or;;1;;;;;;2095;;2022/04/25;2024/04/25
+Dionne & Fils (1988) Inc.;e-Plans seul;;;1;;;1;95;495;;2019/05/15;2024/05/15
+Distribution Air Cube Inc /Soutions Acoustiques 2012;e-Plans seul;;;;;;3;;885;;2022/12/07;2024/12/07
+Distribution Beto-Briq Inc;e-Plans seul;;;;4;;;;1180;;2021/02/04;2024/05/04
+DLM Construction;Argent;;1;;;;;;995;;2020/08/17;2024/05/10
+DMA Construction;Argent;2;;;;;;640;;;2016/04/26;2024/04/26
+Domra Construction Inc.;Or;5;;;;;;3175;;;2006/05/12;2024/05/12
+Dorais Construction;Or;2;;;;;;1540;;;2006/12/04;2024/12/04
+Downs McGovern / 9322-0614;Or Essai;;3;;;;;;4085;;2022/03/10;2024/03/10
+Dradam;e-Plans seul;;;;1;;;;295;;2023/02/15;2024/02/15
+Drumco construction Inc   (DJ Revêtement Inc  1597));Or;5;1;;;;;3175;995;;2010/09/19;2024/09/19
+DT PEINTURE;e-Plans seul;;;;1;;;;295;;2022/08/25;2024/08/25
+Dufour Construction  / 9319-3019 Quebec Inc;Or;;1;;;;;;2095;;2023/02/08;2024/02/08
+Duquette Construction (1994) Inc;Or;;1;;;;;;2095;;2023/04/12;2024/04/12
+Dynamique -Dor Sasu;e-Plans seul;;;;1;;;;295;;2023/02/07;2024/02/07
+EAC Construction;e-Plans seul;;;;2;;;;590;;2020/12/15;2024/03/15
+EAN CONSTRUCTION  Group LTD;e-Plans seul;;;;3;;;;885;;2021/01/18;2024/04/18
+Ébénesterie LG Martel;e-Plans seul;;;;1;;;;295;;2023/01/10;2025/01/10
+Ébenisterie AMB Inc;e-Plans seul;;;;1;;;;295;;2023/10/16;2024/10/16
+Ébénisterie B Coulombe;e-Plans seul;;;;1;;;;295;;2023/01/31;2025/01/31
+EBM Démolition;e-Plans seul;;;;;;4;;1080;;2022/05/16;2024/05/16
+Eclip;e-Plans seul;;;;1;;;;295;;2022/05/09;2024/05/09
+Eclipse Électrique;e-Plans seul;;;;1;;;;295;;2022/05/30;2024/05/30
+Ecole Séminaire Sherbrooke;Or;1;;;;;;995;;;2021/04/28;2024/04/28
+EJP Construction Inc;Or;;1;;;;;;2095;;2023/09/20;2024/09/20
+EKO Immobilier Inc;Or;;1;;;;;;2095;;2023/02/07;2024/02/07
+Électricité de Beauce Inc.;e-Plans seul;;;;1;;;;295;;2022/02/01;2024/02/01
+Électricité des Laurentides Inc;e-Plans seul;;;;;;3;;885;;2022/08/30;2024/08/30
+Elite Environmental Group Inc.;e-Plans seul;;;;;4;;480;;;2019/03/11;2024/03/11
+EMD Construction Inc.;Or;3;;;;;;2085;;;2003/03/15;2024/03/15
+Ememcor Construction Inc;e-Plans seul;;;;1;;;;295;;2023/02/20;2024/02/20
+Énergère Inc;e-Plans seul;;;;1;;;;295;;2022/07/07;2024/07/07
+Energylease;e-Plans seul;;;;1;;;;295;;2023/10/06;2024/10/06
+Enerko Inc;e-Plans seul;;;;;;2;;690;;2020/12/02;2024/03/02
+Entreprise Davincipro;e-Plans seul;;;;1;;;;295;;2023/10/17;2024/10/17
+Entreprise Jacques Grondin;e-Plans seul;;;;1;;;;295;;2023/12/15;2024/12/15
+Entreprise Mathieu Ostiguy Inc;e-Plans seul;;;;2;;;;590;;2023/04/04;2024/04/04
+Entreprise Rhônalpine de Cloisons Préfabriquées (E.R.C.P.);e-Plans seul;;;;;1;1;195;195;;2016/09/13;2024/09/13
+Entreprises Guillaume Dumont Inc.;Or;1;;;;;;995;;;2015/12/18;2024/12/18
+Eraco Construction;e-Plans seul;;;;1;;;;295;;2023/04/27;2024/04/27
+Éric Rivest Tireur de Joints;Or;;1;;;;;;2095;;2023/07/05;2024/07/05
+Escalera Construction Inc;Or;1;1;;;;;995;995;;2010/02/04;2025/02/04
+Escaliers Multi Design;e-Plans seul;;;;;;1;;495;;2020/09/10;2024/12/10
+Espace construction;Or;2;;;;;;1540;;;2016/12/15;2024/12/15
+Espaces Lokalia      (2552-5981 Québec Inc);e-Plans seul;;;;1;;;;295;;2023/05/26;2024/05/26
+Estérel Carrelage;e-Plans seul;;;1;;;;95;;;2018/11/27;2024/11/27
+Estimation de construction N.L.   9360-2522 Québec Inc;e-Plans seul;;;;;1;;195;;;2017/08/11;2024/08/11
+ESTIMATION JLT;e-Plans seul;;;;;;1;;495;;2021/11/08;2024/11/08
+Estimation Plus Roch Dumont;e-Plans seul;;;1;;;;95;;;2019/03/22;2024/03/22
+Estimations.Cloud;e-Plans seul;;;1;1;;;95;295;;2019/12/12;2024/12/12
+ETP Construction;Or;;1;;;;;;2095;;2023/06/21;2024/06/21
+Eurl Alexandre;e-Plans seul;;;;1;;;;295;;2020/12/17;2024/03/17
+Evali Constructions / 9401-3174 Québec Inc;e-Plans seul;;;;2;;;;590;;2021/08/10;2024/11/10
+Excavation Jérémy Forest Inc.;e-Plans seul;;;;;;1;;495;;2020/07/17;2024/03/25
+Excavation Rive-Sud Inc;e-Plans seul;;;;1;;;;295;;2023/07/05;2024/07/05
+Excavation S.L.T. Inc.;e-Plans seul;;;;;2;;290;;;2017/06/08;2024/06/08
+Excavation Simon Pare et Fils Inc.;e-Plans seul;;;;1;;;;295;;2021/04/01;2024/07/01
+Excavation Yvon Benoit;e-Plans seul;;;;;;2;;690;;2020/06/02;2024/06/02
+EXO Construction Inc.;Invitation;1;1;;;;;195;195;150;2017/07/18;2024/07/18
+Expertise en Bâtiment Champagne Inc;Or;;1;;;;;;2095;;2021/03/31;2024/03/31
+Fabelta systèmes de fenestration;e-Plans seul;;;;;;3;;885;;2021/03/22;2024/06/22
+Fecci Interface Sarl;e-Plans seul;;;1;;;;95;;;2020/06/03;2024/06/03
+Ferblanterie VerToit Inc;e-Plans seul;;;;1;;;;295;;2022/06/07;2024/06/07
+Finex briques et enduits inc.;e-Plans seul;;;;;4;;480;;;2014/04/07;2024/04/07
+Finition DC Concept    9300-2517 Qc Inc;e-Plans seul;;;;1;;;;295;;2023/09/29;2024/09/29
+Finition de plancher Rapide    9037-0610 Québec Inc;e-Plans seul;;;;2;;;;590;;2022/07/18;2024/07/18
+Flor Déco Décorations G.L;e-Plans seul;;;1;;;;95;;;2019/09/11;2024/09/11
+Flor decor concepte deco Coll et frère;e-Plans seul;;;;;1;;195;;;2015/05/20;2024/05/20
+FlorDeco;e-Plans seul;;;;1;;;;295;;2022/05/03;2024/05/03
+Fondations Rive-Sud;e-Plans seul;;;;2;;;;590;;2022/08/09;2024/08/09
+Foratech Construction;e-Plans seul;;;;1;;;;295;;2023/08/17;2024/08/17
+FORMACLIM INC. (Fix AC);e-Plans seul;;;;1;;;;295;;2022/08/18;2024/08/18
+Frare & Gallant Ltée;Or;5;1;;;;;3175;995;;2014/01/29;2024/01/29
+Frimasco inc.;e-Plans seul;;;;1;3;;385;295;;2017/01/23;2025/01/23
+Gagnon Électrique & Associés Inc;e-Plans seul;;;;1;;;;295;;2023/04/04;2024/04/04
+Garçon Étancheité;e-Plans seul;;;;;1;;195;;;2016/02/08;2024/02/08
+Gaston Champoux (1973) Inc.;Or;1;;;;;;995;;;2003/03/02;2024/03/02
+Georges Hamel Inc;e-Plans seul;;;;1;;;;295;;2021/05/12;2024/08/12
+Ger-Ro Methodex Inc;Or Essai;;2;;;;;;3090;;2021/12/17;2024/12/17
+Gérald Bourdage (Les Services d'estimation G.S. Inc.);Or;1;;;;;;995;;;2004/01/01;2025/01/01
+Gestion Dclic;e-Plans seul;;;;2;;;;590;;2021/08/18;2024/11/18
+Gestion de construction DPI;Or;;1;;;;;;2095;;2023/05/10;2024/05/10
+Gestion Dexsen Inc.;e-Plans seul;;;1;;;;95;;;2019/02/22;2024/02/22
+Gestion Immobilère ASM;Or;;1;;;;;;2095;;2023/08/11;2024/08/11
+Gestion Kokolakis Inc.;e-Plans seul;;;;1;;;;295;;2022/03/21;2024/03/21
+Gilles Audet Excavation Inc.;e-Plans seul;;;;;;1;;495;;2020/09/01;2024/09/01
+Gilles Malo Inc.;Or;2;3;;;;;1540;2985;;2006/05/05;2024/05/05
+GL Électricité Automatisation;e-Plans seul;;;;;;2;;690;;2022/09/27;2024/09/27
+Goimbault Sarl;e-Plans seul;;;;;1;;195;;;2016/04/04;2024/04/04
+Golden Gate Contracting;Invitation;;1;;;;;;895;;2021/07/15;2024/07/15
+GP Construction de Val-d'OR;Or;1;;;;;;995;;;2017/01/26;2024/01/26
+Gpic + Inc;e-Plans seul;;;1;;;;95;;;2020/07/13;2024/07/13
+Grilli Samuel Consortium Immobilier;e-Plans seul;;;;1;;;;295;;2023/11/07;2024/11/07
+Grondin et Nadeau Inc.;Or;;3;;;;;;4085;;2021/10/20;2024/10/20
+Groupe 2G Inc;Or;;1;;;;;;2095;;2022/06/15;2024/06/15
+Groupe Angevin;e-Plans seul;;;;;2;;290;;;2020/01/21;2024/01/21
+Groupe Axino Inc.(9173-0523), Rainville;Or;4;1;;;;;2630;995;;2013/05/30;2024/05/30
+Groupe Axino Inc.(9173-0523), Rainville (e-Plans);e-Plans seul;;;1;1;;;95;295;;2020/01/17;2024/05/30
+Groupe Balex Inc;e-Plans seul;;;;1;;;;295;;2023/04/13;2024/04/13
+Groupe Concept synerJ Inc.;e-Plans seul;;;1;;;;95;;;2020/01/13;2025/01/13
+Groupe Corrox;e-Plans seul;;;;;2;;290;;;2018/01/23;2025/01/23
+Groupe Excel SM Inc.;Or;;1;;;;;;2095;;2020/05/19;2024/05/19
+Groupe Firco Inc;Or;;1;;;;;;2095;;2023/09/29;2024/09/29
+Groupe Gagné construction inc.;Or;2;;;;;;1540;;;2017/03/05;2024/03/15
+Groupe GMI Construction;Or;1;;;;;;995;;;2016/02/05;2024/02/05
+Groupe GMR Construction Inc.;Or;1;1;;;;;995;995;;2007/12/12;2024/12/12
+Groupe Immobilier TL;Or;;1;;;;;;2095;;2020/01/27;2024/01/27
+Groupe JFG   9303-2472 QUÉBEC iNC;e-Plans seul;;;;2;;;;590;;2022/06/17;2024/06/17
+Groupe LGR;Or;;1;;;;;;2095;;2023/11/20;2024/11/20
+Groupe M2L Inc;e-Plans seul;;;;;;1;;495;;2023/05/15;2024/05/15
+GROUPE MATHIEU;e-Plans seul;;;;;;2;;690;;2020/08/06;2024/11/06
+Groupe Medway Inc;e-Plans seul;;;;1;;;;295;;2022/12/05;2024/12/05
+Groupe Module Construction Inc.;Or;;1;;;;1;;2095;;2019/06/26;2024/06/26
+Groupe Norbec Inc.;e-Plans seul;;;;;4;;480;;;2019/03/29;2024/03/29
+GROUPE RPF LTEE/ Richard Poirier;e-Plans seul;;;;;;2;;690;;2022/09/02;2024/09/02
+Groupe Symaco Inc;Or;1;1;;;;;995;995;;2010/06/22;2024/06/22
+Groupe Veilleux;e-Plans seul;;;;1;;;;295;;2022/05/18;2024/05/18
+Groupe Venise Inc;Or Essai;;1;;;;;;2095;;2023/01/27;2024/01/27
+Guimond Construction;Or;;4;;;;;;5080;;2020/03/05;2024/03/05
+Habitat Construction Matane (1986) Inc;Or Essai;;2;;;;;;3090;;2023/04/12;2024/04/12
+Habitation 3 (9338-4139 Québec inc.)  hec3;Or;;1;;;;;;2095;;2018/06/07;2024/06/07
+Habitation Daniel Desrochers;Or;;1;;;;;;2095;;2023/12/11;2024/12/11
+HABITATION KYO;e-Plans seul;;;;2;;;;590;;2022/09/26;2024/09/26
+Habitations Atlas/ Atimco;Or;;1;;;;;;2095;;2023/08/30;2024/08/30
+Habitations Dessoleils;Or;;1;;;;;;2095;;2022/03/31;2024/03/31
+Hardy Construction;Or;5;;;;;;3175;;;2003/10/24;2024/10/24
+Hulix Construction e-Plans;e-Plans seul;;;1;2;;;95;590;;2017/09/21;2024/09/21
+Humaco Construction inc.;Or;3;;;;;;2085;;;2016/11/02;2024/11/02
+Humanéo Constructions;Or;;1;;;;;;2095;;2023/10/04;2024/10/04
+Immovex Expertise Immobilière Inc;e-Plans seul;;;;;;1;;495;;2022/09/22;2024/09/22
+Ion Technologies Inc;e-Plans seul;;;;2;;;;590;;2023/05/03;2024/05/03
+Isabelle Pouliot Estimation   (9421-6207 Québec Inc);e-Plans seul;;;;1;;;;295;;2022/09/01;2024/09/01
+Isofor;Argent;3;2;;;;;1085;1750;;2018/10/31;2024/10/31
+Isolation Clermont Enr.;e-Plans seul;;;;;;2;;690;;2022/05/11;2024/05/11
+Isolation Drummond/  David Defossés;e-Plans seul;;;;1;;;;295;;2023/10/10;2024/10/10
+Isolation Majeau et frère inc;e-Plans seul;;;;;3;;385;;;2015/07/07;2024/07/07
+Jardin Dion Inc;e-Plans seul;;;;1;;;;295;;2022/04/27;2024/04/27
+JC7 Signature construction;Or;3;;;;;;2085;;;2011/10/13;2024/10/13
+JDC Étanchéité;e-Plans seul;;;;;1;;195;;;2019/01/31;2024/01/31
+Jean Daoust Construction Inc.;Or;;2;;;;;;3090;;2020/09/23;2024/09/23
+Jean Leclerc Excavation inc;e-Plans seul;;;;;2;;290;;;2016/04/15;2024/04/15
+Jean-Luc Levasseur;Or;2;;;;;;1540;;;2013/09/18;2024/09/18
+Jerry Lapointe;Argent;;1;;;;;;995;;2023/03/14;2024/03/14
+JMS Évolution Inc.;e-Plans seul;;;;1;;;;295;;2020/09/01;2024/08/02
+Jonathan Laflamme / Constructions RDJ;Or;;2;;;;;;3090;;2020/11/24;2024/11/24
+Judand Ltée;e-Plans seul;;;;;1;;195;;;2018/10/19;2024/10/19
+Julie 2;Or;;1;;1;;;;2095;;2021/07/10;2024/07/10
+Julie Lamontagne;Or;1;;;;;;995;;;2018/07/06;2025/07/06
+JUMEC;Or;4;;;;;;2630;;;2008/09/24;2024/09/24
+Kamco construction Inc;Or;5;;;;;;3175;;;2009/09/24;2024/09/24
+L'Archevèque et Rivest;Or;5;;;;;;3175;;;2007/12/06;2024/12/06
+L'intendant Guillaume Boissonnault e-Plans;e-Plans seul;;;1;;;;95;;;2018/11/18;2024/11/18
+L'Intendant Inc;Or;4;;;;;;2630;;;2010/11/18;2024/11/18
+L'intendant inc e-Plans;e-Plans seul;;;;;2;;290;;;2016/11/18;2024/11/18
+L. Fournier et Fils;e-Plans seul;;;;;;2;;690;;2020/06/29;2024/03/24
+La Brique JSB inc.;e-Plans seul;;;;1;;;;295;;2021/02/12;2024/05/12
+La Cabane à Prestige Inc;Or;;1;;;;;;2095;;2023/10/27;2024/10/27
+La Toiture Inc;e-Plans seul;;;;1;;;;295;;2023/04/24;2024/04/24
+Lalonde Cantin Construction & Associés Canada (LCC);Or;4;;;;;;2630;;;2012/08/14;2024/08/14
+Lanaco Enrg. (Alain Landry);Or;1;;;;1;;995;;;2011/07/14;2025/07/14
+Larivière Construction Ltée;Or;1;;;;;;995;;;2018/04/12;2024/04/12
+Laval Fortin;Or;2;;;;;;1540;;;2009/01/29;2024/01/29
+LCS Briquetage & Maçonnerie Inc.;Argent;1;;;;1;;490;;;2017/02/07;2025/02/07
+Le Groupe CIBS;e-Plans seul;;;;;;2;;690;;2020/12/03;2024/12/03
+Le Groupe Patenaude inc;Or;;1;;;;;;2095;;2021/01/11;2025/01/11
+Le Groupe Sharo    (Groupe main d'oeuvre);e-Plans seul;;;;2;;;;590;;2022/08/10;2024/08/10
+Lefebvre & Benoit;e-Plans seul;;;;2;;;;590;;2023/01/16;2025/01/16
+Les Céramiques LGD Inc.;e-Plans seul;;;1;;;;95;;;2020/10/30;2024/10/30
+Les Construction Benoit Doyon;Or;3;1;;;;;2085;995;;2013/12/10;2024/12/10
+Les Constructions Allard;Or;2;;;;;;1540;;;2003/11/19;2024/11/19
+Les Constructions Hydrospec Inc.;Or;3;1;;;;;2085;995;;2010/02/19;2024/02/19
+Les Constructions Immoblex Inc;e-Plans seul;;;;;;1;;495;;2023/05/09;2024/05/09
+Les Constructions M & F /9257-0134 Québec Inc;e-Plans seul;;;;1;;;;295;;2022/09/26;2024/09/26
+Les constructions M. Patry Inc;e-Plans seul;;;;1;;;;295;;2023/08/09;2024/08/09
+Les Constructions Nemco Inc.;e-Plans seul;;;1;;;;95;;;2020/08/13;2024/08/13
+Les constructions PL2 - 9338-2158 Québec inc.;e-Plans seul;;;1;1;;;95;295;;2018/04/03;2024/04/03
+Les constructions Robin inc.;Or;4;;;;;;2630;;;2017/08/22;2024/08/22
+Les Constructions S.S.O Inc;Or;;1;;;;;;2095;;2023/11/16;2024/11/16
+Les Constructions Solam Inc.;Or;3;;;;;;2085;;;2005/05/11;2024/05/11
+Les Constructions Unic Inc.;e-Plans seul;;;;;;2;;690;;2014/07/21;2024/07/21
+Les Constructions Yves Lessard;Or;3;;;;;;2085;;;2002/03/29;2024/03/29
+Les Entreprises Alexandre Bond Inc;e-Plans seul;;;;1;;;;295;;2023/12/07;2024/12/07
+Les entreprises AMS;e-Plans seul;;;;;1;;195;;;2018/01/29;2025/01/29
+Les Entreprises Aubry Villeneuve Inc;e-Plans seul;;;;1;;;;295;;2023/04/27;2024/04/27
+Les Entreprises Christian Arbour Inc.;Or;3;1;;;;;2085;995;;2010/07/05;2024/07/05
+Les Entreprises Constructhor Inc;e-Plans seul;;;;1;;;;295;;2023/10/20;2024/10/20
+Les Entreprises Denexco inc.;Or;;4;;;;;;5080;;2021/08/18;2024/08/18
+Les Entreprises Électriques Michel Guertin Inc;e-Plans seul;;;;;1;;195;;;2019/12/16;2024/12/16
+Les entreprises électriques N.I.C.E. Inc.;e-Plans seul;;;;1;;;;295;;2022/01/05;2025/01/05
+Les Entreprises G&M Laplante Ltée;Or;;1;;;;;;2095;;2023/12/20;2024/12/20
+Les Entreprises Georges Flamand Inc. (L'ESTIMATEUR GÉNÉRAL);Or;;1;;;;;;2095;;2022/04/11;2024/04/11
+Les Entreprises Gordon Quint Inc;Or;;1;;;;;;2095;;2023/12/04;2024/12/04
+Les entreprises Louis Bellerose;Invitation;;1;;;;1;;1390;;2022/01/05;2025/01/05
+Les entreprises Ma-Mi Inc;Or;1;;;;;;995;;;2007/04/27;2025/04/27
+Les entreprises Philippe Denis Inc.;Or;3;2;;;;;2085;1990;;2017/02/04;2024/02/04
+Les entreprises Proteau et Garneau;Or;1;1;;;;;995;995;;2010/02/19;2024/02/19
+Les Entreprises QMD Inc.;e-Plans seul;;;;;;5;;1275;;2021/08/03;2024/11/03
+Les entreprises Roseneige inc.;e-Plans seul;;;1;2;;;95;590;;2019/05/30;2024/05/30
+Les entreprises Victor et François Inc.;Or;2;1;;;;;1540;995;;2017/04/06;2024/04/06
+Les Expertises Argento inc.;Or;2;;;;;;1540;;;2014/09/09;2024/09/09
+Les Experts d'la Toiture inc.;e-Plans seul;;;1;;;;95;;;2019/08/14;2024/08/14
+Les Finitions Inc;e-Plans seul;;;;1;;;;295;;2023/04/19;2024/04/19
+Les Géants du couvre plancher;e-Plans seul;;;;;3;;385;;;2017/10/20;2024/10/20
+Les Habitations Beauséjour inc.;Or;1;;;;;;995;;;2016/01/05;2025/01/05
+Les habitations Jonathan Roy Inc;e-Plans seul;;;;;1;;195;;;2015/02/09;2024/02/09
+Les habitations Lymosa;Or;;1;;;;;;2095;;2023/09/08;2024/09/08
+Les habitations Reno Plus  (9406-6636 Québec Inc);Or;;1;;;;;;2095;;2023/06/29;2024/06/29
+Les Immeubles Roussin;Or;;2;;;;;;3090;;2021/02/18;2024/02/28
+Les Industries Cama;Or;4;;;;;;2630;;;2008/09/24;2024/09/24
+Les Industries M. Santerre Ltee;Or;1;;;;;;995;;;2006/02/03;2024/02/03
+Les Installations Électriques Sylvain Durand Inc.;e-Plans seul;;;;;2;1;290;195;;2020/08/13;2024/08/13
+Les Joints AD Inc;e-Plans seul;;;;1;;;;295;;2022/07/13;2024/07/13
+Les Pliages Nova;e-Plans seul;;;;1;;;;295;;2023/08/25;2024/08/25
+Les Rénovations Montplaisir Inc.;Or;;1;;;;;;2095;;2021/03/15;2024/03/15
+Les revêtements Despatis Inc.;e-Plans seul;;;;1;1;;195;295;;2018/06/04;2024/06/04
+Les services ACM Inc.;e-Plans seul;;;1;;;;95;;;2016/06/02;2024/06/02
+Les Services Informatisés (Install14);Or;;3;;;;;;4085;;2018/10/24;2024/12/31
+Les Services Informatisés install (install 12);Or;1;;;;;;995;;;2008/01/01;2025/01/01
+Lesage & Turgeon Électrique;e-Plans seul;;;;1;;;;295;;2023/01/11;2025/01/11
+Levasseur Toitures Inc;e-Plans seul;;;;1;;;;295;;2024/01/15;2025/01/15
+Levesque et Associés inc.;Argent;;2;;;;2;;2110;;2022/05/18;2024/05/18
+LÉVIS CONSTRUCTION;Argent;2;;;;;;940;;;2015/02/04;2024/02/04
+Lexco Construction Inc;Or;;1;;;;;;2095;;2022/12/22;2024/12/22
+Lexco Électrique;e-Plans seul;;;;;;2;;690;;2023/12/14;2024/12/14
+LF Électrique Inc;e-Plans seul;;;;1;;;;295;;2022/06/17;2024/06/17
+LK Teck Estimation;Or;;1;;;;;;2095;;2024/01/17;2025/01/17
+Loracon construction;Invitation;2;1;;;3;;675;195;200;2015/04/09;2024/04/09
+Lortie Construction inc.;Argent;;3;;;;;;1845;;2020/01/16;2025/01/16
+Lucie Mtchell ventes;Or;3;;;;;;2085;;;2022/09/29;2024/09/29
+Ludovic Guyot;e-Plans seul;;;;1;;;;295;;2024/01/08;2025/01/08
+Lussier et Fils Inc.;e-Plans seul;;;2;;;;190;;;2014/05/13;2024/05/13
+M.R. Parent Inc.;Or;;3;;;;;;4085;;2020/02/17;2024/02/17
+Ma Entrepreneur Général Inc;e-Plans seul;;;;1;;;;295;;2023/03/20;2024/03/20
+Maçonnerie Code Plus Inc;e-Plans seul;;;;1;;;;295;;2024/01/10;2025/01/10
+Maçonnerie François Rochon Inc;e-Plans seul;;;;1;;;;295;;2023/05/09;2024/05/09
+Maçonnerie Gervais et Associés Inc.;e-Plans seul;;;;;1;;195;;;2020/06/05;2024/06/05
+Maçonnerie Globensky;e-Plans seul;;;;2;;;;590;;2022/09/28;2024/09/28
+Maçonnerie J.T Inc;e-Plans seul;;;;1;;;;295;;2023/04/05;2024/04/05
+Maçonnerie JPB 2011 Inc;e-Plans seul;;;;1;;;;295;;2022/06/27;2024/06/27
+Maçonnerie Legendre;e-Plans seul;;;;1;;;;295;;2022/06/28;2024/06/28
+Maçonnerie MJC;e-Plans seul;;;1;;;;95;;;2015/03/26;2024/03/26
+Maçonnerie RP Inc;e-Plans seul;;;;1;;;;295;;2021/04/14;2024/07/14
+Maçonnerie Williams Inc.;e-Plans seul;;;;1;;;;295;;2020/05/12;2024/05/12
+Maçonnex;e-Plans seul;;;;;3;;385;;;2018/05/20;2024/05/20
+Maçonnex  (Saguenay);e-Plans seul;;;;1;;;;295;;2023/04/03;2024/04/03
+Mag-Dev Construction Inc;e-Plans seul;;;1;2;;;95;590;;2020/07/14;2024/07/14
+Magenta Exterior Solutions;e-Plans seul;;;;;;3;;885;;2023/06/08;2024/06/08
+MAGNY ELECTRIQUE  9190-5778 Québec Inc;e-Plans seul;;;;;;2;;690;;2022/09/08;2024/09/08
+Maison Harmonie, Pole Construction1;Argent Plus;;2;;;;2;;2760;;2020/02/21;2024/02/21
+Maisons Distinction;Or;;1;;;;;;2095;;2023/01/09;2025/01/09
+Mansart Construction;Or;;1;;;;;;2095;;2023/10/04;2024/10/04
+Marcel Charest et fils;Or;3;;;;;;2085;;;2007/02/05;2025/02/05
+Maxium Construction;Or;;1;;;;;;2095;;2023/10/19;2024/10/19
+Mécanique Électrique CMPL Inc;e-Plans seul;;;;;4;;480;;;2020/12/03;2024/12/03
+Mécanique MGS Métal Inc.;e-Plans seul;;;;;;3;;885;;2019/01/14;2025/01/14
+Média Constructions;Invitation;1;1;;;;1;195;690;100;2019/02/11;2024/02/11
+Melma Construction;Or;;2;;;;;;3090;;2018/03/14;2024/09/14
+MICHAUD BRIQUES ET PIERRES INC.;e-Plans seul;;;;1;;;;295;;2022/09/21;2024/09/21
+Mjr Inc.;Bronze;1;;;;1;;390;;;2018/08/08;2024/08/08
+MLC;e-Plans seul;;;;1;;;;295;;2023/08/22;2024/08/22
+Mon Génie en Bâtiment    9433-3325 Québec Inc;e-Plans seul;;;;2;;;;590;;2023/04/11;2024/04/11
+Monsieur Debeaunavet;e-Plans seul;;;;2;;;;590;;2022/06/30;2024/06/30
+Mountain Granite;e-Plans seul;;;;;1;;195;;;2018/03/05;2024/03/05
+MOV ELECTRIQUE (9391-8332 QUEBEC INC);e-Plans seul;;;;1;;;;295;;2022/09/21;2024/09/21
+MRJ Électrique Inc;e-Plans seul;;;;1;;;;295;;2023/03/28;2024/03/28
+MSTJ Peinture Inc.;e-Plans seul;;;1;;;;95;;;2019/12/05;2024/12/05
+Multi Techniques Inc;e-Plans seul;;;;1;;;;295;;2021/06/15;2024/09/26
+Multi-Peintres Inc;e-Plans seul;;;2;;;;190;;;2020/02/11;2024/02/11
+Municipalité de Piedmont;e-Plans seul;;;;;2;;290;;;2017/11/22;2024/11/22
+Nadeau et Fils CTN;e-Plans seul;;;;1;;;;295;;2023/08/09;2024/08/09
+Nadeau et Fils Inc;e-Plans seul;;;1;1;;;95;295;;2019/11/22;2024/11/22
+Nadeau Ultra Tech Inc;e-Plans seul;;;;1;;;;295;;2023/03/08;2024/03/08
+National Démolition;e-Plans seul;;;;;1;;195;;;2018/11/14;2024/11/14
+Némésis Construction Inc;Or;;1;;;;;;2095;;2022/10/11;2024/10/11
+Nepsen;e-Plans seul;;;1;1;;;95;295;;2019/08/12;2024/08/12
+Neptune Construction;e-Plans seul;;;;;;1;;495;;2023/01/31;2024/01/31
+Norag inc;e-Plans seul;;;;;2;;290;;;2016/07/21;2024/07/21
+Novaxion Construction Inc.;e-Plans seul;;;;1;;;;295;;2021/03/11;2024/06/11
+Omnia Technologies Inc.;e-Plans seul;;;;;4;;480;;;2019/03/25;2024/03/25
+Omnisol / Gestion D.M. Roy Inc;e-Plans seul;;;;;2;;290;;;2017/01/31;2025/01/31
+Pamela Proulx;e-Plans seul;;;;1;;;;295;;2023/02/23;2024/02/23
+Panzo Construction Inc;e-Plans seul;;;;2;;;;590;;2023/06/09;2024/06/09
+Parisien Construction (RGMSP);Or;3;;;;;;2085;;;2013/08/30;2024/08/30
+Pascal Dubé Construction Rénovation (9438-9137 QC Inc);e-Plans seul;;;;1;;;;295;;2023/11/08;2024/11/08
+Patrick Cyr;e-Plans seul;;;;1;;;;295;;2023/07/18;2024/07/18
+Patrick Gagné & Fils Inc;e-Plans seul;;;;1;;;;295;;2022/05/26;2024/05/26
+Pavage Béton TC;e-Plans seul;;;;1;;;;295;;2023/09/11;2024/09/11
+Pavage M.G.M.T.;e-Plans seul;;;;;1;1;195;195;;2019/10/09;2024/10/09
+Paysages Rossignol inc;e-Plans seul;;;;;1;;195;;;2016/05/25;2024/05/25
+Peinture Décor;e-Plans seul;;;;1;;;;295;;2020/05/15;2024/06/18
+Peinture Éco Macomeau Inc.;e-Plans seul;;;1;;;;95;;;2019/05/22;2024/05/22
+Peinture Marcil Inc.;e-Plans seul;;;;1;;;;295;;2022/03/29;2024/03/29
+Peinture Mauricie Inc;e-Plans seul;;;;1;;;;295;;2023/04/27;2024/04/27
+Peinture Roberge Inc.;e-Plans seul;;;;2;;;;590;;2020/06/15;2024/09/15
+Peinture Simco Inc;e-Plans seul;;;;1;;;;295;;2023/10/16;2024/10/16
+Pélox Électrique Inc;e-Plans seul;;;;1;;;;295;;2023/07/21;2024/07/21
+Perfection Électrique;e-Plans seul;;;;1;;;;295;;2023/07/13;2024/07/13
+Picard Constructions;e-Plans seul;;;;1;;;;295;;2022/07/21;2024/07/21
+Pierre Landry Électrique Inc;e-Plans seul;;;;1;;3;;1180;;2022/12/22;2024/12/22
+Pinard Rousseau Construction;Or;;1;;;;;;2095;;2022/11/17;2024/11/17
+Pincor Ltée;Or;;2;;;;;;3090;;2021/05/03;2024/05/03
+Plancher CP;e-Plans seul;;;;;1;;195;;;2015/05/14;2024/05/14
+Plancher de Bois Franc Excalibur Inc.;e-Plans seul;;;;;2;;290;;;2014/04/09;2024/04/09
+Plancher Déco Distinction;e-Plans seul;;;1;;;;95;;;2017/01/24;2025/01/24
+Planchers Mur à Mur Inc.;e-Plans seul;;;1;;;;95;;;2017/02/02;2025/02/02
+Plani-Verre;e-Plans seul;;;;;3;1;385;195;;2020/07/09;2024/07/09
+Planit Construction;Or;6;;;;;;3720;;;2015/03/30;2024/03/30
+Plâtre et Peinture M. Gagnon;e-Plans seul;;;;;;3;;885;;2018/08/10;2024/08/10
+Poly-Béton;e-Plans seul;;;1;;;;95;;;2018/01/22;2025/01/22
+Poly-Dalle Inc;e-Plans seul;;;;;;1;;495;;2023/02/02;2025/02/02
+Polyval Construction inc.;Invitation;1;;;;;;195;;;2017/01/18;2025/01/18
+PP Deslandes Inc;e-Plans seul;;;;1;;;;295;;2023/10/05;2024/10/05
+Pro-Fit Rénovations    9468-8512 Québec Inc;Argent Plus;;1;;;;;;1195;;2023/02/24;2024/02/24
+Pro-jet Démolition Inc.;Or;;3;;;;;;4085;;2005/05/27;2024/04/18
+Pro-Sept (9300-6658);Argent Plus;1;;;;;;595;;;2014/05/22;2024/05/22
+PROGIMA Construction Inc.;Or;;1;;;;;;2095;;2023/03/29;2024/03/29
+Projet Plus Inc.;e-Plans seul;;;1;;;;95;;;2018/08/29;2024/08/29
+Projets Rénovations Experts DL inc;Or;;1;;;;;;2095;;2021/06/17;2024/09/17
+Protection Incendie UNIK;e-Plans seul;;;;;;3;;885;;2018/12/18;2024/12/18
+PROTECTION INCENDIE VISION 360 INC;e-Plans seul;;;;;2;;290;;;2020/04/22;2024/04/22
+Provost Bonno Construction Inc;e-Plans seul;;;;1;;;;295;;2024/01/11;2025/01/11
+Quadrax et Associés;e-Plans seul;;;;2;;;;590;;2005/04/27;2024/04/27
+Qualipro Peinture;e-Plans seul;;;1;;;;95;;;2017/08/22;2024/08/22
+QuebecHab;Or;4;;;;;;2630;;;2005/09/15;2024/09/15
+Quinox Inc.;e-Plans seul;;;;;;2;;690;;2022/03/10;2024/03/10
+R. N. Samson Inc.;Or;;1;;;;;;2095;;2021/09/09;2024/09/09
+Rampes Avant-Garde;e-Plans seul;;;;;3;;385;;;2018/05/02;2024/05/02
+Rassco Construction;Argent;2;;;;2;;930;;100;2014/11/27;2024/11/27
+Réno Construction Max. M.;e-Plans seul;;;;2;;;;590;;2022/04/05;2024/07/05
+Rénovations Alexandre Léveillé;Invitation;;1;;;;1;;1390;50;2021/10/25;2024/10/25
+Renovek;e-Plans seul;;;1;;;;95;;;2019/08/15;2024/08/15
+Renovision R.K.R Inc;Or;;1;;;;;;2095;;2023/05/03;2024/05/03
+Revêtement Lambert;e-Plans seul;;;;1;;;;295;;2023/02/17;2024/02/17
+Revêtement Mille Îles Inc.;e-Plans seul;;;;1;;;;295;;2023/09/13;2024/09/13
+Revêtement Nault inc.;e-Plans seul;;;1;;;;95;;;2019/04/02;2024/04/02
+Revêtements Muraux Spec Inc;e-Plans seul;;;;1;;;;295;;2021/06/15;2024/09/15
+RG Solution;e-Plans seul;;;;;;1;;495;;2021/03/12;2024/06/12
+RIC Revêtements Inc.;e-Plans seul;;;;;2;;290;;;2018/12/03;2024/12/03
+RMS Portes et fenêtres (1343266 ONT INC);e-Plans seul;;;;1;;;;295;;2022/04/05;2024/04/05
+Robert Archambault;e-Plans seul;;;1;;;;95;;;2019/04/09;2024/04/09
+Robert Lefebvre;e-Plans seul;;;;1;;;;295;;2021/06/17;2024/06/17
+Roland Grenier Construction;Invitation;2;;;;;;290;;;2015/11/20;2024/11/20
+rpm2;e-Plans seul;;;;4;;;;1180;;2022/04/07;2024/04/07
+S.G Construction / 9142-6254 Inc;Invitation;1;;;;2;1;485;495;;2014/10/13;2024/10/13
+S.G.T.L.;e-Plans seul;;;1;;;;95;;;2018/02/05;2024/02/05
+Sabcon Inc.;Invitation;1;;;;;;195;;;2017/01/17;2025/01/17
+Sablage & Peinture Beaulac (1995) Inc.;e-Plans seul;;;1;;;;95;;;2017/03/29;2024/03/29
+Saint-Lambert Électrique;e-Plans seul;;;;;;2;;690;;2022/06/15;2024/06/15
+SARL DEPP IMMOBILIER;e-Plans seul;;;1;1;;;95;295;;2020/02/14;2024/02/14
+SARL EVF;e-Plans seul;;;1;;;;95;;;2020/03/25;2024/03/25
+Sarl SPB;e-Plans seul;;;;1;;;;295;;2023/06/08;2024/06/08
+Sas Bilger;e-Plans seul;;;;;;2;;690;;2020/11/30;2024/02/28
+Sas BTCE;e-Plans seul;;;;1;;;;295;;2024/01/12;2025/01/12
+SAS MAISONNEUVE;e-Plans seul;;;1;;;;95;;;2020/03/17;2024/03/17
+SAS Parkelis;e-Plans seul;;;1;;;;95;;;2018/08/07;2024/08/07
+SAS Toncelli Construction;e-Plans seul;;;1;;;;95;;;2020/03/31;2024/03/31
+SASU Morales;e-Plans seul;;;;1;;;;295;;2022/01/21;2025/01/21
+Scarfone construction & Gilca inc.;Argent;5;1;;;;;1375;750;;2016/10/04;2024/10/20
+SDEL Tertiaire;e-Plans seul;;;2;;4;;670;;;2020/06/15;2024/06/15
+SEC TECH SERVICES SARL;e-Plans seul;;;1;;;;95;;;2018/05/10;2024/05/10
+Selectronix    9156-5457 Qc Inc;e-Plans seul;;;;;;2;;690;;2023/04/18;2024/04/18
+Senterre Entrepreneur Général;Or;;5;;;;;;6075;;2019/09/10;2024/09/10
+Serge & André Brin Coffrages de Béton Inc;e-Plans seul;;;;1;;;;295;;2023/10/04;2024/10/04
+Service de Mise au Point LeBlanc inc.;e-Plans seul;;;;1;;;;295;;2021/06/16;2024/09/16
+Services E.G.C. Inc.;Or;;1;;;;;;2095;;2020/10/08;2025/01/08
+Services en bâtiment Ebax Inc;Or;;2;;;;;;3090;;2019/09/24;2024/09/24
+Services MCR 64 Inc;e-Plans seul;;;;1;;;;295;;2022/05/18;2024/05/18
+Services Résidentiels Majordom;e-Plans seul;;;;1;;;;295;;2023/07/13;2024/07/13
+SEVIM inc.;Or;1;;;;;;995;;;2019/03/29;2024/03/29
+Signature AP;Or;;2;;;;;;3090;;2021/09/20;2024/12/20
+SKB peinture (Cetta);e-Plans seul;;;1;;;;95;;;2017/10/10;2024/10/10
+Solutions Électriques Françis Aubin Inc;e-Plans seul;;;;1;;;;295;;2023/08/23;2024/08/23
+Soudure J.F. Dionne Inc.;e-Plans seul;;;1;1;;;95;295;;2020/06/01;2024/06/01
+Sphère DI Construction inc.;e-Plans seul;;;;1;;;;295;;2021/04/01;2024/04/01
+ST-AMANT PEINTURE INC.;e-Plans seul;;;;1;;;;295;;2023/03/07;2024/03/07
+St-Arnauld & Labrecque Inc;e-Plans seul;;;;1;;;;295;;2023/06/19;2024/06/19
+STM;e-Plans seul;;;;1;;;;295;;2022/11/03;2024/12/13
+Strategia Conseil;e-Plans seul;;;;1;;;;295;;2022/10/12;2024/10/12
+Structures Héritage;e-Plans seul;;;;1;;;;295;;2023/06/26;2024/06/26
+Structures M.H inc.;Or;;1;;;;;;2095;;2023/01/16;2025/01/16
+Structures Stross Napierville inc.;e-Plans seul;;;;;1;;195;;;2016/05/03;2024/05/03
+Sud Cloisons;e-Plans seul;;;;;1;;195;;;2016/04/01;2024/04/01
+SuperNord Construction Inc;e-Plans seul;;;;3;;;;885;;2022/07/20;2024/07/20
+Surfacex Rive-Nord;e-Plans seul;;;;1;;;;295;;2021/01/05;2024/04/05
+Sydaco Inc;Or;;4;;1;;;;5080;;2023/07/05;2024/07/05
+Systemes Électrique Darc;e-Plans seul;;;;;;1;;495;;2023/09/11;2024/09/11
+T3P construction inc.;Or;;2;;;;;;3090;;2020/04/07;2024/04/07
+Tapis Neufs de l'Outaouais;e-Plans seul;;;;;;1;;495;;2022/12/01;2024/12/01
+TCE Habitat;e-Plans seul;;;;1;;;;295;;2023/04/17;2024/04/17
+TELEALARMEPLUS;e-Plans seul;;;;1;;;;295;;2022/08/22;2024/08/22
+Tergos Ecoconstruction Inc.;e-Plans seul;;;;;2;;290;;;2014/10/07;2024/10/07
+Terrain Dev Immobilier Inc;Or;;1;;;;;;2095;;2023/06/09;2024/06/09
+Terrassement Baril;e-Plans seul;;;;1;;;;295;;2023/04/24;2024/04/24
+Terrazzo Inc  9314-2503 Qc Inc;e-Plans seul;;;;1;;;;295;;2024/01/16;2025/01/16
+Test CTRL;Or;1;;;;;;995;;;2022/09/23;2024/12/31
+Therrien Entrepreneur Général;Or;3;1;;;;;2085;995;;2016/05/01;2024/05/01
+Thouraud Fayat Bâtiment;e-Plans seul;;;8;1;;;760;295;;2015/09/23;2024/06/01
+TISSOT ETANCHEITE;e-Plans seul;;;;1;;;;295;;2021/12/01;2024/12/01
+Toitures Aubin inc.;e-Plans seul;;;;;;2;;690;;2021/05/07;2024/08/07
+Toitures et Rénovations Cossette;e-Plans seul;;;;;1;1;195;195;;2014/05/29;2024/05/29
+Toitures et Rénovations Delisle   9323-4565 Québec Inc;e-Plans seul;;;;;;1;;495;;2023/04/24;2024/04/24
+Toitures Frontenac;e-Plans seul;;;;1;;;;295;;2020/03/30;2024/03/30
+Toitures Gendron Inc.;e-Plans seul;;;;1;;;;295;;2021/04/06;2024/07/06
+Toitures Impex;e-Plans seul;;;;1;;;;295;;2023/08/09;2024/08/09
+Toitures Lessard Provost Inc;e-Plans seul;;;;1;;;;295;;2022/05/12;2024/05/12
+Toitures Messier et Tougas;e-Plans seul;;;;;;3;;885;;2022/01/21;2024/01/21
+Toitures Moses;e-Plans seul;;;1;1;;;95;295;;2018/02/26;2024/02/26
+Toitures Nortech;e-Plans seul;;;;;3;;385;;;2016/05/16;2024/05/16
+Toitures R.P. Inc.;e-Plans seul;;;;;;2;;690;;2019/04/18;2025/02/08
+Toitures Ultima;e-Plans seul;;;;1;;;;295;;2023/01/23;2024/01/23
+Tomy Electrique Inc;e-Plans seul;;;;;;2;;690;;2021/03/10;2024/06/10
+Unibec Champel;e-Plans seul;;;2;;;;190;;;2020/07/16;2024/07/16
+Venise Peintre Inc.;e-Plans seul;;;;2;;;;590;;2021/02/09;2024/05/09
+Ventilation Lejour Inc;e-Plans seul;;;;1;;;;295;;2023/09/25;2024/09/25
+Vilcin Électrique;Or;;1;;;;;;2095;;2023/11/13;2024/11/13
+VILLE DE MIRABEL;e-Plans seul;;;;;;1;;495;;2022/09/13;2024/09/13
+Ville de Montréal;e-Plans seul;;;;1;;;;295;;2022/12/06;2024/12/06
+Vitrerie P. Latreille Inc.;e-Plans seul;;;;;;2;;690;;2021/08/16;2024/11/16
+Vivolum;e-Plans seul;;;;;;8;;1860;;2022/12/20;2024/12/20
+Volta Électrique;e-Plans seul;;;;1;;;;295;;2022/03/04;2024/03/04
+WSP Canada;e-Plans seul;;;4;;;;380;;;2019/05/09;2024/05/09
+Totaux;;306;247;84;258;150;156;232255;491410;950
+Totaux Montants;;202320;364950;7980;75520;21955;50940;;;950
+
+
+Licences Achat EG;;306
+Licences Achat e-Plans;;234
+Licences Locat EG;;247
+Licences Locat e-Plans;;414
+
+Grand Total;724615
+638 clients

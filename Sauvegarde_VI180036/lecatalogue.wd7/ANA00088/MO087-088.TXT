@@ -1,0 +1,5 @@
+//MO087-088.TXT ANA00087 TO ANA00088
+AAClient		TAR	1285	nouvelle taille enregistrement : 1285
+AAClient	REP_COMMON	RUB-		la rubrique REP_COMMON est supprimée
+REPCOMMON		NFI		nouveau fichier
+REPCOMMON		FRN		

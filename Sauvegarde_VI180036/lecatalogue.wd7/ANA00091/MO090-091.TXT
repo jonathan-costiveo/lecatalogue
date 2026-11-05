@@ -1,0 +1,5 @@
+//MO090-091.TXT ANA00090 TO ANA00091
+AAClient		TAR	1286	nouvelle taille enregistrement : 1286
+AAClient	AutoriseTuto	RUB+		AutoriseTuto est une nouvelle rubrique
+LISTFORM		NFI		nouveau fichier
+LISTFORM		FRN		

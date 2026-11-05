@@ -1,0 +1,7 @@
+//MO051-052.TXT ANA00051 TO ANA00052
+Version		TAR	1274	nouvelle taille enregistrement : 1274
+Version	VersionEPlan	RUB+		VersionEPlan est une nouvelle rubrique
+Version	NomVersionEPlan	RUB+		NomVersionEPlan est une nouvelle rubrique
+AAClient		TAR	1281	nouvelle taille enregistrement : 1281
+AAClient	VersionEPlan	RUB+		VersionEPlan est une nouvelle rubrique
+AAClient	DateVersionEPlan	RUB+		DateVersionEPlan est une nouvelle rubrique

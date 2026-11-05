@@ -1,0 +1,26 @@
+//MO122-123.TXT ANA00122 TO ANA00123
+Version		TAR	1778	nouvelle taille enregistrement : 1778
+Version	Version5	NNR	Versions	ATTENTION : la rubrique Versions a pour nouveau nom Version5
+Version	DescVersion5	NNR	NomVersions	ATTENTION : la rubrique NomVersions a pour nouveau nom DescVersion5
+Version	Version_Guide	NNR	Versions2	ATTENTION : la rubrique Versions2 a pour nouveau nom Version_Guide
+Version	DescVersion_Guide	NNR	NomVersions2	ATTENTION : la rubrique NomVersions2 a pour nouveau nom DescVersion_Guide
+Version	Version_Estime12	NNR	Versions3	ATTENTION : la rubrique Versions3 a pour nouveau nom Version_Estime12
+Version	DescVersion_Estime12	NNR	NomVersions3	ATTENTION : la rubrique NomVersions3 a pour nouveau nom DescVersion_Estime12
+Version	Version_Module12	NNR	VersionModule	ATTENTION : la rubrique VersionModule a pour nouveau nom Version_Module12
+Version	DescVersion_Module12	NNR	NomVersionModule	ATTENTION : la rubrique NomVersionModule a pour nouveau nom DescVersion_Module12
+Version	Version_EPlan	NNR	VersionEPlan	ATTENTION : la rubrique VersionEPlan a pour nouveau nom Version_EPlan
+Version	DescVersion_EPlan	NNR	NomVersionEPlan	ATTENTION : la rubrique NomVersionEPlan a pour nouveau nom DescVersion_EPlan
+Version	Version_Estime14	NNR	Version_14	ATTENTION : la rubrique Version_14 a pour nouveau nom Version_Estime14
+Version	DescVersion_Estime14	NNR	NomVersion_14	ATTENTION : la rubrique NomVersion_14 a pour nouveau nom DescVersion_Estime14
+Version	Version_Module14	RUB+		Version_Module14 est une nouvelle rubrique
+Version	DescVersion_Module14	RUB+		DescVersion_Module14 est une nouvelle rubrique
+AAClient		TAR	1379	nouvelle taille enregistrement : 1379
+AAClient	Version5	NNR	Versions	ATTENTION : la rubrique Versions a pour nouveau nom Version5
+AAClient	DateVersion5	NNR	DateVersions	ATTENTION : la rubrique DateVersions a pour nouveau nom DateVersion5
+AAClient	Version_Guide	NNR	Versions2	ATTENTION : la rubrique Versions2 a pour nouveau nom Version_Guide
+AAClient	DateVersionGuide	NNR	DateVersions2	ATTENTION : la rubrique DateVersions2 a pour nouveau nom DateVersionGuide
+AAClient	Version_Estime12	NNR	Versions3	ATTENTION : la rubrique Versions3 a pour nouveau nom Version_Estime12
+AAClient	DateVersion_Estime12	NNR	DateVersions3	ATTENTION : la rubrique DateVersions3 a pour nouveau nom DateVersion_Estime12
+AAClient	Version_Estime14	RUB+		Version_Estime14 est une nouvelle rubrique
+AAClient	DateVersion_Estime14	RUB+		DateVersion_Estime14 est une nouvelle rubrique
+AAClient	Version_EPlan	NNR	VersionEPlan	ATTENTION : la rubrique VersionEPlan a pour nouveau nom Version_EPlan

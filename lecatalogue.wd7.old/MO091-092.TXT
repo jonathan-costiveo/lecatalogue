@@ -1,0 +1,50 @@
+//MO091-092.TXT ANA00091 TO ANA00092
+TRADES		TAR	435	nouvelle taille enregistrement : 435
+TRADES	IDTRADPARENT	RUB+		IDTRADPARENT est une nouvelle clé
+TRADES	TYPE_TRADE	RUB+		TYPE_TRADE est une nouvelle clé
+TRADES	TIMESTAMP_AJOUT	RUB+		TIMESTAMP_AJOUT est une nouvelle rubrique
+TRADES	TIMESTAMP_MODIF	RUB+		TIMESTAMP_MODIF est une nouvelle rubrique
+TRADES	ELEM_EQUIPE	RUB+		ELEM_EQUIPE est une nouvelle rubrique
+TRADES	HIDE_TRADE	RUB+		HIDE_TRADE est une nouvelle rubrique
+TRADES	Flags	RUB+		Flags est une nouvelle rubrique
+TRADES	TYPE_TRADEIDTRADES	RUB+		TYPE_TRADEIDTRADES est une nouvelle clé
+LienAsmb		TAR	233	nouvelle taille enregistrement : 233
+LienAsmb		IDE+*		fichier avec identifiant
+LienAsmb	LACLEUNIK	RUB+		LACLEUNIK est une nouvelle clé
+LienAsmb	NoLigne	CNW	Entier non signé sur 2 octets$Entier sur 4 octets	la rubrique NoLigne a pour nouveau type Entier non signé sur 2 octets
+LienAsmb	QUANTASS	NNR	QUANTITE	ATTENTION : la rubrique QUANTITE a pour nouveau nom QUANTASS
+LienAsmb	QUANTASS	CNW	Réel sur 8 octets$Réel sur 4 octets	la rubrique QUANTASS a pour nouveau type Réel sur 8 octets
+LienAsmb	TEMPSPRODH	NNR	Cat_Temps	ATTENTION : la rubrique Cat_Temps a pour nouveau nom TEMPSPRODH
+LienAsmb	Cat_Ratio	CNW	Réel sur 8 octets$Monétaire	la rubrique Cat_Ratio a pour nouveau type Réel sur 8 octets
+LienAsmb	Cat_Carton	CNW	Réel sur 8 octets$Monétaire	la rubrique Cat_Carton a pour nouveau type Réel sur 8 octets
+LienAsmb	CONTENU_CALC	RUB+		CONTENU_CALC est une nouvelle rubrique
+LienAsmb	CONTENU_CALCA	RUB+		CONTENU_CALCA est une nouvelle rubrique
+LienAsmb	CONTENU_CALCP	RUB+		CONTENU_CALCP est une nouvelle rubrique
+LienAsmb	CONTENU_CALCE	RUB+		CONTENU_CALCE est une nouvelle rubrique
+LienAsmb	CONTENU_CALCS	RUB+		CONTENU_CALCS est une nouvelle rubrique
+LienAsmb	CONTENU_CALCD	RUB+		CONTENU_CALCD est une nouvelle rubrique
+LienAsmb	Cat_Code	RUB-		la clé Cat_Code est supprimée
+LienAsmb	Cat_Description_fr	RUB-		la rubrique Cat_Description_fr est supprimée
+LienAsmb	Cat_description_en	RUB-		la rubrique Cat_description_en est supprimée
+LienAsmb	Cat_description_es	RUB-		la rubrique Cat_description_es est supprimée
+LienAsmb	Cat_DescMaj_FR	RUB-		la rubrique Cat_DescMaj_FR est supprimée
+LienAsmb	Cat_DescMaj_EN	RUB-		la rubrique Cat_DescMaj_EN est supprimée
+LienAsmb	Cat_DescMaj_ES	RUB-		la rubrique Cat_DescMaj_ES est supprimée
+LienAsmb	TAUX_VAL	RUB-		la rubrique TAUX_VAL est supprimée
+Itemcat		TAR	1101	nouvelle taille enregistrement : 1101
+Itemcat	CAT_NIVEAU	RUB+		CAT_NIVEAU est une nouvelle clé
+Itemcat	Cat_DescMaj_FR	NNR	DESC_MAJ_FR	ATTENTION : la rubrique DESC_MAJ_FR a pour nouveau nom Cat_DescMaj_FR
+Itemcat	Cat_DescMaj_EN	NNR	DESC_MAJ_EN	ATTENTION : la rubrique DESC_MAJ_EN a pour nouveau nom Cat_DescMaj_EN
+Itemcat	Cat_DescMaj_ES	NNR	DESC_MAJ_ES	ATTENTION : la rubrique DESC_MAJ_ES a pour nouveau nom Cat_DescMaj_ES
+Itemcat	Cat_Ratio	CNW	Réel sur 8 octets$Monétaire	la rubrique Cat_Ratio a pour nouveau type Réel sur 8 octets
+Itemcat	Cat_Carton	CNW	Réel sur 8 octets$Monétaire	la rubrique Cat_Carton a pour nouveau type Réel sur 8 octets
+Itemcat	Cat_Escompte	CNW	Monétaire$Réel sur 8 octets	la rubrique Cat_Escompte a pour nouveau type Monétaire
+Itemcat	TEMPSPRODH	NNR	Cat_Temps	ATTENTION : la rubrique Cat_Temps a pour nouveau nom TEMPSPRODH
+Itemcat	P_TEMPSPRODH	NNR	Cat_P_Temps	ATTENTION : la rubrique Cat_P_Temps a pour nouveau nom P_TEMPSPRODH
+Itemcat	P_IDTRADES	RUB+		P_IDTRADES est une nouvelle rubrique
+Itemcat	INFOCOMPL	RUB-		la rubrique INFOCOMPL est supprimée
+TRADESTX		TAR	93	nouvelle taille enregistrement : 93
+TRADESTX	TIMESTAMP_AJOUT	RUB+		TIMESTAMP_AJOUT est une nouvelle rubrique
+TRADESTX	TIMESTAMP_MODIF	RUB+		TIMESTAMP_MODIF est une nouvelle rubrique
+TRADESTX	MARQUE_DEL	RUB+		MARQUE_DEL est une nouvelle rubrique
+TRADESTX	CLE_DELTAUX	RUB+		CLE_DELTAUX est une nouvelle clé

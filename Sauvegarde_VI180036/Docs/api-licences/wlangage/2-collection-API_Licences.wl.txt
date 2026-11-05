@@ -1,0 +1,784 @@
+// =====================================================================================
+// Collection de procédures serveur « API_Licences » — projet lecatalogue (WebDev 18)
+// =====================================================================================
+// API appelée par estimation.ca : lecture de la licence d'un client (AAClient),
+// avec ses montants de renouvellement (réels et calculés), renouvellement (dates de fin),
+// recherche des clients par courriel et création d'une fiche client.
+// Contrat : docs/api-licences/contrat.md
+//
+// MARCHE À SUIVRE (détail dans docs/api-licences/README.md) :
+//   1. Créer une collection de procédures nommée API_Licences.
+//   2. Pour CHAQUE bloc ci-dessous délimité par « ==== Procédure X ==== » :
+//      créer une nouvelle procédure globale nommée X dans la collection,
+//      puis remplacer TOUT son contenu (y compris la ligne PROCEDURE) par le bloc.
+//   3. Ordre conseillé (chaque procédure compile seule une fois les précédentes collées) :
+//      sAPITexte, sAPIPaire, sAPIBool, sAPIDate, sAPIMontant, sAPIErreur, sAPIParam, APIEnvoie,
+//      bAPIAccesAutorise, sAPIControleDate, APIInitTarifs, sAPIJSONRenouvellement,
+//      sAPIJSONClient, sAPILire, sAPIRenouveler, sAPIChampCourriel, bAPICourrielValide,
+//      sAPIClientsCourriel, sAPIChercher, sAPIParamTexte, nAPIParamEntier, bAPIParamOption,
+//      sAPIGenereLogin, sAPIGenereMotDePasse, nAPIIdClientParNom, bAPIDemandeTraitee,
+//      sAPIJSONCreation, sAPICreer, TraiteAPILicence (29 procédures).
+//   Ajout des montants de renouvellement dans une collection déjà en place : créer
+//   APIInitTarifs puis sAPIJSONRenouvellement, puis remplacer tout le contenu de sAPIJSONClient.
+//   Ajout de « creer » dans une collection déjà en place (18 procédures) : créer
+//   bAPICourrielValide et sAPIClientsCourriel, remplacer tout le contenu de sAPIChercher, créer
+//   sAPIParamTexte … sAPICreer (9 procédures, dans l'ordre ci-dessus), puis remplacer tout le
+//   contenu de TraiteAPILicence.
+//
+// Réutilise : goAAClient (CAAClient), CAAClient::stNBRLIC, GetLicences, PASS_CLIENT,
+// CAAClient::FL_DELETE, bLitPremier/bLitSuivant (CBasicHF), lnGetFlags (CEstimeHF),
+// goConfig:m_sRepBase, gsFicINI, gsLogFiche, CBasicObjet::LogGeneric, CUTILS::bCreatRep,
+// FermeTout, TraceLog ; pour les montants : GlobInitPrixAchat, GlobInitPrixLocat, gstPrixAchat,
+// gstPrixLocat, gnSDPNbrTarif, gstSDPTabTarif, mDetailRenouvellement, stDETAILRENOUV,
+// OPT_ECHEANCIER… OPT_EPLANS, mGetSDPMontantManuel, isVersionEcole ; pour la création :
+// RazEnreg, SetLicences, bAjoute (CBasicHF), CUTILS::sSansAccent, goNoteClient (CNoteClient).
+// Configuration : section [APILIC] du fichier lecatalogue.ini (voir 3-section-ini.txt).
+// =====================================================================================
+
+
+// ==== Procédure sAPITexte ====
+// Chaîne JSON entre guillemets, caractères spéciaux échappés.
+PROCEDURE sAPITexte(sValeur est une chaîne)
+	sRes	est une chaîne
+	sCar	est une chaîne
+	i		est un entier
+	POUR i=1 _A_ Taille(sValeur)
+		sCar=sValeur[[i]]
+		SELON Asc(sCar)
+			CAS 34:	sRes+="\"+Caract(34)	// guillemet
+			CAS 92:	sRes+="\\"				// barre oblique inverse
+			CAS 9:	sRes+="\t"
+			CAS 10:	sRes+="\n"
+			CAS 13:	sRes+="\r"
+			AUTRE CAS
+				SI Asc(sCar)>=32 ALORS sRes+=sCar	// autres caractères de contrôle ignorés
+		FIN
+	FIN
+	RENVOYER Caract(34)+sRes+Caract(34)
+
+
+// ==== Procédure sAPIPaire ====
+// "nom":valeur  (sValeurJSON est déjà au format JSON)
+PROCEDURE sAPIPaire(sNom est une chaîne,sValeurJSON est une chaîne)
+	RENVOYER Caract(34)+sNom+Caract(34)+":"+sValeurJSON
+
+
+// ==== Procédure sAPIBool ====
+PROCEDURE sAPIBool(bValeur est un booléen)
+	SI bValeur ALORS RENVOYER "true"
+	RENVOYER "false"
+
+
+// ==== Procédure sAPIDate ====
+// AAAAMMJJ -> "AAAA-MM-JJ" ; date vide ou invalide -> ""
+PROCEDURE sAPIDate(sDate est une chaîne)
+	SI Taille(sDate)<>8 _OU_ PAS DateValide(sDate) ALORS RENVOYER sAPITexte("")
+	RENVOYER sAPITexte(Gauche(sDate,4)+"-"+Milieu(sDate,5,2)+"-"+Milieu(sDate,7,2))
+
+
+// ==== Procédure sAPIMontant ====
+// Monétaire -> nombre JSON avec point décimal, quel que soit le séparateur régional.
+PROCEDURE sAPIMontant(mMontant est un monétaire)
+	nCents	est un entier=Arrondi(mMontant*100,0)
+	sSigne	est une chaîne=""
+	SI nCents<0 ALORS
+		sSigne="-"
+		nCents=-nCents
+	FIN
+	RENVOYER sSigne+NumériqueVersChaîne(PartieEntière(nCents/100))+"."+NumériqueVersChaîne(nCents modulo 100,"%02d")
+
+
+// ==== Procédure sAPIErreur ====
+PROCEDURE sAPIErreur(sCode est une chaîne,sMessage est une chaîne)
+	RENVOYER "{"+sAPIPaire("ok","false")+","+sAPIPaire("code",sAPITexte(sCode))+","+sAPIPaire("message",sAPITexte(sMessage))+"}"
+
+
+// ==== Procédure sAPIParam ====
+// Paramètre HTTP de l'API. En mode test (GO) seulement, un paramètre absent de l'URL est lu
+// dans la section [APILIC_TEST] de l'INI de test : les paramètres d'URL n'arrivent pas au code
+// projet en mode test. Sans effet en production (EnModeTest() est faux).
+PROCEDURE sAPIParam(sNom est une chaîne)
+	sValeur est une chaîne=PageParamètre(sNom)
+	SI sValeur="" _ET_ EnModeTest() ALORS sValeur=INILit("APILIC_TEST",sNom,"",gsFicINI)
+	RENVOYER sValeur
+
+
+// ==== Procédure APIEnvoie ====
+// Ferme les fichiers HFSQL, envoie le JSON (UTF-8) comme réponse HTTP et termine la requête.
+// ChaîneAffiche envoie la chaîne directement (pas de fichier temporaire : avec FichierAffiche, le
+// moteur WebDev 19 de production envoie le fichier en fin de requête, après sa suppression).
+PROCEDURE APIEnvoie(sJSON est une chaîne)
+	sType	est une chaîne="application/json; charset=utf-8"
+	// En test, texte brut : le navigateur de la VM affiche la réponse au lieu de la télécharger
+	SI EnModeTest() ALORS sType="text/plain; charset=utf-8"
+	FermeTout()
+	ChaîneAffiche(ChaîneVersUTF8(sJSON),sType)
+	FinProgramme()
+
+
+// ==== Procédure bAPIAccesAutorise ====
+// Contrôle de la section [APILIC] du fichier INI : Actif=1, clé (32 caractères minimum)
+// et, si renseignée, liste des IP autorisées (séparées par des points-virgules).
+// La clé reçue n'est jamais écrite dans le journal.
+PROCEDURE bAPIAccesAutorise(sIP est une chaîne,sFicLog est une chaîne)
+	sCleINI	est une chaîne=INILit("APILIC","CleAPI","",gsFicINI)
+	sIPs	est une chaîne=Remplace(INILit("APILIC","IPAutorisees","",gsFicINI)," ","")
+	SI INILit("APILIC","Actif","0",gsFicINI)<>"1" ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : API inactive")
+		RENVOYER Faux
+	FIN
+	SI Taille(sCleINI)<32 ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : CleAPI absente ou trop courte dans l'INI")
+		RENVOYER Faux
+	FIN
+	SI sAPIParam("Cle")<>sCleINI ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : clé invalide")
+		RENVOYER Faux
+	FIN
+	SI sIPs<>"" _ET_ Position(";"+sIPs+";",";"+sIP+";")=0 ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : IP non autorisée")
+		RENVOYER Faux
+	FIN
+	RENVOYER Vrai
+
+
+// ==== Procédure sAPIControleDate ====
+// Renvoie "" si la date (AAAAMMJJ) est acceptable pour un renouvellement, sinon le motif.
+// Acceptable : date valide, postérieure à aujourd'hui, au plus 5 ans dans le futur.
+PROCEDURE sAPIControleDate(sNom est une chaîne,sDate est une chaîne)
+	sMax est une chaîne=NumériqueVersChaîne(Val(Gauche(DateSys(),4))+5,"%04d")+Milieu(DateSys(),5)
+	SI Taille(sDate)<>8 _OU_ PAS DateValide(sDate) ALORS RENVOYER sNom+" : date invalide (format AAAAMMJJ attendu)"
+	SI sDate<=DateSys() ALORS RENVOYER sNom+" : la date doit être postérieure à aujourd'hui"
+	SI sDate>sMax ALORS RENVOYER sNom+" : date à plus de 5 ans"
+	RENVOYER ""
+
+
+// ==== Procédure APIInitTarifs ====
+// Charge la grille de prix ([LISTEPRIX] de l'INI) et les tarifs de salle de plans dans les
+// variables globales du projet, comme InitTarifs de la page AATableClient. Nécessaire avant
+// mDetailRenouvellement : sans tarifs de salle de plans, mGetSDPRenouvellement lirait hors du tableau.
+PROCEDURE APIInitTarifs()
+	GlobInitPrixAchat(gsFicINI,gstPrixAchat)
+	GlobInitPrixLocat(gsFicINI,gstPrixLocat)
+	gnSDPNbrTarif=0
+	POUR TOUTE CHAÎNE sInfo DE gstPrixAchat:m_sSDPTarifs SEPAREE PAR "|"
+		SI gnSDPNbrTarif<Dimension(gstSDPTabTarif) ALORS
+			gnSDPNbrTarif++
+			gstSDPTabTarif[gnSDPNbrTarif]:m_nTaille=ExtraitChaîne(sInfo,1,"/")
+			SI gstSDPTabTarif[gnSDPNbrTarif]:m_nTaille<4000 ALORS
+				gstSDPTabTarif[gnSDPNbrTarif]:m_nTaille+=500
+			SINON
+				gstSDPTabTarif[gnSDPNbrTarif]:m_nTaille+=1000
+			FIN
+			gstSDPTabTarif[gnSDPNbrTarif]:m_mMontant=ExtraitChaîne(sInfo,2,"/")
+		FIN
+	FIN
+
+
+// ==== Procédure sAPIJSONRenouvellement ====
+// Montants de renouvellement de l'enregistrement courant de goAAClient, comme la fiche AAFicheClient2 :
+//   reel    : colonne « Montants réels » (saisis dans la fiche : MontantMAJ et MontantSDP) ;
+//   calcule : colonne « Montants calculés » (grille de prix, mDetailRenouvellement, mêmes options
+//             que la liste AATableClient), avec le détail ligne par ligne.
+// "calcule" vaut null si le calcul échoue (la cause va dans la trace) : « lire » répond quand même.
+PROCEDURE sAPIJSONRenouvellement()
+	stLic		est une CAAClient::stNBRLIC
+	stResult	est une stDETAILRENOUV
+	nOptions	est un entier
+	mTotal		est un monétaire
+	mReelLog	est un monétaire=goAAClient:mGetMontantMAJ()
+	mReelSDP	est un monétaire=goAAClient:mGetSDPMontantManuel()
+	bCalcule	est un booléen
+	sLibelle	est une chaîne
+	sDetail		est une chaîne
+	sCalcule	est une chaîne="null"
+
+	SI goAAClient:isOptionEcheancier()	ALORS nOptions+=OPT_ECHEANCIER
+	SI goAAClient:isOptionInvitation()	ALORS nOptions+=OPT_INVITE
+	SI goAAClient:isOptionComparatif()	ALORS nOptions+=OPT_COMPARATIF
+	SI goAAClient:isOptionVentilation()	ALORS nOptions+=OPT_VENTILATION
+	SI goAAClient:isOptionRepartition()	ALORS nOptions+=OPT_REPARTITION
+	SI goAAClient:isOptionEPlans()		ALORS nOptions+=OPT_EPLANS
+	goAAClient:GetLicences(stLic)
+	QUAND EXCEPTION DANS
+		APIInitTarifs()
+		SI gnSDPNbrTarif=0 ALORS stLic:m_bSDP=Faux	// grille SDP vide : montant SDP calculé à 0
+		mTotal=mDetailRenouvellement(stResult,stLic:m_nVersion,stLic,nOptions,gstPrixAchat,gstPrixLocat,goAAClient:isVersionEcole())
+		bCalcule=Vrai
+	FAIRE
+		bCalcule=Faux
+		TraceLog("API licences : calcul du renouvellement impossible pour "+goAAClient:sGetLogin()+" : "+ExceptionInfo(errComplet))
+	FIN
+	SI bCalcule ALORS
+		// m_sListe : une ligne « libellé TAB montant » par élément, la dernière est « Grand Total »
+		POUR TOUTE CHAÎNE sLigne DE stResult:m_sListe SEPAREE PAR RC
+			sLibelle=SansEspace(ExtraitChaîne(sLigne,1,TAB))
+			SI sLibelle<>"" _ET_ sLibelle<>"Grand Total" ALORS
+				SI sDetail<>"" ALORS sDetail+=","
+				sDetail+="{"+sAPIPaire("libelle",sAPITexte(sLibelle))+","+...
+					sAPIPaire("montant",sAPIMontant(Val(Remplace(SansEspace(ExtraitChaîne(sLigne,2,TAB)),",","."))))+"}"
+			FIN
+		FIN
+		sCalcule="{"+sAPIPaire("achat",sAPIMontant(stResult:m_mTotalA))+","+...
+			sAPIPaire("location",sAPIMontant(stResult:m_mTotalL))+","+...
+			sAPIPaire("logiciels",sAPIMontant(mTotal-stResult:m_mSDPMontant))+","+...
+			sAPIPaire("salleDePlans",sAPIMontant(stResult:m_mSDPMontant))+","+...
+			sAPIPaire("total",sAPIMontant(mTotal))+","+...
+			sAPIPaire("detail","["+sDetail+"]")+"}"
+	FIN
+	RENVOYER "{"+sAPIPaire("reel","{"+...
+		sAPIPaire("logiciels",sAPIMontant(mReelLog))+","+...
+		sAPIPaire("salleDePlans",sAPIMontant(mReelSDP))+","+...
+		sAPIPaire("total",sAPIMontant(mReelLog+mReelSDP))+"}")+","+...
+		sAPIPaire("calcule",sCalcule)+"}"
+
+
+// ==== Procédure sAPIJSONClient ====
+// Objet JSON décrivant la licence de l'enregistrement courant de goAAClient.
+PROCEDURE sAPIJSONClient()
+	stLic		est une CAAClient::stNBRLIC
+	sJ			est une chaîne
+	sCourriels	est une chaîne
+	sLibelle	est une chaîne
+	nVersion	est un entier
+	goAAClient:GetLicences(stLic)
+	nVersion=goAAClient:nGetVersion()
+	SELON nVersion
+		CAS CAAClient::VERSION_OR:				sLibelle="Or"
+		CAS CAAClient::VERSION_ARGENTPLUS:		sLibelle="Argent+"
+		CAS CAAClient::VERSION_ARGENT:			sLibelle="Argent"
+		CAS CAAClient::VERSION_BRONZE:			sLibelle="Bronze"
+		CAS CAAClient::VERSION_INVITE:			sLibelle="Invitation"
+		CAS CAAClient::VERSION_EPLANS:			sLibelle="e-Plans"
+		CAS CAAClient::VERSION_OR_ESSAI:		sLibelle="Or essai"
+		CAS CAAClient::VERSION_A_DETERMINER:	sLibelle="À déterminer"
+		AUTRE CAS:								sLibelle=""
+	FIN
+	sCourriels=sAPITexte(goAAClient:sGetCourriel1())
+	SI goAAClient:sGetCourriel2()<>"" ALORS sCourriels+=","+sAPITexte(goAAClient:sGetCourriel2())
+	SI goAAClient:sGetCourriel3()<>"" ALORS sCourriels+=","+sAPITexte(goAAClient:sGetCourriel3())
+	SI goAAClient:sGetCourriel1()="" ALORS sCourriels=Milieu(sCourriels,4)	// retire le "" initial et sa virgule
+
+	sJ="{"
+	sJ+=sAPIPaire("id",NumériqueVersChaîne(goAAClient:lnGetIdClient()))
+	sJ+=","+sAPIPaire("login",sAPITexte(goAAClient:sGetLogin()))
+	sJ+=","+sAPIPaire("nom",sAPITexte(goAAClient:sGetNom()))
+	sJ+=","+sAPIPaire("contact",sAPITexte(goAAClient:sGetContact()))
+	sJ+=","+sAPIPaire("courriels","["+sCourriels+"]")
+	sJ+=","+sAPIPaire("abonnement",sAPIBool(goAAClient:isAbonnement()))
+	sJ+=","+sAPIPaire("abonnementMensuel",sAPIBool(goAAClient:isAbonnementMensuel()))
+	sJ+=","+sAPIPaire("actif",sAPIBool(goAAClient:isActif()))
+	sJ+=","+sAPIPaire("dateFinAbonnement",sAPIDate(goAAClient:sGetDateFin()))
+	sJ+=","+sAPIPaire("dateFinEG",sAPIDate(goAAClient:sGetDateFinEG()))
+	sJ+=","+sAPIPaire("dateFinEPlans",sAPIDate(goAAClient:sGetDateFinEPlans()))
+	sJ+=","+sAPIPaire("dateDerniereVisite",sAPIDate(goAAClient:sGetDateDerniereVisite()))
+	sJ+=","+sAPIPaire("typeVersion",NumériqueVersChaîne(nVersion))
+	sJ+=","+sAPIPaire("typeVersionLibelle",sAPITexte(sLibelle))
+	sJ+=","+sAPIPaire("licences","{"+...
+		sAPIPaire("egAchat",NumériqueVersChaîne(stLic:m_nEGAchat))+","+...
+		sAPIPaire("egLocation",NumériqueVersChaîne(stLic:m_nEGLocat))+","+...
+		sAPIPaire("eplansOrAchat",NumériqueVersChaîne(stLic:m_nEPlansOrA))+","+...
+		sAPIPaire("eplansOrLocation",NumériqueVersChaîne(stLic:m_nEPlansOrL))+","+...
+		sAPIPaire("eplansMonoAchat",NumériqueVersChaîne(stLic:m_nEPlans1A))+","+...
+		sAPIPaire("eplansMonoLocation",NumériqueVersChaîne(stLic:m_nEPlans1L))+","+...
+		sAPIPaire("eplansMultiAchat",NumériqueVersChaîne(stLic:m_nEPlansMA))+","+...
+		sAPIPaire("eplansMultiLocation",NumériqueVersChaîne(stLic:m_nEPlansML))+","+...
+		sAPIPaire("totalEG",NumériqueVersChaîne(stLic:m_nTotEG))+","+...
+		sAPIPaire("totalEPlans",NumériqueVersChaîne(stLic:m_nTotEP))+","+...
+		sAPIPaire("location",sAPIBool(stLic:m_bLocation))+","+...
+		sAPIPaire("partageAvecEG",sAPIBool(goAAClient:isPartageLicence()))+"}")
+	sJ+=","+sAPIPaire("options","{"+...
+		sAPIPaire("catalogue",sAPIBool(goAAClient:isAbonnementCatalogue()))+","+...
+		sAPIPaire("eplans",sAPIBool(goAAClient:isOptionEPlans()))+","+...
+		sAPIPaire("echeancier",sAPIBool(goAAClient:isOptionEcheancier()))+","+...
+		sAPIPaire("comparatif",sAPIBool(goAAClient:isOptionComparatif()))+","+...
+		sAPIPaire("ventilation",sAPIBool(goAAClient:isOptionVentilation()))+","+...
+		sAPIPaire("repartition",sAPIBool(goAAClient:isOptionRepartition()))+","+...
+		sAPIPaire("invitation",sAPIBool(goAAClient:isOptionInvitation()))+","+...
+		sAPIPaire("salleDePlans",sAPIBool(stLic:m_bSDP))+"}")
+	sJ+=","+sAPIPaire("montantMAJ",sAPIMontant(goAAClient:mGetMontantMAJ()))	// = renouvellement.reel.logiciels (compatibilité)
+	sJ+=","+sAPIPaire("renouvellement",sAPIJSONRenouvellement())
+	sJ+="}"
+	RENVOYER sJ
+
+
+// ==== Procédure sAPILire ====
+PROCEDURE sAPILire(sLogin est une chaîne)
+	SI PAS goAAClient:isExistLogin(sLogin) ALORS RENVOYER sAPIErreur("LOGIN_INCONNU","Login inconnu")
+	RENVOYER "{"+sAPIPaire("ok","true")+","+sAPIPaire("client",sAPIJSONClient())+"}"
+
+
+// ==== Procédure sAPIRenouveler ====
+// Écrit uniquement les dates fournies (dates absolues : rejouer la même requête ne change rien).
+// Reprend la séquence de la fiche client (AAFicheClient2, EcranVersFichierX) :
+// Set... puis SetLastModif puis bModifie. Abonnement est remis à Vrai avec DateFinAbonnement,
+// sinon LoginClient/LocationExpire le repasseraient à Faux.
+PROCEDURE sAPIRenouveler(sLogin est une chaîne,sIdDemande est une chaîne,sIP est une chaîne,sFicLog est une chaîne)
+	sDateAbo	est une chaîne=SansEspace(sAPIParam("DateFinAbonnement"))
+	sDateEG		est une chaîne=SansEspace(sAPIParam("DateFinEG"))
+	sDateEP		est une chaîne=SansEspace(sAPIParam("DateFinEPlans"))
+	sErreur		est une chaîne
+	sAvant		est une chaîne
+	sApres		est une chaîne
+	bChange		est un booléen
+
+	SI sDateAbo="" _ET_ sDateEG="" _ET_ sDateEP="" ALORS
+		RENVOYER sAPIErreur("AUCUNE_DONNEE","Aucune date à modifier")
+	FIN
+	// Toutes les dates sont contrôlées avant toute écriture
+	SI sDateAbo<>"" ALORS sErreur+=sAPIControleDate("DateFinAbonnement",sDateAbo)+" "
+	SI sDateEG<>"" ALORS sErreur+=sAPIControleDate("DateFinEG",sDateEG)+" "
+	SI sDateEP<>"" ALORS sErreur+=sAPIControleDate("DateFinEPlans",sDateEP)+" "
+	sErreur=SansEspace(sErreur)
+	SI sErreur<>"" ALORS RENVOYER sAPIErreur("DATE_INVALIDE",sErreur)
+
+	SI PAS goAAClient:isExistLogin(sLogin) ALORS RENVOYER sAPIErreur("LOGIN_INCONNU","Login inconnu")
+
+	sAvant=sAPIJSONClient()
+	goAAClient:SetModifEnreg(Faux)
+	SI sDateAbo<>"" ALORS
+		goAAClient:SetDateFinAbonnement(sDateAbo)
+		goAAClient:SetAbonnement(Vrai)
+	FIN
+	SI sDateEG<>"" ALORS goAAClient:SetDateFinEG(sDateEG)
+	SI sDateEP<>"" ALORS goAAClient:SetdateFinEPlans(sDateEP)	// « d » minuscule : nom réel de la méthode
+
+	bChange=goAAClient:isModifEnreg()
+	SI bChange ALORS
+		goAAClient:SetLastModif(DateSys()+HeureSys())
+		SI PAS goAAClient:bModifie() ALORS
+			CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"renouveler"+TAB+sLogin+TAB+sIdDemande+TAB+"ERREUR bModifie "+HErreurInfo())
+			RENVOYER sAPIErreur("ERREUR_INTERNE","Écriture impossible")
+		FIN
+	FIN
+	sApres=sAPIJSONClient()
+	CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"renouveler"+TAB+sLogin+TAB+sIdDemande+TAB+...
+		"Abo="+sDateAbo+" EG="+sDateEG+" EP="+sDateEP+TAB+"modifie="+bChange+TAB+"avant="+sAvant)
+	RENVOYER "{"+sAPIPaire("ok","true")+","+sAPIPaire("modifie",sAPIBool(bChange))+","+...
+		sAPIPaire("avant",sAvant)+","+sAPIPaire("apres",sApres)+"}"
+
+
+// ==== Procédure sAPIChampCourriel ====
+// Rubrique de l'enregistrement courant de goAAClient qui contient sCourriel (déjà sans espaces
+// et en minuscules) : "courriel", "courriel2", "courriel3", ou "" si aucune.
+PROCEDURE sAPIChampCourriel(sCourriel est une chaîne)
+	SI Minuscule(SansEspace(goAAClient:sGetCourriel1()))=sCourriel ALORS RENVOYER "courriel"
+	SI Minuscule(SansEspace(goAAClient:sGetCourriel2()))=sCourriel ALORS RENVOYER "courriel2"
+	SI Minuscule(SansEspace(goAAClient:sGetCourriel3()))=sCourriel ALORS RENVOYER "courriel3"
+	RENVOYER ""
+
+
+// ==== Procédure bAPICourrielValide ====
+// Courriel (déjà sans espaces et en minuscules) acceptable : non vide, avec @, 60 caractères au plus.
+PROCEDURE bAPICourrielValide(sCourriel est une chaîne)
+	RENVOYER sCourriel<>"" _ET_ Position(sCourriel,"@")>0 _ET_ Taille(sCourriel)<=60
+
+
+// ==== Procédure sAPIClientsCourriel ====
+// Éléments JSON (séparés par des virgules, sans les crochets) des clients dont Courriel, Courriel2
+// ou Courriel3 est l'un des courriels donnés (déjà sans espaces et en minuscules ; "" = non cherché).
+// Parcours complet de AAClient par nom : la table est petite, et une recherche sur la clé Courriel
+// manquerait les valeurs saisies avec majuscules ou espaces. Écarte les fiches supprimées
+// (indicateur FL_DELETE) et les fiches sans login (illisibles par « lire »).
+// Au plus 20 clients. En retour : nNbr = nombre de clients, bTronque = Vrai s'il y en a d'autres.
+PROCEDURE sAPIClientsCourriel(sRech1 est une chaîne,sRech2 est une chaîne,sRech3 est une chaîne,nNbr est un entier,bTronque est un booléen)
+	sClients	est une chaîne
+	sChamp		est une chaîne
+	bCont		est un booléen
+	nNbr=0
+	bTronque=Faux
+	bCont=goAAClient:bLitPremier(AAClient.Nom..Nom)
+	TANTQUE bCont _ET_ PAS bTronque
+		SI ETBinaire(goAAClient:lnGetFlags(),CAAClient::FL_DELETE)=0 _ET_ goAAClient:sGetLogin()<>"" ALORS
+			sChamp=""
+			SI sRech1<>"" ALORS sChamp=sAPIChampCourriel(sRech1)
+			SI sChamp="" _ET_ sRech2<>"" ALORS sChamp=sAPIChampCourriel(sRech2)
+			SI sChamp="" _ET_ sRech3<>"" ALORS sChamp=sAPIChampCourriel(sRech3)
+			SI sChamp<>"" ALORS
+				SI nNbr>=20 ALORS
+					bTronque=Vrai
+				SINON
+					nNbr++
+					SI sClients<>"" ALORS sClients+=","
+					sClients+="{"+sAPIPaire("login",sAPITexte(goAAClient:sGetLogin()))+","+...
+						sAPIPaire("nom",sAPITexte(goAAClient:sGetNom()))+","+...
+						sAPIPaire("champ",sAPITexte(sChamp))+","+...
+						sAPIPaire("actif",sAPIBool(goAAClient:isActif()))+"}"
+				FIN
+			FIN
+		FIN
+		bCont=goAAClient:bLitSuivant(AAClient.Nom..Nom)
+	FIN
+	RENVOYER sClients
+
+
+// ==== Procédure sAPIChercher ====
+// Clients dont Courriel, Courriel2 ou Courriel3 est le courriel donné, sans tenir compte de la
+// casse ni des espaces. Lecture seule. Au plus 20 clients ; "tronque":true s'il y en a d'autres.
+PROCEDURE sAPIChercher(sCourriel est une chaîne)
+	sRech		est une chaîne=Minuscule(SansEspace(sCourriel))
+	sClients	est une chaîne
+	nNbr		est un entier
+	bTronque	est un booléen
+	sJ			est une chaîne
+
+	SI PAS bAPICourrielValide(sRech) ALORS RENVOYER sAPIErreur("COURRIEL_INVALIDE","Courriel invalide")
+	sClients=sAPIClientsCourriel(sRech,"","",nNbr,bTronque)
+	sJ="{"+sAPIPaire("ok","true")+","+sAPIPaire("clients","["+sClients+"]")
+	SI bTronque ALORS sJ+=","+sAPIPaire("tronque","true")
+	RENVOYER sJ+"}"
+
+
+// ==== Procédure sAPIParamTexte ====
+// Paramètre texte de « creer », sans espaces au début et à la fin. Les motifs de refus (absent
+// alors qu'obligatoire, trop long) sont ajoutés à sErreur.
+// estimation.ca envoie de l'UTF-8 : la valeur est convertie si elle est de l'UTF-8 valide
+// (contrôle par aller-retour), sinon gardée telle quelle (texte déjà en ANSI, ou ASCII pur).
+PROCEDURE sAPIParamTexte(sNom est une chaîne,nMax est un entier,bObligatoire est un booléen,sErreur est une chaîne)
+	sValeur	est une chaîne=SansEspace(sAPIParam(sNom))
+	sAnsi	est une chaîne=UTF8VersChaîne(sValeur)
+	SI sAnsi<>sValeur _ET_ ChaîneVersUTF8(sAnsi)=sValeur ALORS sValeur=SansEspace(sAnsi)
+	SI sValeur="" _ET_ bObligatoire ALORS sErreur+=sNom+" : obligatoire. "
+	SI Taille(sValeur)>nMax ALORS sErreur+=sNom+" : "+NumériqueVersChaîne(nMax)+" caractères au plus. "
+	RENVOYER sValeur
+
+
+// ==== Procédure nAPIParamEntier ====
+// Paramètre entier de « creer », de 0 à nMax ; absent = 0. Valeur invalide : motif ajouté à sErreur.
+PROCEDURE nAPIParamEntier(sNom est une chaîne,nMax est un entier,sErreur est une chaîne)
+	sValeur	est une chaîne=SansEspace(sAPIParam(sNom))
+	nValeur	est un entier
+	SI sValeur="" ALORS RENVOYER 0
+	nValeur=Val(sValeur)
+	SI NumériqueVersChaîne(nValeur)<>sValeur _OU_ nValeur<0 _OU_ nValeur>nMax ALORS
+		sErreur+=sNom+" : entier de 0 à "+NumériqueVersChaîne(nMax)+" attendu. "
+		RENVOYER 0
+	FIN
+	RENVOYER nValeur
+
+
+// ==== Procédure bAPIParamOption ====
+// Paramètre 0/1 de « creer » ; absent = bDefaut. Autre valeur : motif ajouté à sErreur.
+PROCEDURE bAPIParamOption(sNom est une chaîne,bDefaut est un booléen,sErreur est une chaîne)
+	sValeur est une chaîne=SansEspace(sAPIParam(sNom))
+	SELON sValeur
+		CAS "":		RENVOYER bDefaut
+		CAS "1":	RENVOYER Vrai
+		CAS "0":	RENVOYER Faux
+	FIN
+	sErreur+=sNom+" : 0 ou 1 attendu. "
+	RENVOYER bDefaut
+
+
+// ==== Procédure sAPIGenereLogin ====
+// Login libre tiré du nom du client : lettres et chiffres sans accent, en majuscules, 8 au plus
+// (« CLIENT » si le nom en donne moins de 3), puis suffixe 2, 3… tant que le login est pris.
+// Déplace l'enregistrement courant de goAAClient (isExistLogin).
+PROCEDURE sAPIGenereLogin(sNom est une chaîne)
+	sSource	est une chaîne=Majuscule(CUTILS::sSansAccent(sNom))
+	sBase	est une chaîne
+	sCar	est une chaîne
+	sLogin	est une chaîne
+	i		est un entier
+	nSuffixe est un entier=1
+	POUR i=1 _A_ Taille(sSource)
+		sCar=sSource[[i]]
+		SI (sCar>="A" _ET_ sCar<="Z") _OU_ (sCar>="0" _ET_ sCar<="9") ALORS sBase+=sCar
+		SI Taille(sBase)>=8 ALORS SORTIR
+	FIN
+	SI Taille(sBase)<3 ALORS sBase="CLIENT"
+	sLogin=sBase
+	TANTQUE goAAClient:isExistLogin(sLogin)
+		nSuffixe++
+		sLogin=sBase+NumériqueVersChaîne(nSuffixe)
+	FIN
+	RENVOYER sLogin
+
+
+// ==== Procédure sAPIGenereMotDePasse ====
+// Mot de passe de 10 caractères (taille de AAClient.Mot_de_Passe), lettres et chiffres
+// sans les caractères ambigus (0 O o, 1 l I).
+PROCEDURE sAPIGenereMotDePasse()
+	sAlphabet	est une chaîne="abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+	sMot		est une chaîne
+	i			est un entier
+	InitHasard()
+	POUR i=1 _A_ 10
+		sMot+=sAlphabet[[Hasard(1,Taille(sAlphabet))]]
+	FIN
+	RENVOYER sMot
+
+
+// ==== Procédure nAPIIdClientParNom ====
+// Identifiant du client qui porte ce nom (clé unique AAClient.Nom), 0 si aucun.
+// Déplace l'enregistrement courant de goAAClient.
+PROCEDURE nAPIIdClientParNom(sNom est une chaîne)
+	SI PAS goAAClient:bLitRecherche(AAClient.Nom..Nom,sNom) ALORS RENVOYER 0
+	SI PAS goAAClient:sGetNom()~=sNom ALORS RENVOYER 0
+	RENVOYER goAAClient:lnClePP()
+
+
+// ==== Procédure bAPIDemandeTraitee ====
+// Vrai si le client nIdClient porte la note de création de la demande sIdDemande (rejeu de « creer »).
+// Parcours des notes du client comme la fiche AAFicheClient2 (clé CLE_CLIDATE).
+PROCEDURE bAPIDemandeTraitee(nIdClient est un entier,sIdDemande est une chaîne)
+	sMarque	est une chaîne="[demande API "+sIdDemande+"]"
+	bCont	est un booléen
+	bCont=goNoteClient:bLitRecherche(NOTE_CLIENT.CLE_CLIDATE..Nom,goNoteClient:sConstruitValCle1(NOTE_CLIENT.CLE_CLIDATE..Nom,nIdClient),Faux)
+	TANTQUE bCont _ET_ goNoteClient:nGetIdClient()=nIdClient
+		SI goNoteClient:nGetType()=CNoteClient::NOTE_AUTRE _ET_ Position(goNoteClient:sGetText(),sMarque)>0 ALORS RENVOYER Vrai
+		bCont=goNoteClient:bLitSuivant(NOTE_CLIENT.CLE_CLIDATE..Nom)
+	FIN
+	RENVOYER Faux
+
+
+// ==== Procédure sAPIJSONCreation ====
+// Réponse de « creer » pour l'enregistrement courant de goAAClient (mot de passe compris).
+PROCEDURE sAPIJSONCreation(bCree est un booléen)
+	RENVOYER "{"+sAPIPaire("ok","true")+","+sAPIPaire("cree",sAPIBool(bCree))+","+...
+		sAPIPaire("login",sAPITexte(goAAClient:sGetLogin()))+","+...
+		sAPIPaire("motDePasse",sAPITexte(goAAClient:sGetMotDePasse()))+","+...
+		sAPIPaire("client",sAPIJSONClient())+"}"
+
+
+// ==== Procédure sAPICreer ====
+// Crée une fiche client (AAClient) avec un login et un mot de passe générés.
+// Reprend la création de la fiche AAFicheClient2 (EcranVersFichierX) : RazEnreg, Set…, bAjoute,
+// avec les options préréglées selon la version comme dans la fiche (SEL_VERSIONEG).
+// Tout est contrôlé avant d'écrire. La demande est notée dans une note du client (NOTE_AUTRE) :
+// rejouer la même IdDemande renvoie la fiche déjà créée ("cree":false) sans rien écrire.
+// Un courriel déjà présent dans une fiche est refusé (COURRIEL_EXISTE), sauf Forcer=1.
+PROCEDURE sAPICreer(sIdDemande est une chaîne,sIP est une chaîne,sFicLog est une chaîne)
+	sErreur		est une chaîne
+	sErreurDate	est une chaîne
+	sNom		est une chaîne=sAPIParamTexte("Nom",80,Vrai,sErreur)
+	sContact	est une chaîne=sAPIParamTexte("Contact",50,Faux,sErreur)
+	sCourriel1	est une chaîne=sAPIParamTexte("Courriel",60,Vrai,sErreur)
+	sCourriel2	est une chaîne=sAPIParamTexte("Courriel2",60,Faux,sErreur)
+	sCourriel3	est une chaîne=sAPIParamTexte("Courriel3",60,Faux,sErreur)
+	sTel1		est une chaîne=sAPIParamTexte("Telephone",26,Faux,sErreur)
+	sTel2		est une chaîne=sAPIParamTexte("Telephone2",26,Faux,sErreur)
+	nVersion	est un entier=nAPIParamEntier("TypeVersion",8,sErreur)
+	sDateAbo	est une chaîne=SansEspace(sAPIParam("DateFinAbonnement"))
+	sDateEG		est une chaîne=SansEspace(sAPIParam("DateFinEG"))
+	sDateEP		est une chaîne=SansEspace(sAPIParam("DateFinEPlans"))
+	stLic		est une CAAClient::stNBRLIC
+	nEG			est un entier
+	nEP			est un entier
+	bOr			est un booléen
+	bEch		est un booléen
+	bInv		est un booléen
+	bComp		est un booléen
+	bVent		est un booléen
+	bRep		est un booléen
+	bSDP		est un booléen
+	bCat		est un booléen
+	bMensuel	est un booléen
+	bForcer		est un booléen
+	bEPlans		est un booléen
+	bLocation	est un booléen
+	nIdClient	est un entier
+	sClients	est une chaîne
+	nNbr		est un entier
+	bTronque	est un booléen
+	sLogin		est une chaîne
+	sMotDePasse	est une chaîne
+	sJ			est une chaîne
+
+	SI INILit("APILIC","Creation","0",gsFicINI)<>"1" ALORS
+		RENVOYER sAPIErreur("CREATION_INACTIVE","Création de client désactivée")
+	FIN
+
+	// 1. Contrôles (rien n'est écrit tant qu'il reste un motif de refus)
+	SI sIdDemande="" ALORS sErreur+="IdDemande : obligatoire. "
+	SI sCourriel1<>"" _ET_ PAS bAPICourrielValide(Minuscule(sCourriel1)) ALORS sErreur+="Courriel : courriel invalide. "
+	SI sCourriel2<>"" _ET_ PAS bAPICourrielValide(Minuscule(sCourriel2)) ALORS sErreur+="Courriel2 : courriel invalide. "
+	SI sCourriel3<>"" _ET_ PAS bAPICourrielValide(Minuscule(sCourriel3)) ALORS sErreur+="Courriel3 : courriel invalide. "
+	SI nVersion=0 _ET_ Val(SansEspace(sAPIParam("TypeVersion")))=0 ALORS sErreur+="TypeVersion : obligatoire (1 à 8). "
+	stLic:m_nEGAchat=nAPIParamEntier("EGAchat",99,sErreur)
+	stLic:m_nEGLocat=nAPIParamEntier("EGLocation",99,sErreur)
+	stLic:m_nEPlans1A=nAPIParamEntier("EPlansMonoAchat",99,sErreur)
+	stLic:m_nEPlans1L=nAPIParamEntier("EPlansMonoLocation",99,sErreur)
+	stLic:m_nEPlansMA=nAPIParamEntier("EPlansMultiAchat",99,sErreur)
+	stLic:m_nEPlansML=nAPIParamEntier("EPlansMultiLocation",99,sErreur)
+	nEG=stLic:m_nEGAchat+stLic:m_nEGLocat
+	nEP=stLic:m_nEPlans1A+stLic:m_nEPlans1L+stLic:m_nEPlansMA+stLic:m_nEPlansML
+	bOr=(nVersion=CAAClient::VERSION_OR _OU_ nVersion=CAAClient::VERSION_OR_ESSAI)
+	// Règles de la fiche : pas de licence EG en « À déterminer » ; e-Plans seul = version e-Plans.
+	// nVersion=0 (absent ou invalide) est déjà signalé.
+	SELON nVersion
+		CAS CAAClient::VERSION_EPLANS
+			SI nEG>0 ALORS sErreur+="TypeVersion 6 (e-Plans) : aucune licence EG permise. "
+			SI nEP=0 ALORS sErreur+="TypeVersion 6 (e-Plans) : au moins une licence e-Plans. "
+		CAS CAAClient::VERSION_A_DETERMINER
+			SI nEG>0 ALORS sErreur+="TypeVersion 8 (À déterminer) : aucune licence EG permise. "
+		CAS CAAClient::VERSION_OR, CAAClient::VERSION_ARGENTPLUS, CAAClient::VERSION_ARGENT, CAAClient::VERSION_BRONZE, CAAClient::VERSION_INVITE, CAAClient::VERSION_OR_ESSAI
+			SI nEG=0 ALORS sErreur+="TypeVersion "+NumériqueVersChaîne(nVersion)+" : au moins une licence EG. "
+	FIN
+	// Options préréglées selon la version, comme la fiche (« A chaque modification de SEL_VERSIONEG »)
+	SELON nVersion
+		CAS CAAClient::VERSION_OR, CAAClient::VERSION_OR_ESSAI
+			bEch=Vrai; bInv=Vrai; bComp=Vrai; bVent=Vrai; bRep=Vrai; bSDP=Vrai
+		CAS CAAClient::VERSION_INVITE
+			bSDP=Vrai
+	FIN
+	bEch	=bAPIParamOption("Echeancier",bEch,sErreur)
+	bInv	=bAPIParamOption("Invitation",bInv,sErreur)
+	bComp	=bAPIParamOption("Comparatif",bComp,sErreur)
+	bVent	=bAPIParamOption("Ventilation",bVent,sErreur)
+	bRep	=bAPIParamOption("Repartition",bRep,sErreur)
+	bSDP	=bAPIParamOption("SalleDePlans",bSDP,sErreur)
+	bCat	=bAPIParamOption("Catalogue",Faux,sErreur)
+	bMensuel=bAPIParamOption("AbonnementMensuel",Faux,sErreur)
+	bForcer	=bAPIParamOption("Forcer",Faux,sErreur)
+	SI nVersion=CAAClient::VERSION_INVITE ALORS bSDP=Vrai	// forcé par la fiche
+	// e-Plans : forcé en Or (licences e-Plans Or = licences EG) et dès qu'il y a des licences e-Plans
+	bEPlans=bOr _OU_ nVersion=CAAClient::VERSION_EPLANS _OU_ nEP>0
+	SI bOr ALORS
+		stLic:m_nEPlansOrA=stLic:m_nEGAchat
+		stLic:m_nEPlansOrL=stLic:m_nEGLocat
+	FIN
+	SI sDateAbo<>"" ALORS sErreurDate+=sAPIControleDate("DateFinAbonnement",sDateAbo)+" "
+	SI sDateEG<>"" ALORS sErreurDate+=sAPIControleDate("DateFinEG",sDateEG)+" "
+	SI sDateEP<>"" ALORS sErreurDate+=sAPIControleDate("DateFinEPlans",sDateEP)+" "
+	sErreur=SansEspace(sErreur)
+	sErreurDate=SansEspace(sErreurDate)
+	SI sErreur<>"" ALORS RENVOYER sAPIErreur("DONNEE_INVALIDE",SansEspace(sErreur+" "+sErreurDate))
+	SI sErreurDate<>"" ALORS RENVOYER sAPIErreur("DATE_INVALIDE",sErreurDate)
+
+	// 2. Nom déjà pris : rejeu de la même demande, ou refus (Nom est une clé unique)
+	nIdClient=nAPIIdClientParNom(sNom)
+	SI nIdClient<>0 ALORS
+		SI bAPIDemandeTraitee(nIdClient,sIdDemande) _ET_ goAAClient:isExist(nIdClient) ALORS
+			CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"creer"+TAB+goAAClient:sGetLogin()+TAB+sIdDemande+TAB+"rejeu, fiche déjà créée")
+			RENVOYER sAPIJSONCreation(Faux)
+		FIN
+		sJ=sAPIErreur("NOM_EXISTE","Un client porte déjà ce nom")
+		RENVOYER Gauche(sJ,Taille(sJ)-1)+","+sAPIPaire("login",sAPITexte(goAAClient:sGetLogin()))+"}"
+	FIN
+
+	// 3. Courriel déjà présent dans une fiche
+	SI PAS bForcer ALORS
+		sClients=sAPIClientsCourriel(Minuscule(sCourriel1),Minuscule(sCourriel2),Minuscule(sCourriel3),nNbr,bTronque)
+		SI sClients<>"" ALORS
+			sJ=sAPIErreur("COURRIEL_EXISTE","Courriel déjà présent dans une fiche (Forcer=1 pour créer quand même)")
+			sJ=Gauche(sJ,Taille(sJ)-1)+","+sAPIPaire("clients","["+sClients+"]")
+			SI bTronque ALORS sJ+=","+sAPIPaire("tronque","true")
+			RENVOYER sJ+"}"
+		FIN
+	FIN
+
+	// 4. Création, dans l'ordre de EcranVersFichierX (AAFicheClient2)
+	APIInitTarifs()	// tarifs de salle de plans : taille par défaut de la fiche
+	bLocation=(stLic:m_nEGLocat+stLic:m_nEPlans1L+stLic:m_nEPlansML<>0) _ET_ (stLic:m_nEGAchat+stLic:m_nEPlans1A+stLic:m_nEPlansMA=0)
+	sLogin=sAPIGenereLogin(sNom)
+	sMotDePasse=sAPIGenereMotDePasse()
+	goAAClient:RazEnreg()
+	goAAClient:SetNom(sNom)
+	goAAClient:SetContact(sContact)
+	goAAClient:SetDateInstallation(DateSys())
+	goAAClient:SetCourriel1(sCourriel1)
+	goAAClient:SetCourriel2(sCourriel2)
+	goAAClient:SetCourriel3(sCourriel3)
+	goAAClient:SetLogin(sLogin)
+	goAAClient:SetPassword(sMotDePasse)
+	goAAClient:SetWebmaster(Faux)
+	goAAClient:SetAbonnement(sDateAbo<>"")
+	goAAClient:SetDateFinAbonnement(sDateAbo)
+	goAAClient:SetLicences(stLic)
+	goAAClient:SetVersion(nVersion)
+	goAAClient:SetNoMail(Faux)
+	goAAClient:SetIPMulti(Faux)
+	goAAClient:SetLocation1(bLocation)
+	goAAClient:SetForceLic(Faux)
+	goAAClient:SetVersionEcole(Faux)
+	goAAClient:SetTelephone1(sTel1)
+	goAAClient:SetTelephone2(sTel2)
+	goAAClient:SetSDPAutorise(bSDP)
+	SI gnSDPNbrTarif>0 ALORS goAAClient:SetSDPMaxSize(gstSDPTabTarif[1]:m_nTaille)
+	goAAClient:SetSDPMaxTime(60)
+	goAAClient:SetVendeur(0)
+	goAAClient:SetAbonnementCatalogue(bCat)
+	goAAClient:SetAbonnementMensuel(bMensuel)
+	goAAClient:SetOptionEcheancier(bEch)
+	goAAClient:SetOptionInvitation(bInv)
+	goAAClient:SetOptionComparatif(bComp)
+	goAAClient:SetOptionVentilation(bVent)
+	goAAClient:SetOptionRepartition(bRep)
+	goAAClient:SetVersion14(Vrai)
+	goAAClient:SetOptionEPlans(bEPlans)
+	goAAClient:SetDateFinEG(sDateEG)
+	goAAClient:SetdateFinEPlans(sDateEP)	// « d » minuscule : nom réel de la méthode
+	goAAClient:SetLastModif(DateSys()+HeureSys())
+	SI PAS goAAClient:bAjoute(Vrai) ALORS	// Vrai : silencieux, pas de message à l'écran
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"creer"+TAB+sLogin+TAB+sIdDemande+TAB+"ERREUR bAjoute "+HErreurInfo())
+		SI HErreurDoublon() ALORS RENVOYER sAPIErreur("NOM_EXISTE","Nom ou login déjà utilisé")
+		RENVOYER sAPIErreur("ERREUR_INTERNE","Écriture impossible")
+	FIN
+	nIdClient=goAAClient:lnClePP()
+	CBasicObjet::LogGeneric(gsLogFiche,"API Ajout client """+sNom+""" Cle "+NumériqueVersChaîne(nIdClient))
+
+	// 5. Note de création (visible dans la fiche ; sert à reconnaître un rejeu)
+	goNoteClient:RazEnreg()
+	goNoteClient:SetIdClient(nIdClient)
+	goNoteClient:SetType(CNoteClient::NOTE_AUTRE)
+	goNoteClient:SetDate(DateSys())
+	goNoteClient:SetText("Fiche créée par estimation.ca (API licences) [demande API "+sIdDemande+"]")
+	goNoteClient:SetLogin("API")
+	SI PAS goNoteClient:bAjoute(Vrai) ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"creer"+TAB+sLogin+TAB+sIdDemande+TAB+"ERREUR note de création "+HErreurInfo())
+	FIN
+	CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"creer"+TAB+sLogin+TAB+sIdDemande+TAB+"fiche créée, id "+NumériqueVersChaîne(nIdClient))
+	SI PAS goAAClient:isExist(nIdClient) ALORS RENVOYER sAPIErreur("ERREUR_INTERNE","Fiche créée mais illisible")
+	RENVOYER sAPIJSONCreation(Vrai)
+
+
+// ==== Procédure TraiteAPILicence ====
+// Point d'entrée, appelé par le CAS "apilic" du code d'initialisation du projet.
+// Paramètres HTTP (POST conseillé) : Action, Cle, Login, Courriel, IdDemande,
+// DateFinAbonnement, DateFinEG, DateFinEPlans, et ceux de « creer » (contrat.md).
+PROCEDURE TraiteAPILicence()
+	sIP			est une chaîne=NavigateurAdresseIP(Faux)	// adresse de connexion (non falsifiable)
+	sAction		est une chaîne=Minuscule(SansEspace(sAPIParam("Action")))
+	sLogin		est une chaîne=SansEspace(sAPIParam("Login"))
+	sIdDemande	est une chaîne=Gauche(SansEspace(sAPIParam("IdDemande")),64)
+	sFicLog		est une chaîne=ComplèteRep(fExtraitChemin(gsLogFiche,fDisque+fRépertoire))+"AALogAPI.log"
+	sJSON		est une chaîne
+	sJournal	est une chaîne
+	sCible		est une chaîne=sLogin	// 3e colonne du journal : login, courriel (« chercher ») ou nom (« creer »)
+
+	SI PAS bAPIAccesAutorise(sIP,sFicLog) ALORS
+		APIEnvoie(sAPIErreur("AUTH","Accès refusé"))
+		RETOUR
+	FIN
+	SI PAS goAAClient:bSetAlias(Faux,goConfig:m_sRepBase,PASS_CLIENT) ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+sAction+TAB+"ERREUR ouverture AAClient "+goConfig:m_sRepBase)
+		APIEnvoie(sAPIErreur("ERREUR_INTERNE","Base indisponible"))
+		RETOUR
+	FIN
+	SELON sAction
+		CAS "ping"
+			sJSON="{"+sAPIPaire("ok","true")+","+sAPIPaire("ping",sAPITexte("pong"))+","+sAPIPaire("version",sAPITexte("1"))+"}"
+		CAS "lire"
+			sJSON=sAPILire(sLogin)
+		CAS "renouveler"
+			sJSON=sAPIRenouveler(sLogin,sIdDemande,sIP,sFicLog)
+		CAS "chercher"
+			sCible=Gauche(SansEspace(sAPIParam("Courriel")),100)
+			sJSON=sAPIChercher(sCible)
+		CAS "creer"
+			sCible=Gauche(SansEspace(sAPIParam("Nom")),80)
+			SI PAS goNoteClient:bSetAlias(Faux,goConfig:m_sRepBase) ALORS
+				CBasicObjet::LogGeneric(sFicLog,sIP+TAB+sAction+TAB+"ERREUR ouverture NOTE_CLIENT "+goConfig:m_sRepBase)
+				sJSON=sAPIErreur("ERREUR_INTERNE","Base indisponible")
+			SINON
+				sJSON=sAPICreer(sIdDemande,sIP,sFicLog)
+			FIN
+		AUTRE CAS
+			sJSON=sAPIErreur("ACTION_INCONNUE","Action inconnue : "+sAction)
+	FIN
+	// Le mot de passe (réponse de « creer ») n'est jamais écrit dans le journal
+	sJournal=sJSON
+	SI Position(sJournal,"""motDePasse""")>0 ALORS sJournal=Gauche(sJournal,Position(sJournal,"""motDePasse""")-1)
+	CBasicObjet::LogGeneric(sFicLog,sIP+TAB+sAction+TAB+sCible+TAB+sIdDemande+TAB+Gauche(sJournal,120))
+	APIEnvoie(sJSON)

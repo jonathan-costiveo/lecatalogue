@@ -1,0 +1,5 @@
+//MO058-059.TXT ANA00058 TO ANA00059
+AAClient		TAR	1290	nouvelle taille enregistrement : 1290
+AAClient	SDP_AUTORISE	RUB+		SDP_AUTORISE est une nouvelle rubrique
+AAClient	SDP_MAXSIZE	RUB+		SDP_MAXSIZE est une nouvelle rubrique
+AAClient	SDP_MAXTIME	RUB+		SDP_MAXTIME est une nouvelle rubrique

@@ -1,0 +1,4 @@
+//MO017-018.TXT ANA00017 TO ANA00018
+Client		TAR	498	nouvelle taille enregistrement : 498
+Client	Sujet	RUB+		Sujet est une nouvelle rubrique
+Client	TexteMemo	RUB+		TexteMemo est une nouvelle rubrique

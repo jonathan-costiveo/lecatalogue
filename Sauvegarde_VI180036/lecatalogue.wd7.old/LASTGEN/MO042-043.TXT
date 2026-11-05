@@ -1,0 +1,4 @@
+//MO042-043.TXT ANA00042 TO ANA00043
+RBQ_HISTO		TAR	381	nouvelle taille enregistrement : 381
+RBQ_HISTO	RBQ_REQUETE	TAI-	100	la rubrique RBQ_REQUETE a comme nouvelle taille 201 au lieu de 301
+RBQ_HISTO	RBQ_VERSION	TAI+	10	la rubrique RBQ_VERSION a comme nouvelle taille 21 au lieu de 11

@@ -1,0 +1,2 @@
+//MO023-024.TXT ANA00023 TO ANA00024
+ClientCat	CLE_CAT4	RUB+		CLE_CAT4 est une nouvelle clé

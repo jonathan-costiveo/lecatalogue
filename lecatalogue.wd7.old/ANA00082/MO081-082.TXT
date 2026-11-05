@@ -1,0 +1,3 @@
+//MO081-082.TXT ANA00081 TO ANA00082
+AAClient		TAR	1545	nouvelle taille enregistrement : 1545
+AAClient	MontantSDP	RUB+		MontantSDP est une nouvelle rubrique

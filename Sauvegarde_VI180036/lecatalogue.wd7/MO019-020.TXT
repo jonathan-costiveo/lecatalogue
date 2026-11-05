@@ -1,0 +1,3 @@
+//MO019-020.TXT ANA00019 TO ANA00020
+Itemcat		TAR	339	nouvelle taille enregistrement : 339
+Itemcat	Cat_TimeStamp	RUB-		la rubrique Cat_TimeStamp est supprimée

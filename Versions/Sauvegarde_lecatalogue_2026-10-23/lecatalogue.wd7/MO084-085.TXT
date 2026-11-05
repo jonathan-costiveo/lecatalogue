@@ -1,0 +1,5 @@
+//MO084-085.TXT ANA00084 TO ANA00085
+SDPSTAT		TAR	59	nouvelle taille enregistrement : 59
+SDPSTAT	SDPTYPEOP	CNW	Entier non signé sur 2 octets$Entier sur 4 octets	la rubrique SDPTYPEOP a pour nouveau type Entier non signé sur 2 octets
+SDPSTAT	SDPLANGC	RUB+		SDPLANGC est une nouvelle rubrique
+SDPSTAT	SDPADDRIP	CNW	Entier non signé sur 4 octets$Entier sur 4 octets	la rubrique SDPADDRIP a pour nouveau type Entier non signé sur 4 octets

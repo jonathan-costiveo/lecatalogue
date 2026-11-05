@@ -1,0 +1,14 @@
+//MO060-061.TXT ANA00060 TO ANA00061
+AAClient		TAR	1474	nouvelle taille enregistrement : 1474
+AAClient	NUM_FICHE	RUB+		NUM_FICHE est une nouvelle clé
+AAClient	Nom	TAI+	20	la rubrique Nom a comme nouvelle taille 81 au lieu de 61
+AAClient	Versions	TAI-	30	la rubrique Versions a comme nouvelle taille 21 au lieu de 51
+AAClient	Versions2	TAI-	30	la rubrique Versions2 a comme nouvelle taille 21 au lieu de 51
+AAClient	Versions3	TAI-	30	la rubrique Versions3 a comme nouvelle taille 21 au lieu de 51
+AAClient	TypeVersion	CNW	Entier sur 4 octets$Chaîne	la rubrique TypeVersion a pour nouveau type Entier sur 4 octets
+AAClient	DureeVersion	RUB+		DureeVersion est une nouvelle rubrique
+AAClient	DateActivation	RUB+		DateActivation est une nouvelle rubrique
+AAClient	OptEPlan	RUB+		OptEPlan est une nouvelle rubrique
+AAClient	VersionEPlan	TAI-	30	la rubrique VersionEPlan a comme nouvelle taille 21 au lieu de 51
+AAClient	TypeVersionEPlan	RUB+		TypeVersionEPlan est une nouvelle rubrique
+AAClient	REP_COMMON	RUB+		REP_COMMON est une nouvelle rubrique

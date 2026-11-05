@@ -1,0 +1,3 @@
+//MO121-122.TXT ANA00121 TO ANA00122
+LOGVERSION		TAR	138	nouvelle taille enregistrement : 138
+LOGVERSION	DATESYSCLI	RUB+		DATESYSCLI est une nouvelle rubrique

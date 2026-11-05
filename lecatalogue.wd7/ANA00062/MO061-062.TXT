@@ -1,0 +1,8 @@
+//MO061-062.TXT ANA00061 TO ANA00062
+LOGMODIF		NFI		nouveau fichier
+FORMATION		NFI		nouveau fichier
+NOTE_CLIENT		NFI		nouveau fichier
+TRADESTX		FIC-	Banniere	Fichier supprimé Banniere
+NOTE_CLIENT		FRN		
+FORMATION		FRN		
+LOGMODIF		FRN		

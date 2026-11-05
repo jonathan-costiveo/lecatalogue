@@ -1,0 +1,3 @@
+//MO012-013.TXT ANA00012 TO ANA00013
+Client		TAR	263	nouvelle taille enregistrement : 263
+Client	WebMaster	RUB+		WebMaster est une nouvelle rubrique

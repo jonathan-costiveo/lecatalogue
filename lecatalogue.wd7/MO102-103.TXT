@@ -1,0 +1,4 @@
+//MO102-103.TXT ANA00102 TO ANA00103
+CACHEOPER		TAR	224	nouvelle taille enregistrement : 224
+CACHEOPER	NOM_CIE	RUB+		NOM_CIE est une nouvelle rubrique
+CACHEOPER	NOM_MAJUS	TAI-	20	la rubrique NOM_MAJUS a comme nouvelle taille 81 au lieu de 101

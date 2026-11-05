@@ -1,0 +1,398 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- Demonstration 05/11/2026 09:23 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%DEMONSTRATION..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%DEMONSTRATION..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?216d8a9f"></script>
+<script type="text/javascript">
+var _UC0_="[%MODELE_LIEN2..DNDSOURCE%]";
+var _UC1_="[%MODELE_LIEN2..DNDCIBLE%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On d�tecte les balises DispHTMLUnknownElement par la propri�t� canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas tr�s logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+function _GET_MODELE_LIEN2_1()
+{
+	return _JCIR(_JGE("MODELE_LIEN2",document));
+}
+function _SET_MODELE_LIEN2_1()
+{
+	_JGE("MODELE_LIEN2",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _DEMONSTRATION_LOD_0(event)
+{
+	{
+}
+}
+function _DEMONSTRATION_LOD(event)
+{
+	if(false===_DEMONSTRATION_LOD_0(event))
+	{
+		return;
+	}
+	;
+	{
+}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("MODELE_LIEN2","",_UC0_,_UC1_,_JGEN("MODELE_LIEN2",document,false),[_GET_MODELE_LIEN2_1],[_SET_MODELE_LIEN2_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?20e65aba">
+<link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?20e65aba">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:1060px;height:auto !important;height:1060px;min-width:1403px;width:auto !important;width:1403px;}.l-2 {background-image:url([%_PROJET_WEB_%]res/bgcolor2_CA185DBA_.gif);}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#999999;}
+#CELLULE1,#bzCELLULE1 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#MODELE_IMAGE1 {width:900px;height:106px;}
+.dzMODELE_IMAGE1 {width:900px;height:106px;;overflow-x:hidden;overflow-y:hidden;position:relative}#MODELE_LIEN2,#tzMODELE_LIEN2 {  [%SI%]MODELE_LIEN2..COULEUR!=-1[%ALORS%]color:#[%MODELE_LIEN2..COULEUR%][%FIN%];  [%SI%]MODELE_LIEN2..COULEURFOND!=-1[%ALORS%]background-color:#[%MODELE_LIEN2..COULEURFOND%][%FIN%];font-weight:[%MODELE_LIEN2..POLICEGRAS;4%];font-style:[%MODELE_LIEN2..POLICEITALIQUE;5%];[%SI%]MODELE_LIEN2..POLICENOM!=[%ALORS%]font-family:[%MODELE_LIEN2..POLICENOM%];[%FIN%][%SI%]MODELE_LIEN2..POLICETAILLE!=0[%ALORS%]font-size:[%MODELE_LIEN2..POLICETAILLE;7%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEH!=-1[%ALORS%]text-align:[%MODELE_LIEN2..CADRAGEH;9%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEV!=-1[%ALORS%]vertical-align:[%MODELE_LIEN2..CADRAGEV;10%];[%FIN%][%SI%]MODELE_LIEN2..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%MODELE_LIEN2..OPACITE%]);zoom:1;opacity:[%MODELE_LIEN2..OPACITE;8%];[%FIN%]}#IMAGE2 {width:400px;height:120px;}
+.dzIMAGE2 {width:400px;height:120px;;overflow-x:hidden;overflow-y:hidden;position:relative}#IMAGE3 {width:305px;height:410px;}
+.dzIMAGE3 {width:305px;height:410px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+</style>
+</head>
+<body style="  background-color:#FFFFFF;" onload="[%_CodeInfoError_%];_LOD_COM(event);_DEMONSTRATION_LOD(event)" onunload="_UNL_COM(event);">
+<form name="DEMONSTRATION" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.DEMONSTRATION</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:1403">
+<div id="dwwCELLULE1" style="position:absolute;left:0px;top:0px;width:969px;height:107px;z-index:0;"><table id="CELLULE1" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="106" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELEIMAGE1" style="position:absolute;left:0px;top:0px;width:900px;height:106px;z-index:0;"><div class="dzMODELE_IMAGE1" id="dzMODELE_IMAGE1"><img src="[%_PROJET_WEB_%][%MODELE_IMAGE1..VALEUR%]" width=900 height=106 hspace=0 vspace=0 border=0 alt="" name="MODELE_IMAGE1" id="MODELE_IMAGE1" class="l-1 padding"></div></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE2" style="position:absolute;left:0px;top:107px;width:969px;height:24px;z-index:1;"><table id="CELLULE2" style="position:relative;">
+<tr><td height="24" width="969" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELELIEN1" style="position:absolute;left:28px;top:4px;width:51px;height:16px;z-index:0;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN1','_self','','')}" id="MODELE_LIEN1" class="Lien wblien padding" TABINDEX="1">Accueil</a></div>
+<div id="dwwMODELELIEN3" style="position:absolute;left:194px;top:4px;width:72px;height:16px;z-index:1;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN3','_self','','')}" id="MODELE_LIEN3" class="Lien wblien padding" TABINDEX="1">Conditions</a></div>
+<div id="dwwMODELELIEN4" style="position:absolute;left:401px;top:4px;width:95px;height:16px;z-index:2;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN4','_self','','')}" id="MODELE_LIEN4" class="Lien wblien padding" TABINDEX="1">Nous joindre</a></div>
+<div id="dwwMODELELIEN7" style="position:absolute;left:288px;top:4px;width:96px;height:16px;z-index:3;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN7','_self','','')}" id="MODELE_LIEN7" class="Lien wblien padding" TABINDEX="1">Notre Mission</a></div>
+<div id="dwwMODELELIEN8" style="position:absolute;left:511px;top:4px;width:78px;height:16px;z-index:4;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN8','_self','','')}" id="MODELE_LIEN8" class="Lien wblien padding" TABINDEX="1">Partenaires</a></div>
+<div id="dwwMODELELIEN6" style="position:absolute;left:716px;top:4px;width:78px;height:16px;z-index:5; [%SI%]MODELE_LIEN6..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN6','_self','','')}" id="MODELE_LIEN6" class="Lien wblien padding" TABINDEX="1">Webmaster</a></div>
+<div id="dwwMODELELIEN9" style="position:absolute;left:610px;top:4px;width:84px;height:16px;z-index:6;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN9','_self','','')}" id="MODELE_LIEN9" class="Lien wblien padding" TABINDEX="1">Commander</a></div>
+<div id="MODELE_LIBELLE1" style="position:absolute;left:87px;top:6px;width:9px;height:13px;z-index:7;" class="Verdana-9">|</div>
+<div id="dwwMODELELIEN5" style="position:absolute;left:913px;top:4px;width:44px;height:16px;z-index:8; [%SI%]MODELE_LIEN5..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a id="MODELE_LIEN5" class="Lien padding">Panier</a></div>
+<div id="MODELE_LIBELLE7" style="position:absolute;left:799px;top:5px;width:44px;height:14px;z-index:9; [%SI%]MODELE_LIBELLE7..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Panier</div>
+<div id="MODELE_LIBELLE5" style="position:absolute;left:386px;top:6px;width:9px;height:13px;z-index:10;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE4" style="position:absolute;left:273px;top:6px;width:9px;height:13px;z-index:11;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE2" style="position:absolute;left:181px;top:6px;width:9px;height:13px;z-index:12;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE8" style="position:absolute;left:11px;top:6px;width:9px;height:13px;z-index:13;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE9" style="position:absolute;left:498px;top:6px;width:9px;height:13px;z-index:14;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE10" style="position:absolute;left:595px;top:6px;width:9px;height:13px;z-index:15;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE11" style="position:absolute;left:696px;top:6px;width:9px;height:13px;z-index:16;" class="Verdana-9">|</div>
+<div id="LIB_CATGRIS" style="position:absolute;left:103px;top:5px;width:69px;height:14px;z-index:17; [%SI%]LIB_CATGRIS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Catalogue</div>
+<div id="dwwMODELELIEN2" style="position:absolute;left:[%MODELE_LIEN2..X%]px;top:[%MODELE_LIEN2..Y%]px;z-index:18; [%SI%]MODELE_LIEN2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]MODELE_LIEN2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%MODELE_LIEN2..CURSEURSOURIS%];[%FIN%]"><table width="70px" style="height:16px;"><tr><td class="Lien" valign="middle" id="tzMODELE_LIEN2">[%MODELE_LIEN2..HTMLAVANT%]<a[%SI%]MODELE_LIEN2..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}"[%FIN%] id="MODELE_LIEN2" class="Lien wblien padding" TITLE="[%MODELE_LIEN2..BULLE%]" TABINDEX="1"[%SI%]MODELE_LIEN2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]MODELE_LIEN2..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="MODELE_LIEN2"  href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}">[%MODELE_LIEN2%]</a>[%MODELE_LIEN2..HTMLAPRES%]</td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE3" style="position:absolute;left:0px;top:132px;width:969px;height:928px;z-index:2;"><table id="CELLULE3" style="position:relative;">
+<tr><td height="928" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwIMAGE2" style="position:absolute;left:0px;top:0px;width:400px;height:120px;z-index:0;"><div class="dzIMAGE2" id="dzIMAGE2"><img src="[%_PROJET_WEB_%]bannieres/TitreFinal/Demonstration.jpg" width=400 height=120 hspace=0 vspace=0 border=0 alt="" name="IMAGE2" id="IMAGE2" class="l-0 padding"></div></div>
+<div id="tzHTMLDEMO" style="position:absolute;left:87px;top:154px;width:367px;height:367px;z-index:1;" class="l-0"><html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<title>Bienvenue à tous</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Philippe</o:Author>
+  <o:LastAuthor>Philippe</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>6</o:TotalTime>
+  <o:Created>2005-03-10T15:26:00Z</o:Created>
+  <o:LastSaved>2005-03-10T15:26:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>266</o:Words>
+  <o:Characters>1466</o:Characters>
+  <o:Company>Les Services Informatisés</o:Company>
+  <o:Lines>12</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>1729</o:CharactersWithSpaces>
+  <o:Version>11.5606</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:HyphenationZone>21</w:HyphenationZone>
+  <w:PunctuationKerning/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:BreakWrappedTables/>
+   <w:SnapToGridInCell/>
+   <w:WrapTextWithPunct/>
+   <w:UseAsianBreakRules/>
+   <w:DontGrowAutofit/>
+  </w:Compatibility>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+p
+	{mso-margin-top-alt:auto;
+	margin-right:0cm;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:70.85pt 70.85pt 70.85pt 70.85pt;
+	mso-header-margin:35.4pt;
+	mso-footer-margin:35.4pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:458576109;
+	mso-list-template-ids:-1820262848;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:971836252;
+	mso-list-template-ids:-461726298;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:1250120382;
+	mso-list-template-ids:31869784;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0cm;}
+ul
+	{margin-bottom:0cm;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Tableau Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+	mso-para-margin:0cm;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+</head>
+<script Language="JavaScript">
+function demoa(Langue)
+{
+	var vNouvelle;
+	var vUrl;
+	if(Langue=="fr")
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAInternet.html";
+	}
+	else
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAInternet.html";
+	}
+	vNouvelle=window.open(vUrl,"_blank","width=820,height=600,scrollbars=no,resizable=no,status=no,toolbar=no,menubar=no,location=no,directories=no,left=15,top=10");
+	vNouvelle.focus;
+	return false;
+}
+function demob(Langue)
+{
+	var vNouvelle;
+	var vUrl;
+	if(Langue=="fr")
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAestim.html";
+	}
+	else
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAestim.html";
+	}
+	vNouvelle=window.open(vUrl,"_blank","width=820,height=600,scrollbars=no,resizable=no,status=no,toolbar=no,menubar=no,location=no,directories=no,left=15,top=10");
+	vNouvelle.focus;
+	return false;
+}
+function democ(Langue)
+{
+	var vNouvelle;
+	var vUrl;
+	if(Langue=="fr")
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAexe.html";
+	}
+	else
+	{
+		vUrl = "http://www.lecatalogue.ca/demo/CATAexe.html";
+	}
+	vNouvelle=window.open(vUrl,"_blank","width=820,height=600,scrollbars=no,resizable=no,status=no,toolbar=no,menubar=no,location=no,directories=no,left=15,top=10");
+	vNouvelle.focus;
+	return false;
+}
+<body lang=FR style='tab-interval:35.4pt'>
+
+<div class=Section1>
+
+<div align="left">
+<table border="0" width="366" id="table1" height="368">
+	<tr>
+		<td width="360">
+		<p style="margin-left: 11px; margin-top: 0"><span style='font-family:
+     Arial'>Le catalogue (recherche et accès via Internet)</span>.<br>
+	<span style="font-family: Arial">
+	<a href="#" onclick="demoa('fr');">Démonstration flash</a></span><p style="margin-left: 11px; margin-top: 0">&nbsp;<p style="margin-left: 11px; margin-top: 0">&nbsp;<p style="margin-left: 11px; margin-top: 0">
+		<span style='font-family:
+     Arial'>L’ESTIMATEUR GÉNÉRAL (recherche et accès sur votre ordinateur, mise 
+		à jour des données via Internet, et intégré au logiciel d'estimation).</span><p style="margin-left: 11px; margin-top: 0">
+		<span style="font-family: Arial">
+		<a href="#" onclick="demob('fr');">Démonstration flash</a></span></td>
+	</tr>
+	</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html></div>
+<div id="dwwIMAGE3" style="position:absolute;left:552px;top:132px;width:305px;height:410px;z-index:2;"><div class="dzIMAGE3" id="dzIMAGE3"><img src="[%_PROJET_WEB_%]imgdemo.jpg" width=305 height=410 hspace=0 vspace=0 border=0 alt="" name="IMAGE3" id="IMAGE3" class="l-0 padding"></div></div>
+<div id="LIBELLE3" style="position:absolute;left:501px;top:74px;width:399px;height:19px;z-index:3;" class="Titre-Champs">Le guide est disponible de deux façons<BR><BR></div>
+</div></td></tr></table></div>
+</div>
+<div id="dwwLIENDEMO" style="position:absolute;left:1295px;top:115px;width:108px;height:16px;z-index:3; [%SI%]LIENDEMO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'LIENDEMO','_self','','')}" id="LIENDEMO" class="Lien wblien padding" TABINDEX="1">Démonstrations</a></div>
+
+</form>
+[%DEMONSTRATION..HTMLFINPAGE%]</body>
+</html>
+<!--118990-->

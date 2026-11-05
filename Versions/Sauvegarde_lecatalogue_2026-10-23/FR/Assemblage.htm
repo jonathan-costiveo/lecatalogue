@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- Assemblage 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%ASSEMBLAGE..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%ASSEMBLAGE..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _UC0_="[%LIEN10..DNDSOURCE%]";
+var _UC1_="[%LIEN10..DNDCIBLE%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On détecte les balises DispHTMLUnknownElement par la propriété canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas très logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+// JS_NavigateurOuvre
+function _NAO(p)
+{
+	if(p==0||p>127)return "toolbar=0,location=0,status=0,scrollbars=0,directories=0,menubar=0,resizable=0";
+	var o="";
+	if(p&1)o+="toolbar=1,";
+	if(p&2)o+="location=1,";
+	if(p&4)o+="status=1,";
+	if(p&8)o+="menubar=1,";
+	if(p&16)o+="scrollbars=1,";
+	if(p&32)o+="resizable=1,";
+	if(p&64)o+="directories=1,";
+	if(o.length>0)o=o.substr(0, o.length-1);
+	return o;
+}
+function _GET_LIEN10_1()
+{
+	return _JCIR(_PAGE_["zrl_"+_PAGE_.ZONEASSEMBLAGE.value+"_ZLIEN"]);
+}
+function _SET_LIEN10_1()
+{
+	_PAGE_["zrl_"+_PAGE_.ZONEASSEMBLAGE.value+"_ZLIEN"].innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _ASSEMBLAGE_LOD(event)
+{
+	{
+}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LIEN10","ZONEASSEMBLAGE",_UC0_,_UC1_,_JGEN("LIEN10",document,false),[_GET_LIEN10_1],[_SET_LIEN10_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;width:100%;margin:0;}#page { min-height:187px;height:auto !important;height:187px;min-width:1156px;width:auto !important;width:1156px;}.l-2 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:8pt;color:#0000FF;}
+.l-3 {background-color:#A3D8FF;}
+.l-4 {background-color:#CCFFFF;}
+.REGLETTE-ZONEASSEMBLAGE-sty10621 {font-weight:bold;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE_ZONEASSEMBLAGE .premier a,#REGLETTE_ZONEASSEMBLAGE .premier span,#REGLETTE_ZONEASSEMBLAGE .precedent a,#REGLETTE_ZONEASSEMBLAGE .precedent span,#REGLETTE_ZONEASSEMBLAGE .suivant a,#REGLETTE_ZONEASSEMBLAGE .suivant span,#REGLETTE_ZONEASSEMBLAGE .dernier a,#REGLETTE_ZONEASSEMBLAGE .dernier span,#REGLETTE_ZONEASSEMBLAGE .indice a,#REGLETTE_ZONEASSEMBLAGE .indice span {width:0;}
+#REGLETTE_ZONEASSEMBLAGE li a, #REGLETTE_ZONEASSEMBLAGE li span {height:20px;}
+#IMG_TITRE {width:1100px;height:16px;  [%SI%]IMG_TITRE..COULEUR!=-1[%ALORS%]color:#[%IMG_TITRE..COULEUR%][%FIN%];  [%SI%]IMG_TITRE..COULEURFOND!=-1[%ALORS%]background-color:#[%IMG_TITRE..COULEURFOND%][%FIN%];}
+.dzIMG_TITRE {width:1100px;height:16px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+<CONTENEUR NAME="[%ZONEASSEMBLAGE..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->#zrl_[%ZONEASSEMBLAGE%]_ZIMGLIEN {width:28px;height:21px;}
+.dzIMGASSEMB {width:28px;height:21px;;overflow-x:hidden;overflow-y:hidden;position:relative}#zrl_[%ZONEASSEMBLAGE%]_ZIMAGE {width:1100px;height:16px;  [%SI%]IMAGE2..COULEUR!=-1[%ALORS%]color:#[%IMAGE2..COULEUR%][%FIN%];  [%SI%]IMAGE2..COULEURFOND!=-1[%ALORS%]background-color:#[%IMAGE2..COULEURFOND%][%FIN%];}
+.dzIMAGE2 {width:1100px;height:16px;;overflow-x:hidden;overflow-y:hidden;position:relative}#c-[%ZONEASSEMBLAGE%]-LIEN10,#tzc-[%ZONEASSEMBLAGE%]-LIEN10 {  [%SI%]LIEN10..COULEUR!=-1[%ALORS%]color:#[%LIEN10..COULEUR%][%FIN%];  [%SI%]LIEN10..COULEURFOND!=-1[%ALORS%]background-color:#[%LIEN10..COULEURFOND%][%FIN%];font-weight:[%LIEN10..POLICEGRAS;4%];font-style:[%LIEN10..POLICEITALIQUE;5%];[%SI%]LIEN10..POLICENOM!=[%ALORS%]font-family:[%LIEN10..POLICENOM%];[%FIN%][%SI%]LIEN10..POLICETAILLE!=0[%ALORS%]font-size:[%LIEN10..POLICETAILLE;7%];[%FIN%][%SI%]LIEN10..CADRAGEH!=-1[%ALORS%]text-align:[%LIEN10..CADRAGEH;9%];[%FIN%][%SI%]LIEN10..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIEN10..CADRAGEV;10%];[%FIN%][%SI%]LIEN10..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIEN10..OPACITE%]);zoom:1;opacity:[%LIEN10..OPACITE;8%];[%FIN%]}
+<!--/REPEAT-->
+</CONTENEUR>
+</style>
+</head>
+<body style="   background-color:#FFFFFF;" onload="[%_CodeInfoError_%];_LOD_COM(event);_ASSEMBLAGE_LOD(event)">
+<table align=center  width="1131px"><tr align=left valign=top><td><div style="position:relative">
+<form name="ASSEMBLAGE" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.ASSEMBLAGE</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="zrl_[%ZONEASSEMBLAGE%]_LIEN10">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:2;width:1131">
+<div id="dwwZONEASSEMBLAGE" style="position:absolute;left:0px;top:134px;width:1131px;z-index:2;"><input type=hidden name="ZONEASSEMBLAGE" value="[%ZONEASSEMBLAGE%]"><input type=hidden name="ZONEASSEMBLAGE_DEB" value="[%ZONEASSEMBLAGE..PREMIERVISIBLE%]"><input type=hidden name="_ZONEASSEMBLAGE_OCC" value="[%ZONEASSEMBLAGE..OCCURRENCE%]"><CONTENEUR NAME="[%ZONEASSEMBLAGE..ALIAS%]"><table id="con-ZONEASSEMBLAGE" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr><td height="30" width="1131" style=" [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEASSEMBLAGE..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEASSEMBLAGE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZONEASSEMBLAGE..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEASSEMBLAGE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZONEASSEMBLAGE..LIGNEPAIRE!=1[%ALORS%]l-4[%FIN%][%SI%]ZONEASSEMBLAGE..LIGNEPAIRE=1[%ALORS%]l-3[%FIN%] padding"><div style="position:relative;  [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEASSEMBLAGE..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEASSEMBLAGE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEASSEMBLAGE..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZONEASSEMBLAGE_[%ZONEASSEMBLAGE%]"><div id="zrl_[%ZONEASSEMBLAGE%]_LIBELLE1" style="position:absolute;left:67px;top:4px;width:66px;height:14px;z-index:5; [%SI%]LIBELLE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="Verdana-9"><div id="zrl_[%ZONEASSEMBLAGE%]_ZCODE">[%ZCODE%]</div></div>
+<div id="dwwzrl[%ZONEASSEMBLAGE%]ZIMGLIEN" style="position:absolute;left:1100px;top:0px;width:28px;height:21px;z-index:6;"><div class="dzIMGASSEMB" id="dzzrl_[%ZONEASSEMBLAGE%]_ZIMGLIEN"><img src="[%_PROJET_WEB_%][%ZIMGLIEN%]" width=28 height=21 hspace=0 vspace=0 border=0 alt="" name="zrl_[%ZONEASSEMBLAGE%]_ZIMGLIEN" id="zrl_[%ZONEASSEMBLAGE%]_ZIMGLIEN" class="l-0 padding"></div></div>
+<div id="dwwzrl[%ZONEASSEMBLAGE%]ZIMAGE" style="position:absolute;left:[%IMAGE2..X%]px;top:[%IMAGE2..Y%]px;width:1100px;height:16px;z-index:7; [%SI%]IMAGE2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMAGE2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMAGE2..CURSEURSOURIS%];[%FIN%]"><div class="dzIMAGE2" id="dzzrl_[%ZONEASSEMBLAGE%]_ZIMAGE"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMAGE2=[%IMAGE2..NOCACHE%]&ZIMAGE=[%ZONEASSEMBLAGE%]" width=1100 height=16 hspace=0 vspace=0 border=0 alt="" name="zrl_[%ZONEASSEMBLAGE%]_ZIMAGE" id="zrl_[%ZONEASSEMBLAGE%]_ZIMAGE" class="l-1 padding" TITLE="[%IMAGE2..BULLE%]"[%SI%]IMAGE2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMAGE2..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="dwwzrl[%ZONEASSEMBLAGE%]LIEN10" style="position:absolute;left:[%LIEN10..X%]px;top:[%LIEN10..Y%]px;z-index:8; [%SI%]LIEN10..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]LIEN10..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIEN10..CURSEURSOURIS%];[%FIN%]"><table width="11px" style="height:16px;"><tr><td class="l-2" valign="middle" id="tzc-[%ZONEASSEMBLAGE%]-LIEN10">[%LIEN10..HTMLAVANT%]<a[%SI%]LIEN10..ETAT=0[%ALORS%] href="javascript:_PAGE_.ZONEASSEMBLAGE.value=[%ZONEASSEMBLAGE%];javascript:{_JSL(_PAGE_,'LIEN10','_blank','',_NAO(0)+',width='+1024+',height='+250+',top='+300)}"[%FIN%] id="c-[%ZONEASSEMBLAGE%]-LIEN10" class="l-2 wblien padding" TITLE="[%LIEN10..BULLE%]"[%SI%]LIEN10..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]LIEN10..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="zrl_[%ZONEASSEMBLAGE%]_LIEN10"  href="javascript:_PAGE_.ZONEASSEMBLAGE.value=[%ZONEASSEMBLAGE%];javascript:{_JSL(_PAGE_,'LIEN10','_blank','',_NAO(0)+',width='+1024+',height='+250+',top='+300)}">[%ZLIEN%]</a>[%LIEN10..HTMLAPRES%]</td></tr></table></div>
+</div></td></tr><!--/REPEAT--></table></CONTENEUR></div>
+</div>
+<div id="tzREGLETTEZONEASSEMBLAGE" style="position:absolute;left:297px;top:167px;width:350px;height:20px;z-index:0;"><ol class="reglette">[%REGLETTE_ZONEASSEMBLAGE;2%]</ol></div>
+<div id="dwwIMGTITRE" style="position:absolute;left:[%IMG_TITRE..X%]px;top:[%IMG_TITRE..Y%]px;width:1100px;height:16px;z-index:1; [%SI%]IMG_TITRE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMG_TITRE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMG_TITRE..CURSEURSOURIS%];[%FIN%]"><div class="dzIMG_TITRE" id="dzIMG_TITRE"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMG_TITRE=[%IMG_TITRE..NOCACHE%]" width=1100 height=16 hspace=0 vspace=0 border=0 alt="[%IMG_TITRE%]" name="IMG_TITRE" id="IMG_TITRE" class="l-1 padding" TITLE="[%IMG_TITRE..BULLE%]"[%SI%]IMG_TITRE..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMG_TITRE..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="LIBTITRE" style="position:absolute;left:13px;top:32px;width:856px;height:46px;z-index:3;" class="Verdana-Italique-2">[%LIBTITRE%]</div>
+
+</form>
+</div></td></tr></table>
+[%ASSEMBLAGE..HTMLFINPAGE%]</body>
+</html>
+<!--30543-->

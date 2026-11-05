@@ -1,0 +1,4 @@
+//MO116-117.TXT ANA00116 TO ANA00117
+COURRIELS		TAR	323	nouvelle taille enregistrement : 323
+COURRIELS	TimeStamp	RUB+		TimeStamp est une nouvelle clé
+COURRIELS	Cle_TYPEDATE	RUB+		Cle_TYPEDATE est une nouvelle clé

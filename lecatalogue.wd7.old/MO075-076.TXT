@@ -1,0 +1,6 @@
+//MO075-076.TXT ANA00075 TO ANA00076
+SDPFIC		NFI		nouveau fichier
+SDPSTAT		TAR	56	nouvelle taille enregistrement : 56
+SDPSTAT		IDE+*		fichier avec identifiant
+SDPSTAT	IDSDPSTAT	RUB+		IDSDPSTAT est une nouvelle clé
+SDPFIC		FRN		

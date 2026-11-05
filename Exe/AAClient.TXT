@@ -1,0 +1,262 @@
+2	Les Services Informatisés (install)	Bernard Lavoie	20031013	blavoie@estimation.qc.ca	bernard123456789	dranreb123	1	20110213	20100803	4	5.24J	20100414	12.23Z	20100803	12.05R	20100716	0	philippe@estimation.qc.ca		1				0	1	0	0	0	0	0	0	
+7	Les Constructions Allard	Stephen Fortin	20031119	coallard@cgocable.ca	8194725069	stephen	1	20101119	20100802	5	5.24J	20100118	12.23Y	20100802	1.01A	20050824	0	coallardml@cgocable.ca	coallardml@cgocable.ca	0	819 472-5069			2075	1	0	0	0	0	0	0	
+8	Couvrette et Ass inc.	Jean-Guy Couvrette	20020101	jeanguy.couvrette@couvretteconstruction.com	4504343477	jgcouvrett	1	20110101	20080415	2	5.16x	20071029	1.01A	20071029			0			0	450 434-3477		No charge pour les mises a jour tel que discuté avec Bernard	890	1	0	0	0	0	0	0	
+10	Robert Gauvreau et Fils	Denis, Gaétan ou Thimothé	20040205	denis@rgauvreauconstruction.ca	8198272300	robertdeni	1	20110205	20100625	3	5.24J	20100505	12.23U	20100625	12.01S	20100512	0	gaetan@rgauvreauconstruction.ca	tim@rgauvreauconstruction.ca	0	819 827-2300		Passe de 4 a 3 licences......pour les mises à jour car il manque un estimateur bien qu'il est acheté 4 licences	1285	1	0	0	0	0	0	0	
+11	C.A.L. Entrepreneur Général	Alexandre	20030203	abouchard@constructioncal.com	5149565511	mattrembla	1	20110203	20081202	3	5.22G	20081202	1.01A	20050114	1.01A	20050114	0			0	956-5511			1285	1	0	0	0	0	0	0	
+13	Décarel Inc.	Pascal Filiatrault et Serge Thorne	20040415	pfiliatrault@decarel.com	4182630106	patgrondin	1	20110415	20100526	2	5.22z	20090217	12.23F	20100526			0			0	935-6462	418 263-0106	2 versions Invitation a soumissionner	390	1	0	0	0	0	0	0	
+14	Jos Pelletier Ltée	Karine Michaud	20040304	sgiroux@constructionjpl.com	8887703038	alexrtem	1	20110304	20100208	3	5.24J	20100208	12.21N	20100208	1.01A	20040810	0			0	888 770-3038			1285	1	0	0	0	0	0	0	
+15	Les Constructions Yves Lessard	Yves Lessard	20020329	cyl@bellnet.ca	8193468581	yveslessa	1	20110329	20100426	2	5.24J	20091015	12.22S	20100426			0	Forum@habitation.qc.ca		0	819 346-8581			890	1	0	0	0	0	0	0	
+16	Denis Lévesque (PG Tech)	Denis Lévesque	20030306	denis423@sympatico.ca	8193955691	denlevesqu	0	20050306	20050308	1	4.06W	20041208	1.01A	20041208	1.01A	20041208	0			0	(819) 395-5691	(819) 395-5691		0	1	0	0	0	0	0	0	
+17	STC Acoustique	Jean-Sébastien Gauthier	20040308	stcacoustique@yahoo.ca	4506688181	jeansebas	0	20050308	20050709	2	4.06Z	20050215	1.01A	20050215	1.01A	20050215	0	carlo.castellarin_stc.acoustique@sympatico.ca		0	450 668-8181	450 668-8112		0	1	0	0	0	0	0	0	
+18	EMD Construction Inc.	David Genois	20030315	david.genois@emdconstruction.com	5149903796	davgen	1	20110315	20080923	2	5.20o	20080610	1.01A	20070222	1.01A	20041026	0	Melanie.robitaille@emdconstruction.com		0	990-3796			890	1	0	0	0	0	0	0	
+19	Fédération des Coopérative du nouveau Québec	Éric Dubois	20030326	manon.leblanc@fcnq.ca	5144579371	ericcoop	0	20060326	20060208	2	5.13s	20060208	1.01A	20060208	1.01A	20041122	0			0	514 457-9371			0	1	0	0	0	0	0	0	
+20	Construction Filiatrault Inc.	Jean-Marie Filiatrault	20040309	jean.marie@constructionfiliatrault.com	8193335494	jeanm5494	0	20050309	20080529	2	4.07b	20050225	1.01A	20050301	1.01A	20050301	0	r.fugere@constructionfiliatrault.com		0	819 333-5494			0	1	0	0	0	0	0	0	
+21	Module ll Construction Inc.	M. Fouad, M. Piché	20040427	fouadg@module.ca	5143815601	foupapi	0	20060427	20070219	2	4.06W	20041208	1.01A	20041012	1.01A	20041012	0	sylvainp@module.ca		0	381-5601			0	1	0	0	0	0	0	0	
+22	Qualité Construction inc.	M. Martin Tremblay	20030501	info@qualitecdn.com	4186218052	mmartintre	0	20080501	20070327	2	5.15L	20070207	1.01A	20050420			0	sebastien.pelletier@qualitecdn.com		0	418 621-8052		ABANDON	0	1	0	0	0	0	0	0	
+24	Arri Construction Entrepreneur Général	Simon Boisclair	20030514	simon.boisclair@arriconstruction.com	4507783820	simboiscla	1	20110514	20100626	2	5.24J	20091019	12.23U	20100626	1.01A	20050314	0	jeandube@sijdsolution.com		0	1 450 778-3820			890	1	0	0	0	0	0	0	
+25	Corporation de Construction Germano	M. Tino Polillo	20030522	agostinopolillo@germanoconstruction.com	4506687807	tinopolill	0	20050522	20051215	2	5.10K	20050425	1.01A	20050425	1.01A	20041108	0			0	450 668-7807			890	1	0	0	0	0	0	0	
+26	Tomassini et frère Ltée	Daniel Prévost	20030623	d.prevost@tomassini.ca	5149568909	danprevost	1	20110623	20100713	2	5.24J	20090924	12.23W	20100713			0			0	956-8909			890	1	0	0	0	0	0	0	
+27	Construction André St-Pierre	Guy St-Pierre	20030613	casaintpierre@videotron.ca	4504796517	stpierguy	0	20060213	20041213	2							0			0	c949-7686	r450 479-6517		0	1	0	0	0	0	0	0	
+28	Progest Construction Ltée	Patrick Hétu	20020615	patrick.hetu@progestconstruction.com	5143445227	patrick	0	20050615	20091008	1	5.10J	20050420	1.01A	20050416	1.01A	20050416	0			0	344-5227		Formation Illimité	495	1	0	0	0	0	0	0	
+29	Cap Acoustique 1989 inc.	Alain Boulanger	20030815	capacous@videotron.ca	8193781992	capalainbo	0	20070815	20090223	1	5.15E	20061204	1.01A	20060801	1.01A	20040810	0	aboulan1@qc.aira.com		0	819 378-1992		NE VEUX PLUS DE MISE A JOUR	0	1	0	0	0	0	0	0	
+30	Construction KEB Inc.	Daniel St-Jean	20030828	daniel@constructionkeb.com	8194258509	stjeandani	0	20090828	20070223	3	5.15Q	20070223					0			0	819 425-8509			1285	1	0	0	0	0	0	0	
+31	Gaston Champoux (1973) Inc.	Vincent Roy	20030813	vchampoux@bellnet.ca	5147283615	vinroy	0	20070121	20050824	2	5.14y	20060919			1.01A	20041124	0			0	514 728-3615			0	1	0	0	0	0	0	0	
+32	Jean-Paul Plamondon Enrg.	Denis Plamondon	20030916	denis.plamondon3@sympatico.ca	4186673343	denisplamo	1	20100916	20100704	2	5.24i	20090610	12.23V	20100704	12.04I	20100527	0			0	(418) 681-9246	(418) 681-3504		890	1	0	0	0	0	0	0	
+33	Berka Inc.	Yves Dutil / Daniel Bérubé	20031008	info@berka.qc.ca	4509670344	yves_dutil	0	20041008	20050424	1							0			0	450 967-0344			0	1	0	0	0	0	0	0	
+34	T.G. Béco limitée	Martin Aubut	20031015	maubut@tgbeco.com	5142534406	martin_aub	0	20051015	20060606	1	5.12F	20051003	1.01A	20051003	1.01A	20050429	0	jarduini@tgbeco.com	yvesfortier@tgbeco.com	0	514 253-4406			0	1	0	0	0	0	0	0	
+35	Gestion M. L. Lemieux	Marie Louis Lemieux	20021029	gestionml@bellnet.ca	5146404151	marielouis	0	20031029		1	3.62c						0			0	514 640-4151			0	1	0	0	0	0	0	0	
+36	Hardy Construction 2645-3530 Québec inc	Guy Hardy	20031024	guy.hardy@cableamos.com	8197321493	alainmeuni	1	20101024	20070221	1							0			0	1 819 732-1493		formation illimité	495	1	0	0	0	0	0	0	
+37	S.M. Construction inc.	Normand Lizotte	20031017	normand.lizotte@sm-inc.com	4188497104	smconst	0	20071017	20060413	1	5.14L	20060413	1.01A	20050531	1.01A	20050531	0	claude.faucher@sm-inc.com	simon.pelletier@sm-inc.com	0	418 849-7104			0	1	0	0	0	0	0	0	
+40	Construction Genfor Ltée	Emmanuel Haché	20021216	ehache@genfor.qc.ca	4506612040	emagenfor	1	20101216	20100114	2	5.24J	20100114	12.20O	20091105	1.01A	20050418	0			0	450 661-2040	450 661-2092		890	1	0	0	0	0	0	0	
+41	Construction Yves Giard	Yves Giard	20011220	yves.giard@cgocable.ca	4507732698	yves40	0	20091220	20100409	1	5.24E	20090517					0			0			en attente du paiement de la facture 645 avant remettre en marche	495	1	0	0	0	0	0	0	
+42	Construction Véran inc. (Veran)	Dany Castonguay	20031211	constructionsveran@globetrotter.net	4188472444	danyveran	1	20101211	20100412	1	5.24J	20100205	1.01A	20050124			0			0	418 847-2444			495	1	0	0	0	0	0	0	
+43	Bernard Malo Inc.	Sylvie Bertrand	20031216	sbertrand@filochrome.com	4507591100	bernardmal	1	20101216	20100426	3	5.22K	20081212	12.20D	20091013			0	davidmalo@filochrome.com		0	450 759-1100			1285	1	0	0	0	0	0	0	
+44	Entreprise Beaudoin 2414-9098 Québec inc.	Julie Hudon	20030529	info@beaudoincanada.com	8195951967	beaudoin	1	20110529	20100519	3	5.24J	20100421	12.23C	20100519			0	jh@beaudoincanada.com		0	819 595-1967			1285	1	0	0	0	0	0	0	
+45	Dionne, Marien & Ass.	Jean-Pierre Dionne	20040803	jpdionne@groupedma.com	5143740155	jpdionnedm	0	20050803	20050502	1	4.06W	20041208	1.01A	20040921	1.01A	20040921	0			0				0	1	0	0	0	0	0	0	
+47	A Plus Construction inc.	Gaétan Gingras	20040810	gaetan@aplusconstruction.ca	plusconstr	gaegin	1	20100810	20100707	1	5.24J	20100329	12.23V	20100706	1.01A	20041013	0			0	819 375-2168	c 819 697-5569		495	1	0	0	0	0	0	0	
+48	Construction Longer inc ou Novoco	Denis Briere	20040817	mariofoley@constructionlonger.com	5640115819	briden	1	20100817	20100712	3	5.23B	20090302	12.23W	20100712	1.01A	20040929	0			0	819 564-0115			1285	1	0	0	0	0	0	0	
+51	Cégep de L'Abitibi Témiscamingue	Mathieu Lacombe	20031212	Mathieu.lacombe@cegepat.qc.ca	mathicegep	lalacombe	0	20081212	20080823	9	5.20Q	20080701	1.01A	20060202	1.01A	20050802	0	chabot_jacques@hotmail.com	david.nadeau@cegepat.qc.ca	0	819 762-0931			0	1	0	0	0	0	0	0	
+52	Habitation Daniel Desrochers	Daniel Desrochers	20040729	habitationdanieldesroches@videotron.ca	dandesroche	famille	0	20050729	20050418	1	5.00R	20050329	1.01A	20040819	1.01A	20040819	0			0	450-267-7733	450-739-0643		0	1	0	0	0	0	0	0	
+53	Gérald Bourdage	Gérald Bourdage	20040101	gsbourdage@videotron.ca	geraldb	9920605	0	20070101	20060118	1	5.13K	20060118					0			0	(450) 658-7716			0	1	0	0	0	0	0	0	
+54	Les Constructions Serbec  Inc	Luc Bourdage	20040819	luc@serbec.com	serbeclu	suzanne	1	20100819	20081006	2	5.20L	20080602	1.01A	20071203			0	jean@serbec.com	jfm@serbec.com	0	809-1020			890	1	0	0	0	0	0	0	
+55	An-Au Construction	André Aubin	20010514	aubin@an-au.com	anauaubin	11550	0	20050514	20070110	1	4.06W	20041215	1.01A	20040823	1.01A	20040823	0			0	881-9922			0	1	0	0	0	0	0	0	
+56	Construction Réa Canada Inc.	Robert Réa	20040826	robertrea@videotron.ca	rororea	1356rea	0	20060826	20050411	1	5.10e	20050411	1.01A	20050411	1.01A	20050411	0			0				495	1	0	0	0	0	0	0	
+57	École des Métiers de Montréal	Alain Doiron	20040905	dico42@hotmail.com	ecolemet	dico42	0	20041005	20050424	1	5.17E	20071123	1.01A	20070313			0			0				0	1	0	0	0	0	0	0	
+58	Génie-tech Construction	Christian Parent	20031203	cparent@genie-tech.ca	consparent	535085	0	20061203	20061220	2	5.13a	20051214	1.01A	20041128	1.01A	20041020	0	npoulin@genie-tech.ca		0	418 624-9995			0	1	0	0	0	0	0	0	
+59	Services de Gestion Teknika	Benoit Rivet	20040924	benoit.rivet@groupeteknika.com	teknika150	3782491	0	20060924	20061005	3	5.12F	20051003	1.01A	20010817	1.01A	20010817	0	jean-marc.allard@groupeteknika.com	daniel.benoit@groupeteknika.com	0				0	1	0	0	0	0	0	0	
+60	College Notre-Dame de Foix	Jean Cloutier	20030101	cloutierj@cndf.qc.ca	jcloutier	notredame	0	20070101		20							0			0	1 418 872-8242			0	1	0	0	0	0	0	0	
+63	ETS (École de Technologie Supérieur)	M. Jean Paradis	20041126	Jean.Paradis@etsmtl.ca	jeanparadisets	etsmtl	1	20111226	20091116	45	5.19o	20080414	12.20O	20091116	1.01A	20050118	0	Mathieu.dulude@etsmtl.ca		0				0	1	0	0	0	0	0	0	
+64	Collège Montmorency	Louis Larochelle	20040126	louis-larochelle@videotron.ca	collemin	5264625	0	20060126	20060821	20	4.06W	20050124	1.01A	20050124	1.01A	20050124	0			0	526-3824	450 975-6264		0	1	0	0	0	0	0	0	
+65	Axeco Construction	Jean Leblanc	20050124	axeco@globetrotter.net	jean487	4871188	1	20110124	20090922	1	5.23y	20090416	1.01A	20050203	1.01A	20050427	0	marguerite@globetrotter.net		0	418 759-5091			495	1	0	0	0	0	0	0	
+66	Gestion Lehoux et Tremblay inc.	Jérome Tremblay	20050201	jerome.tremblay@glt.ca	tremblay7500	tempo	0	20060201	20100505	1	5.13K	20060119					0			0	450 679-7500		appel fait le 11/06/2008	0	1	0	0	0	0	0	0	
+67	Les Construction Solam Inc.	André Malenfant	20050511	lbelanger@solam.ca	solam13	malenfant	0	20090511	20080604	1	5.20N	20080604	1.01A	20050715			0			0	418 684-0500	418 684-0501	Mise à jour par CS le 16 avril 2008	495	1	0	0	0	0	0	0	
+68	Anjalec et SDL Maconnerie Inc	Simon Levasseur	20041210	simon@sdl.qc.ca	simonle	simonleva	1	20101223	20100803	3	5.24J	20090702	12.23Z	20100803			0	emilie@anjalecconstruction.com		0	450-492-7111	c 514 829-3585	simonle
+simonleva	1285	1	0	0	0	0	0	0	
+69	Unibec Inc.	Yannick	20050223	unibec@sympatico.ca	uniyan40	kcinnay	0	20080223	20070328	1	5.15F	20061214					0			0	418 276-4140	418 276-9596	appel fait le 11/06/2008	495	1	0	0	0	0	0	0	
+72	Progère Construction (Aecon Division Trois-Rivière)	Mirel Marech	20050223	bcharette@aecon.com	mirelma	5260378	0	20090223	20081121	2	5.21B	20080926					0	mmares@aecon.com		0	1 819 378-5260			890	1	0	0	0	0	0	0	
+73	Construction & rénovation G.L.	Guy Lambert	20030117	constructionglambert@videotron.ca	lambert0605	lambert	0	20060117	20070402	1	5.10U	20050617					0			0	1 450 777-0605			0	1	0	0	0	0	0	0	
+74	Turanco Construction Inc.	Bruno.Possa	20050505	bruno.possa@turanco.com	turanco48609	turchett	0	20090515	20091008	2	5.19p	20080415	1.01A	20060622			0	angelo.turchetta@turanco.com		0	514 486-0911	450 692-7135		890	1	0	0	0	0	0	0	
+75	Les Entreprises AFF	Alain Fernand Fortin	20050531	info@entreprisesaff.com	affentre	siger	0	20070531	20100325	1	5.14Z	20060925	1.01A	20060615	1.01A	20050531	0			0	514 444-1630		Mettre ca sur la glace car le gourvernement a saisi les comptes	495	1	0	0	0	0	0	0	
+76	confort	marc	20050530	confort@isolationconfort.ca	marcconfort	123456789	0	20060602	20051220	2	5.13e	20051220	1.01A	20051220			0			0				0	1	0	0	0	0	0	0	
+77	Pro-jet Démolition Inc.	Stéphane Turchetta	20050527	sturchetta@projetdemolition.com	pierre	boursier	0	20100527	20100526	2	5.22E	20081124	12.23F	20100526			0	plcote@projetdemolition.com	styves@projetdemolition.com	0	450 691-9800	450 691-9881		0	1	0	0	0	0	0	0	
+78	Construction Richard Champagne	Roch Dumont	20050712	const.rchampagne@globetrotter.net	champagneri	87314m	0	20100712	20100125	1	5.24J	20100125	1.01A	20060315	1.01A	20050804	0			0	418 365-7973	418 365-7972		495	1	0	0	0	0	0	0	
+79	Promogest	M. Martial	20050715	promogest@wanadoo.fr	promogest1	bourgoin	0	20060906	20050906	1	5.11U	20050906					0			0	01133474191400			0	1	0	0	0	0	0	0	
+81	QuébecHab	François Caron	20050915	fcaron@quebechab.com	habquebec	qhab1978	1	20100915	20100804	4	5.24J	20090806	12.23Z	20100804			0			0	418 524-3568		si 4 licences 4 *395	1680	1	0	0	0	0	0	0	
+82	Le groupe Tyron Entrepreneur Généraux	Danny Nichilo	20050715	dnichilo@groupetyron.com	tyronnichil	27752775	0	20100715	20080414	2	5.19o	20080414					0			0	450 628-6225	514 863-1723		890	1	0	0	0	0	0	0	
+83	Quadrax et Associés	Simon P. Labelle	20050427	maparent@quadrax.com	quadraxinc	quadrax	1	20110427	20100528	1	5.24J	20100528	12.23J	20100528			0			0	450 681-7000			495	1	0	0	0	0	0	0	
+84	Adascon	Dominic Paris	20051018	Dominic.Paris@grb-inc.com	149adascon	lussier	0	20061018	20070219	1	5.12M	20051025	1.01A	20051025			0			0	1 450 375-5950	1 450 375-3437		0	1	0	0	0	0	0	0	
+85	Bourque Const.	Yanssie Vallé	20051011	yannsie@bourque-construction.com	Yanssie	bourque11	0	20061011	20080222	1	5.14V	20060801	1.01A	20060801			0			0	450 929-1651	450 929-1650		0	1	0	0	0	0	0	0	
+86	Benoit Jobin Inc.	Nicolas Therrien	20051026	b.jobin.inc@qc.aira.com	jobintherr	242577	0	20061026	20070319	2	5.14W	20060822	1.01A	20060822			0			0	418-683-9821			0	1	0	0	0	0	0	0	
+88	C3 - Construction	Fabien Dessureault	20060109	fdessureault@c3-construction.com	c3construc	4501143	0	20070109	20061108	1	5.15D	20061108	1.01A	20061003			0	jparant@c3-construction.com		0	450-665-1143		appel fais le 11/06/2008	0	1	0	0	0	0	0	0	
+89	Les Industries M. Santerre Ltee	Pascal	20060203	rino.indsan@globetrotter.net	santerre12	therrien	1	20110203	20100803	1	5.24J	20090903	1.01A	20090402			0			0	418 589-4883	418 589-5663	Louis Banville est plus là
+Rino Thérien, nouvelle estimateur	495	1	0	0	0	0	0	0	
+90	Domra Construction Inc.	Dominic Guerra	20060512	dguerra@domra.ca	domra721	domra721	1	20110512	20100624	4	5.24J	20091008	12.23U	20100624			0	sguerra@domra.ca	gpereira@domra.ca	0	514 721-9000			1680	1	0	0	0	0	0	0	
+91	Construction Garbarino Inc.	Sylvie Péladeau	20060427	speladeau@garbarino.ca	garbariluc	costa5	1	20110427	20100527	3	5.20i	20080522	1.01A	20080522			0			0	514 731-5654	514 731-2626		1285	1	0	0	0	0	0	0	
+92	CEGEP de Lévis Lauzon	Michel Gagnon	20060613	michel.gagnon@clevislauzon.qc.ca	levisclauzon	cacompte	0	20080613	20070219	100	5.15Q	20070219					0	sinfclient@clevislauzon.qc.ca		0	418 833-5110#32	418 833-5110#32		0	1	0	0	0	0	0	0	
+93	Construction D.A Ouellet & Fils Inc.	Daniel Ouellet	20060606	daouellette@videotron.ca	daoullett	mado1845	1	20110606	20100603	1	5.24J	20100603	12.23J	20100603	12.04I	20100603	0			0	450 689-2413	450 689-8490		495	1	0	0	0	0	0	0	
+94	Gilles Malo Inc.	Alain Malo	20060505	gillesmaloinc@yahoo.ca	alainmalo	8895815	0	20070505		1							0			0	1 450 889-5815	1 450 889-8450	Aucune mise a jour	0	1	0	0	0	0	0	0	
+96	Construction Brault inc.	Christian Brault	20051113	christian.brault@constructionbrault.qc.ca	4467988	4467069	0	20091113	20100614	1	5.24J	20090825	1.01A	20090415			0			0	450 446-7988	450 446-7069		495	1	0	0	0	0	0	0	
+97	R.A. RENOV-ACTION INC.	M. Gilbert	20060923	gilbe77@videotron.ca	renovaction	2614190863	0	20070923	20060925	1	5.14Z	20060925					0			0	514 913-0887			0	1	0	0	0	0	0	0	
+98	Les Entreprises Carco Inc.	Martine Goulet	20061117	entcarco@bellnet.ca	8231515	carco257	0	20071117	20070327	1	5.15S	20070327	1.01A	20070327			0	morel.carco@bellnet.ca		0	418-823-1515	418-823-2268		0	1	0	0	0	0	0	0	
+99	Dorais Construction	Dominique Dorais	20061204	dominic@dorais.ca	dorais3078	4543078	0	20091204	20070221	2	5.15Q	20070221	1.01A	20070221			0			0	450 454-3078			890	1	0	0	0	0	0	0	
+100	Luxor Developpement inc.	Daniel Shamir	20061215	dshamir@luxdev.ca	luxordeve	5148455085	0	20071215	20061216	1	5.15F	20061215	1.01A	20061215			0			0			ABANDON	0	1	0	0	0	0	0	0	
+101	Construction Larco	Luc L'Archevèque	20070111	ll@const-larco.com	larchelar	5818387	1	20110111	20080107	4	5.17E	20071123	1.01A	20071123			0	jpc@const-larco.com		0	450-654-5006	450 581-8387		1680	1	0	0	0	0	0	0	
+102	L'Archevèque et Rivest		20070111		rivestlarc	123456789	0	20080111		1							0			0	450 581-4480	450 581-1134		495	1	0	0	0	0	0	0	
+103	Marcel Charest et fils	Stéphane Veilleux	20070205	jllevasseur@mcfinc.ca	4929705cha	laurie	1	20110205	20100618	2	5.18R	20080306	12.23Q	20100618	12.03H	20100525	0	gcharest@mcfinc.ca		0	418 492-5911	418 492-9705		890	1	0	0	0	0	0	0	
+104	Les Excavations Lampron	Ronald Lampron	20070215	rlampron@qc.aira.com	rlampron_df	4504781651	0	20080215	20070326	1	5.15M	20070216					0			0	450 478-1651	450 478-1709	appel fait le 11/06/2008
+	495	1	0	0	0	0	0	0	
+105	Construction Grantham	Nancy Turner	20061204	nturner@constructionsgrantham.ca	grantham54	2306654	0	20071204		1							0			0	450 230-6654			0	1	0	0	0	0	0	0	
+106	Groupe Mapar Inc.	Christian Parent	20070206	christian@groupemapar.com	mapargroupeinc	6080611	0	20080206		1							0			0	450 608-0611	450 586-5180	appel fait le 11/06/2008	495	1	0	0	0	0	0	0	
+108	Placement LR inc.	Robert Blouin	20070125	azura22@hotmail.com	azurra22hot	554433	0	20080125	20080128	1	5.18A	20080123	1.01A	20080123			0			0	450 227-6269		appel fait le 11/06/2008	495	1	0	0	0	0	0	0	
+109	Cegep de Chicoutimi	Édith Marquis et Paul Lalancette	20070301	edith@cegep-chicoutimi.qc.ca	cegepchicouti	smi579	0	20090301	20091208	50	5.20T	20080818					0	plalance@cegep-chicoutimi.qc.ca	jacblack@cegep-chicoutimi.qc.ca	0	418 549-9520			0	1	0	0	0	0	0	0	
+110	Les entreprises Lamarche et Corneau	Frédérick Corneau	20070306	frederic.corneau@bellnet.ca	erfolg	6882229	0	20090306	20070306	1	5.15S	20070306					0			0	418 688-2229	418 688-4698		495	1	0	0	0	0	0	0	
+112	Les entreprises Ma-Mi Inc	Mathieu Vallières	20070508	mami@bellnet.ca	mamimam	planche	1	20110427	20100611	1	5.24J	20100427	12.23M	20100611	12.04U	20100611	0			0	819 441-1661	819 441-1232		495	1	0	0	0	0	0	0	
+113	ALG GROUPE -CONSEIL INC	André Lavoie	20061115	alavoie@groupe-conseil.ca	alggroupe	6766999	0	20071115		1							0			0	450-676-6999	514-990-6268		495	1	0	0	0	0	0	0	
+114	Const. Coté et Fils	Jean-René Coté	20070522	jrcote@ccfinc.ca	coteetfils	ag56150	1	20110522	20100531	2	5.24J	20090928	12.23J	20100531			0			0	418 337-4255			890	1	0	0	0	0	0	0	
+115	L'UNIQUE ASSURANCES GÉNÉRALES INC - MONTRÉAL	Gilles Vallières	20070530	gilles.vallieres@lunique.qc.ca	assurmtl	7680707	0	20090530	20081027	1	5.21R	20081027					0			0	514 768-0707	514 768-9384		495	1	0	0	0	0	0	0	
+116	Const. G & L GEOFFROY Inc.	Lise Geoffroy	20070711	guygeoffroy@videotron.ca	consglgoe	3465212	1	20110711	20100804	2	5.24i	20090611	12.23Z	20100804	12.05Q	20100701	0			0	819 346-5212	819 821-0034		890	1	0	0	0	0	0	0	
+117	Groupe Secto	Denis Lavoie	20081127	denislavoie.secto@cgocable.ca	secto12	estimation	1	20101127	20091207	2	5.23p	20090317					0	jonathanbernard.secto@cgocable.ca		0	418 343-2989	418 343-3715		890	1	0	0	0	0	0	0	
+118	SLBL Construction	Sylvain Bertrand	20070801	tbrault@slbl.ca	slblcons	6690520	0	20080801	20080229	2	5.18R	20080229					0			0	819 669-0520			890	1	0	0	0	0	0	0	
+119	construction Benoit Moreau inc.	Annie	20070809	annie_constbmoreau@bellnet.ca	moreaubenoit	4726369	0	20080809	20081025	1	5.19v	20080429					0			0	819 472-6369	819 475-4619		495	1	0	0	0	0	0	0	
+120	Construction Idéal de Granby	Daniel Grondin	20070810	idealconstr@qc.aira.com	idealgrondin	3782301	0	20080810	20080122	2	5.16L	20070810					0	muriellefontaine@bellnet.ca		0	450 378-2301			890	1	0	0	0	0	0	0	
+121	Résidence Soleil S.E.N.C. (groupe Savoie)	Eddy Jr Savoie	20060406	ejsavoie@residencessoleil.ca	soleilresidence	4491516	0	20100406	20080522	1	5.16P	20070906	1.01A	20070906			0			0	450 449-1516	450 449-9196		495	1	0	0	0	0	0	0	
+122	Porta Services	Martin Tailleur	20070517	martintailleur@cfvanier.ca	portaservices	5273462	0	20080517		1							0			0	418 527-3462		retour de vacance aout 2008	495	1	0	0	0	0	0	0	
+123	Karhani Haissam	Karhani Haissam	20070626	hkarhani@hotmail.com	karhani	6839241	0	20080626	20071215	1	5.16Q	20070911					0			0	514 683-9241	514 683-9241		495	1	0	0	0	0	0	0	
+124	Danca Concept inc.	Daniel Carey	20070522	dancaconcept@videotron.ca	danca6661	2386661	0	20080522		1							0			0	514 238-6661	450671-6718	appel fait le 12 juin 08	495	1	0	0	0	0	0	0	
+125	ENTREPRISES YVES D'ASTOUS INC.	Yves D'Astous	20070913	jf@entreprisesyvesdastous.com	entredastous	6297555	1	20100913	20080325	1	5.19H	20080325					0			0	450 629-7555	450 663-1875		495	1	0	0	0	0	0	0	
+126	Groupe T.E.Q.	Daniela Constantinescu	20061221	dana@groupeteq.com	teqconst	9333838	0	20071221		1							0			0	514 933-3838	514 933-2668	ABANDON	0	1	0	0	0	0	0	0	
+128	Alta Ltée	M. Lefebvre	20071030	estimation@alta.ws	altaltee	5147488881	0	20081030		1							0			0	514-748-8881			0	1	0	0	0	0	0	0	
+129	CONSTRUCTION DENIS OUELLET INC.	MATHIEU OUELLET	20010214	mathieu@cdoi-construction.com	mathieuxcdoi	2245117	0	20090214		2							0			0	450-224-5117		appel fait le 11/06/2008
+14/02/2010 en suspend temporairement	890	1	0	0	0	0	0	0	
+131	LES HABITATIONS TREVIA	Hugues Ouellette	20071121	huguesouellette@habitationstrevia.com	habtrevia	2665001	0	20071121	20091011	1	À venir	20071122					0			0	514-266-5001		AUCUNE MISE À JOUR	0	1	0	0	0	0	0	0	
+132	AIR-ACTION (1997) INC.	Sylvain Ouellette	20071122	joseph@airaction.ca	airaction	joseph	0	20081122	20080411	1	5.19i	20080409					0	france@airaction.ca		0	450 449-0660	819-364-2804		495	1	0	0	0	0	0	0	
+133	Construction de La Croisette	Sylvain Bujold	20070928	sbujold@croisette.qc.ca	sylvain	bujold	1	20100928	20100419	2	5.24i	20090616	1.01A	20071128			0	pacaron@croisette.qc.ca		0				890	1	0	0	0	0	0	0	
+135	Équipe Landco	Benoit Daoust	20071218	bdaoust@landco.ca	2278441	bdaoust	1	20110114	20090708	2	5.24J	20100121	12.23A	20100517	12.03B	20100517	0	aperreault@landco.ca		0	450 227-8441		Formation Benoit Daoust
+pas pris les mises à jours quand il acheter les 2 licences va voir l'an prochain......12/2008
+Anthony a pris les mise a jour le 8 juillet 2009	890	1	0	0	0	0	0	0	
+136	Scierie Bernard Inc.	Ghislain Bernard	20071204	scierie@xplornet.com	scierieb	3833242	1	20101204	20080201	1	5.18F	20080201	12.21E	20100105			0			0				495	1	0	0	0	0	0	0	
+137	Philippe the great		20080202	ph.delisle@videotron.ca	philippe	tulipes	0	20090202	20091201	1							0			0				495	1	0	0	0	0	0	0	
+138	Gestion Allens Michel inc	Martine Collin	20080101	martinecollin@allensmichel.com	allensm	bajabaja	0	20090101	20100616	1	5.20T	20080808					0	annick@allensmichel.com		0	450 657-1441	514 567-4453		495	1	0	0	0	0	0	0	
+139	Les Services Informatisés	Bernard Lavoie	20080101	blavoie@estimation.ca	sylvie	maxime4265	1	20110101	20100804	0	5.24J	20100722	12.23Z	20100804	12.05R	20100727	0			0			login pour mise a jour Internet	0	1	0	0	0	0	0	0	
+140	Antagon	Samir	20080218	sabosamra@antagon.ca	antagonsam	3348030	1	20110218	20100729	1	5.24J	20100406	12.23Y	20100727	12.03H	20100525	0			0	514 334-8030	514 334-8181		495	1	0	0	0	0	0	0	
+141	CONSTRUCTIONS TOUZIN	JEAN-DANIEL TOUZIN	20080220	jdt@constructionstouzin.com	jeandanieltou	7129596	0	20090220	20080415	1	5.19p	20080415					0			0	450-712-9596	450-565-8494	Location 1 an	495	1	0	0	0	0	0	0	
+142	Cime Construction	Pierre Dion	20080225	info@cimeconstruction.com	cimeconstruction	9951799	1	20110225	20100329	1	5.24J	20100329	12.22j	20100329			0			0	c514 995-1799	f450 661-5507	Version d'essai 1 an
+Formation Pierre Dion	495	1	0	0	0	0	0	0	
+143	Les Entreprises VENTEC	Tony Sirocco	20080226	tsventec@bellnet.ca	venteccons	5149325600	1	20110226		1							1			0	514-932-5600	514-932-8972 F	Formation 2 hres moin
+21 mai 2008 1 hres
+2 hrs heures de formation en banque	295	1	0	0	0	0	0	0	
+144	Const et Réno Patrick Thibodeau	Patrick Thibodeau	20080312	constructionpatrickthibodeau@hotmail.com	conspatthibo	7083871	0	20100312	20080321	1	5.19G	20080321					0			0	514 708-3871			495	1	0	0	0	0	0	0	
+145	1Construction Manic Acoustique	Alain Marois	20080319	alain.cma@cgocable.ca	2952345	acoustique	1	20110319	20100131	1	5.24J	20090811					0			0	819 295-2345			495	1	0	0	0	0	0	0	
+146	Construction Belfor Inc.	Jean-Paul Fortin	20080331	jbosse@constructionbelfor.com	incbelfor	6592070	0	20090331	20081015	2	5.21B	20080930	1.01A	20080424			0	jpfortin@constructionbelfor.com		0	(450) 659-2070	(450) 659-2080	Mise a jour et formation version d'essaie	495	1	0	0	0	0	0	0	
+147	André-Grasset			11@11	andre-grasset	12345	0			30							1			0				0	1	0	0	0	0	0	0	
+148	Cegep St-Laurent	Pierre Chabot, Thérese Daoust		12@12	cegep st-laurent	12345	0			2							1			0				0	1	0	0	0	0	0	0	
+149	Cegep De L'Outaouais	Richard Boulanger,Marc Démarais,Gilles Gauthier,Sy		13@13	outaouais	12345	0			20							1			0				0	1	0	0	0	0	0	0	
+150	Collège Mont-Morency	Pierre Cohen-Bacrie,Pierre Chabot		14@14	Mont-Morency	12345	0			20							1			0				0	1	0	0	0	0	0	0	
+151	Cégep Lévis-Lauzon			15@15	levis-lauzon	12345	0			100							1			0				0	1	0	0	0	0	0	0	
+152	Cégep Limoilou			16@16	limoilou	12345	0			20							1			0				0	1	0	0	0	0	0	0	
+153	Cégep du Vieux Montréal			17@17	vieux montreal	12345	0			0							1			0				0	1	0	0	0	0	0	0	
+154	Cegep de Romouski			18@18	rimouski	12345	0			0							1			0				0	1	0	0	0	0	0	0	
+155	Cegep André-Laurendeau			19@19	andre-laurendeau	12345	0			0							1			0				0	1	0	0	0	0	0	0	
+156	Collège Ahunstic			20@20	ahunstic	12345	0			20							1			0				0	1	0	0	0	0	0	0	
+157	Collège Trois-Rivière			21@21	trois-riviere	12345	0			0							1			0				0	1	0	0	0	0	0	0	
+158	Collège Technique de Montréal	Daniel Prévost		22@22	tech montreal	12345	0			0							1			0				0	1	0	0	0	0	0	0	
+159	Dama Construction	M. Claude Bourret	20080425	cbourret@damaconstruction.com	constdama	6361676	1	20110425	20100705	7	5.24g	20090604	12.23V	20100705	12.04I	20100604	1			0	514-636-1676	514-636-3473		2865	1	0	0	0	0	0	0	
+160	La societe de construction Geratek	M. Michel Beaulieu	20080416	mbeaulieu@geratek.qc.ca	geratek	5690361	0	20090416	20080507	2	5.19z	20080502	1.01A	20080507			0			0	819-564-2933	819-569-0361		890	1	0	0	0	0	0	0	
+161	DEMOLITION ET EXCAVATION DEMEX INC.	Maxime Dallaire	20080418	mdallaire@demex-canada.com	demex	6982222	1	20110418	20100514	1	5.24J	20100514	12.20B	20091008			0			0	418-698-2222	418-698-2421	Formation avec Maxime Dallaire, version argent et échéancier	195	1	0	0	0	0	0	0	
+162	Les Constructions Lagarde Inc.	M. Patrick Lagarde	20080527	desgarde@megacom.net	lagarde	8831127	0	20090528		1							0			0	1 450 883-1127			495	1	0	0	0	0	0	0	
+163	Marc Cléroux Construction inc.	M. Marc Cléroux	20080610	cleroux.admin@qc.aira.com	cleroux	7716222	0	20100610	20100525	1	5.20S	20080711	12.20W	20091207			0	cleroux.soumission@qc.aira.com		0	819-771-6222	819-771-2714		495	1	0	0	0	0	0	0	
+164	Construction JD Morin	Daniel Guérin	20080528	constructionjdmorin@sympatico.ca	jdmorin	3754865	0	20090528	20080821	1	5.20T	20080821	1.01A	20080821			0			0	819-375-4865	819-371-5506		495	1	0	0	0	0	0	0	
+165	Rodican Inc.	Guido Di Zazzo	20071001	rodimax@rodimax.com	dizazzo	3361811	0	20091001	20090128	1	5.20p	20080613	1.01A	20090128			0			0	514-336-1811	514-335-9750	Version argent	195	1	0	0	0	0	0	0	
+166	Hulix Construction	Mathieu Pilotte	20080525	m.pilotte@hulixconstruction.com	hulix5750603	5750603	0	20100525	20100604	1	5.24J	20090831	12.22K	20100407			0			0	450 575-0603		1 Formation	495	1	0	0	0	0	0	0	
+167	NAHTAC CONSTRUCTIONS INC.	Lester La Haye	20080716	nahtac@videotron.ca	nahtac	6599041	0	20090716		1							0			0	450-659-9041	450-659-0239		495	1	0	0	0	0	0	0	
+168	S & E RICHER CONSTRUCTION (9133-8566 QUEBEC INC)	Serge	20080719	richerserge@videotron.ca	richer	5658222	1	20110719	20100604	1							0			0	450-565-8222	450-565-4527	Formation Illimité	495	1	0	0	0	0	0	0	
+169	Boless Inc	Mario Desforges	20080814	mdesforges@boless.com	bolessinc	kodia8	1	20100814	20100305	1	5.24i	20090615	12.21X	20100305			0	jbenoit@boless.com		0				295	1	0	0	0	0	0	0	
+170	Construction Mikado	Stéphane Cardinal	20080102	scardinal@mikadomtl.com	mikadocons	4506529282	0	20100211	20090827	3	5.23y	20090424					0			0	450-652-9282		1 formation	1285	1	0	0	0	0	0	0	
+171	Cama & Jumec	Lyzianne	20080924	christopher@jumec.com	cama-jumec	9557156	1	20100924	20100714	4	5.24J	20100219	12.23Y	20100714	12.01S	20100514	0	admin@cama-industries.com	henrib@cama-industries.com	0	819-955-7156			1680	1	0	0	0	0	0	0	
+172	CONSTRUCTION BÉGIN LEBOEUF 9153-0410 QUÉBEC I	Leboeuf Alain ou Bégin Stéphan	20080804	begin10@videotron.ca	begin	6917882	0	20090804	20080930	1	5.21B	20080930	1.01A	20080930			0			0	450-691-7882			495	1	0	0	0	0	0	0	
+174	Construction Afcor	Alain Sylvestre	20081002	l.sanscartier@afcor.ca	afcor	6388313	0	20091001		1							0			0	450-638-8313	450-638-1111		495	1	0	0	0	0	0	0	
+175	L.A Construction	Luigi Albanese	20081027	luigi.albanese@laconstructioninc.com	laconstruction	9905224	0	20091027	20091012	1	5.24J	20091012	12.20B	20091012			0			0	514-990-5224			495	1	0	0	0	0	0	0	
+176	Construction de l'avenir	Jean-Marie Lamontagne	20081029	const.avenir@b2b2c.ca	avenir	2762969	0	20091029	20090204	1							0			0	418-276-2969		Formation: Ghislain Milord	495	1	0	0	0	0	0	0	
+177	Salvatore L. Briqueteur	Nick Pettinicchi	20080904	nick@salvatorebriqueteur.com	salvatore	4772111	0	20090904		1							0			0	450-477-2111	450-477-2009		495	1	0	0	0	0	0	0	
+178	Rénovation J. Raymond	Alain Daoust	20081126	adaoust@jraymond.ca	raymond	4307900	0	20091126	20090511	1	5.24C	20090511					0	daoust.t@live.ca		0	450-430-7900		Formation a Thomas	495	1	0	0	0	0	0	0	
+179	CJM-IU (Centre jeunesse de Montréal )	Jean Côté	20080911	jean.cote@cjm-iu.qc.ca	cjm-iu	5932144	1	20100911	20100204	2							0			0	514-593-2144			390	1	0	0	0	0	0	0	
+180	Agence MTS agency Inc.	Nadia Sylvestre	20081127	nadia.sylvestre@agencemts.com	agencemts	561-7848	0	20091127		1							0			0	819-561-7848		version bronze	195	1	0	0	0	0	0	0	
+181	jocRoy-Larouche Inc.	Linda Lefebvre	20081120	linda@groupegrl.com	roylarouche	3987333	1	20101120	20100312	2			12.22D	20100312			0			0	819-398-7333	819-398-1111	Version essaie, formation a Linda	890	1	0	0	0	0	0	0	
+182	Emyka	Mathieu Touchette	20081203	mathieuemyka@videotron.ca	emika	9071036	0	20091203		1							0			0	514-907-1036			495	1	0	0	0	0	0	0	
+183	175894 Canada Inc.	Benoit Fortier	20081217	fortierbenoit@videotron.ca	fortierben	jeep1844	0	20081217		1							0			0	514-603-7776		Aucune mise à jour, Formation incluse a Benoit	0	1	0	0	0	0	0	0	
+184	Les Constructions Léo Laplante (1995) Inc.	David Laplante	20081217	david.laplante@cgocable.ca	laplante	7746944	0	20091217	20090813	1	5.24g	20090525	12.18M	20090813			0			0	450-774-6944		installer le 6 Janvier 2006, Formation pour David	495	1	0	0	0	0	0	0	
+185	Gestion G.A.P.	Vickie Bilodeau	20081218	vickiebilodeau@sympatico.ca	gestiongap	4504915484	0	20081218		1							0			0			Essaie 1 an et formation Vicky Bilodeau
+pas de mise à jour	0	1	0	0	0	0	0	0	
+186	Catrem Construction	Carl Tremblay	20090115	ctremblay40@videotron.ca	catremco	6287408	0	20100115	20100210	1			12.17Z	20090714			0			0	450 628-7408		Formation a Carl inclus	0	1	0	0	0	0	0	0	
+187	Les Construction Stéphane Fortin	Eugène Laplante	20090119	sfconstruction@live.ca	stephanefortin	4505395139	0	20100119	20091011	1	5.24J	20090812	12.20B	20091011			0	gl.sfconstruction@live.ca		0			Formation a Eugène Laplante
+Passé en version bronze maj 195
+	195	1	0	0	0	0	0	0	
+188	LAVAL FORTIN	Sébastien Sheehy	20090129	ssheehy@lavalfortin.com	fortin laval	6683321	1	20110129	20100721	4			12.23Y	20100721			0	jduperron@lavalfortin.com		0	418-668-3321		Mise a jour, formation a Sébastien Sheehy	1680	1	0	0	0	0	0	0	
+189	Les entreprises Proteau et Garneau	Bernard Proteau	20100219	bproteau@proteaugarneau.ca	bernproteau	6668999	1	20110219	20100601	1	5.24J	20091008	12.23H	20100527			0			0			MIse a jour, formation	495	1	0	0	0	0	0	0	
+190	Les Constructions François Bélanger inc.	François Bélanger	20090303	constructionfrancoisbelanger@hotmail.com	consfrancois	4504310401	1	20110303	20100208	1	5.23T	20090407					0			0	450 431-0401			395	1	0	0	0	0	0	0	
+191	Clément Poirier Rénovation Enr.	Clément Poirier	20090309	clementpoirier7@hotmail.com	poirierreno	8197974092	0	20090309		0							0			0	819 797-4092		Non de mise à jour,
+Oui Formation
+	495	1	0	0	0	0	0	0	
+192	LES ENTREPRISES NGA INC.	Bernard Malo, ing.	20090326	bmalo@nga.qc.ca	entrenga	4776891	0	20100326	20091013	1			12.20I	20091028			0			0	819-477-6891	819-477-9142	Formation et mise a jour a Bernard Malo	495	1	0	0	0	0	0	0	
+193	Consumaj Inc.	Jean-Denis Major	20090414	jdm@consumaj.com	consumajinc	7736155	1	20110414	20100429	2	5.24J	20100429	12.22S	20100429			0	jhp@consumaj.com		0	450 773-6155			890	1	0	0	0	0	0	0	
+194	Construction Lovail Inc.	Yves et Rémi	20090203	r.vaillant@lovail.ca	lovailca	8197755444	1	20110203	20090417	2			1.01A	20090417			0	y.soulieres@lovail.ca		0	819 775-5444	819 775-9823	Version essaie 1 ans, formation et mise a jour	890	1	0	0	0	0	0	0	
+195	Christau Construction	Yvan Loignon	20090422	yloignon@christauconstruction.com	christau	3580500	1	20110422	20100506	2	5.24J	20100506	12.20F	20091020			0			0	514 669-2515		Formation René Arcand	890	1	0	0	0	0	0	0	
+196	FINAR BATIMENT D'ACIER	Jean-Francois Dumas	20090424	jeanfrancoisd@finar.com			0	20090424		0							0			0	418-836-6411		Pas de mise a jour	0	1	0	0	0	0	0	0	
+197	Desaulniers Construction	Yves Desaulniers	20090206	desaulniersconstruction@sympatico.ca	constdeslau	5143671955	0	20090206		1							0			0	514-367-1955		Pas de mise a jour a l'achat, mais version 12 pour transfert sur Acomba	495	1	0	0	0	0	0	0	
+198	Construction GMR ou Toiture Raymond	Marco Morin	20071212	estimateur@tmraymond.ca	gmrraymond	7773828	1	20101212	20090501	1	5.23Z	20090501					0			0	819 777-3828			0	1	0	0	0	0	0	0	
+199	Gestion-Acri Inc	Marco Turcotte	20090603	gestionacri@videotron.ca	gestionacri	7587324	0	20100603	20100107	1			12.21E	20100107			0			0	819 758-7324			0	1	0	0	0	0	0	0	
+200	SABAT CONSULTING GROUP	Sam Sabat	20090101	sam@sabatsoft.com	sabat	8509633	1	20110101	20100721	1	5.24J	20091008	12.23Y	20100721			0			0	905 850-9633		Revendeur	0	1	0	0	0	0	0	0	
+201	Ciris innovation	George Paquette	20090617	ciris.innovation@videotron.ca	cirisinnovation	8304508	0	20091217	20090618	0	514 830-4508		12.17B	20090618			0			0			Version d'essaie de 6 mois	0	1	0	0	0	0	0	0	
+202	intext Construction inc.	Roger Lavoie	20090629	intext-construction@hotmail.com	intexteinc	4528555	0	20100629	20090709	1			12.17N	20090629			0			0			Formation et mise a jour, en essaie	0	1	0	0	0	0	0	0	
+203	Les Habitations Serma	Serge Boisvert	20090421	habitationserma@msn.com	habitationse	5015418	1	20110421	20100803	1	5.24J	20090829	12.23Z	20100803	12.04I	20100529	0			0	514-501-5418	450-464-9528	Acquisition version argent	295	1	0	0	0	0	0	0	
+204	Construction GCEG Inc	Carl Simard	20090704	csimard@gceg.qc.ca	cgecinc	4186551199	0	20100704		1							0			0	418-655-1199		Mises à jour Gratuite pour 3 mois.Soit du 04/07/2009 au 04/10/2009
+	0	1	0	0	0	0	0	0	
+206	ANCHORAGE CONSTRUCTION INC.	John Mandelson	20090324	john@anchorage.ca	anchorage	9938852	0	20090324		1							0			0	514-993-8852	514-731-8852	Pas de mise à jour à l'achat, Oui formation	495	1	0	0	0	0	0	0	
+207	Sellig PGC Inc	Gilles Ouellet	20090715	selligpgc@videotron.ca	sellig	7398060	0	20100715	20090820	1			12.18O	20090819			0			0	450-679-0473			495	1	0	0	0	0	0	0	
+208	Lexicon Construction Inc.	Giovanni John Piazza	20090323	jpiazza@cxcorp.ca	lexicon	5163900	0	20100323		0							0			0	514 940-2005			0	1	0	0	0	0	0	0	
+209	Sebo Construction	Serge Boudreau	20090806	poseursdepierres@hotmail.com	6349	pierres	0	20100806	20090806	1	Or						0			0	514-943-6349		Pas de mises à jour et Formation	0	1	0	0	0	0	0	0	
+210	College Grasset	Idris	20090817	ibensafia@grasset.qc.ca	grasset	grasset	1	20100817	20090817	12							0			0	514 277-6053			0	1	0	0	0	0	0	0	
+211	Les entreprises CBM	Cédrick Gauthier	20090810	francois@lesentreprisescbm.ca	entrecbmnouv	6430003	1	20100810	20100406	1	5.24J	20100228	12.22K	20100406			0			0				495	1	0	0	0	0	0	0	
+212	GFI Solutions D'affaires Inc	André Michaud	20090817	andre.michaud@gfisolutions.com	michaud	0333	0	20100817		1							0			0	514-868-0333	514-207-1136	Version Argent avec mises a jour incluse Voir Entente avec Bernard	0	1	0	0	0	0	0	0	
+213	Construction Amlac Inc	Michel Boyer	20090522	michelboyer@amlac.ca	boyermi	6627292	0	20100522	20100628	1	5.24J	20100319	12.22U	20100505			0			0	514-662-7292			495	1	0	0	0	0	0	0	
+214	Construction RénoGauthier	Pier-Alexandre Gauthier	20090513	palexg@renogauthier.com	renogauthier	5438602	1	20110513	20100802	2	5.24J	20100802	12.23Y	20100802	12.05Q	20100629	0			0	418 543-8602		Version essaie	890	1	0	0	0	0	0	0	
+215	Fabrispec Inc	Brigitte Faucher	20081223	bfaucher@gastier.com	fabrispec	3254220	0	20091223	20091008	1							0			0	514-325-4220			0	1	0	0	0	0	0	0	
+216	Kamco construction Inc	Armand Lachance	20090924	alachance@kamcoinc	lachance	8565432	1	20100924		4							0			0	418-856-5432	418-856-3097		1680	1	0	0	0	0	0	0	
+217	S P Transport	Natalie Bouchard	20090929	natalie@sptransport.ca	transport	4520020	1	20100929		1							0			0	450-452-0020			0	1	0	0	0	0	0	0	
+218	CONSTRUCTION TRESCO LTÉE	Stephen Buna	20091007	trescoconstruction@gmail.com	tresco	5149927188	1	20101007	20091008	0			12.20B	20091008			0			0	514-992-7188			0	1	0	0	0	0	0	0	
+219	LES CONSTRUCTIONS NICK FAFARD	Nick Fafard	20091013	nickfafard@ntic.qc.ca	fafardnick	7994829	1	20101013	20091207	1			12.20W	20091207			0			0	450 799-4829	450 799-1696	1985 (essai + formation+mise a jour)	495	1	0	0	0	0	0	0	
+220	Campion Construction	Sébastien Campion	20090220	s.campion@sympatico.ca	campionsebas	9626080	0	20100220		1							0			0	819 962-6080		Frère de Joey	495	1	0	0	0	0	0	0	
+221	Les Construction CB 2004 Inc	Étienne Beaulieu	20091109	constructioncb@qc.aira.com	constcb2008	8559980	1	20101109	20100402	1			12.22j	20100402			0			0	418 855-9980	418 855-9923	payé le 10 aout 2009, je l'ai confondu avec CBM construction après 3 mois	495	1	0	0	0	0	0	0	
+222	Construction Michel Dubé (CMD)	Michel Dubé	20091110	constmd@bellnet.ca	constmicheldube	6388444	1	20101110	20091110	1			12.20O	20091110			0			0	450 638-8444			495	1	0	0	0	0	0	0	
+223	Pierre Yves Trahan	Pierre Yves Trahan	20091120	pierre-yves.trahan@xittel.ca	pierreyves	3654079	1	20101120	20100118	1							0			0			Pas de formation	495	1	0	0	0	0	0	0	
+225	DALCON INC. ou Cominar	Guy Réhaume	20091126	grheaume@cominar.com	dalconqc	4186818151	1	20101126	20100217	3	5.24J	20100217	12.21Q	20100217			0	kpepin@cominar.com		0	418-681-8151	418-681-2946	Il ont fait l'achat de 3 licences
+et table a digitaliser	1285	1	0	0	0	0	0	0	
+226	Investissements T & G	Ian QUint	20091126	pierrevillage@bellnet.ca	investtg	4506711681	1	20101126		1							0			0	450 671-1681		Formation José	495	1	0	0	0	0	0	0	
+227	Construction Artois Inc	Guy Allemand	20091207	guy.allemand@gmail.com	artoisinc	9350765	1	20101207		1							0			0			Essaie, formation et mise à jour	495	1	0	0	0	0	0	0	
+228	Avalex	Francois Asselin	20100101	peintureavalex@hotmail.com	avalexinc	5543871	1	20110101	20100121	0	5.24J	20100121	12.21i	20100121			0			0	418 554-3871			495	1	0	0	0	0	0	0	
+229	Construction rénovation Forest	M. Forest	20100115	constforest@hotmail.com	forest	8505897	1	20110115	20100116	1	5.24J	20100116					0			0	819 850-5857			495	1	0	0	0	0	0	0	
+230	JEAN-PAUL & ROGER BOLDUC INC.	Roger Bolduc	20091117	jprbolduc@sogetel.net	rogerbolduc	2443266	1	20101117	20100120	1							0			0	418-244-3266		1 formation et mise a jour	495	1	0	0	0	0	0	0	
+231	CONSTRUCTION N.E.F. INC.	Eric Allard	20091201	eric@constructionnef.com	constrnef	8239024	1	20101201		1							0	fred@constructionnef.com		0	819 823-9024			495	1	0	0	0	0	0	0	
+232	Davelco	David Martineau	20090806	legroupeoptimum@videotron.ca	davidmar	9174057	1	20100806		1							0			0			Formation pour David Marineau	495	1	0	0	0	0	0	0	
+233	Kingston Byers	Danny Pothier	20091030	d_pothier@kingstonbyers.com	kingstonby	3651781	1	20101030		5							0			0	514 365-1781			2075	1	0	0	0	0	0	0	
+234	Construction J.M.	Jonathan Michaud	20100129	info@constructionjm.com	jonathan	8606185	1	20110129		1							0			0	418-860-6185			0	1	0	0	0	0	0	0	
+235	Drumco construction Inc	Francois Coté	20100208	f.cote@drumco.ca	francois	4745035	1	20110208		3							0	g.boislard@drumco.ca		0	819-474-5035			1285	1	0	0	0	0	0	0	
+236	Construction Jean-Yves Paradis	Jean-Yves Paradis		cjyp@vieotron.ca	jeanyves	8672421	0			1							0			0	418-867-2421			0	1	0	0	0	0	0	0	
+237	Binet Construction Inc	Madeleine Roy	20100215	mroy@lesconstructionsbinet.com'	binetroy	2281578	1	20110215		1							0			0	418-228-1578		Module initation a soumissionner seulement	150	1	0	0	0	0	0	0	
+238	Escalera Construction Inc	Pierre Huard	20100204	phuard@escalera.ca	escaleracons	5273333	1	20110204	20100209	1			12.21N	20100209			0	jlamontagne@escalera.ca		0	418 527-3333		Jonathan Lamontagne	495	1	0	0	0	0	0	0	
+239	Const Michel Maltais Inc	Michel Maltais	20100209	michel.maltais@globetrotter.net	maltais	7942605	1	20110209	20100304	2							0	mm.proulx@globetrotter.net	mathieu.bourdages@globetrotter.net	0	418-794-2605		Marie-Michel ou Mathieux	890	1	0	0	0	0	0	0	
+240	Les Constructions Hydrospec Inc	Jean-Frédéric Garneau	20100219	jfgarneau@hydrospec.ca	hydrospec	4186615394	1	20110219		0							0			0	418 661-5394	418 661-1177		495	1	0	0	0	0	0	0	
+241	Construction Julien Dalpé	Simon Dalpé	20100318	simondalpe.cjd@intermonde.net	dalpe_cons	7580771	1	20110318		2							0			0	450-754-2059	450-758-0771		890	1	0	0	0	0	0	0	
+242	RSB Spécialiste en batiment	David Turgeon		david@rsbspecialistes.com	turgeon	7318	0			0							0			0	450-466-7318		Frédéric Lapierre Chargé de projets	495	1	0	0	0	0	0	0	
+243	9217-7336 Québec Inc Construction MDE	Allen Martel	20100224	carolyn_belanger@hotmail.com	martel	8088064	1	20110224	20100804	1			12.22F	20100319			0			0	418-670-2223		Formation donné à Stéphane Emond res: 418-914-1435 cell 418 956-9238
+	495	1	0	0	0	0	0	0	
+244	Constructions J.P. Parent Inc	Jean-Philippe Parent	20100311	jpp@jpp-construction.com	Parentjp	8054480	1	20110311	20100316	1							0			0	514-805-4480		1 Formation illimité	495	1	0	0	0	0	0	0	
+245	Les entreprises QMD Inc	Jean Morisette	20100308	klaframboise@entqmd.com	Morisette	8754356	1	20110308	20100308	1							0			0	514-875-4356			495	1	0	0	0	0	0	0	
+246	Invsetissement Denis St-Pierre	Denis St-Pierre	20091116	denisstp@hotmail.com	stpierre	5727850	1	20101116	20091210	1							0	constructionprolac@cgocable.ca		0	418-572-7850			495	1	0	0	0	0	0	0	
+247	Construction Gescon	André Lacroix	20100226	alacroix77@gmail.com	gesconla	9289291	1	20110226	20100721	2	5.24J	20100721	12.23Y	20100721			0			0	514-904-0337			890	1	0	0	0	0	0	0	
+248	Merlain Canada Inc	Idriss Merlain Kamgang	20100226	merlaincanada@hotmail.com	merlain	6354387	1	20110226	20100506	1	5.24J	20100506	12.22U	20100506			0			0	450-635-4837			495	1	0	0	0	0	0	0	
+249	Carole Asselin	Carole Asselin	20100301	carole.asselin@videotron.ca	caroleasselin	24geo	0	20110301	20100302	1			12.21W	20100302			0			0				495	1	0	0	0	0	0	0	
+250	Construction Misk	Marc Lussier	20100226	lesconstructionsmisk@videotron.qc.ca	consmisk	m9601	1	20110226	20100302	1			12.21W	20100302			0			0	514 830-1261		Formation et mise a jour	495	1	0	0	0	0	0	0	
+251	Gagné & Fils	Sébastien Desmarais	20100315	sdesmarais@gagneetfils.com	desmarais	3572270	1	20110315	20100315	1							0	mabrunel@gagneetfils.com		0	819-357-2270			495	1	0	0	0	0	0	0	
+252	Couture & Tanguay Const.	Sylvie Rousseau	20100303	srousseau@couturetanguay.ca	rousseau	8322224	1	20110303	20100303	3							0	slehoux@couturetanguay.ca		0	418-832-2224			1285	1	0	0	0	0	0	0	
+253	Const Denys Ducharme	Philippe Ducharme	20100308	stephanie.ducharme@constructiondenysducharme.com	Ducharme	7589939	1	20110308	20100422	2			12.22Q	20100422			0			0	819-758-9939	819-740-3036		0	1	0	0	0	0	0	0	
+254	Equipments Fondation Marc Saulnier	Marc Saulnier	20100323	acarroll@marcsaulnier.ca	saulnier	5861413	1	20110323	20100504	1			12.22U	20100504			0			0	450-586-1413	514 240-2689		495	1	0	0	0	0	0	0	
+255	Construction A.L.P.Inc (ALP)	Luc Lépine	20100401	service@constructionalp.com	lepine	7555480	1	20110401	20100401	1							0	patriceperreault@constructionalp.com		0	450-755-5480			495	1	0	0	0	0	0	0	
+256	Batisseur des Appalaches	Michel Allard	20100325	mallard@massifdusud.net	allard	8693676	1	20110325	20100325	1							0			0	877-869-3676			495	1	0	0	0	0	0	0	
+257	La Cité collégiale	Gaétan Lacroix	20100324	GLacro@lacitec.on.ca	citecollegiale	7422493	1	20120324	20100707	25	5.24J	20100608	12.23V	20100707	12.04P	20100608	0			0	613 742-2493 #2		Aucun frais de mise a jour....BL	0	1	0	0	0	0	0	0	
+258	Construction FTH	André Fortin	20100329	fthdirection@videotron.ca	fortin	4910944	0		20100329	1							0			0	450-491-0944	514-497-8662		495	1	0	0	0	0	0	0	
+259	Construction Jean-Luc Groleau	Steve Groleau	20100328	info@groleau.ca	groleau	2288842	1	20110328		1							0			0	418-228-8842		La bonne date d'installation reste a inscrire	495	1	0	0	0	0	0	0	
+260	Construction M-Tech Inc	Roger Richard		cmtech@globetrotter.net	richard	5384592	0			1							0			0	418-538-4592			495	1	0	0	0	0	0	0	
+261	Axim construction Inc	Maxime Pépin	20100422	maxime@aximconstruction.com	maxime	3583885	1	20110422		1							0	francois@isma.ca		0	450-358-3885			495	1	0	0	0	0	0	0	
+262	Groupe Bellus Construction Inc	Daniel Lussier	20100216	dlussier@groupebellus.com	lussier	7546270	1	20110216	20100423	1	5.24J	20100423	12.22S	20100423			0			0	514-754-6270		Formation illimité	495	1	0	0	0	0	0	0	
+263	Constructions Pierre Paquet	Pierre Paquet	20100421	construction.pierrepaquet@hotmail.com	paquet	5637417	1	20110421		1							0			0	418-563-7417	418-837-2509	Formation Illimité	495	1	0	0	0	0	0	0	
+264	Groupe Symaco Inc	Mario Boucher	20100622	symco@qc.aira.com	boucher	8726400	1	20110622	20100622	1							0			0	418-872-6400		Formation Illimité	495	1	0	0	0	0	0	0	
+265	Les constructions Echo Inc	Claude Lessard	20100427	constructionsecho@videotron.ca	lessard	7773980	1	20110427	20100505	1							0			0	450-777-3980		Formation Illimité 1 personne	495	1	0	0	0	0	0	0	
+266	Index Construction Inc	Nidal Sabsabi	20100421	info@trevor.com	sabsabi	3980771	1	20110421		1							0			0	416-398-0771		Module invitation à soumissionner	190	1	0	0	0	0	0	0	
+267	Consortium M.R. Canada Ltée	Jean-Yves Fradet		jyfradet@consortium.com	fradet	3286060	0			2							0			0	514-328-6060		Formation illimité 2 personnes 1 Table à digitaliser	890	1	0	0	0	0	0	0	
+268	Groupe Piché	Yourik Piché	20100512	agayed@groupepiche.ca	yourik	4330783	1	20110512	20100707	2	5.24J	20100707	12.23V	20100707	12.05Q	20100707	0	achraf.gayed@gmail.com		0	450-433-0783		Formation Illimité 2 personnes	890	1	0	0	0	0	0	0	
+269	Gencotech / Inovrd	germain Coté	20080225	germainc@gencotech.qc.ca	germain	3452834	1	20110225		1							0	robind@gencotech.qc.ca		0	418-345-2834			195	1	0	0	0	0	0	0	
+270	Baja Construction Inc	Angel	20100614	estimateur4@bajaconstruction.com	bajacons	6580649	1	20110614	20100614	1							0			0	450-658-0649		Formation Illimité pour Angel	495	1	0	0	0	0	0	0	
+271	CJF Construction Inc	Carl Stebenne		cjfconstruction@videotron.ca	stebenne	7576005	0			1							0			0	514-757-6005		Formation Illimité	495	1	0	0	0	0	0	0	
+272	Construction M.Auclair Inc	Marc Auclair	20100621	auclair51@videotron.ca	auclair	6580710	1	20110621	20100704	1	5.24J	20100704	12.23V	20100704	12.05Q	20100704	0			0	514-231-5445	450-658-0710		495	1	0	0	0	0	0	0	
+273	Team Fiorillo-Roy	Frank Fioricco		tfr@videotron.ca	fioricco	3780222	0			2							0			0	450-378-0222	450-776-0947		890	1	0	0	0	0	0	0	

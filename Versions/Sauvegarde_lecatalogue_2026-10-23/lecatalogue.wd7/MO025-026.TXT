@@ -1,0 +1,2 @@
+//MO025-026.TXT ANA00025 TO ANA00026
+Itemcat	CLE_CAT5	RUB+		CLE_CAT5 est une nouvelle clé

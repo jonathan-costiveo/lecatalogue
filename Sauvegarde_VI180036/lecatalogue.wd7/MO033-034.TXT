@@ -1,0 +1,15 @@
+//MO033-034.TXT ANA00033 TO ANA00034
+Commande		NFI		nouveau fichier
+Historique		NFI		nouveau fichier
+PROVENANCE		TAR	634	nouvelle taille enregistrement : 634
+PROVENANCE	Courriel	RUB+		Courriel est une nouvelle clé
+PROVENANCE	Telecopieur	RUB+		Telecopieur est une nouvelle rubrique
+PROVENANCE	AddrComplete	RUB+		AddrComplete est une nouvelle rubrique
+Client		TAR	849	nouvelle taille enregistrement : 849
+Client	LoginMaj	RUB+		LoginMaj est une nouvelle rubrique
+Client	NomMaj	RUB+		NomMaj est une nouvelle rubrique
+Client	Adresse	RUB+		Adresse est une nouvelle rubrique
+Client	Ville	RUB+		Ville est une nouvelle rubrique
+Client	Province	RUB+		Province est une nouvelle rubrique
+Client	Pays	RUB+		Pays est une nouvelle rubrique
+Client	CodePostal	RUB+		CodePostal est une nouvelle rubrique

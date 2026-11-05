@@ -1,0 +1,17 @@
+//MO044-045.TXT ANA00044 TO ANA00045
+Itemcat		TAR	1168	nouvelle taille enregistrement : 1168
+Itemcat	Cat_Description_fr	NNR	Cat_Description	ATTENTION : la rubrique Cat_Description a pour nouveau nom Cat_Description_fr
+Itemcat	Cat_Description_fr	TAI+	20	la rubrique Cat_Description_fr a comme nouvelle taille 121 au lieu de 101
+Itemcat	Cat_Description_en	RUB+		Cat_Description_en est une nouvelle rubrique
+Itemcat	Cat_Description_es	RUB+		Cat_Description_es est une nouvelle rubrique
+Itemcat	Cat_Equipement	RUB+		Cat_Equipement est une nouvelle rubrique
+Itemcat	Cat_Ratio_Equip	RUB+		Cat_Ratio_Equip est une nouvelle rubrique
+Itemcat	Cat_Carton_Equip	RUB+		Cat_Carton_Equip est une nouvelle rubrique
+Itemcat	Cat_P_Equipement	RUB+		Cat_P_Equipement est une nouvelle rubrique
+Itemcat	Cat_Ratio_SousT	RUB+		Cat_Ratio_SousT est une nouvelle rubrique
+Itemcat	Cat_Carton_SousT	RUB+		Cat_Carton_SousT est une nouvelle rubrique
+Itemcat	DESC_MAJ_FR	NNR	DESC_MAJ	ATTENTION : la clé DESC_MAJ a pour nouveau nom DESC_MAJ_FR
+Itemcat	DESC_MAJ_FR	TAI+	20	la rubrique DESC_MAJ_FR a comme nouvelle taille 121 au lieu de 101
+Itemcat	DESC_MAJ_EN	RUB+		DESC_MAJ_EN est une nouvelle rubrique
+Itemcat	DESC_MAJ_ES	RUB+		DESC_MAJ_ES est une nouvelle rubrique
+Itemcat	CleComp5	RUB+		CleComp5 est une nouvelle clé

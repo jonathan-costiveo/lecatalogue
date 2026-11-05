@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- Batch 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%BATCH..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%BATCH..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _UC0_="[%MODELE_LIEN2..DNDSOURCE%]";
+var _UC1_="[%MODELE_LIEN2..DNDCIBLE%]";
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On dÈtecte les balises DispHTMLUnknownElement par la propriÈtÈ canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas trËs logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+// EXE_SansEspace
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : chaine a traiter
+//	o : option indiquant de quel cote on doit retirer les espaces
+//						  1 = a gauche , 2 = a droite , 3 = les deux
+// Variables locales :
+//	d : position de debut de la chaine resultat desiree
+//	f : position de fin de la chaine resultat desiree
+function _SAE(c,o)
+{
+	var d=0;
+	// On force la conversion en chaine
+	c += ""
+	var f=c.length-1;
+	// Si on a demande sans espace a gauche
+	if(o&1)while(c.charAt(d)==" ")d++;
+	// Si on a demande sans espace a droite
+	if(o&2)while(c.charAt(f)==" ")f--;
+	// Securite si la chaine n'ets faite que d'espaces
+	if (f < d) f= d;
+	// On decoupe la sous chaine
+	return c.substring(d,f+1);
+}
+function _GET_MODELE_LIEN2_1()
+{
+	return _JCIR(_JGE("MODELE_LIEN2",document));
+}
+function _SET_MODELE_LIEN2_1()
+{
+	_JGE("MODELE_LIEN2",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _BATCH_LOD_0(event)
+{
+	{
+}
+}
+function _BATCH_LOD(event)
+{
+	if(false===_BATCH_LOD_0(event))
+	{
+		return;
+	}
+	;
+	{
+}
+}
+function _BOUTON2_CLI(event)
+{
+	{
+	if((_SAE(_PAGE_.SUJET.value,3)==""))
+	{
+		alert("Le sujet est vide... veuillez le remplir.");
+		return;
+	}
+	if((!clWDUtil.oConversionType(confirm(clWDEncode.sEncodeCharset(unescape("Confirmez-vous l\'envoi du courriel ? "))),8,0,8,0)))
+	{
+		return;
+	}
+}
+{
+		_JSL(_PAGE_,"BOUTON2","_self","","");}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("MODELE_LIEN2","",_UC0_,_UC1_,_JGEN("MODELE_LIEN2",document,false),[_GET_MODELE_LIEN2_1],[_SET_MODELE_LIEN2_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.SUJET!=null)try{_PAGE_.SUJET.focus();}catch(e){}
+
+
+}
+</script>
+<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:929px;height:auto !important;height:929px;min-width:1403px;width:auto !important;width:1403px;}.l-2 {background-image:url([%_PROJET_WEB_%]res/bgcolor2_CA185DBA_.gif);}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#999999;}
+.l-4 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#FFFFFF;}
+.l-5 {background-color:#A3D8FF;}
+.l-6 {background-color:#FFFFFF;}
+#CELLULE1,#bzCELLULE1 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#MODELE_IMAGE1 {width:900px;height:106px;}
+.dzMODELE_IMAGE1 {width:900px;height:106px;;overflow-x:hidden;overflow-y:hidden;position:relative}#MODELE_LIEN2,#tzMODELE_LIEN2 {  [%SI%]MODELE_LIEN2..COULEUR!=-1[%ALORS%]color:#[%MODELE_LIEN2..COULEUR%][%FIN%];  [%SI%]MODELE_LIEN2..COULEURFOND!=-1[%ALORS%]background-color:#[%MODELE_LIEN2..COULEURFOND%][%FIN%];font-weight:[%MODELE_LIEN2..POLICEGRAS;4%];font-style:[%MODELE_LIEN2..POLICEITALIQUE;5%];[%SI%]MODELE_LIEN2..POLICENOM!=[%ALORS%]font-family:[%MODELE_LIEN2..POLICENOM%];[%FIN%][%SI%]MODELE_LIEN2..POLICETAILLE!=0[%ALORS%]font-size:[%MODELE_LIEN2..POLICETAILLE;7%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEH!=-1[%ALORS%]text-align:[%MODELE_LIEN2..CADRAGEH;9%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEV!=-1[%ALORS%]vertical-align:[%MODELE_LIEN2..CADRAGEV;10%];[%FIN%][%SI%]MODELE_LIEN2..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%MODELE_LIEN2..OPACITE%]);zoom:1;opacity:[%MODELE_LIEN2..OPACITE;8%];[%FIN%]}#CELLULE5,#bzCELLULE5 {border-style:solid;border-width:1px;border-color:#0000CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#SUJET {width:479px;height:22px;}#TEXTECOURRIEL {width:776px;height:238px;}#BOUTON2 {width:288px;height:24px;}#CELLULE4,#bzCELLULE4 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#CELLULE6,#bzCELLULE6 {border-style:solid;border-width:1px;border-color:#0000CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#CELLULE7,#bzCELLULE7 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+<CONTENEUR NAME="[%ZONEREPETEE1..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->
+<!--/REPEAT-->
+</CONTENEUR>.REGLETTE1-sty10621 {font-weight:bold;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE1 .premier a,#REGLETTE1 .premier span,#REGLETTE1 .precedent a,#REGLETTE1 .precedent span,#REGLETTE1 .suivant a,#REGLETTE1 .suivant span,#REGLETTE1 .dernier a,#REGLETTE1 .dernier span,#REGLETTE1 .indice a,#REGLETTE1 .indice span {width:0;}
+#REGLETTE1 li a, #REGLETTE1 li span {height:20px;}
+
+</style>
+</head>
+<body style="  background-color:#FFFFFF;" onload="chfocus();[%_CodeInfoError_%];_LOD_COM(event);_BATCH_LOD(event)" onunload="_UNL_COM(event);">
+<form name="BATCH" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.BATCH</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:1403">
+<div id="dwwCELLULE1" style="position:absolute;left:0px;top:0px;width:969px;height:107px;z-index:0;"><table id="CELLULE1" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="106" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELEIMAGE1" style="position:absolute;left:0px;top:0px;width:900px;height:106px;z-index:0;"><div class="dzMODELE_IMAGE1" id="dzMODELE_IMAGE1"><img src="[%_PROJET_WEB_%][%MODELE_IMAGE1..VALEUR%]" width=900 height=106 hspace=0 vspace=0 border=0 alt="" name="MODELE_IMAGE1" id="MODELE_IMAGE1" class="l-1 padding"></div></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE2" style="position:absolute;left:0px;top:107px;width:969px;height:24px;z-index:1;"><table id="CELLULE2" style="position:relative;">
+<tr><td height="24" width="969" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELELIEN1" style="position:absolute;left:28px;top:4px;width:51px;height:16px;z-index:0;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN1','_self','','')}" id="MODELE_LIEN1" class="Lien wblien padding" TABINDEX="1">Accueil</a></div>
+<div id="dwwMODELELIEN3" style="position:absolute;left:194px;top:4px;width:72px;height:16px;z-index:1;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN3','_self','','')}" id="MODELE_LIEN3" class="Lien wblien padding" TABINDEX="1">Conditions</a></div>
+<div id="dwwMODELELIEN4" style="position:absolute;left:401px;top:4px;width:95px;height:16px;z-index:2;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN4','_self','','')}" id="MODELE_LIEN4" class="Lien wblien padding" TABINDEX="1">Nous joindre</a></div>
+<div id="dwwMODELELIEN7" style="position:absolute;left:288px;top:4px;width:96px;height:16px;z-index:3;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN7','_self','','')}" id="MODELE_LIEN7" class="Lien wblien padding" TABINDEX="1">Notre Mission</a></div>
+<div id="dwwMODELELIEN8" style="position:absolute;left:511px;top:4px;width:78px;height:16px;z-index:4;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN8','_self','','')}" id="MODELE_LIEN8" class="Lien wblien padding" TABINDEX="1">Partenaires</a></div>
+<div id="dwwMODELELIEN6" style="position:absolute;left:716px;top:4px;width:78px;height:16px;z-index:5; [%SI%]MODELE_LIEN6..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN6','_self','','')}" id="MODELE_LIEN6" class="Lien wblien padding" TABINDEX="1">Webmaster</a></div>
+<div id="dwwMODELELIEN9" style="position:absolute;left:610px;top:4px;width:84px;height:16px;z-index:6;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN9','_self','','')}" id="MODELE_LIEN9" class="Lien wblien padding" TABINDEX="1">Commander</a></div>
+<div id="MODELE_LIBELLE1" style="position:absolute;left:87px;top:6px;width:9px;height:13px;z-index:7;" class="Verdana-9">|</div>
+<div id="dwwMODELELIEN5" style="position:absolute;left:913px;top:4px;width:44px;height:16px;z-index:8; [%SI%]MODELE_LIEN5..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a id="MODELE_LIEN5" class="Lien padding">Panier</a></div>
+<div id="MODELE_LIBELLE7" style="position:absolute;left:799px;top:5px;width:44px;height:14px;z-index:9; [%SI%]MODELE_LIBELLE7..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Panier</div>
+<div id="MODELE_LIBELLE5" style="position:absolute;left:386px;top:6px;width:9px;height:13px;z-index:10;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE4" style="position:absolute;left:273px;top:6px;width:9px;height:13px;z-index:11;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE2" style="position:absolute;left:181px;top:6px;width:9px;height:13px;z-index:12;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE8" style="position:absolute;left:11px;top:6px;width:9px;height:13px;z-index:13;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE9" style="position:absolute;left:498px;top:6px;width:9px;height:13px;z-index:14;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE10" style="position:absolute;left:595px;top:6px;width:9px;height:13px;z-index:15;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE11" style="position:absolute;left:696px;top:6px;width:9px;height:13px;z-index:16;" class="Verdana-9">|</div>
+<div id="LIB_CATGRIS" style="position:absolute;left:103px;top:5px;width:69px;height:14px;z-index:17; [%SI%]LIB_CATGRIS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Catalogue</div>
+<div id="dwwMODELELIEN2" style="position:absolute;left:[%MODELE_LIEN2..X%]px;top:[%MODELE_LIEN2..Y%]px;z-index:18; [%SI%]MODELE_LIEN2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]MODELE_LIEN2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%MODELE_LIEN2..CURSEURSOURIS%];[%FIN%]"><table width="70px" style="height:16px;"><tr><td class="Lien" valign="middle" id="tzMODELE_LIEN2">[%MODELE_LIEN2..HTMLAVANT%]<a[%SI%]MODELE_LIEN2..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}"[%FIN%] id="MODELE_LIEN2" class="Lien wblien padding" TITLE="[%MODELE_LIEN2..BULLE%]" TABINDEX="1"[%SI%]MODELE_LIEN2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]MODELE_LIEN2..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="MODELE_LIEN2"  href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}">[%MODELE_LIEN2%]</a>[%MODELE_LIEN2..HTMLAPRES%]</td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE3" style="position:absolute;left:0px;top:132px;width:969px;height:797px;z-index:2;"><table id="CELLULE3" style="position:relative;">
+<tr><td height="797" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwCELLULE5" style="position:absolute;left:19px;top:21px;width:914px;height:332px;z-index:0;"><table id="CELLULE5" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="330" width="912" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwSUJET" style="position:absolute;left:119px;top:46px;width:479px;height:24px;z-index:0;"><INPUT TYPE="text" SIZE="36" NAME="SUJET" VALUE="[%SUJET%]" id="SUJET" class="Btn-Std padding" TABINDEX="48"></div>
+<div id="dwwlzSUJET" style="position:absolute;left:16px;top:46px;z-index:0;"><table width="103px" style="height:24px;"><tr><td class="Btn-Std padding" id="lzSUJET">Sujet</td></tr></table></div>
+<div id="dwwTEXTECOURRIEL" style="position:absolute;left:119px;top:80px;width:776px;height:240px;z-index:1;"><textarea name="TEXTECOURRIEL" cols="58" rows="6" id="TEXTECOURRIEL" class="Btn-Std padding" TABINDEX="49">[%TEXTECOURRIEL%]</textarea></div>
+<div id="dwwlzTEXTECOURRIEL" style="position:absolute;left:16px;top:80px;width:103px;height:240px;z-index:1;" class="Btn-Std">Texte pour Courriel</div>
+<div id="dwwBOUTON2" style="position:absolute;left:604px;top:44px;width:288px;height:24px;z-index:2;"><input TYPE="button" NAME="BOUTON2" VALUE="Envoyer le courriel √† tous les destinataires" onclick="_BOUTON2_CLI(event)" id="BOUTON2" class="Btn-Std padding" TABINDEX="50"></div>
+<div id="dwwCELLULE4" style="position:absolute;left:0px;top:0px;width:912px;height:24px;z-index:3;"><table id="CELLULE4" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="23" width="912" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="LIBELLE2" style="position:absolute;left:9px;top:5px;width:291px;height:14px;z-index:0;" class="Btn-Std">Envoyer un courriel&nbsp;&#32;√† tous les destinataires</div>
+</div></td></tr></table></div>
+<div id="dwwSELECTEUR1" style="position:absolute;left:11px;top:272px;width:100px;height:46px;z-index:4;"><table id="tzSELECTEUR1" class="Ligne-paire" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:23px;width:100px;"><label for="SELECTEUR1_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SELECTEUR1" value="1" id="SELECTEUR1_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SELECTEUR1[1]..CHECKED%] TABINDEX="52">Texte</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:23px;width:100px;"><label for="SELECTEUR1_2" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SELECTEUR1" value="2" id="SELECTEUR1_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SELECTEUR1[2]..CHECKED%] TABINDEX="52">HTML</label></td></tr></table></div>
+<div id="dwwlzSELECTEUR1" style="position:absolute;left:11px;top:259px;z-index:4;"><table width="100px" style="height:13px;"><tr><td class="Verdana-9 padding" id="lzSELECTEUR1">&nbsp;Courriel</td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE6" style="position:absolute;left:19px;top:376px;width:625px;height:130px;z-index:1;"><table id="CELLULE6" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="128" width="623" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwCELLULE7" style="position:absolute;left:0px;top:0px;width:623px;height:24px;z-index:0;"><table id="CELLULE7" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="23" width="623" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="LIBELLE3" style="position:absolute;left:9px;top:5px;width:182px;height:14px;z-index:0;" class="Btn-Std">Liste des courriels envoy√©s</div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE8" style="position:absolute;left:3px;top:28px;width:616px;height:23px;z-index:1;"><table id="CELLULE8" style="position:relative;">
+<tr><td height="23" width="616" valign="top"><div class="ff3fix63895rel" style=""><div id="LIBELLE1" style="position:absolute;left:11px;top:4px;width:286px;height:14px;z-index:0;" class="l-4">Courriel</div>
+<div id="LIBELLE5" style="position:absolute;left:325px;top:4px;width:127px;height:14px;z-index:1;" class="l-4">Entreprise</div>
+</div></td></tr></table></div>
+<div id="dwwZONEREPETEE1" style="position:absolute;left:3px;top:51px;width:616px;z-index:2;"><input type=hidden name="ZONEREPETEE1" value="[%ZONEREPETEE1%]"><input type=hidden name="ZONEREPETEE1_DEB" value="[%ZONEREPETEE1..PREMIERVISIBLE%]"><input type=hidden name="_ZONEREPETEE1_OCC" value="[%ZONEREPETEE1..OCCURRENCE%]"><CONTENEUR NAME="[%ZONEREPETEE1..ALIAS%]"><table id="con-ZONEREPETEE1" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr><td height="21" width="616" style=" [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%]l-6[%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%]l-5[%FIN%] padding"><div style="position:relative;  [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZONEREPETEE1_[%ZONEREPETEE1%]"><div id="zrl_[%ZONEREPETEE1%]_LIBELLE4" style="position:absolute;left:11px;top:3px;width:286px;height:14px;z-index:2;" class="Btn-Std"><div id="zrl_[%ZONEREPETEE1%]_ATTRIBUT1">[%ATTRIBUT1%]</div></div>
+<div id="zrl_[%ZONEREPETEE1%]_LIBELLE6" style="position:absolute;left:326px;top:3px;width:290px;height:14px;z-index:3;" class="Btn-Std"><div id="zrl_[%ZONEREPETEE1%]_ATTRIBUT2">[%ATTRIBUT2%]</div></div>
+</div></td></tr><!--/REPEAT--></table></CONTENEUR></div>
+<div id="tzREGLETTE1" style="position:absolute;left:129px;top:108px;width:350px;height:20px;z-index:3;"><ol class="reglette">[%REGLETTE1;2%]</ol></div>
+</div></td></tr></table></div>
+<div id="dwwLIENX" style="position:absolute;left:680px;top:380px;width:221px;height:20px;z-index:2;"><a href="javascript:{_JSL(_PAGE_,'LIENX','_self','','')}" id="LIENX" class="Lien wblien padding" TABINDEX="1">Retour √† la liste des entreprises</a></div>
+<div id="dwwIMAGECLICABLE3" style="position:absolute;left:901px;top:372px;width:32px;height:32px;z-index:3;"><a href="[%URL()%]?IMAGECLICABLE3" target="_self"><img src="[%_PROJET_WEB_%]res/RETOUR_1157DC78_.GIF" width=32 height=32 hspace=0 vspace=0 border=0 alt="" name="IMAGECLICABLE3" id="IMAGECLICABLE3" class="l-0 padding"></a></div>
+</div></td></tr></table></div>
+</div>
+<div id="dwwLIENDEMO" style="position:absolute;left:1295px;top:115px;width:108px;height:16px;z-index:3; [%SI%]LIENDEMO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'LIENDEMO','_self','','')}" id="LIENDEMO" class="Lien wblien padding" TABINDEX="1">D√©monstrations</a></div>
+
+</form>
+[%BATCH..HTMLFINPAGE%]</body>
+</html>
+<!--181198-->

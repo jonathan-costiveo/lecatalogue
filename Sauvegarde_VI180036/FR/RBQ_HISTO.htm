@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- RBQ_HISTO 05/11/2026 00:33 WebDev 18 18.0.95.8 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%RBQ_HISTO..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">history.forward()</script>
+<script type="text/javascript">var _bUTF8_=[%RBQ_HISTO..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js"></script>
+<script type="text/javascript">
+var _UC0_="[%TOUS..DNDSOURCE%]";
+var _UC1_="[%TOUS..DNDCIBLE%]";
+var _UC2_="[%RECHERCHER..DNDSOURCE%]";
+var _UC3_="[%RECHERCHER..DNDCIBLE%]";
+<!--
+var _PAGE_=null;
+var _COL=[];_COL[9]="#f1c494";_COL[66]="#353535";
+// STD_ChaineVersDate
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	d : chaine contenant la date
+//	f : format de la chaine
+function _CVD(d,f)
+{
+	// Normalise le masque
+	f = f.replace(/D/g, "J").replace(/Y/g, "A");
+	// Gere les format pour lesquel il manque une composante
+	var j = (-1 != f.indexOf("J")) ? "" : "01";
+	var m = (-1 != f.indexOf("M")) ? "" : "01";
+	var a = (-1 != f.indexOf("A")) ? "" : "" + (new Date()).getUTCFullYear();
+
+	// Traite caractere par caractere le masque
+	var nF = 0;
+	var nD = 0;
+	var fParseJM = function(c)
+	{
+		var s;
+		// Compte le nombre de caracteres
+		if (f.charAt(nF + 1) == c)
+		{
+			s = d.substr(nD, 2);
+			nF++;
+			nD++;
+		}
+		else if (isNaN(parseInt(d.charAt(nD + 1), 10)))
+		{
+			s = "0" + d.charAt(nD);
+		}
+		else
+		{
+			s = d.substr(nD, 2);
+			nD++;
+		}
+		return s;
+	};
+	for(;nF<f.length;nF++,nD++)
+	{
+		switch(f.charAt(nF))
+		{
+		case "J":
+			j = fParseJM("J");
+			break;
+
+		case "M":
+			m = fParseJM("M");
+			break;
+
+		case "A":
+		case "Y":
+			// Sur 2 ou sur 4 ?
+			if (f.indexOf("AAAA")==nF)
+			{
+				a = d.substr(nD, 4);
+				nF+=3;
+				nD+=3;
+			}
+			else
+			{
+				a = d.substr(nD, 2);
+				a= (parseInt(a)>50?"19":"20")+a;
+				nF++;
+				nD++;
+			}
+			break;
+		}
+	}
+
+	var sRes=a+m+j;
+	return (sRes.length==8)?sRes:"";
+}
+// MakeDateFromWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend une date au format AAAAMMJJHHMMSS avec MM dans 1..12 et retourne un objet date
+// La chaine peut etre tronquee a la date auquel cas l'heure sera nulle
+// Parametres :
+//	c : chaine contenant la date 
+// Variables locales :
+//	a : annee
+//	d : date resultat
+function _WMD(c)
+{
+	// on recupere l'annee
+	var a=c.substring(0,4);
+	// on construit la date
+	var d=new Date(a,parseInt(c.substring(4,6), 10) - 1,c.substring(6,8),c.substring(8,10),c.substring(10,12),c.substring(12,14),c.substring(14,16)+"0");
+	// si l'annee est inferieure a 100, on construit l'annee complete
+	if (parseInt(a, 10) < 100)
+	{
+		d.setFullYear(a);
+	}
+	// on renvoie la date resultat
+	return d;
+}
+// JS_DateToWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend un objet Date et retourne une date au format WL AAAAMMJJ (avec MM dans 1..12)
+// Parametres :
+//	d : objet Date 
+// Variables locales :
+//	s : date en chaine au format WL
+//	m : mois en entier entre 1 et 12
+//	j : j en entier
+function _JDTW(d)
+{
+	// Calcule l'annee
+	var s = d.getFullYear();
+	// Calcule le mois en chaine
+	var m = d.getMonth() + 1;
+	s += ((m < 10) ? "0" : "") + m;
+	// Calcule le jour en chaine
+	var j = d.getDate();
+	s += ((j < 10) ? "0" : "") + j;
+	// Renvoie la date resultat
+	return s;
+}
+// STD_DateVersChaineInterne
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	v : chaine contenant une partie de la valeur
+//	r : format courant de la chaine
+//	tf : Tableau des formats : tableau de couples format, longueur de chaine courte
+function _DVCI(v,r,tf)
+{
+	for (var i = 0; i < tf.length; i++)
+	{
+		// Recherche la position du jour dans le format
+		var j = r.indexOf(tf[i][0]);
+		if(j > -1)
+		{
+			// Supprime les 0 non significatifs
+			while ((v.charAt(0) == "0") && (tf[i][1] > 0))
+			{
+				v = v.substring(1);
+				tf[i][1]--;
+			}
+			// Retourne la chaine
+			return r.substring(0,j) + v + r.substring(j + tf[i][0].length, r.length);
+		}
+	}
+	return r;
+}
+// STD_DateVersChaine
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	d : chaine contenant la date au format AAAAMMJJ
+//	f : format de la chaine
+// Variables locales :
+//	r : resultat
+// 	a : position des annees
+//	m : position des mois
+//	j : position des jours
+function _DVC(d,f)
+{
+	if(d=="")return"";
+	var r=f;
+
+	r = _DVCI(d.substring(6,8),r,[["JJ", 0], ["DD", 0], ["J", 1], ["D", 1]]);
+	r = _DVCI(d.substring(4,6),r,[["MM", 0], ["M", 1]]);
+
+	var a=r.indexOf("AAAA");
+	if(a==-1)a=r.indexOf("YYYY");
+	if(a>-1)return r.substring(0,a)+d.substring(0,4)+r.substring(a+4,r.length);
+	a=r.indexOf("AA");
+	if(a==-1)a=r.indexOf("YY");
+	return r.substring(0,a)+d.substring(2,4)+r.substring(a+2,r.length);
+}
+// v : Date au format du champ
+// f : format de la date du champ
+// d : Nombre de jour du déclage
+function _JDJ(v,f,d)
+{
+	v=_CVD(v,f);
+	v=_WMD(v);
+	v.setTime(v.getTime()+d*86400000);
+	v=_JDTW(v);
+	return _DVC(v,f);
+}
+function _RBQ_HISTO_LOD(event)
+{
+	{
+}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("TOUS","",_UC0_,_UC1_,_JGEN("TOUS",document,false),[null],[null]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("RECHERCHER","",_UC2_,_UC3_,_JGEN("RECHERCHER",document,false),[null],[null]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%RBQ_HISTO..HTMLENTETE%]<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.RR_RBQ_NOMENTREP!=null)try{_PAGE_.RR_RBQ_NOMENTREP.focus();}catch(e){}
+
+
+}
+</script>
+<style type="text/css">.wblien {}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:733px;height:auto !important;height:733px;min-width:1577px;width:auto !important;width:1577px;}.l-0 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;}
+
+
+#RR_RBQ_NOMENTREP {width:195px;height:23px;}
+
+#RR_RBQ_ADDRIP {width:195px;height:23px;}
+
+#RR_RBQ_DATE {width:102px;height:23px;}
+
+
+
+
+
+.bc-RBQ_DATE {  [%SI%]RBQ_DATE..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_DATE..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_HEURE {  [%SI%]RBQ_HEURE..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_HEURE..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_ADDRIP {  [%SI%]RBQ_ADDRIP..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_ADDRIP..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_NOMENTREP {  [%SI%]RBQ_NOMENTREP..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_NOMENTREP..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_CUMUL {  [%SI%]RBQ_CUMUL..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_CUMUL..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_VERSION {  [%SI%]RBQ_VERSION..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_VERSION..COULEURFOND%][%FIN%];}
+
+.bc-RBQ_REQUETE {  [%SI%]RBQ_REQUETE..COULEURFOND!=-1[%ALORS%]background-color:#[%RBQ_REQUETE..COULEURFOND%][%FIN%];}
+
+.bc-IDRBQ_HISTO {  [%SI%]IDRBQ_HISTO..COULEURFOND!=-1[%ALORS%]background-color:#[%IDRBQ_HISTO..COULEURFOND%][%FIN%];}
+
+
+#ctzTABLE .l-0 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;}
+#RECHERCHER {  [%SI%]RECHERCHER..COULEUR!=-1[%ALORS%]color:#[%RECHERCHER..COULEUR%][%FIN%];  [%SI%]RECHERCHER..COULEURFOND!=-1[%ALORS%]background-color:#[%RECHERCHER..COULEURFOND%][%FIN%];font-weight:[%RECHERCHER..POLICEGRAS;4%];font-style:[%RECHERCHER..POLICEITALIQUE;5%];[%SI%]RECHERCHER..POLICENOM!=[%ALORS%]font-family:[%RECHERCHER..POLICENOM%];[%FIN%]text-decoration:[%RECHERCHER..POLICESOULIGNEE;6%];[%SI%]RECHERCHER..POLICETAILLE!=0[%ALORS%]font-size:[%RECHERCHER..POLICETAILLE;7%];[%FIN%][%SI%]RECHERCHER..CADRAGEH!=-1[%ALORS%]text-align:[%RECHERCHER..CADRAGEH;9%];[%FIN%][%SI%]RECHERCHER..CADRAGEV!=-1[%ALORS%]vertical-align:[%RECHERCHER..CADRAGEV;10%];[%FIN%][%SI%]RECHERCHER..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%RECHERCHER..OPACITE%]);zoom:1;opacity:[%RECHERCHER..OPACITE;8%];[%FIN%]}
+#TOUS {  [%SI%]TOUS..COULEUR!=-1[%ALORS%]color:#[%TOUS..COULEUR%][%FIN%];  [%SI%]TOUS..COULEURFOND!=-1[%ALORS%]background-color:#[%TOUS..COULEURFOND%][%FIN%];font-weight:[%TOUS..POLICEGRAS;4%];font-style:[%TOUS..POLICEITALIQUE;5%];[%SI%]TOUS..POLICENOM!=[%ALORS%]font-family:[%TOUS..POLICENOM%];[%FIN%]text-decoration:[%TOUS..POLICESOULIGNEE;6%];[%SI%]TOUS..POLICETAILLE!=0[%ALORS%]font-size:[%TOUS..POLICETAILLE;7%];[%FIN%][%SI%]TOUS..CADRAGEH!=-1[%ALORS%]text-align:[%TOUS..CADRAGEH;9%];[%FIN%][%SI%]TOUS..CADRAGEV!=-1[%ALORS%]vertical-align:[%TOUS..CADRAGEV;10%];[%FIN%][%SI%]TOUS..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%TOUS..OPACITE%]);zoom:1;opacity:[%TOUS..OPACITE;8%];[%FIN%]}.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE .premier a,#REGLETTE .premier span,#REGLETTE .precedent a,#REGLETTE .precedent span,#REGLETTE .suivant a,#REGLETTE .suivant span,#REGLETTE .dernier a,#REGLETTE .dernier span,#REGLETTE .indice a,#REGLETTE .indice span {width:0;}
+.REGLETTE-sty10621 {font-weight:bold;}
+#REGLETTE li a, #REGLETTE li span {height:16px;}
+
+
+</style>
+<script type="text/javascript">var _a=null;var _d=null;var _c=null;
+	function _TLS_(){_PAGE_.WD_ACTION_.value='';_PAGE_.WD_BUTTON_CLICK_.value=_d;_PAGE_.action=_a;_PAGE_.target=_c;}
+	function _CLS_(t,n,d,e,p,f,g,h,l){_d=_PAGE_.WD_BUTTON_CLICK_;_a=_PAGE_.action;_c=_PAGE_.target;_PAGE_.WD_BUTTON_CLICK_.value=d?'':e;_PAGE_.WD_ACTION_.value=d?(p+t):'';eval('_PAGE_.'+t).value=n;if(f)_PAGE_ .target=g;if(h)_PAGE_.action=l;_PAGE_.submit();setTimeout("_TLS_()",1)}
+function _C1(V){_CLS_('TABLE',V,1,'WD_ACTION_','CLICTABLE;',0,'',1,'[%URL()%]?WD_ACTION_=CLICTABLE');}
+
+</script>
+</head>
+<body style="   background-color:#FFFFFF;" onload="chfocus();[%_CodeInfoError_%];_LOD_COM(event);_RBQ_HISTO_LOD(event)">
+<script type="text/javascript">var bPCSFR=true;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS"></script><form name="RBQ_HISTO" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.RBQ_HISTO</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:1;width:1577">
+<div id="dwwRRRBQNOMENTREP" style="position:absolute;left:185px;top:48px;width:195px;height:25px;z-index:1;"><INPUT TYPE="text" SIZE="15" MAXLENGTH="120" NAME="RR_RBQ_NOMENTREP" VALUE="[%RR_RBQ_NOMENTREP%]" id="RR_RBQ_NOMENTREP" class="l-0 padding effet" TABINDEX="2"></div>
+<div id="dwwlzRRRBQNOMENTREP" style="position:absolute;left:6px;top:48px;z-index:1;"><table width="179px" style="height:25px;"><tr><td class="l-0 padding effet" id="lzRR_RBQ_NOMENTREP">Nom entreprise :</td></tr></table></div>
+<div id="dwwRRRBQADDRIP" style="position:absolute;left:185px;top:79px;width:195px;height:25px;z-index:2;"><INPUT TYPE="text" SIZE="15" MAXLENGTH="15" NAME="RR_RBQ_ADDRIP" VALUE="[%RR_RBQ_ADDRIP%]" id="RR_RBQ_ADDRIP" class="l-0 padding effet" TABINDEX="3"></div>
+<div id="dwwlzRRRBQADDRIP" style="position:absolute;left:6px;top:79px;z-index:2;"><table width="179px" style="height:25px;"><tr><td class="l-0 padding effet" id="lzRR_RBQ_ADDRIP">Adresse IP :</td></tr></table></div>
+<div id="dwwRRRBQDATE" style="position:absolute;left:185px;top:110px;width:102px;height:25px;z-index:3;"><INPUT TYPE="text" SIZE="7" NAME="RR_RBQ_DATE" VALUE="[%RR_RBQ_DATE%]" onkeypress="return JJMMAA(event,'JJ/MM/AAAA');" onblur="reinit(event,'JJ/MM/AAAA');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');" onfocus="var b=(this.value.length==0);init(event,'JJ/MM/AAAA');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="RR_RBQ_DATE" class="l-0 padding effet" TABINDEX="4"></div>
+<div id="dwwlzRRRBQDATE" style="position:absolute;left:6px;top:110px;z-index:3;"><table width="179px" style="height:25px;"><tr><td class="l-0 padding effet" id="lzRR_RBQ_DATE">Date requete :</td></tr></table></div>
+<div id="dwwTABLE" style="position:absolute;left:6px;top:201px;width:1571px;height:532px;z-index:4;"><input type=hidden name="TABLE" value="[%TABLE%]"><input type=hidden name="TABLE_DEB" value="[%TABLE..PREMIERVISIBLE%]"><input type=hidden name="_TABLE_OCC" value="[%TABLE..OCCURRENCE%]"><CONTENEUR NAME="[%TABLE..ALIAS%]"><table id="ctzTABLE" cellspacing=0 cellpadding=0 width="1571">
+ <tr><td></td><td colspan=[%TABLE..NBCOLVISIBLE%]  align="center" class="Titre-Colonne padding effet" id="lzTABLE">RBQ_HISTO</td></tr>
+ <tr class="l-0 padding effet" id="ttTABLE">
+<td></td>
+  <td width="115" class="l-0 padding effet" id="ttRBQ_DATE">Date</td>
+  <td width="89" class="l-0 padding effet" id="ttRBQ_HEURE">Heure</td>
+  <td width="134" class="l-0 padding effet" id="ttRBQ_ADDRIP">Adresse IP</td>
+  <td width="413" class="l-0 padding effet" id="ttRBQ_NOMENTREP">Nom entreprise</td>
+  <td width="80" class="l-0 padding effet" id="ttRBQ_CUMUL">Cumul</td>
+  <td width="104" class="l-0 padding effet" id="ttRBQ_VERSION">Version</td>
+  <td width="617" class="l-0 padding effet" id="ttRBQ_REQUETE">Texte requete</td>
+[%SI%]IDRBQ_HISTO..VISIBLESTOCKE=1[%ALORS%]  <td width="174" class="l-0 padding effet" id="ttIDRBQ_HISTO">Identifiant de RBQ_HISTO</td>[%FIN%]
+ </tr>
+<!--REPEAT GENERATION_CORPS-->
+ <tr[%SI%]TABLE..SELECTED= SELECTED[%ALORS%] class="l-0 padding effet"[%FIN%][%SI%]TABLE..SELECTED!= SELECTED[%ALORS%][%SI%]TABLE..LignePaire!=1[%ALORS%] class="l-0 padding effet"[%FIN%][%SI%]TABLE..LignePaire=1[%ALORS%] class="Ligne-paire padding effet"[%FIN%][%FIN%] id="TABLE_[%TABLE%]">[%SI%]TABLE..SELECTED!= SELECTED[%ALORS%]
+  <td><input type="radio" name="__TABLE__" VALUE="[%TABLE%]" [%SI%]TABLE..SELECTED= SELECTED[%ALORS%]CHECKED[%FIN%] onclick="_PAGE_.TABLE.value='[%TABLE%]'"></td>
+  <td height="18" width="115" class="l-1 bc-RBQ_DATE padding effet">[%RBQ_DATE%]</td>
+  <td height="18" width="89" class="l-1 bc-RBQ_HEURE padding effet">[%RBQ_HEURE%]</td>
+  <td height="18" width="134" class="l-1 bc-RBQ_ADDRIP padding effet">[%RBQ_ADDRIP%]</td>
+  <td height="18" width="413" class="l-1 bc-RBQ_NOMENTREP padding effet">[%RBQ_NOMENTREP%]</td>
+  <td height="18" width="80" class="l-1 bc-RBQ_CUMUL padding effet">[%RBQ_CUMUL%]</td>
+  <td height="18" width="104" class="l-1 bc-RBQ_VERSION padding effet">[%RBQ_VERSION%]</td>
+  <td height="18" width="617" class="l-1 bc-RBQ_REQUETE padding effet">[%RBQ_REQUETE%]</td>
+[%SI%]IDRBQ_HISTO..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="174" class="l-1 bc-IDRBQ_HISTO padding effet"><a href=javascript:_C1('[%TABLE%]') class="l-1 bc-IDRBQ_HISTO padding effet">[%IDRBQ_HISTO%]</A></td>[%FIN%]
+[%FIN%][%SI%]TABLE..SELECTED= SELECTED[%ALORS%]
+  <td><input type="radio" name="__TABLE__" VALUE="[%TABLE%]" [%SI%]TABLE..SELECTED= SELECTED[%ALORS%]CHECKED[%FIN%] onclick="_PAGE_.TABLE.value='[%TABLE%]'"></td>
+  <td height="18" width="115" class="l-1 bc-RBQ_DATE bc-RBQ_DATE padding effet">[%RBQ_DATE%]</td>
+  <td height="18" width="89" class="l-1 bc-RBQ_HEURE bc-RBQ_HEURE padding effet">[%RBQ_HEURE%]</td>
+  <td height="18" width="134" class="l-1 bc-RBQ_ADDRIP bc-RBQ_ADDRIP padding effet">[%RBQ_ADDRIP%]</td>
+  <td height="18" width="413" class="l-1 bc-RBQ_NOMENTREP bc-RBQ_NOMENTREP padding effet">[%RBQ_NOMENTREP%]</td>
+  <td height="18" width="80" class="l-1 bc-RBQ_CUMUL bc-RBQ_CUMUL padding effet">[%RBQ_CUMUL%]</td>
+  <td height="18" width="104" class="l-1 bc-RBQ_VERSION bc-RBQ_VERSION padding effet">[%RBQ_VERSION%]</td>
+  <td height="18" width="617" class="l-1 bc-RBQ_REQUETE bc-RBQ_REQUETE padding effet">[%RBQ_REQUETE%]</td>
+[%SI%]IDRBQ_HISTO..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="174" class="l-1 bc-IDRBQ_HISTO bc-IDRBQ_HISTO padding effet"><a href=javascript:_C1('[%TABLE%]') class="l-1 bc-IDRBQ_HISTO bc-IDRBQ_HISTO padding effet">[%IDRBQ_HISTO%]</A></td>[%FIN%]
+[%FIN%] </tr>
+<!--/REPEAT-->
+</table></CONTENEUR></div>
+</div>
+<div id="LIBRECHRAP" style="position:absolute;left:8px;top:28px;width:113px;height:13px;z-index:0;" class="Verdana-9">Recherche rapide :</div>
+<div id="dwwRECHERCHER" style="position:absolute;left:[%RECHERCHER..X%]px;top:[%RECHERCHER..Y%]px;width:[%RECHERCHER..LARGEUR%]px;height:[%RECHERCHER..HAUTEUR%]px;z-index:5; [%SI%]RECHERCHER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]RECHERCHER..CURSEURSOURIS!=auto[%ALORS%]cursor:[%RECHERCHER..CURSEURSOURIS%];[%FIN%]">[%RECHERCHER..HTMLAVANT%]<a[%SI%]RECHERCHER..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'RECHERCHER','_self','','')}"[%FIN%] onmouseout="document.getElementById('z_RECHERCHER_IMG').src='[%_PROJET_WEB_%]res/Btn01_ActivXP_Rechercher_D1144D9_.PNG';" onmouseover="document.getElementById('z_RECHERCHER_IMG').src='[%_PROJET_WEB_%]res/Btn02_ActivXP_Rechercher_EC7E8478_.PNG';" id="RECHERCHER" class="Btn-Std wblien padding effet"  style="_height:24px;" TITLE="[%RECHERCHER..BULLE%]" TABINDEX="13"[%SI%]RECHERCHER..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]RECHERCHER..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="RECHERCHER"  href="javascript:{_JSL(_PAGE_,'RECHERCHER','_self','','')}"><img id="z_RECHERCHER_IMG" src="[%_PROJET_WEB_%]res/Btn01_ActivXP_Rechercher_D1144D9_.PNG" alt="[%RECHERCHER..BULLE%]" style="width:80px;height:24px"></a>[%RECHERCHER..HTMLAPRES%]</div>
+<div id="dwwTOUS" style="position:absolute;left:[%TOUS..X%]px;top:[%TOUS..Y%]px;width:[%TOUS..LARGEUR%]px;height:[%TOUS..HAUTEUR%]px;z-index:6; [%SI%]TOUS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]TOUS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TOUS..CURSEURSOURIS%];[%FIN%]">[%TOUS..HTMLAVANT%]<a[%SI%]TOUS..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'TOUS','_self','','')}"[%FIN%] onmouseout="document.getElementById('z_TOUS_IMG').src='[%_PROJET_WEB_%]res/Btn01_ActivXP_Tous_E5734E52_.PNG';" onmouseover="document.getElementById('z_TOUS_IMG').src='[%_PROJET_WEB_%]res/Btn02_ActivXP_Tous_27900460_.PNG';" id="TOUS" class="Btn-Std wblien padding effet"  style="_height:24px;" TITLE="[%TOUS..BULLE%]" TABINDEX="14"[%SI%]TOUS..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]TOUS..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="TOUS"  href="javascript:{_JSL(_PAGE_,'TOUS','_self','','')}"><img id="z_TOUS_IMG" src="[%_PROJET_WEB_%]res/Btn01_ActivXP_Tous_E5734E52_.PNG" alt="[%TOUS..BULLE%]" style="width:80px;height:24px"></a>[%TOUS..HTMLAPRES%]</div>
+<div id="tzREGLETTE" style="position:absolute;left:6px;top:179px;width:418px;height:16px;z-index:7;"><ol class="reglette">[%REGLETTE;2%]</ol></div>
+<div id="dwwBTNCIE" style="position:absolute;left:424px;top:141px;width:85px;height:24px;z-index:8;"><a href="javascript:{_JSL(_PAGE_,'BTN_CIE','_self','','')}" onmouseout="document.getElementById('z_BTN_CIE_IMG').src='[%_PROJET_WEB_%]res/Btn01_ActivXP_Entreprise_2F367FD9_.PNG';" onmouseover="document.getElementById('z_BTN_CIE_IMG').src='[%_PROJET_WEB_%]res/Btn02_ActivXP_Entreprise_5AC0E0E0_.PNG';" id="BTN_CIE" class="Btn-Std wblien padding effet"  style="_height:24px;" TABINDEX="20"><img id="z_BTN_CIE_IMG" src="[%_PROJET_WEB_%]res/Btn01_ActivXP_Entreprise_2F367FD9_.PNG" alt="" style="width:85px;height:24px"></a></div>
+
+</form>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		[%SI%]RECHERCHER..VISIBLESTOCKE=1[%ALORS%]_RECHERCHER_js = new Image(); _RECHERCHER_js.src="[%_PROJET_WEB_%]res/Btn02_ActivXP_Rechercher_EC7E8478_.PNG";[%FIN%]
+		[%SI%]TOUS..VISIBLESTOCKE=1[%ALORS%]_TOUS_js = new Image(); _TOUS_js.src="[%_PROJET_WEB_%]res/Btn02_ActivXP_Tous_27900460_.PNG";[%FIN%]
+		_BTN_CIE_js = new Image(); _BTN_CIE_js.src="[%_PROJET_WEB_%]res/Btn02_ActivXP_Entreprise_5AC0E0E0_.PNG";
+	}
+</script>
+[%RBQ_HISTO..HTMLFINPAGE%]</body>
+</html>
+<!--53555-->

@@ -1,0 +1,5 @@
+//MO067-068.TXT ANA00067 TO ANA00068
+AACOMMENT		NFI		nouveau fichier
+AAClient		TAR	1530	nouvelle taille enregistrement : 1530
+AAClient	MotCles	RUB+		MotCles est une nouvelle rubrique
+AACOMMENT		FRN		

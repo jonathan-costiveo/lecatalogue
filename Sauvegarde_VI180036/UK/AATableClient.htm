@@ -1,0 +1,1003 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- AATableClient 05/11/2026 00:54 WebDev 18 18.0.95.8 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%AATableClient..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%AATABLECLIENT..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WWConstante[%_gnNATION%].js"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDChamp.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/MenuContextuel.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDSaisie.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js"></script>
+<script type="text/javascript">
+var _WD_="[%_PROJET_WEB_%]";
+var _UC0_="[%LIGNE_EN_COURS..DNDSOURCE%]";
+var _UC1_="[%LIGNE_EN_COURS..DNDCIBLE%]";
+var _NA_=[%_gnNATION%];
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+var _PU_="[%URL()%]";
+<!--
+var _PAGE_=null;
+var _COL=[];_COL[9]="#f1c494";_COL[66]="#353535";
+// JS_ChampGetSetPropriete
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	v : Valeur a ecrire dans le champ
+//	c : champ
+//	o : Objet lie au champ
+//	e : event
+//	p : propriete
+//	w : faux = get, vrai = set
+function _JSGSP(v, c, o, e, w, p)
+{
+	// Gere l'indication dans le champ
+	if (o)
+	{
+		if (w)
+		{
+			return o.SetProp(p, e, v, c);
+		}
+		else
+		{
+			return o.GetProp(p, e, v, c);
+		}
+	}
+	return v;
+}
+// JSI_GetForm
+// d : nom du document
+function _JGP(d)
+{
+	return d.forms[0];
+}
+// JSI_IsFormNamed
+// f : formulaire
+// n : nom de la fenetre recherchee
+function _JIFN(f,n)
+{
+	return (f!=null&&f.name.toUpperCase()==n.toUpperCase());
+}
+// JSI_OtherWin
+// w : fenetre du navigateur
+// n : nom de la fenetre recherchee
+// f : formulaire
+// i : compteur de boucle
+// r : resultat de recherche
+function _JOW(w,n)
+{
+	var f=_JGP(w.document);
+	if (_JIFN(f,n))return w;
+	for(var i=0;i<w.frames.length;i++)
+	{
+		// Teste l'acces a l'IFRAME. Car si une IFrame ne pointe pas sur notre site on a un acces refuse
+		try
+		{
+			var r=_JOW(w.frames[i],n);
+			if(r)return r;
+		}
+		catch(e)
+		{
+		}
+	}
+	return null;
+}
+function _JEC(e,s,c)
+{
+	_JCL(_PU_+"/export."+e+"?WD_ACTION_="+s+"&"+c,bFF?"_blank":"_self","","");
+}
+// JS_ConvCoordPage
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	x : position
+//	o : champ
+//	l : Left ou Top
+//	s : + ou -
+// Variables locales :
+//	p : parent courant
+function _JCCP(x,o,l,s)
+{
+	var b=o.ownerDocument.body
+	// Parcours des parents
+	while(1)
+	{
+		// Parent suivant
+		var pt=o.offsetParent;
+		o=pt?pt:o.parentNode;
+		if (!o||(o==b))
+		{
+			break;
+		}
+
+		// Recupere la valeur
+		var v=l?o.offsetLeft:o.offsetTop;
+		// Ajoute a valeur de retour
+		if(v!==undefined)
+		{
+			x+=s?v:-v;
+		}
+	}
+	// Valeur de retour
+	return x;
+}
+// OBJ_SourisPosX
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPX(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollLeft selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollLeft : document.body.scrollLeft) : window.pageXOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientX;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenX);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetX;
+		// Autres
+		return window.pageXOffset + e.clientX - _JCCP(e.target.offsetLeft,e.target,true,true);
+	default:
+		return 0;
+	}
+}
+// OBJ_SourisPosY
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPY(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollTop selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollTop : document.body.scrollTop) : window.pageYOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientY;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenY);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetY;
+		// Autres
+		return window.pageYOffset + e.clientY - _JCCP(e.target.offsetTop,e.target,false,true);
+	default:
+		return 0;
+	}
+}
+// JS_NavigateurOuvre
+function _NAO(p)
+{
+	if(p==0||p>127)return "toolbar=0,location=0,status=0,scrollbars=0,directories=0,menubar=0,resizable=0";
+	var o="";
+	if(p&1)o+="toolbar=1,";
+	if(p&2)o+="location=1,";
+	if(p&4)o+="status=1,";
+	if(p&8)o+="menubar=1,";
+	if(p&16)o+="scrollbars=1,";
+	if(p&32)o+="resizable=1,";
+	if(p&64)o+="directories=1,";
+	if(o.length>0)o=o.substr(0, o.length-1);
+	return o;
+}
+function _GET_LIGNE_EN_COURS_1()
+{
+	return _JSGSP(_PAGE_.LIGNE_EN_COURS.value,document.getElementsByName("LIGNE_EN_COURS")[0],_JOW(top,"AATableClient").clLIGNE_EN_COURS,event,false,1);
+}
+function _SET_LIGNE_EN_COURS_1(v)
+{
+	_PAGE_.LIGNE_EN_COURS.value=_JSGSP(v,document.getElementsByName("LIGNE_EN_COURS")[0],_JOW(top,"AATableClient").clLIGNE_EN_COURS,event,true,1);
+}
+function RefreshLed()
+{
+	{
+	_BTN_RONDROUGE_CLI();
+}
+}
+function _AATABLECLIENT_LOD(event)
+{
+	{
+}
+}
+function _AATABLECLIENT_SUB(event)
+{
+	clLIGNE_EN_COURS.OnSubmit(event);
+	return true;
+}
+function _LIGNE_EN_COURS_FOC(event)
+{
+	clLIGNE_EN_COURS.OnFocus(event);
+	{
+}
+}
+function _LIGNE_EN_COURS_BLU(event)
+{
+	{
+}
+clLIGNE_EN_COURS.OnBlur(event);
+}
+function _BOUTON3_CLI(event)
+{
+	{
+	if((!confirm("Supprimer cette fiche client ?")))
+	{
+		return;
+	}
+}
+if(!_AATABLECLIENT_SUB(event))return;
+	{
+		_JSL(_PAGE_,"BOUTON3","_self","","");}
+}
+function _BTN_REFRESHSTATS_CLI(event)
+{
+	{
+	_PAGE_.SAI_GRANDGRAND.style.color="#C0C0C0";
+	_PAGE_.SAI_ACHATEG.style.color="#C0C0C0";
+	_PAGE_.SAI_ACHATPLAN1.style.color="#C0C0C0";
+	_PAGE_.SAI_ACHATPLANM.style.color="#C0C0C0";
+	_PAGE_.SAI_LOCATEG.style.color="#C0C0C0";
+	_PAGE_.SAI_LOCATPLAN1.style.color="#C0C0C0";
+	_PAGE_.SAI_LOCATPLANM.style.color="#C0C0C0";
+	_PAGE_.SAI_TOTSDP.style.color="#C0C0C0";
+	_PAGE_.SAI_TOTACHAT.style.color="#C0C0C0";
+	_PAGE_.SAI_TOTLOCAT.style.color="#C0C0C0";
+	_PAGE_.SAI_GRANDTOT.style.color="#C0C0C0";
+	_PAGE_.SAI_GTEG.style.color="#C0C0C0";
+	_PAGE_.SAI_GTPLAN1.style.color="#C0C0C0";
+	_PAGE_.SAI_GTPLANM.style.color="#C0C0C0";
+	_PAGE_.SAI_TOTINACTIF.style.color="#C0C0C0";
+	_PAGE_.SAI_TOTH.style.color="#C0C0C0";
+}
+if(!_AATABLECLIENT_SUB(event))return;
+	{
+		_JSL(_PAGE_,"BTN_REFRESHSTATS","_self","","");}
+}
+function _BTN_RONDROUGE_CLI(event){if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,"BTN_RONDROUGE","_self","","")}}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LIGNE_EN_COURS","",_UC0_,_UC1_,_JGEN("LIGNE_EN_COURS",document,false),[_GET_LIGNE_EN_COURS_1],[_SET_LIGNE_EN_COURS_1]);
+	clWDMenuContextuel.Cree((_WD_+"res/"))
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%AATableClient..HTMLENTETE%]<script type="text/javascript">function chfocus()
+{
+[%SI%]BTN_AJOUTER..VISIBLE=1[%ALORS%]
+window.focus();if(_PAGE_.BTN_AJOUTER!=null)try{_PAGE_.BTN_AJOUTER.focus();}catch(e){}
+
+[%FIN%]
+}
+</script>
+<script type="text/javascript">function e_k(event){var c=(event.srcElement!=null)?event.srcElement:event.target;if((c.form==_PAGE_)&&(c.type!='textarea')&&(((event.keyCode!=null)?event.keyCode:((event.which!=null)?event.which:0))==13)){{javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON6','_self','','')}}return(event.returnValue!=null)?(event.returnValue=false):false;}}</script>
+<script type="text/javascript">var clLIGNE_EN_COURS=new WDSaisie("[%LIGNE_EN_COURS..INDICATION;3%]","LIGNE_EN_COURS","");</script><script type="text/javascript">function FinInitJS()
+{
+clLIGNE_EN_COURS.Init(null,"0");}
+</script><script type="text/javascript">function FinSubmitAJAX()
+{
+clLIGNE_EN_COURS.RAZIndication();}
+</script><style type="text/css">.wblien {}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:651px;height:auto !important;height:651px;min-width:1870px;width:auto !important;width:1870px;}.l-1 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;color:#2D2D2D;}
+.l-2 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;color:#2D2D2D;}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;}
+.l-4 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;}
+.l-5 {font-family:Arial, Helvetica, sans-serif;font-size:x-small;vertical-align:middle;}
+.l-6 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:8pt;color:#0000FF;}
+.l-8 {text-decoration:underline ;}
+.l-9 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}
+.l-10 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFC080;}
+.l-11 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFFFFF;}
+.l-12 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#B9E0FD;}
+.l-12:hover,.l-12:active,.l-12:first-line,.l-13 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;}
+.l-14 {font-size:x-small;text-align:right;}
+.l-14:hover,.l-14:active,.l-14:link,.l-14:visited,.l-14:first-child,.l-14:first-letter,.l-14:first-line,.l-14:focus,.l-15,.l-16 {font-size:x-small;}
+.l-17 {font-size:x-small;text-align:center;}
+.l-18 {text-align:center;}
+.l-19 {text-align:left;}
+.l-20 {text-align:right;}
+.l-21 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;font-weight:lighter;color:#1C3F7F;text-align:right;}
+
+
+
+
+
+#SAI_RECHERCHE {width:128px;height:23px;}
+
+
+
+
+#CMB_TRIERMOIS {width:82px;height:26px;}
+
+
+
+#LIB_LOCAT,#tzLIB_LOCAT {font-size:small;text-align:center;vertical-align:bottom;}
+#LIB_ACHAT,#tzLIB_ACHAT {font-size:small;text-align:center;vertical-align:bottom;}
+#LIB_TOTAUX,#tzLIB_TOTAUX {font-size:small;color:#800000;text-align:center;vertical-align:bottom;}
+#LIB_EG,#tzLIB_EG {text-align:right;vertical-align:middle;}
+#LIB_EG1,#tzLIB_EG1 {text-align:right;vertical-align:middle;}
+#LIB_EG2,#tzLIB_EG2 {text-align:right;vertical-align:middle;}
+#LIB_EG3,#tzLIB_EG3 {text-align:right;vertical-align:middle;}
+#LIB_LOCAT1,#tzLIB_LOCAT1 {font-size:small;text-align:center;vertical-align:bottom;}
+#LIB_TOTAUX1,#tzLIB_TOTAUX1 {font-size:small;color:#800000;text-align:center;vertical-align:middle;}
+#LIB_INACTIFS1,#tzLIB_INACTIFS1 {color:#808080;text-align:center;vertical-align:middle;}
+#BTN_RECH {width:149px;height:24px;}
+#LIB_TOTH,#tzLIB_TOTH {font-size:small;text-align:center;vertical-align:bottom;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE1 .premier a,#REGLETTE1 .premier span,#REGLETTE1 .precedent a,#REGLETTE1 .precedent span,#REGLETTE1 .suivant a,#REGLETTE1 .suivant span,#REGLETTE1 .dernier a,#REGLETTE1 .dernier span,#REGLETTE1 .indice a,#REGLETTE1 .indice span {width:0;}
+.REGLETTE1-sty10621 {font-weight:bold;}
+#REGLETTE1 li a, #REGLETTE1 li span {height:14px;}
+
+
+
+
+#SAI_LOCATPLANM {width:134px;height:22px;  [%SI%]SAI_LOCATPLANM..COULEUR!=-1[%ALORS%]color:#[%SAI_LOCATPLANM..COULEUR%][%FIN%];  [%SI%]SAI_LOCATPLANM..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_LOCATPLANM..COULEURFOND%][%FIN%];}
+#lzLIGNE_EN_COURS,#lztzLIGNE_EN_COURS {font-weight:[%LIGNE_EN_COURS..POLICEGRAS;4%];font-style:[%LIGNE_EN_COURS..POLICEITALIQUE;5%];[%SI%]LIGNE_EN_COURS..POLICENOM!=[%ALORS%]font-family:[%LIGNE_EN_COURS..POLICENOM%];[%FIN%]text-decoration:[%LIGNE_EN_COURS..POLICESOULIGNEE;6%];[%SI%]LIGNE_EN_COURS..POLICETAILLE!=0[%ALORS%]font-size:[%LIGNE_EN_COURS..POLICETAILLE;7%];[%FIN%][%SI%]LIGNE_EN_COURS..CADRAGEH!=-1[%ALORS%]text-align:[%LIGNE_EN_COURS..CADRAGEH;9%];[%FIN%][%SI%]LIGNE_EN_COURS..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIGNE_EN_COURS..CADRAGEV;10%];[%FIN%][%SI%]LIGNE_EN_COURS..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIGNE_EN_COURS..OPACITE%]);zoom:1;opacity:[%LIGNE_EN_COURS..OPACITE;8%];[%FIN%][%SI%]LIGNE_EN_COURS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIGNE_EN_COURS..CURSEURSOURIS%];[%FIN%]}
+#LIGNE_EN_COURS {width:[%LIGNE_EN_COURS..DYNLARGEUR13%]px;height:[%LIGNE_EN_COURS..HAUTEUR%]px;  [%SI%]LIGNE_EN_COURS..COULEUR!=-1[%ALORS%]color:#[%LIGNE_EN_COURS..COULEUR%][%FIN%];  [%SI%]LIGNE_EN_COURS..COULEURFOND!=-1[%ALORS%]background-color:#[%LIGNE_EN_COURS..COULEURFOND%][%FIN%];font-weight:[%LIGNE_EN_COURS..POLICEGRAS;4%];font-style:[%LIGNE_EN_COURS..POLICEITALIQUE;5%];[%SI%]LIGNE_EN_COURS..POLICENOM!=[%ALORS%]font-family:[%LIGNE_EN_COURS..POLICENOM%];[%FIN%]text-decoration:[%LIGNE_EN_COURS..POLICESOULIGNEE;6%];[%SI%]LIGNE_EN_COURS..POLICETAILLE!=0[%ALORS%]font-size:[%LIGNE_EN_COURS..POLICETAILLE;7%];[%FIN%][%SI%]LIGNE_EN_COURS..CADRAGEH!=-1[%ALORS%]text-align:[%LIGNE_EN_COURS..CADRAGEH;9%];[%FIN%][%SI%]LIGNE_EN_COURS..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIGNE_EN_COURS..CADRAGEV;10%];[%FIN%][%SI%]LIGNE_EN_COURS..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIGNE_EN_COURS..OPACITE%]);zoom:1;opacity:[%LIGNE_EN_COURS..OPACITE;8%];[%FIN%][%SI%]LIGNE_EN_COURS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIGNE_EN_COURS..CURSEURSOURIS%];[%FIN%]}
+
+#SAI_LOCATPLAN1 {width:134px;height:22px;  [%SI%]SAI_LOCATPLAN1..COULEUR!=-1[%ALORS%]color:#[%SAI_LOCATPLAN1..COULEUR%][%FIN%];  [%SI%]SAI_LOCATPLAN1..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_LOCATPLAN1..COULEURFOND%][%FIN%];}
+#BTN_AJOUTER {width:80px;height:24px;}
+#IMAGE3 {width:[%IMAGE3..LARGEUR%]px;height:[%IMAGE3..HAUTEUR%]px;  [%SI%]IMAGE3..COULEUR!=-1[%ALORS%]color:#[%IMAGE3..COULEUR%][%FIN%];  [%SI%]IMAGE3..COULEURFOND!=-1[%ALORS%]background-color:#[%IMAGE3..COULEURFOND%][%FIN%];}
+.dzIMAGE3 {width:[%IMAGE3..LARGEUR%]px;height:[%IMAGE3..HAUTEUR%]px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+#IMAGE2 {width:[%IMAGE2..LARGEUR%]px;height:[%IMAGE2..HAUTEUR%]px;  [%SI%]IMAGE2..COULEUR!=-1[%ALORS%]color:#[%IMAGE2..COULEUR%][%FIN%];  [%SI%]IMAGE2..COULEURFOND!=-1[%ALORS%]background-color:#[%IMAGE2..COULEURFOND%][%FIN%];}
+.dzIMAGE2 {width:[%IMAGE2..LARGEUR%]px;height:[%IMAGE2..HAUTEUR%]px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+#IMAGE4 {width:[%IMAGE4..LARGEUR%]px;height:[%IMAGE4..HAUTEUR%]px;  [%SI%]IMAGE4..COULEUR!=-1[%ALORS%]color:#[%IMAGE4..COULEUR%][%FIN%];  [%SI%]IMAGE4..COULEURFOND!=-1[%ALORS%]background-color:#[%IMAGE4..COULEURFOND%][%FIN%];}
+.dzIMAGE4 {width:[%IMAGE4..LARGEUR%]px;height:[%IMAGE4..HAUTEUR%]px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+#IMAGE1 {width:[%IMAGE1..LARGEUR%]px;height:[%IMAGE1..HAUTEUR%]px;  [%SI%]IMAGE1..COULEUR!=-1[%ALORS%]color:#[%IMAGE1..COULEUR%][%FIN%];  [%SI%]IMAGE1..COULEURFOND!=-1[%ALORS%]background-color:#[%IMAGE1..COULEURFOND%][%FIN%];}
+.dzIMAGE1 {width:[%IMAGE1..LARGEUR%]px;height:[%IMAGE1..HAUTEUR%]px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+#b-TABLE_CLIENT {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#ctzTABLE_CLIENT {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzTABLE_CLIENT,#bzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#lzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-right:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#ttCOL_CLE,.ttCOL_CLE,#ttNOM_ENTREPRISE,.ttNOM_ENTREPRISE,#ttTELEPHONE,.ttTELEPHONE,#ttDATE_ACHAT,.ttDATE_ACHAT,#ttDATE_EXP,.ttDATE_EXP,#ttDATE_DERNIERE,.ttDATE_DERNIERE,#ttNBRLICEG,.ttNBRLICEG,#ttNBRLICEP,.ttNBRLICEP,#ttACTIF,.ttACTIF,#ttNBHEURE,.ttNBHEURE,#ttVERSIONS,.ttVERSIONS,#ttDATEVERSIONS,.ttDATEVERSIONS,#ttEPLANVERSION,.ttEPLANVERSION,#ttEPLANDATE,.ttEPLANDATE,#ttEMAIL,.ttEMAIL,#ttCOL_MAJ,.ttCOL_MAJ,#ttCOL_TOTACHAT,.ttCOL_TOTACHAT,#ttCOL_TOTLOCAT,.ttCOL_TOTLOCAT,#ttCOL_TOTSDP,.ttCOL_TOTSDP,#ttCOL_LASTMODIF,.ttCOL_LASTMODIF,#ttCOL_BROUGE,.ttCOL_BROUGE,#ttCOL_LOCATION,.ttCOL_LOCATION,#ttCOL_BACTIF,.ttCOL_BACTIF {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#ctzTABLE_CLIENT .l-9 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#ctzTABLE_CLIENT .l-12 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#B9E0FD;}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#ctzTABLE_CLIENT .l-11 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFFFFF;}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+
+#SAI_LOCATEG {width:134px;height:22px;  [%SI%]SAI_LOCATEG..COULEUR!=-1[%ALORS%]color:#[%SAI_LOCATEG..COULEUR%][%FIN%];  [%SI%]SAI_LOCATEG..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_LOCATEG..COULEURFOND%][%FIN%];}
+#lzSAI_MAILDEST,#lztzSAI_MAILDEST {font-size:x-small;font-style:normal;font-weight:normal;color:#333333;vertical-align:middle;}
+#SAI_MAILDEST {width:164px;height:23px;}
+
+#SAI_TOTLOCAT {width:134px;height:22px;  [%SI%]SAI_TOTLOCAT..COULEUR!=-1[%ALORS%]color:#[%SAI_TOTLOCAT..COULEUR%][%FIN%];  [%SI%]SAI_TOTLOCAT..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_TOTLOCAT..COULEURFOND%][%FIN%];}
+
+#SAI_TOTACHAT {width:134px;height:22px;  [%SI%]SAI_TOTACHAT..COULEUR!=-1[%ALORS%]color:#[%SAI_TOTACHAT..COULEUR%][%FIN%];  [%SI%]SAI_TOTACHAT..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_TOTACHAT..COULEURFOND%][%FIN%];}
+
+#SAI_ACHATEG {width:134px;height:22px;  [%SI%]SAI_ACHATEG..COULEUR!=-1[%ALORS%]color:#[%SAI_ACHATEG..COULEUR%][%FIN%];  [%SI%]SAI_ACHATEG..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_ACHATEG..COULEURFOND%][%FIN%];}
+
+#SAI_ACHATPLAN1 {width:134px;height:22px;  [%SI%]SAI_ACHATPLAN1..COULEUR!=-1[%ALORS%]color:#[%SAI_ACHATPLAN1..COULEUR%][%FIN%];  [%SI%]SAI_ACHATPLAN1..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_ACHATPLAN1..COULEURFOND%][%FIN%];}
+
+#SAI_ACHATPLANM {width:134px;height:22px;  [%SI%]SAI_ACHATPLANM..COULEUR!=-1[%ALORS%]color:#[%SAI_ACHATPLANM..COULEUR%][%FIN%];  [%SI%]SAI_ACHATPLANM..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_ACHATPLANM..COULEURFOND%][%FIN%];}
+
+#SAI_TOTSDP {width:134px;height:22px;  [%SI%]SAI_TOTSDP..COULEUR!=-1[%ALORS%]color:#[%SAI_TOTSDP..COULEUR%][%FIN%];  [%SI%]SAI_TOTSDP..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_TOTSDP..COULEURFOND%][%FIN%];}
+#lzSAI_GRANDTOT,#lztzSAI_GRANDTOT {color:#800000;}
+#SAI_GRANDTOT {color:#800000;width:134px;height:22px;  [%SI%]SAI_GRANDTOT..COULEUR!=-1[%ALORS%]color:#[%SAI_GRANDTOT..COULEUR%][%FIN%];  [%SI%]SAI_GRANDTOT..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_GRANDTOT..COULEURFOND%][%FIN%];}
+
+#SAI_TOTINACTIF {color:#808080;width:134px;height:22px;  [%SI%]SAI_TOTINACTIF..COULEUR!=-1[%ALORS%]color:#[%SAI_TOTINACTIF..COULEUR%][%FIN%];  [%SI%]SAI_TOTINACTIF..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_TOTINACTIF..COULEURFOND%][%FIN%];}
+#lzSAI_GTEG,#lztzSAI_GTEG {color:#800000;}
+#SAI_GTEG {color:#800000;width:134px;height:22px;  [%SI%]SAI_GTEG..COULEUR!=-1[%ALORS%]color:#[%SAI_GTEG..COULEUR%][%FIN%];  [%SI%]SAI_GTEG..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_GTEG..COULEURFOND%][%FIN%];}
+#lzSAI_GTPLAN1,#lztzSAI_GTPLAN1 {color:#800000;}
+#SAI_GTPLAN1 {color:#800000;width:134px;height:22px;  [%SI%]SAI_GTPLAN1..COULEUR!=-1[%ALORS%]color:#[%SAI_GTPLAN1..COULEUR%][%FIN%];  [%SI%]SAI_GTPLAN1..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_GTPLAN1..COULEURFOND%][%FIN%];}
+#lzSAI_GTPLANM,#lztzSAI_GTPLANM {color:#800000;}
+#SAI_GTPLANM {color:#800000;width:134px;height:22px;  [%SI%]SAI_GTPLANM..COULEUR!=-1[%ALORS%]color:#[%SAI_GTPLANM..COULEUR%][%FIN%];  [%SI%]SAI_GTPLANM..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_GTPLANM..COULEURFOND%][%FIN%];}
+#lzSAI_GRANDGRAND,#lztzSAI_GRANDGRAND {color:#800000;}
+#SAI_GRANDGRAND {color:#800000;width:134px;height:22px;  [%SI%]SAI_GRANDGRAND..COULEUR!=-1[%ALORS%]color:#[%SAI_GRANDGRAND..COULEUR%][%FIN%];  [%SI%]SAI_GRANDGRAND..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_GRANDGRAND..COULEURFOND%][%FIN%];}
+#SAI_ADDRIP {width:149px;height:23px;}
+
+#SAI_TOTH {width:134px;height:22px;  [%SI%]SAI_TOTH..COULEUR!=-1[%ALORS%]color:#[%SAI_TOTH..COULEUR%][%FIN%];  [%SI%]SAI_TOTH..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_TOTH..COULEURFOND%][%FIN%];}
+#BOUTON3 {width:80px;height:24px;}
+#BOUTON7 {width:94px;height:24px;}
+#BOUTON8 {width:166px;height:24px;}
+#BOUTON9 {width:166px;height:24px;}
+#BOUTON10 {width:166px;height:24px;}
+#BOUTON5 {width:80px;height:24px;}
+#BOUTON11 {width:80px;height:24px;}
+
+
+#BTN_EPLANS {width:149px;height:24px;}
+#BTN_LISTABON {width:134px;height:24px;}
+#BTN_ENVOICONCOURS {width:103px;height:24px;}
+#BTN_LOCEXP {width:126px;height:24px;}
+#BTN_DEMO {width:149px;height:24px;}
+#BTN_REFRESHSTATS {width:134px;height:24px;}
+#BTN_MACHINES {width:110px;height:24px;}
+</style>
+<script type="text/javascript">var _a=null;var _d=null;var _c=null;
+	function _TLS_(){_PAGE_.WD_ACTION_.value='';_PAGE_.WD_BUTTON_CLICK_.value=_d;_PAGE_.action=_a;_PAGE_.target=_c;}
+	function _CLS_(t,n,d,e,p,f,g,h,l){_d=_PAGE_.WD_BUTTON_CLICK_;_a=_PAGE_.action;_c=_PAGE_.target;_PAGE_.WD_BUTTON_CLICK_.value=d?'':e;_PAGE_.WD_ACTION_.value=d?(p+t):'';eval('_PAGE_.'+t).value=n;if(f)_PAGE_ .target=g;if(h)_PAGE_.action=l;_PAGE_.submit();setTimeout("_TLS_()",1)}
+function _C1(V){_CLS_('TABLE_CLIENT',V,1,'WD_ACTION_','CLICTABLE;',0,'',1,'[%URL()%]?WD_ACTION_=CLICTABLE');}
+
+</script>
+</head>
+<body style="   background-color:#FFFFFF;" onkeypress="return e_k(event);" onload="chfocus();FinInitJS();[%_CodeInfoError_%];_LOD_COM(event);_AATABLECLIENT_LOD(event)">
+<script type="text/javascript">var bPCSFR=false;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS"></script><form name="AATABLECLIENT" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.AATABLECLIENT</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="BOUTON6">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:3;width:1870">
+<TABLE>
+ <TR>
+  <td colspan=19 height=2></td>
+ </TR>
+ <TR>
+  <td rowspan=18 style="width:186px"></td>
+  <TD COLSPAN=14 width="1219px"></TD>
+  <TD ROWSPAN=4 class="BLEUE-Sel padding effet" id="tzLIB_TOTAUX"  style="[%SI%]LIB_TOTAUX..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140" height="20">Totaux</TD>
+  <TD ROWSPAN=17 width="4px" height="123px"></TD>
+  <TD ROWSPAN=4 class="BLEUE-Sel padding effet" id="tzLIB_LOCAT1"  style="[%SI%]LIB_LOCAT1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140" height="20">Salles de plans</TD>
+  <TD height="2px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=9 width="932px"></TD>
+  <TD COLSPAN=2 ROWSPAN=4 class="BLEUE-Sel padding effet" id="tzLIB_ACHAT"  style="[%SI%]LIB_ACHAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140" height="20">Achat</TD>
+  <TD ROWSPAN=16 width="3px" height="121px"></TD>
+  <TD ROWSPAN=4 class="BLEUE-Sel padding effet" id="tzLIB_LOCAT"  style="[%SI%]LIB_LOCAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140" height="20">Location</TD>
+  <TD ROWSPAN=16 width="4px" height="121px"></TD>
+  <TD height="9px"></TD>
+ </TR>
+ <TR>
+  <TD ROWSPAN=5 class="l-5 padding effet" id="lzCMB_TRIERMOIS" width="161" height="28">Trier mois renouvellement</TD>
+  <TD COLSPAN=2 ROWSPAN=5 width="82" height="28"><table width="82px" style="height:28px;"><tr><td valign="middle" id="tzCMB_TRIERMOIS">
+<select NAME="[%CMB_TRIERMOIS..ALIAS%]" SIZE=1 onchange="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'CMB_TRIERMOIS','_self','','')}" id="CMB_TRIERMOIS" class="l-5 padding effet" TABINDEX="21">  <option [%CMB_TRIERMOIS..SELECTED%] VALUE="[%CMB_TRIERMOIS%]">[%CMB_TRIERMOIS..VALEUR;1%]</option>
+
+</select></td></tr></table></TD>
+  <TD COLSPAN=2 ROWSPAN=6 width="266px" height="38px"></TD>
+  <TD ROWSPAN=5 width="166px" height="28px"><input TYPE="button" NAME="BTN_RECH" VALUE="IP Bloquée?" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_RECH','_self','','')}" id="BTN_RECH" class="Btn-Std padding effet" TABINDEX="60"></TD>
+  <TD COLSPAN=3 width="257px"></TD>
+  <TD height="6px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=4 width="115px" height="22px"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'LIEN_LISTECLIENT','_self','','')}" id="LIEN_LISTECLIENT" class="l-6 wblien padding effet"  style=" [%SI%]LIEN_LISTECLIENT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]_height:20px;" TABINDEX="65">Listes des clients&nbsp;</a></TD>
+  <TD ROWSPAN=3 width="142px" height="8px"></TD>
+  <TD height="3px"></TD>
+ </TR>
+ <TR>
+  <TD ROWSPAN=13 width="140px" height="103px"></TD>
+  <TD ROWSPAN=6 width="140px" height="53px"></TD>
+  <TD height="2px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 width="140px"></TD>
+  <TD ROWSPAN=12 width="140px" height="101px"></TD>
+  <TD height="3px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=2 class="BLEUE-Sel padding effet" id="tzLIB_EG"  style="[%SI%]LIB_EG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="144" height="24">Estimateur Général</TD>
+  <TD ROWSPAN=11 width="138px" height="98px"></TD>
+  <TD height="14px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=3 width="243px"></TD>
+  <TD COLSPAN=3 ROWSPAN=5 width="281px" height="36px"></TD>
+  <TD height="10px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=9 width="206px" height="74px"></TD>
+  <TD COLSPAN=2 ROWSPAN=2 width="263px" height="24px"><input type="hidden" name="INT_ACCESFIN" value=""><table class="l-4" id="tzINT_ACCESFIN" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:137px;"><label for="INT_ACCESFIN_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="INT_ACCESFIN" value="1" id="INT_ACCESFIN_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%INT_ACCESFIN[1]..CHECKED%] onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'INT_ACCESFIN','_self','','')}" TABINDEX="44">Accès après date fin</label></td></tr></table></TD>
+  <TD ROWSPAN=8 width="40px" height="51px"></TD>
+  <TD COLSPAN=2 width="144px"></TD>
+  <TD height="1px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=2 class="BLEUE-Sel padding effet" id="tzLIB_EG1"  style="[%SI%]LIB_EG1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="144" height="24">e-Plans MO</TD>
+  <TD height="23px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=7 width="263px" height="50px"></TD>
+  <TD ROWSPAN=3 class="BLEUE-Sel padding effet" id="tzLIB_TOTAUX1"  style="[%SI%]LIB_TOTAUX1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140" height="20">Grand Total</TD>
+  <TD height="1px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=3 class="BLEUE-Sel padding effet" id="tzLIB_EG2"  style="[%SI%]LIB_EG2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="144" height="24">e-Plans MU</TD>
+  <TD height="1px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 ROWSPAN=4 width="203px" height="25px"></TD>
+  <TD ROWSPAN=2 width="78px" height="23px"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'LIEN_STAT','_self','','')}" id="LIEN_STAT" class="l-6 wblien padding effet"  style=" [%SI%]LIEN_STAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]_height:20px;" TABINDEX="45">Statistiques</a></TD>
+  <TD height="18px"></TD>
+ </TR>
+ <TR>
+  <TD ROWSPAN=4 width="140px" height="30px"></TD>
+  <TD height="5px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=3 width="222px"></TD>
+  <TD height="1px"></TD>
+ </TR>
+ <TR>
+  <TD ROWSPAN=2 width="78px" height="24px"></TD>
+  <TD COLSPAN=2 ROWSPAN=2 class="BLEUE-Sel padding effet" id="tzLIB_EG3"  style="[%SI%]LIB_EG3..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="144" height="24">Total</TD>
+  <TD height="1px"></TD>
+ </TR>
+ <TR>
+  <TD COLSPAN=2 width="206px"><input type="hidden" name="INT_FILTRE12" value=""><table class="l-4" id="tzINT_FILTRE12" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:192px;"><label for="INT_FILTRE12_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="INT_FILTRE12" value="1" id="INT_FILTRE12_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%INT_FILTRE12[1]..CHECKED%] onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'INT_FILTRE12','_self','','')}" TABINDEX="35">Filter&nbsp;</label></td></tr></table></TD>
+  <TD width="37px"></TD>
+  <TD height="23px"></TD>
+ </TR>
+ <TR>
+  <TD width="161px"></TD>
+  <TD width="45px"></TD>
+  <TD width="37px"></TD>
+  <TD width="226px"></TD>
+  <TD width="40px"></TD>
+  <TD width="166px"></TD>
+  <TD width="37px"></TD>
+  <TD width="78px"></TD>
+  <TD width="142px"></TD>
+  <TD width="2px"></TD>
+  <TD width="138px"></TD>
+  <TD width="3px"></TD>
+  <TD width="140px"></TD>
+  <TD width="4px"></TD>
+  <TD width="140px"></TD>
+  <TD width="4px"></TD>
+  <TD width="140px"></TD>
+  <TD height="16px"></TD>
+ </TR>
+</TABLE>
+<TABLE>
+ <TR>
+  <td rowspan=2 style="width:1456px"></td>
+  <TD class="BLEUE-Sel padding effet" id="tzLIB_INACTIFS1"  style="[%SI%]LIB_INACTIFS1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140">Inactifs</TD>
+  <TD height="20px"></TD>
+ </TR>
+ <TR>
+  <TD width="140px"></TD>
+  <TD height="36px"></TD>
+ </TR>
+</TABLE>
+<TABLE>
+ <TR>
+  <td rowspan=2 style="width:1549px"></td>
+  <TD class="BLEUE-Sel padding effet" id="tzLIB_TOTH"  style="[%SI%]LIB_TOTH..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="140">Total heures</TD>
+  <TD height="20px"></TD>
+ </TR>
+ <TR>
+  <TD width="140px"></TD>
+  <TD height="276px"></TD>
+ </TR>
+</TABLE>
+<TABLE>
+ <TR>
+  <td rowspan=2 style="width:1520px"></td>
+  <TD class="Note-Italic-2 padding effet" id="tzLIB_LOCATION"  style="[%SI%]LIB_LOCATION..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="100">Libellé 1</TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR>
+  <TD width="100px"></TD>
+  <TD height="6px"></TD>
+ </TR>
+</TABLE>
+<TABLE>
+ <TR>
+  <td rowspan=2 style="width:1520px"></td>
+  <TD class="Note-Italic-2 padding effet" id="tzLIB_ACTIFS"  style="[%SI%]LIB_ACTIFS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="100">Libellé 2</TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR>
+  <TD width="100px"></TD>
+  <TD height="6px"></TD>
+ </TR>
+</TABLE>
+<TABLE>
+ <TR>
+  <td rowspan=2 style="width:1520px"></td>
+  <TD class="Note-Italic-2 padding effet" id="tzLIB_INACTIFS"  style="[%SI%]LIB_INACTIFS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" width="100">Libellé 3</TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR>
+  <TD width="100px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+<div id="dwwSELACTIF" style="position:absolute;left:392px;top:73px;width:212px;height:20px;z-index:3;"><table class="l-2" id="tzSEL_ACTIF" width="212" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:70px;"><label for="SEL_ACTIF_1" style="position:relative;padding-left:20px;"><input type="RADIO" name="SEL_ACTIF" value="1" id="SEL_ACTIF_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_ACTIF[1]..CHECKED%] onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'SEL_ACTIF','_self','','')}" TABINDEX="64">Actifs</label></td><td style="vertical-align:middle;height:20px;width:70px;"><label for="SEL_ACTIF_2" style="position:relative;padding-left:20px;"><input type="RADIO" name="SEL_ACTIF" value="2" id="SEL_ACTIF_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_ACTIF[2]..CHECKED%] onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'SEL_ACTIF','_self','','')}" TABINDEX="64">Inactifs</label></td><td style="vertical-align:middle;height:20px;width:70px;"><label for="SEL_ACTIF_3" style="position:relative;padding-left:20px;"><input type="RADIO" name="SEL_ACTIF" value="3" id="SEL_ACTIF_3" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_ACTIF[3]..CHECKED%] onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'SEL_ACTIF','_self','','')}" TABINDEX="64">Tous</label></td></tr></table></div>
+<div id="dwwSAIRECHERCHE" style="position:absolute;left:14px;top:43px;width:128px;height:25px;z-index:4;"><INPUT TYPE="text" SIZE="9" NAME="SAI_RECHERCHE" VALUE="[%SAI_RECHERCHE%]" id="SAI_RECHERCHE" class="BLEUE10 padding effet" TABINDEX="18"></div>
+<div id="dwwSAILOCATPLANM" style="position:absolute;left:1261px;top:76px;width:140px;height:24px;z-index:28; [%SI%]SAI_LOCATPLANM..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_LOCATPLANM" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_LOCATPLANM"><INPUT TYPE="text" SIZE="9" NAME="SAI_LOCATPLANM" VALUE="[%SAI_LOCATPLANM%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_LOCATPLANM" class="Style6-Droit padding effet" TABINDEX="28" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwLIGNEENCOURS" style="position:absolute;left:[%LIGNE_EN_COURS..X%]px;top:[%LIGNE_EN_COURS..Y%]px;width:53px;height:24px;z-index:29; [%SI%]LIGNE_EN_COURS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="53" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="l-7 padding effet" id="lzLIGNE_EN_COURS" width="13">[%LIGNE_EN_COURS..LIBELLE%]</TD>
+  <TD width="40"><table width="40px" style="height:24px;"><tr><td valign="middle" id="tzLIGNE_EN_COURS">[%LIGNE_EN_COURS..HTMLAVANT%]<INPUT TYPE="text" SIZE="2" [%SI%]LIGNE_EN_COURS..TAILLE!=0[%ALORS%]MAXLENGTH="[%LIGNE_EN_COURS..TAILLE%]" [%FIN%]NAME="LIGNE_EN_COURS" VALUE="[%LIGNE_EN_COURS%]" onblur="_LIGNE_EN_COURS_BLU(event)" onfocus="_LIGNE_EN_COURS_FOC(event)" id="LIGNE_EN_COURS" class="l-7 padding effet" TITLE="[%LIGNE_EN_COURS..BULLE%]" TABINDEX="29"[%SI%]LIGNE_EN_COURS..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]LIGNE_EN_COURS..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%LIGNE_EN_COURS..HTMLAPRES%]</td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="13px"></TD>
+  <TD width="40px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAILOCATPLAN1" style="position:absolute;left:1261px;top:52px;width:140px;height:24px;z-index:30; [%SI%]SAI_LOCATPLAN1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_LOCATPLAN1" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_LOCATPLAN1"><INPUT TYPE="text" SIZE="9" NAME="SAI_LOCATPLAN1" VALUE="[%SAI_LOCATPLAN1%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_LOCATPLAN1" class="Style6-Droit padding effet" TABINDEX="31" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwTABLECLIENT" style="position:absolute;left:[%TABLE_CLIENT..X%]px;top:[%TABLE_CLIENT..Y%]px;z-index:36; [%SI%]TABLE_CLIENT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]"><table width="1536px" cellspacing=0 id="bzlzTABLE_CLIENT" style="height:514px;border-collapse:separate;"><tr><td class="l-7 padding effet" valign="top" id="tzlzTABLE_CLIENT" style="border:none;">[%TABLE_CLIENT..HTMLAVANT%]<input type=hidden name="TABLE_CLIENT" value="[%TABLE_CLIENT%]"><input type=hidden name="TABLE_CLIENT_DEB" value="[%TABLE_CLIENT..PREMIERVISIBLE%]"><input type=hidden name="_TABLE_CLIENT_OCC" value="[%TABLE_CLIENT..OCCURRENCE%]"><CONTENEUR NAME="[%TABLE_CLIENT..ALIAS%]"><table id="ctzTABLE_CLIENT" cellspacing=0 cellpadding=0 width="1534"[%SI%]TABLE_CLIENT..VISIBLE=0[%ALORS%]border-collapse:separate;[%FIN%] TITLE="[%TABLE_CLIENT..BULLE%]">
+ <tr><td colspan=[%TABLE_CLIENT..NBCOLVISIBLE%]  align="center" class="l-9 padding effet" id="lzTABLE_CLIENT"><table><tr valign="top" class="l-9 padding effet" id="lzTABLE_CLIENT"><td width="100%" align="center">[%SI%]TABLE_CLIENT..LIBELLE!=""[%ALORS%][%TABLE_CLIENT..LIBELLE%][%FIN%]</td><td><img align="top" alt="none" src="[%_PROJET_WEB_%]res/ConversionTable.GIF" onclick="clWDMenuContextuel.Ouvre('TABLE_CLIENT', event)"></td></tr></table></td></tr>
+ <tr style="border:0" class="l-10 padding effet" id="ttTABLE_CLIENT">
+[%SI%]COL_CLE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_CLE..LARGEUR%]" class="l-10 padding effet" id="ttCOL_CLE">[%COL_CLE..LIBELLE%]</td>[%FIN%]
+[%SI%]NOM_ENTREPRISE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%NOM_ENTREPRISE..LARGEUR%]" class="l-10 padding effet" id="ttNOM_ENTREPRISE">[%NOM_ENTREPRISE..LIBELLE%]</td>[%FIN%]
+[%SI%]TELEPHONE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%TELEPHONE..LARGEUR%]" class="l-10 padding effet" id="ttTELEPHONE">[%TELEPHONE..LIBELLE%]</td>[%FIN%]
+[%SI%]DATE_ACHAT..VISIBLESTOCKE=1[%ALORS%]  <td width="[%DATE_ACHAT..LARGEUR%]" class="l-10 padding effet" id="ttDATE_ACHAT">[%DATE_ACHAT..LIBELLE%]</td>[%FIN%]
+[%SI%]DATE_EXP..VISIBLESTOCKE=1[%ALORS%]  <td width="[%DATE_EXP..LARGEUR%]" class="l-10 padding effet" id="ttDATE_EXP">[%DATE_EXP..LIBELLE%]</td>[%FIN%]
+[%SI%]DATE_DERNIERE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%DATE_DERNIERE..LARGEUR%]" class="l-10 padding effet" id="ttDATE_DERNIERE">[%DATE_DERNIERE..LIBELLE%]</td>[%FIN%]
+[%SI%]NBRLICEG..VISIBLESTOCKE=1[%ALORS%]  <td width="[%NBRLICEG..LARGEUR%]" class="l-10 padding effet" id="ttNBRLICEG">[%NBRLICEG..LIBELLE%]</td>[%FIN%]
+[%SI%]NBRLICEP..VISIBLESTOCKE=1[%ALORS%]  <td width="[%NBRLICEP..LARGEUR%]" class="l-10 padding effet" id="ttNBRLICEP">[%NBRLICEP..LIBELLE%]</td>[%FIN%]
+[%SI%]ACTIF..VISIBLESTOCKE=1[%ALORS%]  <td width="[%ACTIF..LARGEUR%]" class="l-10 padding effet" id="ttACTIF">[%ACTIF..LIBELLE%]</td>[%FIN%]
+[%SI%]NBHEURE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%NBHEURE..LARGEUR%]" class="l-10 padding effet" id="ttNBHEURE">[%NBHEURE..LIBELLE%]</td>[%FIN%]
+[%SI%]VERSIONS..VISIBLESTOCKE=1[%ALORS%]  <td width="[%VERSIONS..LARGEUR%]" class="l-10 padding effet" id="ttVERSIONS">[%VERSIONS..LIBELLE%]</td>[%FIN%]
+[%SI%]DATEVERSIONS..VISIBLESTOCKE=1[%ALORS%]  <td width="[%DATEVERSIONS..LARGEUR%]" class="l-10 padding effet" id="ttDATEVERSIONS">[%DATEVERSIONS..LIBELLE%]</td>[%FIN%]
+[%SI%]EPLANVERSION..VISIBLESTOCKE=1[%ALORS%]  <td width="[%EPLANVERSION..LARGEUR%]" class="l-10 padding effet" id="ttEPLANVERSION">[%EPLANVERSION..LIBELLE%]</td>[%FIN%]
+[%SI%]EPLANDATE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%EPLANDATE..LARGEUR%]" class="l-10 padding effet" id="ttEPLANDATE">[%EPLANDATE..LIBELLE%]</td>[%FIN%]
+[%SI%]EMAIL..VISIBLESTOCKE=1[%ALORS%]  <td width="[%EMAIL..LARGEUR%]" class="l-10 padding effet" id="ttEMAIL">[%EMAIL..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_MAJ..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_MAJ..LARGEUR%]" class="l-10 padding effet" id="ttCOL_MAJ">[%COL_MAJ..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_TOTACHAT..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_TOTACHAT..LARGEUR%]" class="l-10 padding effet" id="ttCOL_TOTACHAT">[%COL_TOTACHAT..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_TOTLOCAT..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_TOTLOCAT..LARGEUR%]" class="l-10 padding effet" id="ttCOL_TOTLOCAT">[%COL_TOTLOCAT..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_TOTSDP..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_TOTSDP..LARGEUR%]" class="l-10 padding effet" id="ttCOL_TOTSDP">[%COL_TOTSDP..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_LASTMODIF..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_LASTMODIF..LARGEUR%]" class="l-10 padding effet" id="ttCOL_LASTMODIF">[%COL_LASTMODIF..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_BROUGE..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_BROUGE..LARGEUR%]" class="l-10 padding effet" id="ttCOL_BROUGE">[%COL_BROUGE..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_LOCATION..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_LOCATION..LARGEUR%]" class="l-10 padding effet" id="ttCOL_LOCATION">[%COL_LOCATION..LIBELLE%]</td>[%FIN%]
+[%SI%]COL_BACTIF..VISIBLESTOCKE=1[%ALORS%]  <td width="[%COL_BACTIF..LARGEUR%]" class="l-10 padding effet" id="ttCOL_BACTIF" style="border-right-width:0">[%COL_BACTIF..LIBELLE%]</td>[%FIN%]
+ </tr>
+<!--REPEAT GENERATION_CORPS-->
+ <tr[%SI%]TABLE_CLIENT..LignePaire!=1[%ALORS%] class="l-11 padding effet"[%FIN%][%SI%]TABLE_CLIENT..LignePaire=1[%ALORS%] class="l-12 padding effet"[%FIN%] id="TABLE_CLIENT_[%TABLE_CLIENT%]">
+[%SI%]COL_CLE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_CLE..LARGEUR%]" class="l-14 bc-COL_CLE padding effet"
+ style="  [%SI%]COL_CLE..COULEUR!=-1[%ALORS%]color:[%COL_CLE..COULEUR%][%FIN%];  [%SI%]COL_CLE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_CLE..COULEURFOND%][%FIN%];[%SI%]COL_CLE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_CLE..CURSEURSOURIS%];[%FIN%]">[%COL_CLE%]</td>[%FIN%]
+[%SI%]NOM_ENTREPRISE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%NOM_ENTREPRISE..LARGEUR%]" class="l-15 bc-NOM_ENTREPRISE padding effet"
+ style="  [%SI%]NOM_ENTREPRISE..COULEUR!=-1[%ALORS%]color:[%NOM_ENTREPRISE..COULEUR%][%FIN%];  [%SI%]NOM_ENTREPRISE..COULEURFOND!=-1[%ALORS%]background-color:#[%NOM_ENTREPRISE..COULEURFOND%][%FIN%];[%SI%]NOM_ENTREPRISE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NOM_ENTREPRISE..CURSEURSOURIS%];[%FIN%]"><a[%SI%]NOM_ENTREPRISE..ETATCOLCALCUL=0[%ALORS%] href=javascript:_C1('[%TABLE_CLIENT%]')[%FIN%] class="l-15 bc-NOM_ENTREPRISE padding effet"
+ style="  [%SI%]NOM_ENTREPRISE..COULEUR!=-1[%ALORS%]color:[%NOM_ENTREPRISE..COULEUR%][%FIN%];  [%SI%]NOM_ENTREPRISE..COULEURFOND!=-1[%ALORS%]background-color:#[%NOM_ENTREPRISE..COULEURFOND%][%FIN%];[%SI%]NOM_ENTREPRISE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NOM_ENTREPRISE..CURSEURSOURIS%];[%FIN%]"[%SI%]NOM_ENTREPRISE..ETATCOLCALCUL=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="TABLE_CLIENT"  href=javascript:_C1('[%TABLE_CLIENT%]')>[%NOM_ENTREPRISE%]</A></td>[%FIN%]
+[%SI%]TELEPHONE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%TELEPHONE..LARGEUR%]" class="l-16 bc-TELEPHONE padding effet"
+ style="  [%SI%]TELEPHONE..COULEUR!=-1[%ALORS%]color:[%TELEPHONE..COULEUR%][%FIN%];  [%SI%]TELEPHONE..COULEURFOND!=-1[%ALORS%]background-color:#[%TELEPHONE..COULEURFOND%][%FIN%];[%SI%]TELEPHONE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TELEPHONE..CURSEURSOURIS%];[%FIN%]">[%TELEPHONE%]</td>[%FIN%]
+[%SI%]DATE_ACHAT..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%DATE_ACHAT..LARGEUR%]" class="l-17 bc-DATE_ACHAT padding effet"
+ style="  [%SI%]DATE_ACHAT..COULEUR!=-1[%ALORS%]color:[%DATE_ACHAT..COULEUR%][%FIN%];  [%SI%]DATE_ACHAT..COULEURFOND!=-1[%ALORS%]background-color:#[%DATE_ACHAT..COULEURFOND%][%FIN%];[%SI%]DATE_ACHAT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%DATE_ACHAT..CURSEURSOURIS%];[%FIN%]">[%DATE_ACHAT%]</td>[%FIN%]
+[%SI%]DATE_EXP..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%DATE_EXP..LARGEUR%]" class="l-18 bc-DATE_EXP padding effet"
+ style="  [%SI%]DATE_EXP..COULEUR!=-1[%ALORS%]color:[%DATE_EXP..COULEUR%][%FIN%];  [%SI%]DATE_EXP..COULEURFOND!=-1[%ALORS%]background-color:#[%DATE_EXP..COULEURFOND%][%FIN%];[%SI%]DATE_EXP..CURSEURSOURIS!=auto[%ALORS%]cursor:[%DATE_EXP..CURSEURSOURIS%];[%FIN%]">[%DATE_EXP%]</td>[%FIN%]
+[%SI%]DATE_DERNIERE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%DATE_DERNIERE..LARGEUR%]" class="l-18 bc-DATE_DERNIERE padding effet"
+ style="  [%SI%]DATE_DERNIERE..COULEUR!=-1[%ALORS%]color:[%DATE_DERNIERE..COULEUR%][%FIN%];  [%SI%]DATE_DERNIERE..COULEURFOND!=-1[%ALORS%]background-color:#[%DATE_DERNIERE..COULEURFOND%][%FIN%];[%SI%]DATE_DERNIERE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%DATE_DERNIERE..CURSEURSOURIS%];[%FIN%]">[%DATE_DERNIERE%]</td>[%FIN%]
+[%SI%]NBRLICEG..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%NBRLICEG..LARGEUR%]" class="l-19 bc-NBRLICEG padding effet"
+ style="  [%SI%]NBRLICEG..COULEUR!=-1[%ALORS%]color:[%NBRLICEG..COULEUR%][%FIN%];  [%SI%]NBRLICEG..COULEURFOND!=-1[%ALORS%]background-color:#[%NBRLICEG..COULEURFOND%][%FIN%];[%SI%]NBRLICEG..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NBRLICEG..CURSEURSOURIS%];[%FIN%]">[%NBRLICEG%]</td>[%FIN%]
+[%SI%]NBRLICEP..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%NBRLICEP..LARGEUR%]" class="l-20 bc-NBRLICEP padding effet"
+ style="  [%SI%]NBRLICEP..COULEUR!=-1[%ALORS%]color:[%NBRLICEP..COULEUR%][%FIN%];  [%SI%]NBRLICEP..COULEURFOND!=-1[%ALORS%]background-color:#[%NBRLICEP..COULEURFOND%][%FIN%];[%SI%]NBRLICEP..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NBRLICEP..CURSEURSOURIS%];[%FIN%]">[%NBRLICEP%]</td>[%FIN%]
+[%SI%]ACTIF..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%ACTIF..LARGEUR%]" class="l-18 bc-ACTIF padding effet"
+ style="  [%SI%]ACTIF..COULEUR!=-1[%ALORS%]color:[%ACTIF..COULEUR%][%FIN%];  [%SI%]ACTIF..COULEURFOND!=-1[%ALORS%]background-color:#[%ACTIF..COULEURFOND%][%FIN%];[%SI%]ACTIF..CURSEURSOURIS!=auto[%ALORS%]cursor:[%ACTIF..CURSEURSOURIS%];[%FIN%]">[%ACTIF%]</td>[%FIN%]
+[%SI%]NBHEURE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%NBHEURE..LARGEUR%]" class="l-20 bc-NBHEURE padding effet"
+ style="  [%SI%]NBHEURE..COULEUR!=-1[%ALORS%]color:[%NBHEURE..COULEUR%][%FIN%];  [%SI%]NBHEURE..COULEURFOND!=-1[%ALORS%]background-color:#[%NBHEURE..COULEURFOND%][%FIN%];[%SI%]NBHEURE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NBHEURE..CURSEURSOURIS%];[%FIN%]">[%NBHEURE%]</td>[%FIN%]
+[%SI%]VERSIONS..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%VERSIONS..LARGEUR%]" class="l-18 bc-VERSIONS padding effet"
+ style="  [%SI%]VERSIONS..COULEUR!=-1[%ALORS%]color:[%VERSIONS..COULEUR%][%FIN%];  [%SI%]VERSIONS..COULEURFOND!=-1[%ALORS%]background-color:#[%VERSIONS..COULEURFOND%][%FIN%];[%SI%]VERSIONS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%VERSIONS..CURSEURSOURIS%];[%FIN%]">[%VERSIONS%]</td>[%FIN%]
+[%SI%]DATEVERSIONS..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%DATEVERSIONS..LARGEUR%]" class="l-18 bc-DATEVERSIONS padding effet"
+ style="  [%SI%]DATEVERSIONS..COULEUR!=-1[%ALORS%]color:[%DATEVERSIONS..COULEUR%][%FIN%];  [%SI%]DATEVERSIONS..COULEURFOND!=-1[%ALORS%]background-color:#[%DATEVERSIONS..COULEURFOND%][%FIN%];[%SI%]DATEVERSIONS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%DATEVERSIONS..CURSEURSOURIS%];[%FIN%]">[%DATEVERSIONS%]</td>[%FIN%]
+[%SI%]EPLANVERSION..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%EPLANVERSION..LARGEUR%]" class="l-18 bc-EPLANVERSION padding effet"
+ style="  [%SI%]EPLANVERSION..COULEUR!=-1[%ALORS%]color:[%EPLANVERSION..COULEUR%][%FIN%];  [%SI%]EPLANVERSION..COULEURFOND!=-1[%ALORS%]background-color:#[%EPLANVERSION..COULEURFOND%][%FIN%];[%SI%]EPLANVERSION..CURSEURSOURIS!=auto[%ALORS%]cursor:[%EPLANVERSION..CURSEURSOURIS%];[%FIN%]">[%EPLANVERSION%]</td>[%FIN%]
+[%SI%]EPLANDATE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%EPLANDATE..LARGEUR%]" class="l-18 bc-EPLANDATE padding effet"
+ style="  [%SI%]EPLANDATE..COULEUR!=-1[%ALORS%]color:[%EPLANDATE..COULEUR%][%FIN%];  [%SI%]EPLANDATE..COULEURFOND!=-1[%ALORS%]background-color:#[%EPLANDATE..COULEURFOND%][%FIN%];[%SI%]EPLANDATE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%EPLANDATE..CURSEURSOURIS%];[%FIN%]">[%EPLANDATE%]</td>[%FIN%]
+[%SI%]EMAIL..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%EMAIL..LARGEUR%]" class="l-18 bc-EMAIL padding effet"
+ style="  [%SI%]EMAIL..COULEUR!=-1[%ALORS%]color:[%EMAIL..COULEUR%][%FIN%];  [%SI%]EMAIL..COULEURFOND!=-1[%ALORS%]background-color:#[%EMAIL..COULEURFOND%][%FIN%];[%SI%]EMAIL..CURSEURSOURIS!=auto[%ALORS%]cursor:[%EMAIL..CURSEURSOURIS%];[%FIN%]">[%EMAIL%]</td>[%FIN%]
+[%SI%]COL_MAJ..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_MAJ..LARGEUR%]" class="l-21 bc-COL_MAJ padding effet"
+ style="  [%SI%]COL_MAJ..COULEUR!=-1[%ALORS%]color:#[%COL_MAJ..COULEUR%][%FIN%];  [%SI%]COL_MAJ..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_MAJ..COULEURFOND%][%FIN%];[%SI%]COL_MAJ..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_MAJ..CURSEURSOURIS%];[%FIN%]">[%COL_MAJ%]</td>[%FIN%]
+[%SI%]COL_TOTACHAT..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_TOTACHAT..LARGEUR%]" class="l-20 bc-COL_TOTACHAT padding effet"
+ style="  [%SI%]COL_TOTACHAT..COULEUR!=-1[%ALORS%]color:[%COL_TOTACHAT..COULEUR%][%FIN%];  [%SI%]COL_TOTACHAT..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_TOTACHAT..COULEURFOND%][%FIN%];[%SI%]COL_TOTACHAT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_TOTACHAT..CURSEURSOURIS%];[%FIN%]">[%COL_TOTACHAT%]</td>[%FIN%]
+[%SI%]COL_TOTLOCAT..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_TOTLOCAT..LARGEUR%]" class="l-20 bc-COL_TOTLOCAT padding effet"
+ style="  [%SI%]COL_TOTLOCAT..COULEUR!=-1[%ALORS%]color:[%COL_TOTLOCAT..COULEUR%][%FIN%];  [%SI%]COL_TOTLOCAT..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_TOTLOCAT..COULEURFOND%][%FIN%];[%SI%]COL_TOTLOCAT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_TOTLOCAT..CURSEURSOURIS%];[%FIN%]">[%COL_TOTLOCAT%]</td>[%FIN%]
+[%SI%]COL_TOTSDP..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_TOTSDP..LARGEUR%]" class="l-20 bc-COL_TOTSDP padding effet"
+ style="  [%SI%]COL_TOTSDP..COULEUR!=-1[%ALORS%]color:[%COL_TOTSDP..COULEUR%][%FIN%];  [%SI%]COL_TOTSDP..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_TOTSDP..COULEURFOND%][%FIN%];[%SI%]COL_TOTSDP..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_TOTSDP..CURSEURSOURIS%];[%FIN%]">[%COL_TOTSDP%]</td>[%FIN%]
+[%SI%]COL_LASTMODIF..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_LASTMODIF..LARGEUR%]" class="l-19 bc-COL_LASTMODIF padding effet"
+ style="  [%SI%]COL_LASTMODIF..COULEUR!=-1[%ALORS%]color:[%COL_LASTMODIF..COULEUR%][%FIN%];  [%SI%]COL_LASTMODIF..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_LASTMODIF..COULEURFOND%][%FIN%];[%SI%]COL_LASTMODIF..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_LASTMODIF..CURSEURSOURIS%];[%FIN%]">[%COL_LASTMODIF%]</td>[%FIN%]
+[%SI%]COL_BROUGE..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_BROUGE..LARGEUR%]" class="l-19 bc-COL_BROUGE padding effet"
+ style="  [%SI%]COL_BROUGE..COULEUR!=-1[%ALORS%]color:[%COL_BROUGE..COULEUR%][%FIN%];  [%SI%]COL_BROUGE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_BROUGE..COULEURFOND%][%FIN%];[%SI%]COL_BROUGE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_BROUGE..CURSEURSOURIS%];[%FIN%]">[%COL_BROUGE%]</td>[%FIN%]
+[%SI%]COL_LOCATION..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_LOCATION..LARGEUR%]" class="l-20 bc-COL_LOCATION padding effet"
+ style="  [%SI%]COL_LOCATION..COULEUR!=-1[%ALORS%]color:[%COL_LOCATION..COULEUR%][%FIN%];  [%SI%]COL_LOCATION..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_LOCATION..COULEURFOND%][%FIN%];[%SI%]COL_LOCATION..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_LOCATION..CURSEURSOURIS%];[%FIN%]">[%COL_LOCATION%]</td>[%FIN%]
+[%SI%]COL_BACTIF..VISIBLESTOCKE=1[%ALORS%]  <td height="18" width="[%COL_BACTIF..LARGEUR%]" class="l-20 bc-COL_BACTIF padding effet"
+ style="  [%SI%]COL_BACTIF..COULEUR!=-1[%ALORS%]color:[%COL_BACTIF..COULEUR%][%FIN%];  [%SI%]COL_BACTIF..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_BACTIF..COULEURFOND%][%FIN%];[%SI%]COL_BACTIF..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_BACTIF..CURSEURSOURIS%];[%FIN%]">[%COL_BACTIF%]</td>[%FIN%]
+ </tr>
+<!--/REPEAT-->
+</table></CONTENEUR>[%TABLE_CLIENT..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwSAILOCATEG" style="position:absolute;left:1261px;top:27px;width:140px;height:24px;z-index:37; [%SI%]SAI_LOCATEG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_LOCATEG" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_LOCATEG"><INPUT TYPE="text" SIZE="9" NAME="SAI_LOCATEG" VALUE="[%SAI_LOCATEG%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_LOCATEG" class="Style6-Droit padding effet" TABINDEX="36" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIMAILDEST" style="position:absolute;left:1587px;top:430px;width:283px;height:25px;z-index:38; [%SI%]SAI_MAILDEST..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="25" width="283" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE10 padding effet" id="lzSAI_MAILDEST" width="119">Courriel envoi liste</TD>
+  <TD width="164px"><INPUT TYPE="text" SIZE="11" NAME="SAI_MAILDEST" VALUE="[%SAI_MAILDEST%]" id="SAI_MAILDEST" class="BLEUE10 padding effet" TABINDEX="39"></TD>
+  <TD height="25px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="119px"></TD>
+  <TD width="164px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAITOTLOCAT" style="position:absolute;left:1261px;top:101px;width:140px;height:24px;z-index:39; [%SI%]SAI_TOTLOCAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_TOTLOCAT" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_TOTLOCAT"><INPUT TYPE="text" SIZE="9" NAME="SAI_TOTLOCAT" VALUE="[%SAI_TOTLOCAT%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_TOTLOCAT" class="Style6-Droit padding effet" TABINDEX="42" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAITOTACHAT" style="position:absolute;left:1118px;top:101px;width:140px;height:24px;z-index:40; [%SI%]SAI_TOTACHAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_TOTACHAT" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_TOTACHAT"><INPUT TYPE="text" SIZE="9" NAME="SAI_TOTACHAT" VALUE="[%SAI_TOTACHAT%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_TOTACHAT" class="Style6-Droit padding effet" TABINDEX="46" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIACHATEG" style="position:absolute;left:1118px;top:27px;width:140px;height:24px;z-index:41; [%SI%]SAI_ACHATEG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_ACHATEG" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_ACHATEG"><INPUT TYPE="text" SIZE="9" NAME="SAI_ACHATEG" VALUE="[%SAI_ACHATEG%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_ACHATEG" class="Style6-Droit padding effet" TABINDEX="47" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIACHATPLAN1" style="position:absolute;left:1118px;top:52px;width:140px;height:24px;z-index:42; [%SI%]SAI_ACHATPLAN1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_ACHATPLAN1" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_ACHATPLAN1"><INPUT TYPE="text" SIZE="9" NAME="SAI_ACHATPLAN1" VALUE="[%SAI_ACHATPLAN1%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_ACHATPLAN1" class="Style6-Droit padding effet" TABINDEX="48" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIACHATPLANM" style="position:absolute;left:1118px;top:76px;width:140px;height:24px;z-index:43; [%SI%]SAI_ACHATPLANM..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_ACHATPLANM" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_ACHATPLANM"><INPUT TYPE="text" SIZE="9" NAME="SAI_ACHATPLANM" VALUE="[%SAI_ACHATPLANM%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_ACHATPLANM" class="Style6-Droit padding effet" TABINDEX="49" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAITOTSDP" style="position:absolute;left:1549px;top:27px;width:140px;height:24px;z-index:44; [%SI%]SAI_TOTSDP..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_TOTSDP" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_TOTSDP"><INPUT TYPE="text" SIZE="9" NAME="SAI_TOTSDP" VALUE="[%SAI_TOTSDP%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_TOTSDP" class="Style6-Droit padding effet" TABINDEX="50" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIGRANDTOT" style="position:absolute;left:1405px;top:101px;width:140px;height:24px;z-index:45; [%SI%]SAI_GRANDTOT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_GRANDTOT" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_GRANDTOT"><INPUT TYPE="text" SIZE="9" NAME="SAI_GRANDTOT" VALUE="[%SAI_GRANDTOT%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_GRANDTOT" class="Style6-Droit padding effet" TABINDEX="51" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAITOTINACTIF" style="position:absolute;left:1549px;top:154px;width:140px;height:24px;z-index:46; [%SI%]SAI_TOTINACTIF..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_TOTINACTIF" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_TOTINACTIF"><INPUT TYPE="text" SIZE="9" NAME="SAI_TOTINACTIF" VALUE="[%SAI_TOTINACTIF%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_TOTINACTIF" class="Style6-Droit padding effet" TABINDEX="52" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIGTEG" style="position:absolute;left:1405px;top:27px;width:140px;height:24px;z-index:47; [%SI%]SAI_GTEG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_GTEG" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_GTEG"><INPUT TYPE="text" SIZE="9" NAME="SAI_GTEG" VALUE="[%SAI_GTEG%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_GTEG" class="Style6-Droit padding effet" TABINDEX="53" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIGTPLAN1" style="position:absolute;left:1405px;top:52px;width:140px;height:24px;z-index:48; [%SI%]SAI_GTPLAN1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_GTPLAN1" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_GTPLAN1"><INPUT TYPE="text" SIZE="9" NAME="SAI_GTPLAN1" VALUE="[%SAI_GTPLAN1%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_GTPLAN1" class="Style6-Droit padding effet" TABINDEX="54" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIGTPLANM" style="position:absolute;left:1405px;top:76px;width:140px;height:24px;z-index:49; [%SI%]SAI_GTPLANM..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_GTPLANM" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_GTPLANM"><INPUT TYPE="text" SIZE="9" NAME="SAI_GTPLANM" VALUE="[%SAI_GTPLANM%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_GTPLANM" class="Style6-Droit padding effet" TABINDEX="55" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIGRANDGRAND" style="position:absolute;left:1549px;top:101px;width:140px;height:24px;z-index:50; [%SI%]SAI_GRANDGRAND..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_GRANDGRAND" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_GRANDGRAND"><INPUT TYPE="text" SIZE="9" NAME="SAI_GRANDGRAND" VALUE="[%SAI_GRANDGRAND%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_GRANDGRAND" class="Style6-Droit padding effet" TABINDEX="56" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIADDRIP" style="position:absolute;left:541px;top:13px;width:149px;height:25px;z-index:51;"><INPUT TYPE="text" SIZE="10" NAME="SAI_ADDRIP" VALUE="[%SAI_ADDRIP%]" id="SAI_ADDRIP" class="BLEUE10 padding effet" TABINDEX="57"></div>
+<div id="dwwSAITOTH" style="position:absolute;left:1549px;top:222px;width:140px;height:24px;z-index:52; [%SI%]SAI_TOTH..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="140" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <TD class="BLEUE8 padding effet" id="lzSAI_TOTH" width="6"></TD>
+  <TD width="134"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAI_TOTH"><INPUT TYPE="text" SIZE="9" NAME="SAI_TOTH" VALUE="[%SAI_TOTH%]" onkeypress="return VerifSaisieNombre(event,'+99 999 999,99');" onblur="reinitNombre(event,'+99 999 999,99');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,10}('+_WW_SEPDECIMAL_+'(\\d| ){0,2}){0,1}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+99 999 999,99');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_TOTH" class="Style6-Droit padding effet" TABINDEX="61" READONLY></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="6px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+</div>
+<div id="dwwBTNRONDROUGE" style="position:absolute;left:507px;top:9px;z-index:0; [%SI%]BTN_RONDROUGE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table width="32px" style="height:32px;"><tr><td class="Btn-Std" valign="middle" background="[%_PROJET_WEB_%]RondRouge.png" id="tzBTN_RONDROUGE"><table><tr><td align="center" style="width:32px;height:32px"><a href="javascript:_BTN_RONDROUGE_CLI()" id="BTN_RONDROUGE" class="Btn-Std wblien padding effet"  style="_height:32px;text-decoration:none;background-image:none;display:block;" TABINDEX="59"><span id="z_BTN_RONDROUGE_IMG" style="display:table;_display:block;width:100%;width:32px;height:32px;overflow:hidden;cursor:pointer;"><span class="btnvalignmiddle" style="line-height:14px;"></span></span></a></td></tr></table></td></tr></table></div>
+<div id="dwwBTNRONDVERT" style="position:absolute;left:507px;top:9px;z-index:1; [%SI%]BTN_RONDVERT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table width="32px" style="height:32px;"><tr><td class="Btn-Std" valign="middle" background="[%_PROJET_WEB_%]RondVert.png" id="tzBTN_RONDVERT"><table><tr><td align="center" style="width:32px;height:32px"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_RONDVERT','_self','','')}" id="BTN_RONDVERT" class="Btn-Std wblien padding effet"  style="_height:32px;text-decoration:none;background-image:none;display:block;" TABINDEX="58"><span id="z_BTN_RONDVERT_IMG" style="display:table;_display:block;width:100%;width:32px;height:32px;overflow:hidden;cursor:pointer;"><span class="btnvalignmiddle" style="line-height:14px;"></span></span></a></td></tr></table></td></tr></table></div>
+<div id="dwwBOUTON6" style="position:absolute;left:142px;top:43px;width:38px;height:24px;z-index:2;"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON6','_self','','')}" onmouseout="document.getElementById('z_BOUTON6_IMG').src='[%_PROJET_WEB_%]res/JUMELL2__FFD1031E_.PNG';" onmouseover="document.getElementById('z_BOUTON6_IMG').src='[%_PROJET_WEB_%]res/_BOUTON6_2__AD863F06_.PNG';" id="BOUTON6" class="l-0 wblien padding effet"  style="_height:24px;" TABINDEX="19"><img id="z_BOUTON6_IMG" src="[%_PROJET_WEB_%]res/JUMELL2__FFD1031E_.PNG" alt="" style="width:38px;height:24px"></a></div>
+<div id="tzREGLETTE1" style="position:absolute;left:14px;top:75px;width:310px;height:14px;z-index:25;"><ol class="reglette">[%REGLETTE1;2%]</ol></div>
+<div id="dwwBOUTON2" style="position:absolute;left:288px;top:102px;width:52px;height:16px;z-index:26;"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON2','_self','','')}" onmouseout="document.getElementById('z_BOUTON2_IMG').src='[%_PROJET_WEB_%]res/_Tri%20Date_34494B22_.PNG';" onmouseover="document.getElementById('z_BOUTON2_IMG').src='[%_PROJET_WEB_%]res/_Tri%20DateBOUTON2_2__5E31FE7_.PNG';" id="BOUTON2" class="l-8 wblien padding effet"  style="_height:16px;" TABINDEX="25"><img id="z_BOUTON2_IMG" src="[%_PROJET_WEB_%]res/_Tri%20Date_34494B22_.PNG" alt="" style="width:52px;height:16px"></a></div>
+<div id="dwwBOUTON4" style="position:absolute;left:369px;top:102px;width:52px;height:16px;z-index:27;"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON4','_self','','')}" onmouseout="document.getElementById('z_BOUTON4_IMG').src='[%_PROJET_WEB_%]res/_Tri%20Date_34494B22_.PNG';" onmouseover="document.getElementById('z_BOUTON4_IMG').src='[%_PROJET_WEB_%]res/_Tri%20DateBOUTON4_2__68D9DFA1_.PNG';" id="BOUTON4" class="l-8 wblien padding effet"  style="_height:16px;" TABINDEX="26"><img id="z_BOUTON4_IMG" src="[%_PROJET_WEB_%]res/_Tri%20Date_34494B22_.PNG" alt="" style="width:52px;height:16px"></a></div>
+<div id="dwwBTNAJOUTER" style="position:absolute;left:14px;top:13px;width:80px;height:24px;z-index:31; [%SI%]BTN_AJOUTER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_AJOUTER" VALUE="Add" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_AJOUTER','_self','','')}" id="BTN_AJOUTER" class="l-7 padding effet" TABINDEX="15"></div>
+<div id="dwwIMAGE3" style="position:absolute;left:[%IMAGE3..X%]px;top:[%IMAGE3..Y%]px;width:[%IMAGE3..LARGEUR%]px;height:[%IMAGE3..HAUTEUR%]px;z-index:32; [%SI%]IMAGE3..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMAGE3..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMAGE3..CURSEURSOURIS%];[%FIN%]"><div class="dzIMAGE3" id="dzIMAGE3"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMAGE3=[%IMAGE3..NOCACHE%]" width=[%IMAGE3..LARGEUR%] height=[%IMAGE3..HAUTEUR%] hspace=0 vspace=0 border=0 alt="[%IMAGE3%]" name="IMAGE3" id="IMAGE3" class="l-7 padding effet" TITLE="[%IMAGE3..BULLE%]"[%SI%]IMAGE3..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMAGE3..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="dwwIMAGE2" style="position:absolute;left:[%IMAGE2..X%]px;top:[%IMAGE2..Y%]px;width:[%IMAGE2..LARGEUR%]px;height:[%IMAGE2..HAUTEUR%]px;z-index:33; [%SI%]IMAGE2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMAGE2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMAGE2..CURSEURSOURIS%];[%FIN%]"><div class="dzIMAGE2" id="dzIMAGE2"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMAGE2=[%IMAGE2..NOCACHE%]" width=[%IMAGE2..LARGEUR%] height=[%IMAGE2..HAUTEUR%] hspace=0 vspace=0 border=0 alt="[%IMAGE2%]" name="IMAGE2" id="IMAGE2" class="l-7 padding effet" TITLE="[%IMAGE2..BULLE%]"[%SI%]IMAGE2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMAGE2..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="dwwIMAGE4" style="position:absolute;left:[%IMAGE4..X%]px;top:[%IMAGE4..Y%]px;width:[%IMAGE4..LARGEUR%]px;height:[%IMAGE4..HAUTEUR%]px;z-index:34; [%SI%]IMAGE4..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMAGE4..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMAGE4..CURSEURSOURIS%];[%FIN%]"><div class="dzIMAGE4" id="dzIMAGE4"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMAGE4=[%IMAGE4..NOCACHE%]" width=[%IMAGE4..LARGEUR%] height=[%IMAGE4..HAUTEUR%] hspace=0 vspace=0 border=0 alt="[%IMAGE4%]" name="IMAGE4" id="IMAGE4" class="l-7 padding effet" TITLE="[%IMAGE4..BULLE%]"[%SI%]IMAGE4..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMAGE4..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="dwwIMAGE1" style="position:absolute;left:[%IMAGE1..X%]px;top:[%IMAGE1..Y%]px;width:[%IMAGE1..LARGEUR%]px;height:[%IMAGE1..HAUTEUR%]px;z-index:35; [%SI%]IMAGE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMAGE1..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMAGE1..CURSEURSOURIS%];[%FIN%]"><div class="dzIMAGE1" id="dzIMAGE1"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMAGE1=[%IMAGE1..NOCACHE%]" width=[%IMAGE1..LARGEUR%] height=[%IMAGE1..HAUTEUR%] hspace=0 vspace=0 border=0 alt="[%IMAGE1%]" name="IMAGE1" id="IMAGE1" class="l-7 padding effet" TITLE="[%IMAGE1..BULLE%]"[%SI%]IMAGE1..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMAGE1..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+<div id="dwwBOUTON3" style="position:absolute;left:100px;top:13px;width:80px;height:24px;z-index:53; [%SI%]BOUTON3..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON3" VALUE="Delete" onclick="_BOUTON3_CLI(event)" id="BOUTON3" class="l-7 padding effet" TABINDEX="17"></div>
+<div id="dwwBOUTON7" style="position:absolute;left:186px;top:98px;width:94px;height:24px;z-index:54;"><input TYPE="button" NAME="BOUTON7" VALUE="Afficher tous" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON7','_self','','')}" id="BOUTON7" class="l-7 padding effet" TABINDEX="20"></div>
+<div id="dwwBOUTON8" style="position:absolute;left:1559px;top:358px;width:166px;height:24px;z-index:55; [%SI%]BOUTON8..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON8" VALUE="Configuration" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON8','_blank','','')}" id="BOUTON8" class="l-7 padding effet" TABINDEX="22"></div>
+<div id="dwwBOUTON9" style="position:absolute;left:1559px;top:325px;width:166px;height:24px;z-index:56; [%SI%]BOUTON9..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON9" VALUE="Bannières 120 x 600" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON9','_blank','','')}" id="BOUTON9" class="l-0 padding effet" TABINDEX="23"></div>
+<div id="dwwBOUTON10" style="position:absolute;left:1559px;top:292px;width:166px;height:24px;z-index:57; [%SI%]BOUTON10..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON10" VALUE="Bannières 468 x 60" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON10','_blank','','')}" id="BOUTON10" class="l-7 padding effet" TABINDEX="24"></div>
+<div id="dwwBOUTON5" style="position:absolute;left:14px;top:98px;width:80px;height:24px;z-index:58; [%SI%]BOUTON5..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON5" VALUE="Détail" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON5','_blank','',_NAO(48)+',width='+810+',height='+700+',left='+1+',top='+1)}" id="BOUTON5" class="l-7 padding effet" TABINDEX="27"></div>
+<div id="dwwBOUTON11" style="position:absolute;left:100px;top:98px;width:80px;height:24px;z-index:59; [%SI%]BOUTON11..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON11" VALUE="Rafraichir" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON11','_self','','')}" id="BOUTON11" class="l-7 padding effet" TABINDEX="30"></div>
+<div id="dwwBTNDATEMODIF" style="position:absolute;left:458px;top:102px;width:191px;height:16px;z-index:60;"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_DATEMODIF','_self','','')}" onmouseout="document.getElementById('z_BTN_DATEMODIF_IMG').src='[%_PROJET_WEB_%]res/_Tri%20date%20derni%C3%A8re%20modification_70C2D257_.PNG';" onmouseover="document.getElementById('z_BTN_DATEMODIF_IMG').src='[%_PROJET_WEB_%]res/_Tri%20date%20derni%C3%A8re%20modificationBTN_DATEMODIF_2__4CC89A91_.PNG';" id="BTN_DATEMODIF" class="l-8 wblien padding effet"  style="_height:16px;" TABINDEX="32"><img id="z_BTN_DATEMODIF_IMG" src="[%_PROJET_WEB_%]res/_Tri%20date%20derni%C3%A8re%20modification_70C2D257_.PNG" alt="" style="width:191px;height:16px"></a></div>
+<div id="dwwBOUTON12" style="position:absolute;left:179px;top:43px;width:38px;height:24px;z-index:61;"><a href="javascript:if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BOUTON12','_self','','')}" onmouseout="document.getElementById('z_BOUTON12_IMG').src='[%_PROJET_WEB_%]res/JUMELLB__4AE9F0EA_.PNG';" onmouseover="document.getElementById('z_BOUTON12_IMG').src='[%_PROJET_WEB_%]res/_BOUTON12_2__DB1F0774_.PNG';" id="BOUTON12" class="l-0 wblien padding effet"  style="_height:24px;" TITLE="Recherche avec phonetique" TABINDEX="33"><img id="z_BOUTON12_IMG" src="[%_PROJET_WEB_%]res/JUMELLB__4AE9F0EA_.PNG" alt="Recherche avec phonetique" style="width:38px;height:24px"></a></div>
+<div id="dwwBTNEPLANS" style="position:absolute;left:541px;top:47px;width:149px;height:24px;z-index:62; [%SI%]BTN_EPLANS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_EPLANS" VALUE="Clients e-Plans" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_EPLANS','_blank','','')}" id="BTN_EPLANS" class="l-0 padding effet" TABINDEX="34"></div>
+<div id="dwwBTNLISTABON" style="position:absolute;left:864px;top:98px;width:134px;height:24px;z-index:63; [%SI%]BTN_LISTABON..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_LISTABON" VALUE="Liste des abonnés" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_LISTABON','_self','','')}" id="BTN_LISTABON" class="l-0 padding effet" TABINDEX="38"></div>
+<div id="dwwBTNENVOICONCOURS" style="position:absolute;left:1601px;top:462px;width:103px;height:24px;z-index:64; [%SI%]BTN_ENVOICONCOURS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_ENVOICONCOURS" VALUE="Envoi tirage" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_ENVOICONCOURS','_self','','')}" id="BTN_ENVOICONCOURS" class="l-0 padding effet" TABINDEX="40"></div>
+<div id="dwwBTNLOCEXP" style="position:absolute;left:260px;top:47px;width:126px;height:24px;z-index:65; [%SI%]BTN_LOCEXP..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_LOCEXP" VALUE="Loc. expirées" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_LOCEXP','_blank','','')}" id="BTN_LOCEXP" class="l-0 padding effet" TABINDEX="43"></div>
+<div id="dwwBTNDEMO" style="position:absolute;left:695px;top:47px;width:149px;height:24px;z-index:66; [%SI%]BTN_DEMO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_DEMO" VALUE="Versions Demo" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_DEMO','_self','','')}" id="BTN_DEMO" class="l-0 padding effet" TABINDEX="62"></div>
+<div id="dwwBTNREFRESHSTATS" style="position:absolute;left:1555px;top:252px;width:134px;height:24px;z-index:67; [%SI%]BTN_REFRESHSTATS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_REFRESHSTATS" VALUE="Rafraichir" onclick="_BTN_REFRESHSTATS_CLI(event)" id="BTN_REFRESHSTATS" class="l-7 padding effet" TABINDEX="63"></div>
+<div id="dwwBTNMACHINES" style="position:absolute;left:850px;top:47px;width:110px;height:24px;z-index:68; [%SI%]BTN_MACHINES..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BTN_MACHINES" VALUE="Machines" onclick="if(_AATABLECLIENT_SUB()){_JSL(_PAGE_,'BTN_MACHINES','_self','','')}" id="BTN_MACHINES" class="l-0 padding effet" TABINDEX="66"></div>
+
+</form>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		_BOUTON6_js = new Image(); _BOUTON6_js.src="[%_PROJET_WEB_%]res/_BOUTON6_2__AD863F06_.PNG";
+		_BOUTON2_js = new Image(); _BOUTON2_js.src="[%_PROJET_WEB_%]res/_Tri%20DateBOUTON2_2__5E31FE7_.PNG";
+		_BOUTON4_js = new Image(); _BOUTON4_js.src="[%_PROJET_WEB_%]res/_Tri%20DateBOUTON4_2__68D9DFA1_.PNG";
+		_BTN_DATEMODIF_js = new Image(); _BTN_DATEMODIF_js.src="[%_PROJET_WEB_%]res/_Tri%20date%20derni%C3%A8re%20modificationBTN_DATEMODIF_2__4CC89A91_.PNG";
+		_BOUTON12_js = new Image(); _BOUTON12_js.src="[%_PROJET_WEB_%]res/_BOUTON12_2__DB1F0774_.PNG";
+	}
+</script>
+[%AATableClient..HTMLFINPAGE%]</body>
+</html>
+<!--145261-->

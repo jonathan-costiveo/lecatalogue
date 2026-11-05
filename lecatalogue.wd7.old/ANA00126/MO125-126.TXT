@@ -1,0 +1,5 @@
+//MO125-126.TXT ANA00125 TO ANA00126
+AAClient		TAR	1413	nouvelle taille enregistrement : 1413
+AAClient	B_ECOLE	RUB+		B_ECOLE est une nouvelle rubrique
+INFO_ECOLE		NFI		nouveau fichier
+INFO_ECOLE		FRN		

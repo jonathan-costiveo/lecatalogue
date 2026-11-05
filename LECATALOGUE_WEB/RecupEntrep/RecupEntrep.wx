@@ -1,0 +1,6 @@
+[GLOBAL]
+VERSION=1
+TAG=RecupEntrep
+[WDREPORT]
+LOCAL_DIR=C:\Program Files (x86)\RecupEntrep\Etats et Requêtes
+GLOBAL_DIR=C:\Program Files (x86)\RecupEntrep\Etats et Requêtes Partagés

@@ -1,0 +1,3 @@
+//MO132-133.TXT ANA00132 TO ANA00133
+REPCOMMON		TAR	576	nouvelle taille enregistrement : 576
+REPCOMMON	ENREG_MONO	RUB+		ENREG_MONO est une nouvelle rubrique

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- GestCat 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%GESTCAT..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%GESTCAT..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _UC0_="[%BTN_DEL..DNDSOURCE%]";
+var _UC1_="[%BTN_DEL..DNDCIBLE%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+function _GESTCAT_LOD(event)
+{
+	{
+}
+}
+function _BTN_DEL_CLI(event)
+{
+	{
+	if((!clWDUtil.oConversionType(confirm("Etes-vous sûr de vouloir supprimer le catalogue ?"),8,0,8,0)))
+	{
+		clWDUtil.bStopPropagation(event||{});
+		return;
+	}
+}
+{
+		_JSL(_PAGE_,"BTN_DEL","_self","","");}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_DEL","ZONEREPETEE_MULTICAT",_UC0_,_UC1_,_JGEN("BTN_DEL",document,false),[null],[null]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%GESTCAT..HTMLENTETE%]<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:171px;height:auto !important;height:171px;min-width:701px;width:auto !important;width:701px;}.l-1 {background-color:#A3D8FF;}
+.l-2 {background-color:#CCFFFF;}
+
+<CONTENEUR NAME="[%ZONEREPETEE_MULTICAT..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->#c-[%ZONEREPETEE_MULTICAT%]-BTN-DEL {  [%SI%]BTN_DEL..COULEUR!=-1[%ALORS%]color:#[%BTN_DEL..COULEUR%][%FIN%];  [%SI%]BTN_DEL..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_DEL..COULEURFOND%][%FIN%];font-weight:[%BTN_DEL..POLICEGRAS;4%];font-style:[%BTN_DEL..POLICEITALIQUE;5%];[%SI%]BTN_DEL..POLICENOM!=[%ALORS%]font-family:[%BTN_DEL..POLICENOM%];[%FIN%]text-decoration:[%BTN_DEL..POLICESOULIGNEE;6%];[%SI%]BTN_DEL..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_DEL..POLICETAILLE;7%];[%FIN%][%SI%]BTN_DEL..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_DEL..CADRAGEH;9%];[%FIN%][%SI%]BTN_DEL..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_DEL..CADRAGEV;10%];[%FIN%][%SI%]BTN_DEL..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_DEL..OPACITE%]);zoom:1;opacity:[%BTN_DEL..OPACITE;8%];[%FIN%]}
+<!--/REPEAT-->
+</CONTENEUR>.REGLETTE-ZONEREPETEE-MULTICAT-sty10621 {font-weight:bold;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE_ZONEREPETEE_MULTICAT .premier a,#REGLETTE_ZONEREPETEE_MULTICAT .premier span,#REGLETTE_ZONEREPETEE_MULTICAT .precedent a,#REGLETTE_ZONEREPETEE_MULTICAT .precedent span,#REGLETTE_ZONEREPETEE_MULTICAT .suivant a,#REGLETTE_ZONEREPETEE_MULTICAT .suivant span,#REGLETTE_ZONEREPETEE_MULTICAT .dernier a,#REGLETTE_ZONEREPETEE_MULTICAT .dernier span,#REGLETTE_ZONEREPETEE_MULTICAT .indice a,#REGLETTE_ZONEREPETEE_MULTICAT .indice span {width:0;}
+#REGLETTE_ZONEREPETEE_MULTICAT li a, #REGLETTE_ZONEREPETEE_MULTICAT li span {height:20px;}
+
+</style>
+</head>
+<body style="   background-color:#FFFFFF;" onload="[%_CodeInfoError_%];_LOD_COM(event);_GESTCAT_LOD(event)">
+<form name="GESTCAT" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.GESTCAT</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="zrl_[%ZONEREPETEE_MULTICAT%]_BTN_DEL">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:701">
+<div id="dwwZONEREPETEEMULTICAT" style="position:absolute;left:78px;top:108px;width:623px;z-index:0;"><input type=hidden name="ZONEREPETEE_MULTICAT" value="[%ZONEREPETEE_MULTICAT%]"><input type=hidden name="ZONEREPETEE_MULTICAT_DEB" value="[%ZONEREPETEE_MULTICAT..PREMIERVISIBLE%]"><input type=hidden name="_ZONEREPETEE_MULTICAT_OCC" value="[%ZONEREPETEE_MULTICAT..OCCURRENCE%]"><CONTENEUR NAME="[%ZONEREPETEE_MULTICAT..ALIAS%]"><table id="con-ZONEREPETEE_MULTICAT" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr><td height="37" width="623" style=" [%SI%]ATTMUCLEUNIK..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=CCFFFF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ATTMUCLEUNIK..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=CCFFFF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE!=1[%ALORS%]l-2[%FIN%][%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE=1[%ALORS%]l-1[%FIN%] padding"><div style="position:relative;  [%SI%]ATTMUCLEUNIK..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=A3D8FF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE_MULTICAT..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE_MULTICAT..COULEURFOND!=CCFFFF[%ALORS%]#[%ATTMUCLEUNIK..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZONEREPETEE_MULTICAT_[%ZONEREPETEE_MULTICAT%]"><div id="zrl_[%ZONEREPETEE_MULTICAT%]_MUCLEUNIK" style="position:absolute;left:6px;top:9px;width:127px;height:19px;z-index:2;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE_MULTICAT%]_ATTMUCLEUNIK">[%ATTMUCLEUNIK%]</div></div>
+<div id="tzzrl[%ZONEREPETEE_MULTICAT%]ATTNOMCATALOG" style="position:absolute;left:171px;top:7px;width:237px;height:24px;z-index:3;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE_MULTICAT%]_ATTNOMCATALOG">[%ATTNOMCATALOG..VALEUR%]</div></div>
+<div id="dwwzrl[%ZONEREPETEE_MULTICAT%]BTNDEL" style="position:absolute;left:[%BTN_DEL..X%]px;top:[%BTN_DEL..Y%]px;width:104px;height:24px;z-index:4; [%SI%]BTN_DEL..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_DEL..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_DEL..CURSEURSOURIS%];[%FIN%]">[%BTN_DEL..HTMLAVANT%]<a[%SI%]BTN_DEL..ETAT=0[%ALORS%] href="javascript:_PAGE_.ZONEREPETEE_MULTICAT.value=[%ZONEREPETEE_MULTICAT%];javascript:_BTN_DEL_CLI()"[%FIN%] onmouseout="document.getElementById('z_zrl_[%ZONEREPETEE_MULTICAT%]_BTN_DEL_IMG').src='[%_PROJET_WEB_%]res/Btn01_ActivXP_Supprimer_721AB727_.PNG';" onmouseover="document.getElementById('z_zrl_[%ZONEREPETEE_MULTICAT%]_BTN_DEL_IMG').src='[%_PROJET_WEB_%]res/Btn02_ActivXP_Supprimer_5228A81B_.PNG';" id="c-[%ZONEREPETEE_MULTICAT%]-BTN-DEL" class="Btn-Std wblien padding"  style="_height:24px;" TITLE="[%BTN_DEL..BULLE%]"[%SI%]BTN_DEL..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_DEL..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="zrl_[%ZONEREPETEE_MULTICAT%]_BTN_DEL"  href="javascript:_PAGE_.ZONEREPETEE_MULTICAT.value=[%ZONEREPETEE_MULTICAT%];javascript:_BTN_DEL_CLI()"><img id="z_zrl_[%ZONEREPETEE_MULTICAT%]_BTN_DEL_IMG" src="[%_PROJET_WEB_%]res/Btn01_ActivXP_Supprimer_721AB727_.PNG" alt="[%BTN_DEL..BULLE%]" style="width:104px;height:24px;"></a>[%BTN_DEL..HTMLAPRES%]</div>
+</div></td></tr><!--/REPEAT--></table></CONTENEUR></div>
+</div>
+<div id="tzREGLETTEZONEREPETEEMULTICAT" style="position:absolute;left:222px;top:151px;width:350px;height:20px;z-index:1;"><ol class="reglette">[%REGLETTE_ZONEREPETEE_MULTICAT;2%]</ol></div>
+
+</form>
+[%GESTCAT..HTMLFINPAGE%]</body>
+</html>
+<!--27637-->

@@ -1,0 +1,3 @@
+//MO056-057.TXT ANA00056 TO ANA00057
+SDPINFO		TAR	87	nouvelle taille enregistrement : 87
+SDPINFO	SDP_DELETED	RUB+		SDP_DELETED est une nouvelle rubrique

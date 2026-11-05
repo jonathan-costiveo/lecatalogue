@@ -1,0 +1,3 @@
+//MO137-138.TXT ANA00137 TO ANA00138
+AAClient		TAR	1463	nouvelle taille enregistrement : 1463
+AAClient	NBHFORM	RUB+		NBHFORM est une nouvelle rubrique

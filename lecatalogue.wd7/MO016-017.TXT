@@ -1,0 +1,4 @@
+//MO016-017.TXT ANA00016 TO ANA00017
+Client		TAR	439	nouvelle taille enregistrement : 439
+Client	Telephone	RUB+		Telephone est une nouvelle rubrique
+Client	Fax1	RUB+		Fax1 est une nouvelle rubrique

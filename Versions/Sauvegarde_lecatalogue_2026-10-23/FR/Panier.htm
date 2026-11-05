@@ -1,0 +1,414 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- Panier 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%PANIER..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PANIER..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _UC0_="[%PANIERLIEN..DNDSOURCE%]";
+var _UC1_="[%PANIERLIEN..DNDCIBLE%]";
+var _UC2_="[%MODELE_LIEN2..DNDSOURCE%]";
+var _UC3_="[%MODELE_LIEN2..DNDCIBLE%]";
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// STD_ChaineVersDate
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	d : chaine contenant la date
+//	f : format de la chaine
+function _CVD(d,f)
+{
+	// Normalise le masque
+	f = f.replace(/D/g, "J").replace(/Y/g, "A");
+	// Gere les format pour lesquel il manque une composante
+	var j = (-1 != f.indexOf("J")) ? "" : "01";
+	var m = (-1 != f.indexOf("M")) ? "" : "01";
+	var a = (-1 != f.indexOf("A")) ? "" : "" + (new Date()).getUTCFullYear();
+
+	// Traite caractere par caractere le masque
+	var nF = 0;
+	var nD = 0;
+	var fParseJM = function(c)
+	{
+		var s;
+		// Compte le nombre de caracteres
+		if (f.charAt(nF + 1) == c)
+		{
+			s = d.substr(nD, 2);
+			nF++;
+			nD++;
+		}
+		else if (isNaN(parseInt(d.charAt(nD + 1), 10)))
+		{
+			s = "0" + d.charAt(nD);
+		}
+		else
+		{
+			s = d.substr(nD, 2);
+			nD++;
+		}
+		return s;
+	};
+	for(;nF<f.length;nF++,nD++)
+	{
+		switch(f.charAt(nF))
+		{
+		case "J":
+			j = fParseJM("J");
+			break;
+
+		case "M":
+			m = fParseJM("M");
+			break;
+
+		case "A":
+		case "Y":
+			// Sur 2 ou sur 4 ?
+			if (f.indexOf("AAAA")==nF)
+			{
+				a = d.substr(nD, 4);
+				nF+=3;
+				nD+=3;
+			}
+			else
+			{
+				a = d.substr(nD, 2);
+				a= (parseInt(a)>50?"19":"20")+a;
+				nF++;
+				nD++;
+			}
+			break;
+		}
+	}
+
+	var sRes=a+m+j;
+	return (sRes.length==8)?sRes:"";
+}
+// MakeDateFromWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend une date au format AAAAMMJJHHMMSS avec MM dans 1..12 et retourne un objet date
+// La chaine peut etre tronquee a la date auquel cas l'heure sera nulle
+// Parametres :
+//	c : chaine contenant la date 
+// Variables locales :
+//	a : annee
+//	d : date resultat
+function _WMD(c)
+{
+	// on recupere l'annee
+	var a=c.substring(0,4);
+	// on construit la date
+	var d=new Date(a,parseInt(c.substring(4,6), 10) - 1,c.substring(6,8),c.substring(8,10),c.substring(10,12),c.substring(12,14),c.substring(14,16)+"0");
+	// si l'annee est inferieure a 100, on construit l'annee complete
+	if (parseInt(a, 10) < 100)
+	{
+		d.setFullYear(a);
+	}
+	// on renvoie la date resultat
+	return d;
+}
+// JS_DateToWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend un objet Date et retourne une date au format WL AAAAMMJJ (avec MM dans 1..12)
+// Parametres :
+//	d : objet Date 
+// Variables locales :
+//	s : date en chaine au format WL
+//	m : mois en entier entre 1 et 12
+//	j : j en entier
+function _JDTW(d)
+{
+	// Calcule l'annee
+	var s = d.getFullYear();
+	// Calcule le mois en chaine
+	var m = d.getMonth() + 1;
+	s += ((m < 10) ? "0" : "") + m;
+	// Calcule le jour en chaine
+	var j = d.getDate();
+	s += ((j < 10) ? "0" : "") + j;
+	// Renvoie la date resultat
+	return s;
+}
+// STD_DateVersChaineInterne
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	v : chaine contenant une partie de la valeur
+//	r : format courant de la chaine
+//	tf : Tableau des formats : tableau de couples format, longueur de chaine courte
+function _DVCI(v,r,tf)
+{
+	for (var i = 0; i < tf.length; i++)
+	{
+		// Recherche la position du jour dans le format
+		var j = r.indexOf(tf[i][0]);
+		if(j > -1)
+		{
+			// Supprime les 0 non significatifs
+			while ((v.charAt(0) == "0") && (tf[i][1] > 0))
+			{
+				v = v.substring(1);
+				tf[i][1]--;
+			}
+			// Retourne la chaine
+			return r.substring(0,j) + v + r.substring(j + tf[i][0].length, r.length);
+		}
+	}
+	return r;
+}
+// STD_DateVersChaine
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	d : chaine contenant la date au format AAAAMMJJ
+//	f : format de la chaine
+// Variables locales :
+//	r : resultat
+// 	a : position des annees
+//	m : position des mois
+//	j : position des jours
+function _DVC(d,f)
+{
+	if(d=="")return"";
+	var r=f;
+
+	r = _DVCI(d.substring(6,8),r,[["JJ", 0], ["DD", 0], ["J", 1], ["D", 1]]);
+	r = _DVCI(d.substring(4,6),r,[["MM", 0], ["M", 1]]);
+
+	var a=r.indexOf("AAAA");
+	if(a==-1)a=r.indexOf("YYYY");
+	if(a>-1)return r.substring(0,a)+d.substring(0,4)+r.substring(a+4,r.length);
+	a=r.indexOf("AA");
+	if(a==-1)a=r.indexOf("YY");
+	return r.substring(0,a)+d.substring(2,4)+r.substring(a+2,r.length);
+}
+// v : Date au format du champ
+// f : format de la date du champ
+// d : Nombre de jour du dÈclage
+function _JDJ(v,f,d)
+{
+	v=_CVD(v,f);
+	v=_WMD(v);
+	v.setTime(v.getTime()+d*86400000);
+	v=_JDTW(v);
+	return _DVC(v,f);
+}
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On dÈtecte les balises DispHTMLUnknownElement par la propriÈtÈ canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas trËs logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+function _GET_MODELE_LIEN2_1()
+{
+	return _JCIR(_JGE("MODELE_LIEN2",document));
+}
+function _SET_MODELE_LIEN2_1()
+{
+	_JGE("MODELE_LIEN2",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _GET_PANIERLIEN_1()
+{
+	return _JCIR(_JGE("PANIERLIEN",document));
+}
+function _SET_PANIERLIEN_1()
+{
+	_JGE("PANIERLIEN",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _PANIER_LOD_0(event)
+{
+	{
+}
+}
+function _PANIER_LOD(event)
+{
+	if(false===_PANIER_LOD_0(event))
+	{
+		return;
+	}
+	;
+	{
+}
+}
+	function _LIENX_CLI(event)
+	{
+		history.back()
+}
+	function _IMAGECLICABLE3_CLI(event)
+	{
+		history.back()
+	
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("PANIERLIEN","",_UC0_,_UC1_,_JGEN("PANIERLIEN",document,false),[_GET_PANIERLIEN_1],[_SET_PANIERLIEN_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("MODELE_LIEN2","",_UC2_,_UC3_,_JGEN("MODELE_LIEN2",document,false),[_GET_MODELE_LIEN2_1],[_SET_MODELE_LIEN2_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:1067px;height:auto !important;height:1067px;min-width:1403px;width:auto !important;width:1403px;}.l-2 {background-image:url([%_PROJET_WEB_%]res/bgcolor2_CA185DBA_.gif);}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#999999;}
+.l-4 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;font-weight:bold;color:#003366;}
+.l-5 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:8pt;color:#000000;text-align:right;}
+.l-6 {background-color:#A3D8FF;}
+.l-7 {background-color:#CCFFFF;}
+#CELLULE1,#bzCELLULE1 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#MODELE_IMAGE1 {width:900px;height:106px;}
+.dzMODELE_IMAGE1 {width:900px;height:106px;;overflow-x:hidden;overflow-y:hidden;position:relative}#MODELE_LIEN2,#tzMODELE_LIEN2 {  [%SI%]MODELE_LIEN2..COULEUR!=-1[%ALORS%]color:#[%MODELE_LIEN2..COULEUR%][%FIN%];  [%SI%]MODELE_LIEN2..COULEURFOND!=-1[%ALORS%]background-color:#[%MODELE_LIEN2..COULEURFOND%][%FIN%];font-weight:[%MODELE_LIEN2..POLICEGRAS;4%];font-style:[%MODELE_LIEN2..POLICEITALIQUE;5%];[%SI%]MODELE_LIEN2..POLICENOM!=[%ALORS%]font-family:[%MODELE_LIEN2..POLICENOM%];[%FIN%][%SI%]MODELE_LIEN2..POLICETAILLE!=0[%ALORS%]font-size:[%MODELE_LIEN2..POLICETAILLE;7%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEH!=-1[%ALORS%]text-align:[%MODELE_LIEN2..CADRAGEH;9%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEV!=-1[%ALORS%]vertical-align:[%MODELE_LIEN2..CADRAGEV;10%];[%FIN%][%SI%]MODELE_LIEN2..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%MODELE_LIEN2..OPACITE%]);zoom:1;opacity:[%MODELE_LIEN2..OPACITE;8%];[%FIN%]}.REGLETTE-ZONEREPETEE1-sty10001 {text-align:center;}
+.REGLETTE-ZONEREPETEE1-sty10621 {font-weight:bold;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE_ZONEREPETEE1 .premier a,#REGLETTE_ZONEREPETEE1 .premier span,#REGLETTE_ZONEREPETEE1 .precedent a,#REGLETTE_ZONEREPETEE1 .precedent span,#REGLETTE_ZONEREPETEE1 .suivant a,#REGLETTE_ZONEREPETEE1 .suivant span,#REGLETTE_ZONEREPETEE1 .dernier a,#REGLETTE_ZONEREPETEE1 .dernier span,#REGLETTE_ZONEREPETEE1 .indice a,#REGLETTE_ZONEREPETEE1 .indice span {width:0;}
+#REGLETTE_ZONEREPETEE1 li a, #REGLETTE_ZONEREPETEE1 li span {height:20px;}
+
+<CONTENEUR NAME="[%ZONEREPETEE1..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->#c-[%ZONEREPETEE1%]-DATE1 {width:11px;height:22px;}
+<!--/REPEAT-->
+</CONTENEUR>#PANIERLIEN,#tzPANIERLIEN {  [%SI%]PANIERLIEN..COULEUR!=-1[%ALORS%]color:#[%PANIERLIEN..COULEUR%][%FIN%];  [%SI%]PANIERLIEN..COULEURFOND!=-1[%ALORS%]background-color:#[%PANIERLIEN..COULEURFOND%][%FIN%];font-weight:[%PANIERLIEN..POLICEGRAS;4%];font-style:[%PANIERLIEN..POLICEITALIQUE;5%];[%SI%]PANIERLIEN..POLICENOM!=[%ALORS%]font-family:[%PANIERLIEN..POLICENOM%];[%FIN%][%SI%]PANIERLIEN..POLICETAILLE!=0[%ALORS%]font-size:[%PANIERLIEN..POLICETAILLE;7%];[%FIN%][%SI%]PANIERLIEN..CADRAGEH!=-1[%ALORS%]text-align:[%PANIERLIEN..CADRAGEH;9%];[%FIN%][%SI%]PANIERLIEN..CADRAGEV!=-1[%ALORS%]vertical-align:[%PANIERLIEN..CADRAGEV;10%];[%FIN%][%SI%]PANIERLIEN..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%PANIERLIEN..OPACITE%]);zoom:1;opacity:[%PANIERLIEN..OPACITE;8%];[%FIN%]}
+</style>
+</head>
+<body style="  background-color:#FFFFFF;" onload="[%_CodeInfoError_%];_LOD_COM(event);_PANIER_LOD(event)" onunload="_UNL_COM(event);">
+<script type="text/javascript">var bPCSFR=true;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS?c2bdf26"></script><form name="PANIER" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.PANIER</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:1403">
+<div id="dwwCELLULE1" style="position:absolute;left:0px;top:0px;width:969px;height:107px;z-index:0;"><table id="CELLULE1" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="106" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELEIMAGE1" style="position:absolute;left:0px;top:0px;width:900px;height:106px;z-index:0;"><div class="dzMODELE_IMAGE1" id="dzMODELE_IMAGE1"><img src="[%_PROJET_WEB_%][%MODELE_IMAGE1..VALEUR%]" width=900 height=106 hspace=0 vspace=0 border=0 alt="" name="MODELE_IMAGE1" id="MODELE_IMAGE1" class="l-1 padding"></div></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE2" style="position:absolute;left:0px;top:107px;width:969px;height:24px;z-index:1;"><table id="CELLULE2" style="position:relative;">
+<tr><td height="24" width="969" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELELIEN1" style="position:absolute;left:28px;top:4px;width:51px;height:16px;z-index:0;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN1','_self','','')}" id="MODELE_LIEN1" class="Lien wblien padding" TABINDEX="1">Accueil</a></div>
+<div id="dwwMODELELIEN3" style="position:absolute;left:194px;top:4px;width:72px;height:16px;z-index:1;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN3','_self','','')}" id="MODELE_LIEN3" class="Lien wblien padding" TABINDEX="1">Conditions</a></div>
+<div id="dwwMODELELIEN4" style="position:absolute;left:401px;top:4px;width:95px;height:16px;z-index:2;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN4','_self','','')}" id="MODELE_LIEN4" class="Lien wblien padding" TABINDEX="1">Nous joindre</a></div>
+<div id="dwwMODELELIEN7" style="position:absolute;left:288px;top:4px;width:96px;height:16px;z-index:3;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN7','_self','','')}" id="MODELE_LIEN7" class="Lien wblien padding" TABINDEX="1">Notre Mission</a></div>
+<div id="dwwMODELELIEN8" style="position:absolute;left:511px;top:4px;width:78px;height:16px;z-index:4;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN8','_self','','')}" id="MODELE_LIEN8" class="Lien wblien padding" TABINDEX="1">Partenaires</a></div>
+<div id="dwwMODELELIEN6" style="position:absolute;left:716px;top:4px;width:78px;height:16px;z-index:5; [%SI%]MODELE_LIEN6..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN6','_self','','')}" id="MODELE_LIEN6" class="Lien wblien padding" TABINDEX="1">Webmaster</a></div>
+<div id="dwwMODELELIEN9" style="position:absolute;left:610px;top:4px;width:84px;height:16px;z-index:6;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN9','_self','','')}" id="MODELE_LIEN9" class="Lien wblien padding" TABINDEX="1">Commander</a></div>
+<div id="MODELE_LIBELLE1" style="position:absolute;left:87px;top:6px;width:9px;height:13px;z-index:7;" class="Verdana-9">|</div>
+<div id="dwwMODELELIEN5" style="position:absolute;left:913px;top:4px;width:44px;height:16px;z-index:8; [%SI%]MODELE_LIEN5..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a id="MODELE_LIEN5" class="Lien padding">Panier</a></div>
+<div id="MODELE_LIBELLE7" style="position:absolute;left:799px;top:5px;width:44px;height:14px;z-index:9; [%SI%]MODELE_LIBELLE7..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Panier</div>
+<div id="MODELE_LIBELLE5" style="position:absolute;left:386px;top:6px;width:9px;height:13px;z-index:10;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE4" style="position:absolute;left:273px;top:6px;width:9px;height:13px;z-index:11;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE2" style="position:absolute;left:181px;top:6px;width:9px;height:13px;z-index:12;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE8" style="position:absolute;left:11px;top:6px;width:9px;height:13px;z-index:13;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE9" style="position:absolute;left:498px;top:6px;width:9px;height:13px;z-index:14;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE10" style="position:absolute;left:595px;top:6px;width:9px;height:13px;z-index:15;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE11" style="position:absolute;left:696px;top:6px;width:9px;height:13px;z-index:16;" class="Verdana-9">|</div>
+<div id="LIB_CATGRIS" style="position:absolute;left:103px;top:5px;width:69px;height:14px;z-index:17; [%SI%]LIB_CATGRIS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Catalogue</div>
+<div id="dwwMODELELIEN2" style="position:absolute;left:[%MODELE_LIEN2..X%]px;top:[%MODELE_LIEN2..Y%]px;z-index:18; [%SI%]MODELE_LIEN2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]MODELE_LIEN2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%MODELE_LIEN2..CURSEURSOURIS%];[%FIN%]"><table width="70px" style="height:16px;"><tr><td class="Lien" valign="middle" id="tzMODELE_LIEN2">[%MODELE_LIEN2..HTMLAVANT%]<a[%SI%]MODELE_LIEN2..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}"[%FIN%] id="MODELE_LIEN2" class="Lien wblien padding" TITLE="[%MODELE_LIEN2..BULLE%]" TABINDEX="1"[%SI%]MODELE_LIEN2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]MODELE_LIEN2..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="MODELE_LIEN2"  href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}">[%MODELE_LIEN2%]</a>[%MODELE_LIEN2..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwIMAGECLICABLE1" style="position:absolute;left:937px;top:0px;width:32px;height:22px;z-index:19;"><a href="[%URL()%]?IMAGECLICABLE1" target="_self"><img src="[%_PROJET_WEB_%]res/CADDIE2_6FC0A16C_.GIF" width=22 height=22 hspace=1 vspace=5 border=0 alt="" name="IMAGECLICABLE1" id="IMAGECLICABLE1" class="l-0 padding"></a></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE3" style="position:absolute;left:0px;top:132px;width:969px;height:935px;z-index:2;"><table id="CELLULE3" style="position:relative;">
+<tr><td height="935" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="COMPANY_ACTIVXP2" style="position:absolute;left:91px;top:31px;width:227px;height:36px;z-index:0;" class="Titre-page">Le Panier</div>
+<div id="LIBELLE7" style="position:absolute;left:777px;top:84px;width:73px;height:13px;z-index:1;" class="Verdana-9">Soustraitant</div>
+<div id="LIBELLE6" style="position:absolute;left:682px;top:84px;width:62px;height:13px;z-index:2;" class="Verdana-9">Prix Achat</div>
+<div id="LIBELLE5" style="position:absolute;left:495px;top:84px;width:33px;height:13px;z-index:3;" class="Verdana-9">Unit√©</div>
+<div id="LIBELLE3" style="position:absolute;left:161px;top:85px;width:68px;height:13px;z-index:4;" class="Verdana-9">Description</div>
+<div id="LIBELLE9" style="position:absolute;left:894px;top:84px;width:43px;height:13px;z-index:5;" class="Verdana-9">Carton</div>
+<div id="LIBELLE10" style="position:absolute;left:585px;top:84px;width:57px;height:13px;z-index:6;" class="Verdana-9">Prix Pose</div>
+<div id="LIBELLE2" style="position:absolute;left:90px;top:84px;width:34px;height:13px;z-index:7;" class="Verdana-9">Code</div>
+<div id="dwwIMAGECLICABLE2" style="position:absolute;left:22px;top:26px;width:60px;height:46px;z-index:8;"><a href="[%URL()%]?IMAGECLICABLE2" target="_self"><img src="[%_PROJET_WEB_%]res/caddie_87913FF1_.jpg" width=60 height=46 hspace=0 vspace=0 border=0 alt="" name="IMAGECLICABLE2" id="IMAGECLICABLE2" class="l-0 padding"></a></div>
+<div id="tzREGLETTEZONEREPETEE1" style="position:absolute;left:13px;top:133px;width:940px;height:20px;z-index:9;"><ol class="reglette">[%REGLETTE_ZONEREPETEE1;2%]</ol></div>
+<div id="dwwZONEREPETEE1" style="position:absolute;left:13px;top:104px;width:940px;z-index:10;"><input type=hidden name="ZONEREPETEE1" value="[%ZONEREPETEE1%]"><input type=hidden name="ZONEREPETEE1_DEB" value="[%ZONEREPETEE1..PREMIERVISIBLE%]"><input type=hidden name="_ZONEREPETEE1_OCC" value="[%ZONEREPETEE1..OCCURRENCE%]"><CONTENEUR NAME="[%ZONEREPETEE1..ALIAS%]"><table id="con-ZONEREPETEE1" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr><td height="22" width="940" style=" [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%]l-7[%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%]l-6[%FIN%] padding"><div style="position:relative;  [%SI%]ZCODE..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZONEREPETEE1..LIGNEPAIRE=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=A3D8FF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%SI%]ZONEREPETEE1..LIGNEPAIRE!=1[%ALORS%][%SI%]ZONEREPETEE1..COULEURFOND!=CCFFFF[%ALORS%]#[%ZCODE..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZONEREPETEE1_[%ZONEREPETEE1%]"><div id="dwwzrl[%ZONEREPETEE1%]LIBELLE1" style="position:absolute;left:77px;top:4px;width:66px;height:14px;z-index:8;"><a id="c-[%ZONEREPETEE1%]-LIBELLE1" class="Verdana-9 padding">[%ZCODE%]</a></div>
+<div id="zrl_[%ZONEREPETEE1%]_DESCRIPTION" style="position:absolute;left:149px;top:4px;width:282px;height:14px;z-index:9;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE1%]_ZDESCRIPTION">[%ZDESCRIPTION%]</div></div>
+<div id="zrl_[%ZONEREPETEE1%]_MAINOEUVRE" style="position:absolute;left:482px;top:4px;width:44px;height:14px;z-index:10;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE1%]_ZUNITE">[%ZUNITE%]</div></div>
+<div id="tzzrl[%ZONEREPETEE1%]ZPRIXPOSE" style="position:absolute;left:571px;top:0px;width:72px;height:22px;z-index:11;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE1%]_ZPRIXPOSE">[%ZPRIXPOSE..VALEUR%]</div></div>
+<div id="tzzrl[%ZONEREPETEE1%]ZPRIXACHAT" style="position:absolute;left:667px;top:0px;width:72px;height:22px;z-index:12;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE1%]_ZPRIXACHAT">[%ZPRIXACHAT..VALEUR%]</div></div>
+<div id="tzzrl[%ZONEREPETEE1%]ZSOUSTRAITANT" style="position:absolute;left:764px;top:0px;width:72px;height:22px;z-index:14;" class="Verdana-9"><div id="zrl_[%ZONEREPETEE1%]_ZSOUSTRAITANT">[%ZSOUSTRAITANT..VALEUR%]</div></div>
+<div id="dwwzrl[%ZONEREPETEE1%]ZCOCHE" style="position:absolute;left:22px;top:1px;width:20px;height:20px;z-index:15;"><input type="hidden" name="zrl_[%ZONEREPETEE1%]_ZCOCHE" value=""><table class="l-0 zrl_[%ZONEREPETEE1%]_ZCOCHE" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:20px;"><label for="zrl_[%ZONEREPETEE1%]_ZCOCHE_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="CHECKBOX" name="zrl_[%ZONEREPETEE1%]_ZCOCHE" value="1" id="zrl_[%ZONEREPETEE1%]_ZCOCHE_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%SI%]ZCOCHE..VALEUR="1"[%ALORS%] CHECKED [%FIN%]></label></td></tr></table></div>
+<div id="dwwzrl[%ZONEREPETEE1%]ZDATE" style="position:absolute;left:465px;top:0px;width:11px;height:24px;z-index:16; [%SI%]DATE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><INPUT TYPE="text" SIZE="0" NAME="zrl_[%ZONEREPETEE1%]_ZDATE" VALUE="[%ZDATE..VALEUR;1%]" onkeypress="return JJMMAA(event,'JJ/MM/AAAA');" onblur="reinit(event,'JJ/MM/AAAA');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');" onfocus="var b=(this.value.length==0);init(event,'JJ/MM/AAAA');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="c-[%ZONEREPETEE1%]-DATE1" class="l-0 padding"></div>
+</div></td></tr><!--/REPEAT--></table></CONTENEUR></div>
+<div id="dwwLIEN6" style="position:absolute;left:13px;top:81px;width:73px;height:14px;z-index:13;"><a href="javascript:{_JSL(_PAGE_,'LIEN6','_self','','')}" id="LIEN6" class="l-4 wblien padding" TABINDEX="1">Supprimer</a></div>
+<div id="dwwLIENX" style="position:absolute;left:750px;top:28px;width:203px;height:33px;z-index:11;"><a href="javascript:_LIENX_CLI()" id="LIENX" class="Lien wblien padding" TABINDEX="1">Retour vers le catalogue</a></div>
+<div id="dwwIMAGECLICABLE3" style="position:absolute;left:918px;top:29px;width:32px;height:32px;z-index:12;"><img src="[%_PROJET_WEB_%]res/RETOUR_1157DC78_.GIF" width=32 height=32 hspace=0 vspace=0 border=0 alt="" name="IMAGECLICABLE3" onclick="_IMAGECLICABLE3_CLI(event)" id="IMAGECLICABLE3" class="l-0 padding"></div>
+</div></td></tr></table></div>
+</div>
+<div id="dwwLIENDEMO" style="position:absolute;left:1295px;top:115px;width:108px;height:16px;z-index:3; [%SI%]LIENDEMO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'LIENDEMO','_self','','')}" id="LIENDEMO" class="Lien wblien padding" TABINDEX="1">D√©monstrations</a></div>
+<div id="dwwPANIERLIEN" style="position:absolute;left:[%PANIERLIEN..X%]px;top:[%PANIERLIEN..Y%]px;z-index:4; [%SI%]PANIERLIEN..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]PANIERLIEN..CURSEURSOURIS!=auto[%ALORS%]cursor:[%PANIERLIEN..CURSEURSOURIS%];[%FIN%]"><table width="167px" style="height:20px;"><tr><td class="l-5" valign="middle" id="tzPANIERLIEN">[%PANIERLIEN..HTMLAVANT%]<a[%SI%]PANIERLIEN..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'PANIERLIEN','_self','','')}"[%FIN%] id="PANIERLIEN" class="l-5 wblien padding" TITLE="[%PANIERLIEN..BULLE%]" TABINDEX="1"[%SI%]PANIERLIEN..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]PANIERLIEN..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="PANIERLIEN"  href="javascript:{_JSL(_PAGE_,'PANIERLIEN','_self','','')}">[%PANIERLIEN%]</a>[%PANIERLIEN..HTMLAPRES%]</td></tr></table></div>
+
+</form>
+[%PANIER..HTMLFINPAGE%]</body>
+</html>
+<!--120673-->

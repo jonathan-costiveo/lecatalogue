@@ -1,0 +1,192 @@
+// GenerePairesCrypte — procédure globale à coller dans WebDev 18 (projet lecatalogue ou projet de test).
+// But : produire des paires clair/chiffré pour la rétro-ingénierie des fonctions Crypte() PC SOFT utilisées par le site :
+//   - compresseChaîneCourte + encodePCS  (paramètres cpl / ans des liens de salle de plans, PAGE_NUMSDP2 p. 2142 ; unsubscribe p. 2173)
+//   - crypteRapide + encodePCS           (ConstruitReqRBQ, p. 3878)
+//   - crypteAnsi + encodePCS             (mot de passe SMTP dans l'INI, EnvoiTirage p. 3904)
+// Les clés sont celles du code : les recopier ICI depuis PAGE_NUMSDP2, PAGE_UNSUBSCRIBE, ConstruitReqRBQ et EnvoiTirage.
+// Ne pas transmettre les clés avec le fichier CSV : seules les paires sont nécessaires (la clé sera communiquée à part, de vive voix).
+//
+// Sortie : un CSV (UTF-8 non requis : les clairs sont restreints à l'ASCII imprimable plus quelques accents Windows-1252,
+// encodés en hexadécimal dans la colonne 3 pour éviter toute ambiguïté).
+// Colonnes : mode ; numéro de clé ; clair en hexadécimal ; chiffré tel quel (chaîne ASCII produite par Crypte)
+//
+// Appel : GenerePairesCrypte("H:\Temp\pairesCrypte.csv", 400)
+
+PROCEDURE GenerePairesCrypte(sFichier est une chaîne, nNbrParMode est un entier = 400)
+
+// ---- clés à renseigner (depuis le code du site) ----
+sCle1 est une chaîne = ""   // clé de PAGE_NUMSDP2 / PAGE_SDPDELETED (cpl, ans)      -> mode compresseChaîneCourte
+sCle2 est une chaîne = ""   // clé de PAGE_UNSUBSCRIBE                                -> mode compresseChaîneCourte
+sCle3 est une chaîne = ""   // clé de ConstruitReqRBQ                                  -> mode crypteRapide
+sCle4 est une chaîne = ""   // clé de EnvoiTirage / SMTP                               -> mode crypteAnsi
+// ----------------------------------------------------
+
+SI sCle1="" OU sCle2="" OU sCle3="" OU sCle4="" ALORS
+	Erreur("Renseigner les quatre clés dans le code avant d'exécuter.")
+	RETOUR
+FIN
+
+nFic est un entier = fCrée(sFichier)
+SI nFic = -1 ALORS
+	Erreur("Impossible de créer " + sFichier, ErreurInfo())
+	RETOUR
+FIN
+fEcritLigne(nFic, "mode;cle;clair_hex;chiffre")
+
+// Jeux de clairs : (1) chaînes fixes représentatives du vrai contenu, (2) aléatoires de longueur 1 à 120
+sFixes est une chaîne = ...
+	"a" + RC + "ab" + RC + "abc" + RC + "abcd" + RC + "0000000000" + RC + ...
+	"1" + RC + "12345" + RC + "1234567890" + RC + ...
+	"user=JEAN;mail=jean@exemple.com;tel=4185551234" + RC + ...
+	"5000|1|20250101|LES CONSTRUCTIONS EXEMPLE INC." + RC + ...
+	"https://www.pes.rbq.gouv.qc.ca/RegistreLicences/Recherche/Resultats/FicheDetenteur?mode=Entreprise&ent=123456" + RC + ...
+	"Québec Montréal été ÀÉÈÙ çà" + RC + ...
+	RépèteChaîne("A", 50) + RC + RépèteChaîne("A", 51) + RC + RépèteChaîne("A", 52) + RC + ...
+	RépèteChaîne("ab", 40) + RC + "   espaces   " + RC + Caract(9) + "tab" + Caract(9)
+
+PROCEDURE INTERNE sVersHexa(sTexte est une chaîne)
+	sHex est une chaîne = ""
+	i est un entier
+	POUR i = 1 _A_ Taille(sTexte)
+		sHex += NumériqueVersChaîne(Asc(sTexte[[i]]), "02X")
+	FIN
+	RENVOYER sHex
+FIN
+
+PROCEDURE INTERNE EcritPaire(sMode est une chaîne, nCle est un entier, sCle est une chaîne, nMethode est un entier, sClair est une chaîne)
+	sChiffre est une chaîne = Crypte(sClair, sCle, nMethode, encodePCS)
+	fEcritLigne(nFic, sMode + ";" + nCle + ";" + sVersHexa(sClair) + ";" + sChiffre)
+FIN
+
+PROCEDURE INTERNE sAleatoire(nLng est un entier, bAccents est un booléen)
+	sRes est une chaîne = ""
+	i est un entier
+	nCode est un entier
+	POUR i = 1 _A_ nLng
+		SI bAccents ET Hasard(1, 6) = 1 ALORS
+			nCode = Hasard(192, 255)       // lettres accentuées Windows-1252
+		SINON
+			nCode = Hasard(32, 126)        // ASCII imprimable
+		FIN
+		sRes += Caract(nCode)
+	FIN
+	RENVOYER sRes
+FIN
+
+// Les trois modes, chacun avec sa (ou ses) clé(s)
+sLigne est une chaîne
+n est un entier
+
+POUR TOUTE CHAÎNE sLigne DE sFixes SEPAREE PAR RC
+	EcritPaire("compresseChaineCourte", 1, sCle1, compresseChaîneCourte, sLigne)
+	EcritPaire("compresseChaineCourte", 2, sCle2, compresseChaîneCourte, sLigne)
+	EcritPaire("crypteRapide",          3, sCle3, crypteRapide,          sLigne)
+	EcritPaire("crypteAnsi",            4, sCle4, crypteAnsi,            sLigne)
+FIN
+
+InitHasard()
+POUR n = 1 _A_ nNbrParMode
+	// longueurs 1..120, un tiers avec accents
+	sLigne = sAleatoire(Hasard(1, 120), Modulo(n, 3) = 0)
+	EcritPaire("compresseChaineCourte", 1, sCle1, compresseChaîneCourte, sLigne)
+	EcritPaire("crypteRapide",          3, sCle3, crypteRapide,          sLigne)
+	EcritPaire("crypteAnsi",            4, sCle4, crypteAnsi,            sLigne)
+	// même clair, clé 2, pour isoler l'effet de la clé
+	SI Modulo(n, 10) = 0 ALORS EcritPaire("compresseChaineCourte", 2, sCle2, compresseChaîneCourte, sLigne)
+FIN
+
+// Séries utiles à l'analyse : même clair avec une seule lettre qui change, longueurs croissantes
+POUR n = 1 _A_ 26
+	EcritPaire("compresseChaineCourte", 1, sCle1, compresseChaîneCourte, "test" + Caract(64 + n))
+	EcritPaire("crypteRapide",          3, sCle3, crypteRapide,          "test" + Caract(64 + n))
+FIN
+POUR n = 1 _A_ 64
+	EcritPaire("compresseChaineCourte", 1, sCle1, compresseChaîneCourte, RépèteChaîne("x", n))
+	EcritPaire("crypteRapide",          3, sCle3, crypteRapide,          RépèteChaîne("x", n))
+	EcritPaire("crypteAnsi",            4, sCle4, crypteAnsi,            RépèteChaîne("x", n))
+FIN
+
+fFerme(nFic)
+Info("Paires écrites dans " + sFichier)
+
+
+// =====================================================================================================
+// GenereEchantillonsFormats — échantillons pour la rétro-ingénierie de fCompacte et des archives WDZ
+// (formats PC SOFT propriétaires utilisés par export14, sdpintv et bid). À coller à côté de la procédure
+// précédente. Produit dans sRep :
+//   fcompacte_<n>.src   : fichier source (texte ou binaire pseudo-aléatoire, tailles variées)
+//   fcompacte_<n>.wdz   : résultat de fCompacte(src) — le même format que le .wdz d'export14
+//   wdz_<n>.wdz         : archive créée par zipCrée(...,"x.wdz") contenant un ou deux fichiers texte connus
+//   zip_<n>.zip         : la même archive avec extension .zip (pour comparer les deux formats)
+//   index.txt           : liste des échantillons (nom ; taille source ; CRC32 WinDev du source)
+// Appel : GenereEchantillonsFormats("H:\Temp\EchantillonsFormats")
+
+PROCEDURE GenereEchantillonsFormats(sRep est une chaîne)
+
+SI PAS fRepExiste(sRep) ALORS fRepCrée(sRep)
+nIndex est un entier = fCrée(CompléteRep(sRep) + "index.txt")
+
+PROCEDURE INTERNE sContenu(nTaille est un entier, nType est un entier)
+	// nType 0 : texte répétitif ; 1 : texte aléatoire imprimable ; 2 : octets 0-255 aléatoires ; 3 : zéros
+	sRes est une chaîne = ""
+	i est un entier
+	SELON nType
+		CAS 0 : sRes = RépèteChaîne("Ligne de catalogue;0001;Description de l'item;12,50;UN" + RC, nTaille / 60 + 1)
+		CAS 1 : POUR i = 1 _A_ nTaille ; sRes += Caract(Hasard(32, 126)) ; FIN
+		CAS 2 : POUR i = 1 _A_ nTaille ; sRes += Caract(Hasard(0, 255)) ; FIN
+		CAS 3 : sRes = RépèteChaîne(Caract(0), nTaille)
+	FIN
+	RENVOYER Gauche(sRes, nTaille)
+FIN
+
+PROCEDURE INTERNE Ecrit(sNom est une chaîne, sData est une chaîne)
+	n est un entier = fCrée(sNom)
+	fEcrit(n, sData)
+	fFerme(n)
+FIN
+
+n est un entier = 0
+nTaille est un entier
+nType est un entier
+sSrc est une chaîne
+sDst est une chaîne
+
+// fCompacte : tailles 0, 1, 2, 3, 10, 100, 1000, 4096, 65536, 200000 × 4 types de contenu
+POUR TOUTE CHAÎNE sT DE "0;1;2;3;10;100;1000;4096;65536;200000" SEPAREE PAR ";"
+	nTaille = Val(sT)
+	POUR nType = 0 _A_ 3
+		n++
+		sSrc = CompléteRep(sRep) + "fcompacte_" + n + ".src"
+		sDst = CompléteRep(sRep) + "fcompacte_" + n + ".wdz"
+		Ecrit(sSrc, sContenu(nTaille, nType))
+		SI PAS fCompacte(sSrc, sDst) ALORS
+			fEcritLigne(nIndex, "fcompacte_" + n + " ; ERREUR fCompacte ; " + ErreurInfo())
+		SINON
+			fEcritLigne(nIndex, "fcompacte_" + n + " ; " + nTaille + " ; type " + nType)
+		FIN
+	FIN
+FIN
+
+// Archives zipCrée : un fichier texte connu, puis deux fichiers ; extension .wdz puis .zip
+sFic1 est une chaîne = CompléteRep(sRep) + "20250101120000Interv.txt"
+sFic2 est une chaîne = CompléteRep(sRep) + "deuxieme.txt"
+Ecrit(sFic1, "1001" + TAB + "1" + TAB + "20250101120000" + RC + "1002" + TAB + "2" + TAB + "20250101120001" + RC)
+Ecrit(sFic2, RépèteChaîne("ABCDEFGHIJ", 500))
+
+POUR n = 1 _A_ 2
+	POUR TOUTE CHAÎNE sExt DE "wdz;zip" SEPAREE PAR ";"
+		sArch est une chaîne = "arch" + n
+		sDst = CompléteRep(sRep) + sExt + "_" + n + "." + sExt
+		SI zipCrée(sArch, sDst) = 0 ALORS
+			zipAjouteFichier(sArch, sFic1, zipRépertoire)        // avec le chemin, comme l'EG
+			SI n = 2 ALORS zipAjouteFichier(sArch, sFic2, zipRépertoire)
+			zipFerme(sArch)
+			fEcritLigne(nIndex, sExt + "_" + n + " ; archive " + n + " fichier(s)")
+		SINON
+			fEcritLigne(nIndex, sExt + "_" + n + " ; ERREUR zipCrée ; " + ErreurInfo())
+		FIN
+	FIN
+FIN
+
+fFerme(nIndex)
+Info("Échantillons écrits dans " + sRep)

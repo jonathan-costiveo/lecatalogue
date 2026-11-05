@@ -1,0 +1,5 @@
+//MO053-054.TXT ANA00053 TO ANA00054
+SDPDESC		NFI		nouveau fichier
+SDPINFO		NFI		nouveau fichier
+SDPINFO		FRN		
+SDPDESC		FRN		

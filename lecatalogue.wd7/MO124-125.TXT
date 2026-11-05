@@ -1,0 +1,4 @@
+//MO124-125.TXT ANA00124 TO ANA00125
+AAClient		TAR	1412	nouvelle taille enregistrement : 1412
+AAClient	LOCATION1	RUB+		LOCATION1 est une nouvelle rubrique
+AAClient	LOCATION2	RUB+		LOCATION2 est une nouvelle rubrique

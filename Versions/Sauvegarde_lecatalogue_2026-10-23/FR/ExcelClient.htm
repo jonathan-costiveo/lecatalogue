@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- ExcelClient 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%EXCELCLIENT..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%EXCELCLIENT..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WWConstante[%_gnNATION%].js?f30b6d07"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/MenuContextuel.js?3ee21d2b" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _WD_="[%_PROJET_WEB_%]";
+var _NA_=[%_gnNATION%];
+var _PU_="[%URL()%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+function _JEC(e,s,c)
+{
+	_JCL(_PU_+"/export."+e+"?WD_ACTION_="+s+"&"+c,bFF?"_blank":"_self","","");
+}
+// JS_ConvCoordPage
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	x : position
+//	o : champ
+//	l : Left ou Top
+//	s : + ou -
+// Variables locales :
+//	p : parent courant
+function _JCCP(x,o,l,s)
+{
+	var b=o.ownerDocument.body
+	// Parcours des parents
+	while(1)
+	{
+		// Parent suivant
+		var pt=o.offsetParent;
+		o=pt?pt:o.parentNode;
+		if (!o||(o==b))
+		{
+			break;
+		}
+
+		// Recupere la valeur
+		var v=l?o.offsetLeft:o.offsetTop;
+		// Ajoute a valeur de retour
+		if(v!==undefined)
+		{
+			x+=s?v:-v;
+		}
+	}
+	// Valeur de retour
+	return x;
+}
+// OBJ_SourisPosX
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPX(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollLeft selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollLeft : document.body.scrollLeft) : window.pageXOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientX;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenX);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetX;
+		// Autres
+		return window.pageXOffset + e.clientX - _JCCP(e.target.offsetLeft,e.target,true,true);
+	default:
+		return 0;
+	}
+}
+// OBJ_SourisPosY
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPY(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollTop selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollTop : document.body.scrollTop) : window.pageYOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientY;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenY);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetY;
+		// Autres
+		return window.pageYOffset + e.clientY - _JCCP(e.target.offsetTop,e.target,false,true);
+	default:
+		return 0;
+	}
+}
+function _LOD_COM(event)
+{
+	clWDMenuContextuel.Cree((_WD_+"res/"))
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%EXCELCLIENT..HTMLENTETE%]<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:572px;height:auto !important;height:572px;min-width:1229px;width:auto !important;width:1229px;}.l-1 {text-align:left;}
+.bc-NOM {  [%SI%]NOM..COULEURFOND!=-1[%ALORS%]background-color:#[%NOM..COULEURFOND%][%FIN%];}.bc-CONTACT {  [%SI%]CONTACT..COULEURFOND!=-1[%ALORS%]background-color:#[%CONTACT..COULEURFOND%][%FIN%];}.bc-DATEFIN {  [%SI%]DATEFIN..COULEURFOND!=-1[%ALORS%]background-color:#[%DATEFIN..COULEURFOND%][%FIN%];}.bc-DATEACHAT {  [%SI%]DATEACHAT..COULEURFOND!=-1[%ALORS%]background-color:#[%DATEACHAT..COULEURFOND%][%FIN%];}.bc-COURRIEL1 {  [%SI%]COURRIEL1..COULEURFOND!=-1[%ALORS%]background-color:#[%COURRIEL1..COULEURFOND%][%FIN%];}.bc-COURRIEL2 {  [%SI%]COURRIEL2..COULEURFOND!=-1[%ALORS%]background-color:#[%COURRIEL2..COULEURFOND%][%FIN%];}.bc-PROVENANCE {  [%SI%]PROVENANCE..COULEURFOND!=-1[%ALORS%]background-color:#[%PROVENANCE..COULEURFOND%][%FIN%];}.REGLETTE-sty10621 {font-weight:bold;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE .premier a,#REGLETTE .premier span,#REGLETTE .precedent a,#REGLETTE .precedent span,#REGLETTE .suivant a,#REGLETTE .suivant span,#REGLETTE .dernier a,#REGLETTE .dernier span,#REGLETTE .indice a,#REGLETTE .indice span {width:0;}
+#REGLETTE li a, #REGLETTE li span {height:16px;}
+
+</style>
+<script type="text/javascript">var _a=null;var _d=null;var _c=null;
+	function _TLS_(){_PAGE_.WD_ACTION_.value='';_PAGE_.WD_BUTTON_CLICK_.value=_d;_PAGE_.action=_a;_PAGE_.target=_c;}
+	function _CLS_(t,n,d,e,p,f,g,h,l){_d=_PAGE_.WD_BUTTON_CLICK_;_a=_PAGE_.action;_c=_PAGE_.target;_PAGE_.WD_BUTTON_CLICK_.value=d?'':e;_PAGE_.WD_ACTION_.value=d?(p+t):'';eval('_PAGE_.'+t).value=n;if(f)_PAGE_ .target=g;if(h)_PAGE_.action=l;_PAGE_.submit();setTimeout("_TLS_()",1)}
+function _C1(V){_CLS_('TABLE',V,1,'WD_ACTION_','CLICTABLE;',0,'',1,'[%URL()%]?WD_ACTION_=CLICTABLE');}
+function _C2(V){_CLS_('TABLE',V,1,'WD_ACTION_','CLICTABLE;',0,'',1,'[%URL()%]?WD_ACTION_=CLICTABLE');}
+
+</script>
+</head>
+<body style="   background-color:#FFFFFF;" onload="[%_CodeInfoError_%];_LOD_COM(event);">
+<form name="EXCELCLIENT" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.EXCELCLIENT</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:1229">
+<div id="dwwTABLE" style="position:absolute;left:24px;top:26px;width:1205px;height:524px;z-index:0;"><input type=hidden name="TABLE" value="[%TABLE%]"><input type=hidden name="TABLE_DEB" value="[%TABLE..PREMIERVISIBLE%]"><input type=hidden name="_TABLE_OCC" value="[%TABLE..OCCURRENCE%]"><CONTENEUR NAME="[%TABLE..ALIAS%]"><table id="ctzTABLE" cellspacing=0 cellpadding=0 width="1205">
+ <tr><td colspan=[%TABLE..NBCOLVISIBLE%]  align="center" class="Titre-Colonne padding" id="lzTABLE"><table><tr valign="top" class="Titre-Colonne padding" id="lzTABLE"><td width="100%" align="center">Client</td><td><img align="top" alt="none" src="[%_PROJET_WEB_%]res/ConversionTable.GIF" onclick="clWDMenuContextuel.Ouvre('TABLE', event)"></td></tr></table></td></tr>
+ <tr class="l-0 padding" id="ttTABLE">
+  <td width="190" class="l-0 padding" id="ttNOM">Nom</td>
+  <td width="148" class="l-0 padding" id="ttCONTACT">Contact</td>
+  <td width="87" class="l-0 padding" id="ttDATEFIN">DateFin</td>
+  <td width="124" class="l-0 padding" id="ttDATEACHAT">DateAchat</td>
+  <td width="220" class="l-0 padding" id="ttCOURRIEL1">Courriel1</td>
+  <td width="220" class="l-0 padding" id="ttCOURRIEL2">Courriel2</td>
+  <td width="216" class="l-0 padding" id="ttPROVENANCE">Provenance</td>
+ </tr>
+<!--REPEAT GENERATION_CORPS-->
+ <tr[%SI%]TABLE..SELECTED= SELECTED[%ALORS%] class="l-0 padding"[%FIN%][%SI%]TABLE..SELECTED!= SELECTED[%ALORS%][%SI%]TABLE..LIGNEPAIRE!=1[%ALORS%] class="Ligne-impaire padding"[%FIN%][%SI%]TABLE..LIGNEPAIRE=1[%ALORS%] class="Ligne-paire padding"[%FIN%][%FIN%] id="TABLE_[%TABLE%]">[%SI%]TABLE..SELECTED!= SELECTED[%ALORS%]
+  <td height="18" width="190" class="l-0 communbc-NOM padding"><a href=javascript:_C1('[%TABLE%]') class="l-0  padding">[%NOM%]</A></td>
+  <td height="18" width="148" class="l-0 communbc-CONTACT padding">[%CONTACT%]</td>
+  <td height="18" width="87" class="l-0 communbc-DATEFIN padding">[%DATEFIN%]</td>
+  <td height="18" width="124" class="l-0 communbc-DATEACHAT padding">[%DATEACHAT%]</td>
+  <td height="18" width="220" class="l-1 communbc-COURRIEL1 padding">[%COURRIEL1%]</td>
+  <td height="18" width="220" class="l-1 communbc-COURRIEL2 padding">[%COURRIEL2%]</td>
+  <td height="18" width="216" class="l-0 communbc-PROVENANCE padding"><a href=javascript:_C2('[%TABLE%]') class="l-0  padding">[%PROVENANCE%]</A></td>
+[%FIN%][%SI%]TABLE..SELECTED= SELECTED[%ALORS%]
+  <td height="18" width="190" class="l-0 bc-NOM padding"><a href=javascript:_C1('[%TABLE%]') class="l-0  padding">[%NOM%]</A></td>
+  <td height="18" width="148" class="l-0 bc-CONTACT padding">[%CONTACT%]</td>
+  <td height="18" width="87" class="l-0 bc-DATEFIN padding">[%DATEFIN%]</td>
+  <td height="18" width="124" class="l-0 bc-DATEACHAT padding">[%DATEACHAT%]</td>
+  <td height="18" width="220" class="l-1 bc-COURRIEL1 padding">[%COURRIEL1%]</td>
+  <td height="18" width="220" class="l-1 bc-COURRIEL2 padding">[%COURRIEL2%]</td>
+  <td height="18" width="216" class="l-0 bc-PROVENANCE padding"><a href=javascript:_C2('[%TABLE%]') class="l-0  padding">[%PROVENANCE%]</A></td>
+[%FIN%] </tr>
+<!--/REPEAT-->
+</table></CONTENEUR></div>
+</div>
+<div id="tzREGLETTE" style="position:absolute;left:113px;top:556px;width:418px;height:16px;z-index:1;"><ol class="reglette">[%REGLETTE;2%]</ol></div>
+
+</form>
+[%EXCELCLIENT..HTMLFINPAGE%]</body>
+</html>
+<!--28263-->

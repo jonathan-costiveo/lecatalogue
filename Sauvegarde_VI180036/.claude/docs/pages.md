@@ -1,0 +1,81 @@
+# Pages (.wwh)
+
+Généré par `.claude/scripts/gen_index.py`. Champs extraits des gabarits HTML générés `FR/<page>.htm` (reflètent la dernière génération, pas forcément la source courante). Les pages préfixées AA / PAGE_ sont surtout l'administration et les outils internes.
+
+- **AAConfEPlan** (2026-04-06) — (aucun champ nommé)
+- **AAConfigure** (2026-04-03) — HAUT, ZONEREPETEE1
+- **AAConfigure2** (2014-07-09) — (pas de gabarit FR — page probablement inutilisée)
+- **AAConfirmer** (2026-04-03) — (aucun champ nommé)
+- **AAConfirmer3** (2014-07-09) — (pas de gabarit FR — page probablement inutilisée)
+- **AADownload** (2026-10-19) — BTN_ESTIME, BTN_MODULE, BTN_TRANSPLAN, BTN_VALIDER, BTN_WEBMASTER, B_OUBLI, SEL_VERSIONEG, VER_EPLAN, VER_ESTIME, VER_MODULE
+- **AAEstime12** (2026-04-03) — (aucun champ nommé)
+- **AAEstime14** (2026-04-06) — (aucun champ nommé)
+- **AAFicheClient** (2026-04-02) — BTN_AJOUTM, BTN_AJOUTNOTE, BTN_COPIERINFO, BTN_DELCLIENT, BTN_DELNOTE, BTN_INFOECOLE, BTN_SAUVE, BTN_SAUVEQUIT, BTN_SUBM, B_CADENASOUVERT, INTERRUPTEUR1, INTERRUPTEUR2, INT_CATALOGUE, INT_COMPARATIF, INT_COURRIEL1, INT_COURRIEL2, INT_COURRIEL3, INT_ECHEANCIER, INT_ECOLE, INT_EPLANS, INT_EPLANS1, INT_EUROPE, INT_FACTURATION, INT_FORCELIC, INT_IGNORECOMMON, INT_INVITE, INT_IPMULTI, INT_LOCATION, INT_RBQINTERDIT, INT_REPARTITION, INT_SDPAUTORISE, INT_TUTORIEL, INT_V14, INT_VENTILATION, SAISIE1, SAI_NOTE, SAI_NOTEGEN, SEL_MONOPOSTE, SEL_TYPENOTE, SEL_VERSION, TAB_COMMON, TAB_DETAILPRIX, TAB_FORMATION, WEBMASTER
+- **AAFicheClient2** (2026-10-19) — BTN_AJOUTM, BTN_AJOUTNOTE, BTN_COPIERINFO, BTN_DELALLCOMMON, BTN_DELCLIENT, BTN_DELCOMMON, BTN_DELNOTE, BTN_INFOECOLE, BTN_NONLOCK, BTN_NONLOCK1, BTN_OUILOCK, BTN_REFRESHCOMMON, BTN_SAUVE, BTN_SAUVEQUIT, BTN_SUBM, B_CADENASOUVERT, INTERRUPTEUR1, INTERRUPTEUR2, INT_CATALOGUE, INT_COMPARATIF, INT_COURRIEL1, INT_COURRIEL2, INT_COURRIEL3, INT_ECHEANCIER, INT_ECOLE, INT_EPLANS1, INT_EPLANS2, INT_EPLANSXX, INT_ESTIME2, INT_EUROPE, INT_FACTURATION, INT_FORCELIC, INT_IGNORECOMMON, INT_INVITE, INT_IPMULTI, INT_LOCATION, INT_MENSUEL, INT_PARTAGE, INT_RBQINTERDIT, INT_REPARTITION, INT_SDPAUTORISE, INT_TUTORIEL, INT_V14, INT_VENTILATION, SAISIE1, SAI_NOTE, SAI_NOTEGEN, SEL_MONOPOSTE, SEL_TYPENOTE, SEL_VERSIONEG, TAB_COMMON, TAB_DETAILPRIX, TAB_FORMATION, WEBMASTER
+- **AAInfoEcole** (2026-04-03) — (aucun champ nommé)
+- **AAModule12** (2026-04-03) — (aucun champ nommé)
+- **AAModule14** (2026-04-06) — (aucun champ nommé)
+- **AARenouvelle** (2026-04-03) — INT_RESTE, SAI_MESSAGE
+- **AATableClient** (2026-10-19) — IMAGE1, IMAGE2, IMAGE3, IMAGE4, INT_ACCESFIN, INT_FILTRE12, SEL_ACTIF, TABLE_CLIENT
+- **Accueil.old** (2007-10-09) — (pas de gabarit FR — page probablement inutilisée)
+- **Accueil** (2026-04-03) — BOUTON1, IMAGE2, IMG_ACCEUIL, MODELE_IMAGE1, MODELE_LIEN2
+- **Accueil2** (2026-04-03) — IMAGE2, MODELE_IMAGE1, MODELE_LIEN2
+- **Assemblage** (2026-04-03) — IMG_TITRE, LIEN10, ZONEASSEMBLAGE
+- **Batch** (2026-04-03) — IMAGECLICABLE3, MODELE_IMAGE1, MODELE_LIEN2, SELECTEUR1, TEXTECOURRIEL, ZONEREPETEE1
+- **BonCommande** (2026-04-03) — (aucun champ nommé)
+- **Catalogue2** (2026-04-03) — IMAGECLICABLE1, IMG_TITRE2, LIEN10, MODELE_IMAGE1, MODELE_LIEN2, PAGEDEBUT, PAGEDEBUT1, PAGEFIN, PAGEFIN1, PAGEPRECEDENTE, PAGEPRECEDENTE1, PAGESUIVANTE, PAGESUIVANTE1, PANIERLIEN, ZONEREPETEE1
+- **Commander** (2026-04-03) — IMAGE2, MODELE_IMAGE1, MODELE_LIEN2
+- **Conditions** (2026-04-03) — IMAGE2, MODELE_IMAGE1, MODELE_LIEN2, SELCOND, SELCOND1, VALIDER, VALIDER1
+- **Contact** (2026-04-03) — IMAGE2, MODELE_IMAGE1, MODELE_LIEN2, SAISIE3
+- **Demonstration** (2026-04-03) — IMAGE2, IMAGE3, MODELE_IMAGE1, MODELE_LIEN2
+- **Demonstration2** (2014-09-24) — (pas de gabarit FR — page probablement inutilisée)
+- **Demonstration3** (2026-04-03) — IMAGE1, IMAGE2, MODELE_IMAGE1, MODELE_LIEN2
+- **ExcelClient** (2026-04-03) — TABLE
+- **FicheClient** (2004-09-27) — (pas de gabarit FR — page probablement inutilisée)
+- **FrameCat** (2005-02-22) — (pas de gabarit FR — page probablement inutilisée)
+- **FrmCatalog** (2005-02-22) — (pas de gabarit FR — page probablement inutilisée)
+- **FrmCatalog2** (2005-02-22) — (pas de gabarit FR — page probablement inutilisée)
+- **GestBan** (2014-10-13) — (pas de gabarit FR — page probablement inutilisée)
+- **GestBan2** (2026-04-03) — SELECTEUR1, TABLE_BANNIERE2
+- **GestBanniere** (2014-07-08) — (pas de gabarit FR — page probablement inutilisée)
+- **GestBanniere2** (2014-07-08) — (pas de gabarit FR — page probablement inutilisée)
+- **GestCat** (2026-04-03) — ZONEREPETEE_MULTICAT
+- **ListProcess** (2026-04-03) — MODELE_IMAGE1, MODELE_LIEN2, ZONER
+- **LogList** (2026-04-03) — ZONELOG
+- **MajCatalogue** (2005-02-22) — (pas de gabarit FR — page probablement inutilisée)
+- **Oubli** (2026-04-03) — MODELE_IMAGE1, MODELE_LIEN2
+- **Page1** (2026-04-03) — (pas de gabarit FR — page probablement inutilisée)
+- **Page2** (2026-04-03) — (pas de gabarit FR — page probablement inutilisée)
+- **Page3** (2005-02-22) — (pas de gabarit FR — page probablement inutilisée)
+- **PAGE_ADDRIP** (2026-04-03) — (aucun champ nommé)
+- **PAGE_CLIENTDEMO** (2026-05-13) — INT_COMMENCE, TAB_CLIENTDEMO
+- **PAGE_CLIEPLANS** (2026-05-13) — TABLE_CLIENT
+- **PAGE_CONFIDENTIALITE** (2026-04-03) — (aucun champ nommé)
+- **PAGE_DECONNECT** (2026-04-03) — (aucun champ nommé)
+- **PAGE_DEPASSE** (2026-04-03) — (aucun champ nommé)
+- **PAGE_ERRDESABON** (2026-04-03) — IMG_ESTIME, IMG_ESTIME1, IMG_ESTIME2
+- **PAGE_FINDESABON** (2026-04-03) — IMG_ESTIME, IMG_ESTIME1, IMG_ESTIME2
+- **PAGE_HISTODEMO** (2026-05-13) — TAB_HISTO
+- **PAGE_LISTSDP** (2026-04-03) — ZR_LISTSDP
+- **PAGE_NOTES** (2026-05-13) — ZONEREPETEE_NOTE_CLIENT
+- **PAGE_NUMSDP2** (2026-04-03) — (aucun champ nommé)
+- **PAGE_NUMSDPX** (2026-04-03) — (aucun champ nommé)
+- **PAGE_PROJET** (2026-08-24) — CAPTCHA1, IMG_LOGO, LNK_NOMFIC, LNK_TRANSFERT, SEL_REPONSE, ZR_OPTIONS, ZR_SOUSTITRE, ZWW_POSITION_
+- **PAGE_REFUS** (2026-04-03) — (aucun champ nommé)
+- **PAGE_SDPDELETED** (2026-04-03) — (aucun champ nommé)
+- **PAGE_STATSDP** (2026-04-03) — ZR_STAT
+- **PAGE_UNSUBSCRIBE** (2026-04-03) — BTN_UNSUBSCRIBE, IMG_ESTIME, IMG_ESTIME1, IMG_ESTIME2
+- **PageBrouillon** (2026-04-03) — (aucun champ nommé)
+- **PageTest** (2005-03-07) — (pas de gabarit FR — page probablement inutilisée)
+- **Panier** (2026-04-03) — IMAGECLICABLE1, IMAGECLICABLE2, IMAGECLICABLE3, MODELE_IMAGE1, MODELE_LIEN2, PANIERLIEN, ZONEREPETEE1
+- **ParamSMTP** (2026-04-03) — INT_CONFIRME, MODELE_IMAGE1, MODELE_LIEN2
+- **Partenaires** (2026-04-03) — BTN_EPLANS, BTN_SALLEDEPLANS, IMAGE2, IMAGECLICABLE3, IMAGECLICABLE6, IMG_AVANTAGE, IMG_ESTIMATEUR, MODELE_IMAGE1, MODELE_LIEN2
+- **ProfilClient** (2007-10-09) — (pas de gabarit FR — page probablement inutilisée)
+- **ProfilClient2** (2026-09-17) — ABONNEMENT, BATCH, INTMASTER, INT_FACTURATION, LISTCATUSER, MODELE_IMAGE1, MODELE_LIEN2, SAI_NOTEGEN, TEXTECOURRIEL
+- **RBQ_ENTREP** (2026-04-03) — ANNULER, OK, RBQ_INTERDIT
+- **RBQ_HISTO** (2026-04-03) — RECHERCHER, TABLE, TOUS
+- **RBQ_NOTFOUND** (2026-04-03) — ANNULER
+- **Table_et_fiche_Itemcat** (2005-02-18) — (pas de gabarit FR — page probablement inutilisée)
+- **TableClient** (2026-04-03) — IMAGE1, IMAGE2, IMAGE3, IMAGE4, INT_FILTRE, LIENLOG, MODELE_IMAGE1, MODELE_LIEN2, ZONEREPETEE1
+- **TermineProg** (2026-04-03) — (aucun champ nommé)
+- **WebDevOuiNon** (2026-04-03) — (aucun champ nommé)

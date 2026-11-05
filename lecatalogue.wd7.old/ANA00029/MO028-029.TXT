@@ -1,0 +1,6 @@
+//MO028-029.TXT ANA00028 TO ANA00029
+PROVENANCE		NFI		nouveau fichier
+Client		TAR	506	nouvelle taille enregistrement : 506
+Client	Flags	RUB+		Flags est une nouvelle rubrique
+Client	IDPROVENANCE	RUB+		IDPROVENANCE est une nouvelle clé
+Client	Provenance	RUB-		la rubrique Provenance est supprimée

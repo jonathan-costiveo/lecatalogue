@@ -1,0 +1,65 @@
+Welcome to LiveChat	
+Niusha S.Support Agent
+Good
+
+Niusha S.Thank you for contacting iWeb, we're pleased to hear from you. How can we help you today?
+
+Client Parlez-vous Français?
+
+Niusha S.oui je vais essayer
+
+Client Pour brancher le nom de domaine à notre site web nous avons besoin de nos DNS. Quelles sont les valeurs des DNS? Il nous faudrait aussi le nom du serveur SMTP pour envoyer des courriels depuis le site web.
+
+Values of DNS and SMTP server name?
+
+Niusha S.my.privatedns.com and your.privatedns.com
+
+mais il n’y a pas de smtp serveur
+
+Client how I can send messages from my website?
+
+Niusha S.do you have cpanel whm?
+
+you can set mx record for your domain
+
+Client What is cpanel whm?
+
+Niusha S.I checked your server, no you dont have that
+
+you can set mx record for your domain and then your email will be handled by that
+
+Client waht is mx record?
+
+Niusha S.its mail exchange records
+
+for handling the email
+
+so you want to use iweb dns
+
+so you need to open a ticket fo us to add your domain
+
+and we automatically will set the mx record for it
+
+like mail.yourdomain.com
+
+Client Nous faisons la redirection des DNS avec notre registraire. Nous avons juste besoin de créer mx record.
+
+Niusha S.http://technet.micro…ary/cc816902%28v=ws.10%29.aspx
+
+mais vous avez me demandé de nos DNS
+
+Client I don't understand. You give me the dns my.privatedns.com and your.privatedns.com. There are not the good DNS?
+
+Niusha S.yes they are Im asking if you want to use our DNS, have you create a ticket for us to add your domain in our fns?
+
+DNS*
+
+http://kb.iweb.com/e…%C3%A0-votre-serveur?locale=16
+
+Client If I understand:
+
+I link DNS with my registraire + mx record and I open a ticket with you to finalize ?
+
+Niusha S.in your registrar url you need to add my and your.privatedns.com and then yes open a ticket for us for add your mx and its IP
+
+Client OK. Thank you

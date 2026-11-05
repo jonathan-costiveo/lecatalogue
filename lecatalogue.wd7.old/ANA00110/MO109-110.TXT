@@ -1,0 +1,3 @@
+//MO109-110.TXT ANA00109 TO ANA00110
+AAClient		TAR	1331	nouvelle taille enregistrement : 1331
+AAClient	EPLANSMONOPOSTE	RUB+		EPLANSMONOPOSTE est une nouvelle rubrique

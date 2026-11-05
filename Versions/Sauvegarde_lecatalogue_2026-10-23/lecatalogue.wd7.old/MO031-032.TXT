@@ -1,0 +1,3 @@
+//MO031-032.TXT ANA00031 TO ANA00032
+Itemcat		TAR	531	nouvelle taille enregistrement : 531
+Itemcat	Cat_Temps	CNW	Réel sur 8 octets$Entier sur 4 octets	la rubrique Cat_Temps a pour nouveau type Réel sur 8 octets

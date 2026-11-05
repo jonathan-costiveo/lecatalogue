@@ -1,0 +1,3 @@
+//MO050-051.TXT ANA00050 TO ANA00051
+Envoi		NFI		nouveau fichier
+Envoi		FRN		

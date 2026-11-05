@@ -1,0 +1,24 @@
+//MO123-124.TXT ANA00123 TO ANA00124
+Client	DateFinAbonnement	NNR	DateFin	ATTENTION : la rubrique DateFin a pour nouveau nom DateFinAbonnement
+Version	EstimeVersion5	NNR	Version5	ATTENTION : la rubrique Version5 a pour nouveau nom EstimeVersion5
+Version	EstimeVersion12	NNR	Version_Guide	ATTENTION : la rubrique Version_Guide a pour nouveau nom EstimeVersion12
+Version	ModuleVersion12	NNR	Version_Estime12	ATTENTION : la rubrique Version_Estime12 a pour nouveau nom ModuleVersion12
+Version	Version_EPlans	NNR	Version_EPlan	ATTENTION : la rubrique Version_EPlan a pour nouveau nom Version_EPlans
+Version	EstimeVersion14	NNR	Version_Estime14	ATTENTION : la rubrique Version_Estime14 a pour nouveau nom EstimeVersion14
+AAClient		TAR	1409	nouvelle taille enregistrement : 1409
+AAClient	DateFinAbonnement	NNR	DateFin	ATTENTION : la rubrique DateFin a pour nouveau nom DateFinAbonnement
+AAClient	EstimeVersion5	NNR	Version5	ATTENTION : la rubrique Version5 a pour nouveau nom EstimeVersion5
+AAClient	EstimeDateVersion5	NNR	DateVersion5	ATTENTION : la rubrique DateVersion5 a pour nouveau nom EstimeDateVersion5
+AAClient	EstimeVersion12	NNR	Version_Guide	ATTENTION : la rubrique Version_Guide a pour nouveau nom EstimeVersion12
+AAClient	EstimeDateVersion12	NNR	DateVersionGuide	ATTENTION : la rubrique DateVersionGuide a pour nouveau nom EstimeDateVersion12
+AAClient	ModuleVersion12	NNR	Version_Estime12	ATTENTION : la rubrique Version_Estime12 a pour nouveau nom ModuleVersion12
+AAClient	ModuleDateVersion12	NNR	DateVersion_Estime12	ATTENTION : la rubrique DateVersion_Estime12 a pour nouveau nom ModuleDateVersion12
+AAClient	EstimeVersion14	NNR	Version_Estime14	ATTENTION : la rubrique Version_Estime14 a pour nouveau nom EstimeVersion14
+AAClient	EstimeDateVersion14	NNR	DateVersion_Estime14	ATTENTION : la rubrique DateVersion_Estime14 a pour nouveau nom EstimeDateVersion14
+AAClient	ModuleVersion14	RUB+		ModuleVersion14 est une nouvelle rubrique
+AAClient	ModuleDateVersion14	RUB+		ModuleDateVersion14 est une nouvelle rubrique
+AAClient	Version_EPlans	NNR	Version_EPlan	ATTENTION : la rubrique Version_EPlan a pour nouveau nom Version_EPlans
+AAClient	DateVersionEPlans	NNR	DateVersionEPlan	ATTENTION : la rubrique DateVersionEPlan a pour nouveau nom DateVersionEPlans
+AAClient	TypeVersionEPlans	NNR	TypeVersionEPlan	ATTENTION : la rubrique TypeVersionEPlan a pour nouveau nom TypeVersionEPlans
+AAClient	DateFinEPlans	NNR	DateFinEPlan	ATTENTION : la rubrique DateFinEPlan a pour nouveau nom DateFinEPlans
+REPCOMMON	DateFinAbonnement	NNR	DateFin	ATTENTION : la rubrique DateFin a pour nouveau nom DateFinAbonnement

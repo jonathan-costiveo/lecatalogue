@@ -1,0 +1,8 @@
+//MO005-006.TXT ANA00005 TO ANA00006
+Multicat		NFI		nouveau fichier
+Itemcat		TAR	389	nouvelle taille enregistrement : 389
+Itemcat		IDE+*		fichier avec identifiant
+Itemcat	IMCLEUNIK	CNW	Identifiant automatique (4 octets)$Entier non signé sur 8 octets	la rubrique IMCLEUNIK a pour nouveau type Identifiant automatique (4 oc
+Itemcat	MUCLEUNIK	CLEU*		la rubrique MUCLEUNIK est maintenant une clé
+Itemcat	MUCLEUNIK	CNW	Entier sur 4 octets$Entier non signé sur 8 octets	la rubrique MUCLEUNIK a pour nouveau type Entier sur 4 octets
+Multicat		FRN		

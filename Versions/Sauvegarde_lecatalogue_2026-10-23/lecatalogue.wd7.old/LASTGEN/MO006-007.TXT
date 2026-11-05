@@ -1,0 +1,6 @@
+//MO006-007.TXT ANA00006 TO ANA00007
+Itemcat		TAR	357	nouvelle taille enregistrement : 357
+Itemcat	CLE_CAT3	RUB+		CLE_CAT3 est une nouvelle clé
+Itemcat	TYPEITEMCat_Code	RUB+		TYPEITEMCat_Code est une nouvelle clé
+Itemcat	Categorie	RUB-		la clé Categorie est supprimée
+Itemcat	Secteur	RUB-		la clé Secteur est supprimée

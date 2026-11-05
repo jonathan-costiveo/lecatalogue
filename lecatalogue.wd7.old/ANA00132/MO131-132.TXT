@@ -1,0 +1,6 @@
+//MO131-132.TXT ANA00131 TO ANA00132
+REPCOMMON		TAR	572	nouvelle taille enregistrement : 572
+REPCOMMON	RESTEJOUR	RUB+		RESTEJOUR est une nouvelle rubrique
+REPCOMMON	CADENAS_CLI	RUB+		CADENAS_CLI est une nouvelle rubrique
+REPCOMMON	CADENAS_SRV	RUB+		CADENAS_SRV est une nouvelle rubrique
+REPCOMMON	INDIC_REP	RUB+		INDIC_REP est une nouvelle rubrique

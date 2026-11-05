@@ -1,0 +1,4 @@
+//MO015-016.TXT ANA00015 TO ANA00016
+Client		TAR	396	nouvelle taille enregistrement : 396
+Client	Courriel2	RUB+		Courriel2 est une nouvelle rubrique
+Client	Courriel3	RUB+		Courriel3 est une nouvelle rubrique

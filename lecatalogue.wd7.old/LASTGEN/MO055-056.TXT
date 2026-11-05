@@ -1,0 +1,4 @@
+//MO055-056.TXT ANA00055 TO ANA00056
+SDPDESC		TAR	52	nouvelle taille enregistrement : 52
+SDPDESC	SDP_PASS	RUB+		SDP_PASS est une nouvelle rubrique
+SDPDESC	SDP_REQ	NNR	DESC_SALLE	ATTENTION : la rubrique DESC_SALLE a pour nouveau nom SDP_REQ

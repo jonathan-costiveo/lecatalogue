@@ -1,0 +1,4 @@
+//MO027-028.TXT ANA00027 TO ANA00028
+TTABCONV		NFI		nouveau fichier
+TRESERVE		NFI		nouveau fichier
+TTABCONV		FRN		

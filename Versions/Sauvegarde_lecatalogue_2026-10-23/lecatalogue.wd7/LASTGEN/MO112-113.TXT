@@ -1,0 +1,3 @@
+//MO112-113.TXT ANA00112 TO ANA00113
+REPCOMMON		TAR	524	nouvelle taille enregistrement : 524
+REPCOMMON	REP_NETTOYER	RUB+		REP_NETTOYER est une nouvelle rubrique

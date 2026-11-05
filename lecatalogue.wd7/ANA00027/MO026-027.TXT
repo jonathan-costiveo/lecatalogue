@@ -1,0 +1,14 @@
+//MO026-027.TXT ANA00026 TO ANA00027
+TUNITE		NFI		nouveau fichier
+TTYPUNIT		NFI		nouveau fichier
+LienAsmb		NFI		nouveau fichier
+Itemcat		TAR	445	nouvelle taille enregistrement : 445
+Itemcat	Cat_Code	TAI+	25	la rubrique Cat_Code a comme nouvelle taille 41 au lieu de 16
+Itemcat	T_TUCLEUNIK	RUB+		T_TUCLEUNIK est une nouvelle rubrique
+Itemcat	DATECRE	RUB+		DATECRE est une nouvelle rubrique
+Itemcat	DATEMOD	RUB+		DATEMOD est une nouvelle rubrique
+Itemcat	NBRELEM	RUB+		NBRELEM est une nouvelle rubrique
+Itemcat	INFOCOMPL	RUB+		INFOCOMPL est une nouvelle rubrique
+TUNITE		FRN		
+TTYPUNIT		FRN		
+LienAsmb		FRN		

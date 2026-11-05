@@ -1,0 +1,9 @@
+//MO141-142.TXT ANA00141 TO ANA00142
+HISTODEMO		TAR	147	nouvelle taille enregistrement : 147
+HISTODEMO	NOMMACHINE	RUB+		NOMMACHINE est une nouvelle rubrique
+HISTODEMO	SOFTVERSION	RUB+		SOFTVERSION est une nouvelle rubrique
+HISTODEMO	SOFTTYPE	RUB+		SOFTTYPE est une nouvelle rubrique
+CLIENTDEMO		TAR	273	nouvelle taille enregistrement : 273
+CLIENTDEMO	DATEDEBUT	RUB+		DATEDEBUT est une nouvelle rubrique
+CLIENTDEMO	DATEBUTOIR	RUB+		DATEBUTOIR est une nouvelle rubrique
+CLIENTDEMO	DATELAST	RUB+		DATELAST est une nouvelle rubrique

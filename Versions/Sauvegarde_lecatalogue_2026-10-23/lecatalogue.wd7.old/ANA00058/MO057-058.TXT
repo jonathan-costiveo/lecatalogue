@@ -1,0 +1,3 @@
+//MO057-058.TXT ANA00057 TO ANA00058
+SDPINFO		TAR	91	nouvelle taille enregistrement : 91
+SDPINFO	SDP_LANGUE	RUB+		SDP_LANGUE est une nouvelle rubrique

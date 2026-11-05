@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- PAGE_CLIEPLANS 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%PAGE_CLIEPLANS..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PAGE_CLIEPLANS..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WWConstante[%_gnNATION%].js?5a17aeea"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDChamp.js?11219ce6" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/MenuContextuel.js?3ee21d2b" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDXML.js?f52e3206" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDAJAX.js?bf6b10bd" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDTable.js?93bc80ee" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _WD_="[%_PROJET_WEB_%]";
+var _NA_=[%_gnNATION%];
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+var _PU_="[%URL()%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On détecte les balises DispHTMLUnknownElement par la propriété canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas très logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+function _JEC(e,s,c)
+{
+	_JCL(_PU_+"/export."+e+"?WD_ACTION_="+s+"&"+c,bFF?"_blank":"_self","","");
+}
+// JS_ConvCoordPage
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	x : position
+//	o : champ
+//	l : Left ou Top
+//	s : + ou -
+// Variables locales :
+//	p : parent courant
+function _JCCP(x,o,l,s)
+{
+	var b=o.ownerDocument.body
+	// Parcours des parents
+	while(1)
+	{
+		// Parent suivant
+		var pt=o.offsetParent;
+		o=pt?pt:o.parentNode;
+		if (!o||(o==b))
+		{
+			break;
+		}
+
+		// Recupere la valeur
+		var v=l?o.offsetLeft:o.offsetTop;
+		// Ajoute a valeur de retour
+		if(v!==undefined)
+		{
+			x+=s?v:-v;
+		}
+	}
+	// Valeur de retour
+	return x;
+}
+// OBJ_SourisPosX
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPX(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollLeft selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollLeft : document.body.scrollLeft) : window.pageXOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientX;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenX);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetX;
+		// Autres
+		return window.pageXOffset + e.clientX - _JCCP(e.target.offsetLeft,e.target,true,true);
+	default:
+		return 0;
+	}
+}
+// OBJ_SourisPosY
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	e : evenement courant
+//	o : options
+// Variables locales :
+//	r : resultat intermediaire
+function _SPY(e,o)
+{
+	// Si pas d'evenement => Renvoie zero
+	if (!e) return 0;
+
+	// Selon les coordonnees demandes
+	switch(o)
+	{
+	// Dans le repere de la page
+	case 0:
+		// Calcul de scrollTop selon le navigateur et le mode de compatibilite
+		var r = bIE ? (document.documentElement.clientWidth ? document.documentElement.scrollTop : document.body.scrollTop) : window.pageYOffset;
+		// IE
+		if (bIE && (window.parent == window)) r -= 2;
+		return r + e.clientY;
+	// Dans le repere de l'ecran
+	case 1:return (e.screenY);
+	// Dans le repere du champ qui a lance l'evenement
+	case 2:
+		// IE
+		if (bIE) return e.offsetY;
+		// Autres
+		return window.pageYOffset + e.clientY - _JCCP(e.target.offsetTop,e.target,false,true);
+	default:
+		return 0;
+	}
+}
+function _PAGE_CLIEPLANS_KPR(event)
+{
+	return clWDUtil.bOnKeyPressPage(arguments,this,[{bEntree:1,tabValidation:[],pfFonction:_BOUTON6_CLI},{bEntree:1,tabValidation:[],pfFonction:_BOUTON12_CLI}],{})}
+function _BOUTON6_CLI(event)
+{
+	{
+}
+{
+		_JSL(_PAGE_,"BOUTON6","_self","","");}
+}
+function _BOUTON12_CLI(event)
+{
+	{
+}
+{
+		_JSL(_PAGE_,"BOUTON12","_self","","");}
+}
+function _LOD_COM(event)
+{
+	clWDMenuContextuel.Cree((_WD_+"res/"))
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%PAGE_CLIEPLANS..HTMLENTETE%]<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.BTN_CANCEL!=null)try{_PAGE_.BTN_CANCEL.focus();}catch(e){}
+
+
+}
+</script>
+<script type="text/javascript">var clTABLE_CLIENT=new WDTable("TABLE_CLIENT",0,18,2,4,[%TABLE_CLIENT..TABLESELECT%],["l-3","l-4","l-5"],["[%_PROJET_WEB_%]res/TableTri.gif","[%_PROJET_WEB_%]res/TableTriP.gif","[%_PROJET_WEB_%]res/TableTriM.gif"],["[%_PROJET_WEB_%]res/TableCherche.gif","[%_PROJET_WEB_%]res/TableChercheO.gif","[%_PROJET_WEB_%]res/TableChercheC.gif"]);</script><script type="text/javascript">function FinInitJS()
+{
+clTABLE_CLIENT.Init(-1,"[%TABLE_CLIENT..CODEHTML_17;3%]");}
+</script><style type="text/css">.wblien {text-align:center;  color:#379DC3;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">
+body{overflow:auto;height:100%;width:100%;margin:0;  color:#2D2D2D;}#page {  background-color:#FFFFFF;}html, form {height:100%;}.l-1 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;}
+.l-2 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFC080;}
+.l-3 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFFFFF;}
+.l-4 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#B9E0FD;}
+.l-4:hover,.l-4:active,.l-4:first-line,.l-5 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;}
+.l-6 {font-size:x-small;text-align:right;}
+.l-6:hover,.l-6:active,.l-6:link,.l-6:visited,.l-6:first-child,.l-6:first-letter,.l-6:first-line,.l-6:focus,.l-7,.l-8 {font-size:x-small;}
+.l-9 {font-size:x-small;text-align:center;}
+.l-10 {text-align:center;}
+.l-11 {text-align:right;}
+.l-12 {text-align:left;}
+.l-13 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10pt;font-weight:bold;color:#000000;}
+.REGLETTE1-sty10001 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#2D2D2D;-ms-border-radius:2px 2px 2px 2px/2px 2px 2px 2px;-moz-border-radius:2px 2px 2px 2px/2px 2px 2px 2px;-webkit-border-radius:2px 2px 2px 2px/2px 2px 2px 2px;-o-border-radius:2px 2px 2px 2px/2px 2px 2px 2px;border-radius:2px 2px 2px 2px/2px 2px 2px 2px;}
+html .padding.REGLETTE1-sty10001 {padding:3px 0;}
+.REGLETTE1-sty10001:hover {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#18181A;}
+.REGLETTE1-sty10621 {font-weight:bold;color:#FFFFFF;background-color:#79A2E4;}
+html .padding.REGLETTE1-sty10621, html .padding.REGLETTE1-sty10615, html .padding.REGLETTE1-sty10617, html .padding.REGLETTE1-sty10613, html .padding.REGLETTE1-sty10619, html .padding.REGLETTE1-sty10623, html .padding.REGLETTE1-sty10625 {padding:0 3px;}
+.REGLETTE1-sty10621:hover {color:#FFFFFF;background-color:#79A2E4;}
+.REGLETTE1-sty10615,.REGLETTE1-sty10617,.REGLETTE1-sty10613,.REGLETTE1-sty10619,.REGLETTE1-sty10623,.REGLETTE1-sty10625 {background-color:#BFBFBF;}
+.REGLETTE1-sty10615:hover,.REGLETTE1-sty10617:hover,.REGLETTE1-sty10613:hover,.REGLETTE1-sty10619:hover,.REGLETTE1-sty10623:hover,.REGLETTE1-sty10625:hover {background-color:#E6E6E6;}
+.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTE1 .premier a,#REGLETTE1 .precedent a,#REGLETTE1 .suivant a,#REGLETTE1 .dernier a,#REGLETTE1 .indice a {width:10px;}
+#REGLETTE1 .premier span,#REGLETTE1 .precedent span,#REGLETTE1 .suivant span,#REGLETTE1 .dernier span,#REGLETTE1 .indice span {width:3px;}
+#REGLETTE1 li a, #REGLETTE1 li span {height:14px;}
+
+#b-TABLE_CLIENT {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;}#lzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-right:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#ttCOL_CLE,.ttCOL_CLE,#ttCOL_COMPAGNIE,.ttCOL_COMPAGNIE,#ttCOL_TELEPHONE,.ttCOL_TELEPHONE,#ttCOL_DATEACHAT,.ttCOL_DATEACHAT,#ttCOL_DATEXP,.ttCOL_DATEXP,#ttCOL_LASTVISITE,.ttCOL_LASTVISITE,#ttCOL_NBRLIC,.ttCOL_NBRLIC,#ttCOL_VERSION,.ttCOL_VERSION,#ttCOL_DATEEPLANS,.ttCOL_DATEEPLANS,#ttCOL_COURRIEL,.ttCOL_COURRIEL,#ttCOL_COURRIEL2,.ttCOL_COURRIEL2,#ttCOL_BROUGE,.ttCOL_BROUGE {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {  [%SI%]TABLE_CLIENT..COULEUR!=-1[%ALORS%]color:#[%TABLE_CLIENT..COULEUR%][%FIN%];  [%SI%]TABLE_CLIENT..COULEURFOND!=-1[%ALORS%]background-color:#[%TABLE_CLIENT..COULEURFOND%][%FIN%];border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzclzTABLE_CLIENT {border-right:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzdlzTABLE_CLIENT {border-right:solid 1px #B4B4B4;border-bottom:solid 1px #B4B4B4;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#ctzTABLE_CLIENT .l-1 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;color:#196FAE;background-color:#B9E0FD;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#ctzTABLE_CLIENT .l-4 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#B9E0FD;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#ctzTABLE_CLIENT .l-3 {font-family:'Trebuchet MS', sans-serif;font-size:x-small;color:#000000;background-color:#FFFFFF;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#tzlzTABLE_CLIENT,#bzlzTABLE_CLIENT {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;[%SI%]TABLE_CLIENT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%TABLE_CLIENT..CURSEURSOURIS%];[%FIN%]}#BTN_CANCEL {width:86px;height:26px;}#SAI_RECHERCHE {width:164px;height:23px;}
+</style>
+<script type="text/javascript">var _a=null;var _d=null;var _c=null;
+	function _TLS_(){_PAGE_.WD_ACTION_.value='';_PAGE_.WD_BUTTON_CLICK_.value=_d;_PAGE_.action=_a;_PAGE_.target=_c;}
+	function _CLS_(t,n,d,e,p,f,g,h,l){_d=_PAGE_.WD_BUTTON_CLICK_;_a=_PAGE_.action;_c=_PAGE_.target;_PAGE_.WD_BUTTON_CLICK_.value=d?'':e;_PAGE_.WD_ACTION_.value=d?(p+t):'';eval('_PAGE_.'+t).value=n;if(f)_PAGE_ .target=g;if(h)_PAGE_.action=l;_PAGE_.submit();setTimeout("_TLS_()",1)}
+function _C1(V){_CLS_('TABLE_CLIENT',V,1,'WD_ACTION_','CLICTABLE;',0,'',1,'[%URL()%]?WD_ACTION_=CLICTABLE');}
+
+</script>
+</head>
+<body style="  background-color:#D3D3D3;" onkeypress="_PAGE_CLIEPLANS_KPR(event)" onload="chfocus();FinInitJS();[%_CodeInfoError_%];_LOD_COM(event);">
+<form name="PAGE_CLIEPLANS" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.PAGE_CLIEPLANS</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="BOUTON6">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+
+<table style="width:100.00%;height:100.00%">
+	<tr valign="top" style="height:6px">
+		<td style="width:1361px">
+		
+		</td>
+	
+	</tr>
+	<tr valign="top" style="height:100.00%">
+		<td style="width:100.00%"><table style="width:100%;height:100%;"><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);width:10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);height:10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% 0px;width:10px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td><td id="page" style="width:100%;">
+			<table style="height:100%;width:1341px" align="center">
+				<tr valign="top" style="height:100%">
+					<td>
+						<table style="width:1341px;height:1010px">
+							<tr valign="top" style="height:3px">
+								<td style="width:1341px">
+								
+								</td>
+							
+							</tr>
+							<tr valign="top" style="height:1007px">
+								<td style="width:1341px">
+									<div style="height:100%;min-width:1341px;width:auto !important;width:1341px;" class="lh0">
+										<div  style="clear:left;float:left;margin:10px 0 5px;display:inline;min-width:1341px;width:auto !important;width:1341px;min-height:992px;height:auto !important;height:992px;">
+											<div  style="clear:left;float:left;margin:0 0 0 18px;display:inline;min-width:1323px;width:auto !important;width:1323px;min-height:50px;height:auto !important;height:50px;">
+												<div  style="float:left;margin:7px 0 18px;display:inline;min-height:25px;height:auto !important;height:25px;">
+													<div  style="min-width:164px;width:auto !important;width:164px;"><INPUT TYPE="text" SIZE="11" NAME="SAI_RECHERCHE" VALUE="[%SAI_RECHERCHE%]" id="SAI_RECHERCHE" class="BLEUE10 padding">
+													
+													</div>
+												
+												</div>
+												<div  style="float:left;margin:7px 0 19px 6px;display:inline;min-height:24px;height:auto !important;height:24px;">
+													<div  style="min-width:38px;width:auto !important;width:38px;"><a href="javascript:_BOUTON6_CLI()" onmouseout="document.getElementById('z_BOUTON6_IMG').src='[%_PROJET_WEB_%]res/JUMELL2__FAE41C21_.PNG';" onmouseover="document.getElementById('z_BOUTON6_IMG').src='[%_PROJET_WEB_%]res/__FAE41C21_.PNG';" id="BOUTON6" class="l-14 wblien padding"  style="_height:24px;"><img id="z_BOUTON6_IMG" src="[%_PROJET_WEB_%]res/JUMELL2__FAE41C21_.PNG" alt="" style="width:38px;height:24px;"></a>
+													
+													</div>
+												
+												</div>
+												<div  style="float:left;margin:7px 0 19px 6px;display:inline;min-height:24px;height:auto !important;height:24px;">
+													<div  style="min-width:38px;width:auto !important;width:38px;"><a href="javascript:_BOUTON12_CLI()" onmouseout="document.getElementById('z_BOUTON12_IMG').src='[%_PROJET_WEB_%]res/JUMELLB__49DEA265_.PNG';" onmouseover="document.getElementById('z_BOUTON12_IMG').src='[%_PROJET_WEB_%]res/__49DEA265_.PNG';" id="BOUTON12" class="l-14 wblien padding"  style="_height:24px;" TITLE="Recherche avec phonetique"><img id="z_BOUTON12_IMG" src="[%_PROJET_WEB_%]res/JUMELLB__49DEA265_.PNG" alt="Recherche avec phonetique" style="width:38px;height:24px;"></a>
+													
+													</div>
+												
+												</div>
+												<div  style="float:left;margin:12px 0 18px 219px;display:inline;min-height:20px;height:auto !important;height:20px;">
+													<div  style="min-width:305px;width:auto !important;width:305px;"><table width="305px" style="text-align:left;height:20px;"><tr><td valign="middle" id="REGLETTE1"><ol class="reglette">[%REGLETTE1;2%]</ol></td></tr></table>
+													
+													</div>
+												
+												</div>
+												<div  style="float:left;margin:0 0 0 425px;display:inline;min-height:50px;height:auto !important;height:50px;">
+													<div  style="min-width:86px;width:auto !important;width:86px;"><table id="dzczBTN_CANCEL"><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8c.png);width:12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8h.png);height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8c.png);background-position:100% 0px;width:12px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8v.png);"><div style="width:12px;font-size:1px"></div></td><td><table width="62px" style="text-align:left;height:26px;"><tr><td class="l-13 padding" valign="middle" id="tzBTN_CANCEL"><input TYPE="button" NAME="BTN_CANCEL" VALUE="Return" onclick="{_JSL(_PAGE_,'BTN_CANCEL','_self','','')}" id="BTN_CANCEL" class="l-13 padding"></td></tr></table></td><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8v.png);background-position:100% 0px;"><div style="width:12px;font-size:1px"></div></td></tr><tr style="height:12px"><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8c.png);background-position:0px -12px;height:12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8h.png);background-position:0px 100%;height:-12px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/01010400_032c58d1_wwcb8c.png);background-position:100% -12px;"></td></tr></table>
+													
+													</div>
+												
+												</div>
+											
+											</div>
+											<div  style="clear:left;float:left;margin:6px 0 0 18px;display:inline;min-height:936px;height:auto !important;height:936px;">
+												<div  style="min-width:1323px;width:auto !important;width:1323px;"><table width="1276px" cellspacing=0 id="bzlzTABLE_CLIENT" style="[%SI%]TABLE_CLIENT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]text-align:left;height:936px;border-collapse:separate;"><tr><td class="l-0 padding" valign="top" id="tzlzTABLE_CLIENT" style="border:none;">[%TABLE_CLIENT..HTMLAVANT%]<input type=hidden name="TABLE_CLIENT" value="[%TABLE_CLIENT%]"><input type=hidden name="TABLE_CLIENT_DEB" value="[%TABLE_CLIENT..PREMIERVISIBLE%]"><input type=hidden name="_TABLE_CLIENT_OCC" value="[%TABLE_CLIENT..OCCURRENCE%]"><table id="ctzTABLE_CLIENT" cellspacing=0 cellpadding=0 width="1274" style="[%SI%]TABLE_CLIENT..VISIBLE=0[%ALORS%]border-collapse:separate;[%FIN%]" TITLE="[%TABLE_CLIENT..BULLE%]">
+ <tr><td colspan=1  align="center" class="l-1 padding" id="lzTABLE_CLIENT">[%TABLE_CLIENT..LIBELLE%]</td><td></td></tr>
+ <tr style="border:0" id="ttTABLE_CLIENT">
+<td id="tzclzTABLE_CLIENT" style="width:100%;border-bottom-width:0"><div style="overflow:hidden;width:1258px"><table id="TABLE_CLIENT_TITRES_POS" cellspacing=0 width="100%" style="[%SI%]TABLE_CLIENT..VISIBLE=0[%ALORS%]border-collapse:separate;[%FIN%]"><tr id="TABLE_CLIENT_TITRES">[%SI%]COL_CLE..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_CLE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_0" style="width:35px;overflow:hidden;margin-left:10px;">[%COL_CLE..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_CLE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_0" onclick="clTABLE_CLIENT.OnTriColonne(0,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_CLE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_0" onclick="clTABLE_CLIENT.OnRechercheColonne(0,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(0,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(0,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,0,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_COMPAGNIE..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_COMPAGNIE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_1" style="width:282px;overflow:hidden;margin-left:10px;">[%COL_COMPAGNIE..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_COMPAGNIE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_1" onclick="clTABLE_CLIENT.OnTriColonne(1,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_COMPAGNIE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_1" onclick="clTABLE_CLIENT.OnRechercheColonne(1,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(1,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(1,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,1,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_TELEPHONE..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_TELEPHONE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_2" style="width:78px;overflow:hidden;margin-left:10px;">[%COL_TELEPHONE..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_TELEPHONE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_2" onclick="clTABLE_CLIENT.OnTriColonne(2,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_TELEPHONE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_2" onclick="clTABLE_CLIENT.OnRechercheColonne(2,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(2,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(2,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,2,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_DATEACHAT..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_DATEACHAT" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_3" style="width:68px;overflow:hidden;margin-left:10px;">[%COL_DATEACHAT..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_DATEACHAT..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_3" onclick="clTABLE_CLIENT.OnTriColonne(3,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_DATEACHAT..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_3" onclick="clTABLE_CLIENT.OnRechercheColonne(3,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(3,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(3,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,3,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_DATEXP..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_DATEXP" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_4" style="width:68px;overflow:hidden;margin-left:10px;">[%COL_DATEXP..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_DATEXP..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_4" onclick="clTABLE_CLIENT.OnTriColonne(4,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_DATEXP..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_4" onclick="clTABLE_CLIENT.OnRechercheColonne(4,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(4,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(4,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,4,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_LASTVISITE..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_LASTVISITE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_5" style="width:68px;overflow:hidden;margin-left:10px;">[%COL_LASTVISITE..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_LASTVISITE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_5" onclick="clTABLE_CLIENT.OnTriColonne(5,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_LASTVISITE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_5" onclick="clTABLE_CLIENT.OnRechercheColonne(5,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(5,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(5,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,5,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_NBRLIC..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_NBRLIC" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_6" style="width:29px;overflow:hidden;margin-left:10px;">[%COL_NBRLIC..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_NBRLIC..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_6" onclick="clTABLE_CLIENT.OnTriColonne(6,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_NBRLIC..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_6" onclick="clTABLE_CLIENT.OnRechercheColonne(6,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(6,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(6,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,6,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_VERSION..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_VERSION" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_7" style="width:48px;overflow:hidden;margin-left:10px;">[%COL_VERSION..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_VERSION..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_7" onclick="clTABLE_CLIENT.OnTriColonne(7,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_VERSION..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_7" onclick="clTABLE_CLIENT.OnRechercheColonne(7,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(7,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(7,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,7,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_DATEEPLANS..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_DATEEPLANS" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_8" style="width:68px;overflow:hidden;margin-left:10px;">[%COL_DATEEPLANS..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_DATEEPLANS..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_8" onclick="clTABLE_CLIENT.OnTriColonne(8,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_DATEEPLANS..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_8" onclick="clTABLE_CLIENT.OnRechercheColonne(8,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(8,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(8,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,8,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_COURRIEL..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_COURRIEL" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_9" style="width:208px;overflow:hidden;margin-left:10px;">[%COL_COURRIEL..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_COURRIEL..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_9" onclick="clTABLE_CLIENT.OnTriColonne(9,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_COURRIEL..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_9" onclick="clTABLE_CLIENT.OnRechercheColonne(9,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(9,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(9,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,9,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_COURRIEL2..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_COURRIEL2" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_10" style="width:244px;overflow:hidden;margin-left:10px;">[%COL_COURRIEL2..LIBELLE%]</div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_COURRIEL2..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_10" onclick="clTABLE_CLIENT.OnTriColonne(10,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_COURRIEL2..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_10" onclick="clTABLE_CLIENT.OnRechercheColonne(10,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(10,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(10,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,10,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+[%SI%]COL_BROUGE..VISIBLESTOCKE=1[%ALORS%]  <td class="l-2 padding" id="ttCOL_BROUGE" style="border-left-width:0;border-top-width:0;"><div style="overflow:hidden;width:100%;height:18px;position:relative"><div id="TABLE_CLIENT_TITRES_11" style="width:88px;overflow:hidden;margin-left:10px;">[%COL_BROUGE..LIBELLE%]</div><div style="width:14px;height:0"><!-- --></div><img src="[%_PROJET_WEB_%]res/TableTri.gif" style="position:absolute;top:1px;left:1px[%SI%]COL_BROUGE..TRIABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_TRI_11" onclick="clTABLE_CLIENT.OnTriColonne(11,0)" alt="none"><img src="[%_PROJET_WEB_%]res/TableCherche.gif" style="position:absolute;bottom:1px;right:1px[%SI%]COL_BROUGE..RECHERCHABLE=0[%ALORS%];display:none[%FIN%]" id="TABLE_CLIENT_TITRES_RECH_11" onclick="clTABLE_CLIENT.OnRechercheColonne(11,this)" onmouseover="clTABLE_CLIENT.OnRechercheSouris(11,this,true);" onmouseout="clTABLE_CLIENT.OnRechercheSouris(11,this,false);" alt=""></div></td><td style="width:1px;position:relative;_position:static;height:100%;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,11,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%"><!-- --></div></td>[%FIN%]
+</tr></table></div></td><td><img align="top" alt="none" src="[%_PROJET_WEB_%]res/ConversionTable.GIF" onclick="clWDMenuContextuel.Ouvre('TABLE_CLIENT', event)"></td> </tr>
+<tr><td id="tzdlzTABLE_CLIENT" style="width:100%;border-top-width:0;"><div style="overflow-x:auto;overflow-y:hidden;width:1258px;height:898px;position:relative;z-index:1"><div style="position:relative;width:100%" id="TABLE_CLIENT_POS"><table id="TABLE_CLIENT_TB" cellspacing=0 width="100%" style="[%SI%]TABLE_CLIENT..VISIBLE=0[%ALORS%]border-collapse:separate;[%FIN%]height:898px"><!-- 
+ <tr class="l-3 padding" id="TABLE_CLIENT_[%_INDICE_%]" style="visibility:hidden;height:18px">
+  <td height="18" class="l-6 communbc-COL_CLE padding" style="  [%SI%]COL_CLE..COULEUR!=-1[%ALORS%]color:#[%COL_CLE..COULEUR%][%FIN%];  [%SI%]COL_CLE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_CLE..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_CLE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_CLE..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],0,event)"><div style="width:45px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_0"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,0,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-7 communbc-COL_COMPAGNIE padding" style="  [%SI%]COL_COMPAGNIE..COULEUR!=-1[%ALORS%]color:#[%COL_COMPAGNIE..COULEUR%][%FIN%];  [%SI%]COL_COMPAGNIE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_COMPAGNIE..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_COMPAGNIE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_COMPAGNIE..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],1,event)"><div style="width:292px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_1" style="padding-left:1;"><a[%SI%]COL_COMPAGNIE..ETATCOLCALCUL=0[%ALORS%] href=javascript:_C1('[%TABLE_CLIENT%]')[%FIN%] class="l-7  padding"[%SI%]COL_COMPAGNIE..ETATCOLCALCUL=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="TABLE_CLIENT"  href=javascript:_C1('[%TABLE_CLIENT%]')></A></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,1,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-8 communbc-COL_TELEPHONE padding" style="  [%SI%]COL_TELEPHONE..COULEUR!=-1[%ALORS%]color:#[%COL_TELEPHONE..COULEUR%][%FIN%];  [%SI%]COL_TELEPHONE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_TELEPHONE..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_TELEPHONE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_TELEPHONE..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],2,event)"><div style="width:88px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_2" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,2,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-9 communbc-COL_DATEACHAT padding" style="  [%SI%]COL_DATEACHAT..COULEUR!=-1[%ALORS%]color:#[%COL_DATEACHAT..COULEUR%][%FIN%];  [%SI%]COL_DATEACHAT..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_DATEACHAT..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_DATEACHAT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_DATEACHAT..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],3,event)"><div style="width:78px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_3"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,3,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-10 communbc-COL_DATEXP padding" style="  [%SI%]COL_DATEXP..COULEUR!=-1[%ALORS%]color:#[%COL_DATEXP..COULEUR%][%FIN%];  [%SI%]COL_DATEXP..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_DATEXP..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_DATEXP..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_DATEXP..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],4,event)"><div style="width:78px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_4"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,4,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-10 communbc-COL_LASTVISITE padding" style="  [%SI%]COL_LASTVISITE..COULEUR!=-1[%ALORS%]color:#[%COL_LASTVISITE..COULEUR%][%FIN%];  [%SI%]COL_LASTVISITE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_LASTVISITE..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_LASTVISITE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_LASTVISITE..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],5,event)"><div style="width:78px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_5"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,5,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-11 communbc-COL_NBRLIC padding" style="  [%SI%]COL_NBRLIC..COULEUR!=-1[%ALORS%]color:#[%COL_NBRLIC..COULEUR%][%FIN%];  [%SI%]COL_NBRLIC..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_NBRLIC..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_NBRLIC..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_NBRLIC..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],6,event)"><div style="width:39px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_6"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,6,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-10 communbc-COL_VERSION padding" style="  [%SI%]COL_VERSION..COULEUR!=-1[%ALORS%]color:#[%COL_VERSION..COULEUR%][%FIN%];  [%SI%]COL_VERSION..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_VERSION..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_VERSION..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_VERSION..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],7,event)"><div style="width:58px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_7"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,7,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-10 communbc-COL_DATEEPLANS padding" style="  [%SI%]COL_DATEEPLANS..COULEUR!=-1[%ALORS%]color:#[%COL_DATEEPLANS..COULEUR%][%FIN%];  [%SI%]COL_DATEEPLANS..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_DATEEPLANS..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_DATEEPLANS..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_DATEEPLANS..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],8,event)"><div style="width:78px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_8"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,8,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-12 communbc-COL_COURRIEL padding" style="  [%SI%]COL_COURRIEL..COULEUR!=-1[%ALORS%]color:#[%COL_COURRIEL..COULEUR%][%FIN%];  [%SI%]COL_COURRIEL..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_COURRIEL..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_COURRIEL..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_COURRIEL..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],9,event)"><div style="width:218px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_9" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,9,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-12 communbc-COL_COURRIEL2 padding" style="  [%SI%]COL_COURRIEL2..COULEUR!=-1[%ALORS%]color:#[%COL_COURRIEL2..COULEUR%][%FIN%];  [%SI%]COL_COURRIEL2..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_COURRIEL2..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_COURRIEL2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_COURRIEL2..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],10,event)"><div style="width:254px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_10" style="padding-left:1;"></div></div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,10,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td>  <td height="18" class="l-11 communbc-COL_BROUGE padding" style="  [%SI%]COL_BROUGE..COULEUR!=-1[%ALORS%]color:#[%COL_BROUGE..COULEUR%][%FIN%];  [%SI%]COL_BROUGE..COULEURFOND!=-1[%ALORS%]background-color:#[%COL_BROUGE..COULEURFOND%][%FIN%];border-left-width:0;border-top-width:0;[%SI%]COL_BROUGE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%COL_BROUGE..CURSEURSOURIS%];[%FIN%]" onclick="clTABLE_CLIENT.OnSelectLigne([%_INDICE_%],11,event)"><div style="width:98px;overflow-x:hidden"><div id="TABLE_CLIENT_[%_INDICE_%]_11"></div></div><div style="width:14px;height:0">[%COMMENT%]</div></td><td style="width:1px;position:relative;_position:static;" class="wbtablesep "><div onmousedown="clTABLE_CLIENT.OnRedimCol(event,11,14)" style="width:1px;cursor:col-resize;  background-color:#000000;;overflow:hidden;position:absolute;_position:relative;top:0;bottom:0;_height:100%">[%COMMENT%]</div></td> </tr>
+ --><tr><td></td></tr></table></div><table style="position:absolute;top:0;left:0;width:100%;border:solid 2px #B4B4B4;height:100%;visibility:hidden;z-index:100" id="TABLE_CLIENT_MASQUE"><tr><td align="center" valign="middle"><img src="[%_PROJET_WEB_%]res/TableAttente.gif" alt="none"></td></tr></table><table style="position:absolute;top:0;left:0;width:100%;height:100%;visibility:hidden;z-index:101" id="TABLE_CLIENT_MASQUETR"><tr><td align="center" valign="middle"><!-- --></td></tr></table></div></td><td style="width:16;height:898px"><div style="position:relative;overflow-x:hidden;width:16px;height:898px"><div style="position:absolute;left:-4px;width:20px;height:898px;overflow-x:hidden;overflow-y:auto"><div style="width:1px;height:1px;overflow:hidden" id="TABLE_CLIENT_SB"></div></div></div></td></tr>
+</table>[%TABLE_CLIENT..HTMLAPRES%]</td></tr></table>
+												
+												</div>
+											
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</td>
+							
+							</tr>
+						
+						</table>
+					
+					</td>
+				
+				</tr>
+			
+			</table></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td></tr><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:0px -10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);background-position:0px 100%;height:-10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% -10px;"></td></tr></table>
+		
+		</td>
+	
+	</tr>
+
+</table>
+</form>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		_BOUTON6_js = new Image(); _BOUTON6_js.src="[%_PROJET_WEB_%]res/__FAE41C21_.PNG";
+		_BOUTON12_js = new Image(); _BOUTON12_js.src="[%_PROJET_WEB_%]res/__49DEA265_.PNG";
+	}
+</script>
+<script type="text/javascript">if (bOpr) document.getElementsByTagName("head")[0].innerHTML+='<style type="text/css">.wbtablesep{position:static !important;}</style>';</script>[%PAGE_CLIEPLANS..HTMLFINPAGE%]</body>
+</html>
+<!--73932-->

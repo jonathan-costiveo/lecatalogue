@@ -1,0 +1,11 @@
+//MO030-031.TXT ANA00030 TO ANA00031
+Itemcat		TAR	527	nouvelle taille enregistrement : 527
+Itemcat	Cat_CODEG	RUB+		Cat_CODEG est une nouvelle rubrique
+Itemcat	Cat_CODED	RUB+		Cat_CODED est une nouvelle rubrique
+Itemcat	CLE_TYPEG	RUB+		CLE_TYPEG est une nouvelle clé
+Itemcat	CLE_TYPED	RUB+		CLE_TYPED est une nouvelle clé
+Itemcat	CLE_CODEG	RUB+		CLE_CODEG est une nouvelle clé
+Itemcat	CLE_CODED	RUB+		CLE_CODED est une nouvelle clé
+Itemcat	CLE_CAT3	RUB-		la clé CLE_CAT3 est supprimée
+Itemcat	CLE_CAT4	RUB-		la clé CLE_CAT4 est supprimée
+Itemcat	CLE_CAT5	RUB-		la clé CLE_CAT5 est supprimée

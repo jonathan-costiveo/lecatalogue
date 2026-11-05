@@ -1,0 +1,6 @@
+//MO106-107.TXT ANA00106 TO ANA00107
+RBQ_ENTREP		TAR	188	nouvelle taille enregistrement : 188
+RBQ_ENTREP	RBQ_ADDRIP_S	RUB+		RBQ_ADDRIP_S est une nouvelle clé
+RBQ_HISTO		TAR	422	nouvelle taille enregistrement : 422
+RBQ_HISTO	RBQ_ADDRIP_S	RUB+		RBQ_ADDRIP_S est une nouvelle clé
+SDPSTAT	SDPADDRIP_S	CLEN*		la rubrique SDPADDRIP_S est maintenant une clé

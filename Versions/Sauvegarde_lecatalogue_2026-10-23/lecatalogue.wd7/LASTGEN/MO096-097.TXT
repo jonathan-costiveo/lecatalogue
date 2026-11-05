@@ -1,0 +1,3 @@
+//MO096-097.TXT ANA00096 TO ANA00097
+AAClient		TAR	1304	nouvelle taille enregistrement : 1304
+AAClient	LASTMODIF	RUB+		LASTMODIF est une nouvelle rubrique

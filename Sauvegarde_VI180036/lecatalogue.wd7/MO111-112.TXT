@@ -1,0 +1,4 @@
+//MO111-112.TXT ANA00111 TO ANA00112
+REPCOMMON		TAR	523	nouvelle taille enregistrement : 523
+REPCOMMON	NOMMACHINE	RUB+		NOMMACHINE est une nouvelle rubrique
+REPCOMMON	CLE_CLI_IP_ORDI	RUB+		CLE_CLI_IP_ORDI est une nouvelle clé

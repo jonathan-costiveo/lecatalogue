@@ -1,0 +1,4 @@
+//MO003-004.TXT ANA00003 TO ANA00004
+Itemcat		TAR	397	nouvelle taille enregistrement : 397
+Itemcat	Categorie	RUB+		Categorie est une nouvelle rubrique
+Itemcat	Secteur	RUB+		Secteur est une nouvelle rubrique

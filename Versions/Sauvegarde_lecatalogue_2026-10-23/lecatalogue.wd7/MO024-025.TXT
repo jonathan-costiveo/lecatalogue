@@ -1,0 +1,9 @@
+//MO024-025.TXT ANA00024 TO ANA00025
+Multicat		TAR	843	nouvelle taille enregistrement : 843
+Multicat	TypeCatalog	CNW	Entier non signé sur 2 octets$Entier non signé sur 4 octets	la rubrique TypeCatalog a pour nouveau type Entier non signé sur 2 octets
+Itemcat		TAR	332	nouvelle taille enregistrement : 332
+Itemcat	CLE_PARENT	CNW	Entier sur 4 octets$Entier non signé sur 8 octets	la rubrique CLE_PARENT a pour nouveau type Entier sur 4 octets
+Itemcat	P_TUCLEUNIK	CNW	Entier sur 4 octets$Entier non signé sur 8 octets	la rubrique P_TUCLEUNIK a pour nouveau type Entier sur 4 octets
+Itemcat	V_TUCLEUNIK	CNW	Entier sur 4 octets$Entier non signé sur 8 octets	la rubrique V_TUCLEUNIK a pour nouveau type Entier sur 4 octets
+Itemcat	Cat_Temps	RUB+		Cat_Temps est une nouvelle rubrique
+Itemcat	Cat_P_Temps	RUB+		Cat_P_Temps est une nouvelle rubrique

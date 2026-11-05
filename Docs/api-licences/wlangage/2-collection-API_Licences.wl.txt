@@ -1,0 +1,289 @@
+// =====================================================================================
+// Collection de procédures serveur « API_Licences » — projet lecatalogue (WebDev 18)
+// =====================================================================================
+// API appelée par estimation.ca : lecture de la licence d'un client (AAClient) et
+// renouvellement (dates de fin). Contrat : docs/api-licences/contrat.md
+//
+// MARCHE À SUIVRE (détail dans docs/api-licences/README.md) :
+//   1. Créer une collection de procédures nommée API_Licences.
+//   2. Pour CHAQUE bloc ci-dessous délimité par « ==== Procédure X ==== » :
+//      créer une nouvelle procédure globale nommée X dans la collection,
+//      puis remplacer TOUT son contenu (y compris la ligne PROCEDURE) par le bloc.
+//   3. Ordre conseillé (chaque procédure compile seule une fois les précédentes collées) :
+//      sAPITexte, sAPIPaire, sAPIBool, sAPIDate, sAPIMontant, sAPIErreur, APIEnvoie,
+//      bAPIAccesAutorise, sAPIControleDate, sAPIJSONClient, sAPILire, sAPIRenouveler,
+//      TraiteAPILicence.
+//
+// Réutilise : goAAClient (CAAClient), CAAClient::stNBRLIC, GetLicences, PASS_CLIENT,
+// goConfig:m_sRepBase, gsFicINI, gsLogFiche, CBasicObjet::LogGeneric, CUTILS::bCreatRep,
+// FermeTout.
+// Configuration : section [APILIC] du fichier lecatalogue.ini (voir 3-section-ini.txt).
+// =====================================================================================
+
+
+// ==== Procédure sAPITexte ====
+// Chaîne JSON entre guillemets, caractères spéciaux échappés.
+PROCEDURE sAPITexte(sValeur est une chaîne)
+	sRes	est une chaîne
+	sCar	est une chaîne
+	i		est un entier
+	POUR i=1 _A_ Taille(sValeur)
+		sCar=sValeur[[i]]
+		SELON Asc(sCar)
+			CAS 34:	sRes+="\"+Caract(34)	// guillemet
+			CAS 92:	sRes+="\\"				// barre oblique inverse
+			CAS 9:	sRes+="\t"
+			CAS 10:	sRes+="\n"
+			CAS 13:	sRes+="\r"
+			AUTRE CAS
+				SI Asc(sCar)>=32 ALORS sRes+=sCar	// autres caractères de contrôle ignorés
+		FIN
+	FIN
+	RENVOYER Caract(34)+sRes+Caract(34)
+
+
+// ==== Procédure sAPIPaire ====
+// "nom":valeur  (sValeurJSON est déjà au format JSON)
+PROCEDURE sAPIPaire(sNom est une chaîne,sValeurJSON est une chaîne)
+	RENVOYER Caract(34)+sNom+Caract(34)+":"+sValeurJSON
+
+
+// ==== Procédure sAPIBool ====
+PROCEDURE sAPIBool(bValeur est un booléen)
+	SI bValeur ALORS RENVOYER "true"
+	RENVOYER "false"
+
+
+// ==== Procédure sAPIDate ====
+// AAAAMMJJ -> "AAAA-MM-JJ" ; date vide ou invalide -> ""
+PROCEDURE sAPIDate(sDate est une chaîne)
+	SI Taille(sDate)<>8 _OU_ PAS DateValide(sDate) ALORS RENVOYER sAPITexte("")
+	RENVOYER sAPITexte(Gauche(sDate,4)+"-"+Milieu(sDate,5,2)+"-"+Milieu(sDate,7,2))
+
+
+// ==== Procédure sAPIMontant ====
+// Monétaire -> nombre JSON avec point décimal, quel que soit le séparateur régional.
+PROCEDURE sAPIMontant(mMontant est un monétaire)
+	nCents	est un entier=Arrondi(mMontant*100,0)
+	sSigne	est une chaîne=""
+	SI nCents<0 ALORS
+		sSigne="-"
+		nCents=-nCents
+	FIN
+	RENVOYER sSigne+NumériqueVersChaîne(PartieEntière(nCents/100))+"."+NumériqueVersChaîne(nCents modulo 100,"%02d")
+
+
+// ==== Procédure sAPIErreur ====
+PROCEDURE sAPIErreur(sCode est une chaîne,sMessage est une chaîne)
+	RENVOYER "{"+sAPIPaire("ok","false")+","+sAPIPaire("code",sAPITexte(sCode))+","+sAPIPaire("message",sAPITexte(sMessage))+"}"
+
+
+// ==== Procédure APIEnvoie ====
+// Ferme les fichiers HFSQL, envoie le JSON (UTF-8) comme réponse HTTP et termine la requête.
+// Le JSON passe par un fichier temporaire dans le répertoire des traces (hors du site web),
+// car FichierAffiche est le seul envoi non HTML déjà utilisé par le projet.
+PROCEDURE APIEnvoie(sJSON est une chaîne)
+	sRep	est une chaîne=ComplèteRep(fExtraitChemin(gsLogFiche,fDisque+fRépertoire))+"API"
+	sFic	est une chaîne
+	FermeTout()
+	CUTILS::bCreatRep(sRep)
+	sFic=ComplèteRep(sRep)+"apilic_"+DateSys()+HeureSys()+"_"+Hasard(999999)+".json"
+	fSauveTexte(sFic,ChaîneVersUTF8(sJSON))
+	FichierAffiche(sFic,"application/json; charset=utf-8")
+	fSupprime(sFic)
+	FinProgramme()
+
+
+// ==== Procédure bAPIAccesAutorise ====
+// Contrôle de la section [APILIC] du fichier INI : Actif=1, clé (32 caractères minimum)
+// et, si renseignée, liste des IP autorisées (séparées par des points-virgules).
+// La clé reçue n'est jamais écrite dans le journal.
+PROCEDURE bAPIAccesAutorise(sIP est une chaîne,sFicLog est une chaîne)
+	sCleINI	est une chaîne=INILit("APILIC","CleAPI","",gsFicINI)
+	sIPs	est une chaîne=Remplace(INILit("APILIC","IPAutorisees","",gsFicINI)," ","")
+	SI INILit("APILIC","Actif","0",gsFicINI)<>"1" ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : API inactive")
+		RENVOYER Faux
+	FIN
+	SI Taille(sCleINI)<32 ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : CleAPI absente ou trop courte dans l'INI")
+		RENVOYER Faux
+	FIN
+	SI PageParamètre("Cle")<>sCleINI ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : clé invalide")
+		RENVOYER Faux
+	FIN
+	SI sIPs<>"" _ET_ Position(";"+sIPs+";",";"+sIP+";")=0 ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"Refus : IP non autorisée")
+		RENVOYER Faux
+	FIN
+	RENVOYER Vrai
+
+
+// ==== Procédure sAPIControleDate ====
+// Renvoie "" si la date (AAAAMMJJ) est acceptable pour un renouvellement, sinon le motif.
+// Acceptable : date valide, postérieure à aujourd'hui, au plus 5 ans dans le futur.
+PROCEDURE sAPIControleDate(sNom est une chaîne,sDate est une chaîne)
+	sMax est une chaîne=NumériqueVersChaîne(Val(Gauche(DateSys(),4))+5,"%04d")+Milieu(DateSys(),5)
+	SI Taille(sDate)<>8 _OU_ PAS DateValide(sDate) ALORS RENVOYER sNom+" : date invalide (format AAAAMMJJ attendu)"
+	SI sDate<=DateSys() ALORS RENVOYER sNom+" : la date doit être postérieure à aujourd'hui"
+	SI sDate>sMax ALORS RENVOYER sNom+" : date à plus de 5 ans"
+	RENVOYER ""
+
+
+// ==== Procédure sAPIJSONClient ====
+// Objet JSON décrivant la licence de l'enregistrement courant de goAAClient.
+PROCEDURE sAPIJSONClient()
+	stLic		est une CAAClient::stNBRLIC
+	sJ			est une chaîne
+	sCourriels	est une chaîne
+	sLibelle	est une chaîne
+	nVersion	est un entier
+	goAAClient:GetLicences(stLic)
+	nVersion=goAAClient:nGetVersion()
+	SELON nVersion
+		CAS CAAClient::VERSION_OR:				sLibelle="Or"
+		CAS CAAClient::VERSION_ARGENTPLUS:		sLibelle="Argent+"
+		CAS CAAClient::VERSION_ARGENT:			sLibelle="Argent"
+		CAS CAAClient::VERSION_BRONZE:			sLibelle="Bronze"
+		CAS CAAClient::VERSION_INVITE:			sLibelle="Invitation"
+		CAS CAAClient::VERSION_EPLANS:			sLibelle="e-Plans"
+		CAS CAAClient::VERSION_OR_ESSAI:		sLibelle="Or essai"
+		CAS CAAClient::VERSION_A_DETERMINER:	sLibelle="À déterminer"
+		AUTRE CAS:								sLibelle=""
+	FIN
+	sCourriels=sAPITexte(goAAClient:sGetCourriel1())
+	SI goAAClient:sGetCourriel2()<>"" ALORS sCourriels+=","+sAPITexte(goAAClient:sGetCourriel2())
+	SI goAAClient:sGetCourriel3()<>"" ALORS sCourriels+=","+sAPITexte(goAAClient:sGetCourriel3())
+	SI goAAClient:sGetCourriel1()="" ALORS sCourriels=Milieu(sCourriels,4)	// retire le "" initial et sa virgule
+
+	sJ="{"
+	sJ+=sAPIPaire("id",NumériqueVersChaîne(goAAClient:lnGetIdClient()))
+	sJ+=","+sAPIPaire("login",sAPITexte(goAAClient:sGetLogin()))
+	sJ+=","+sAPIPaire("nom",sAPITexte(goAAClient:sGetNom()))
+	sJ+=","+sAPIPaire("contact",sAPITexte(goAAClient:sGetContact()))
+	sJ+=","+sAPIPaire("courriels","["+sCourriels+"]")
+	sJ+=","+sAPIPaire("abonnement",sAPIBool(goAAClient:isAbonnement()))
+	sJ+=","+sAPIPaire("actif",sAPIBool(goAAClient:isActif()))
+	sJ+=","+sAPIPaire("dateFinAbonnement",sAPIDate(goAAClient:sGetDateFin()))
+	sJ+=","+sAPIPaire("dateFinEG",sAPIDate(goAAClient:sGetDateFinEG()))
+	sJ+=","+sAPIPaire("dateFinEPlans",sAPIDate(goAAClient:sGetDateFinEPlans()))
+	sJ+=","+sAPIPaire("dateDerniereVisite",sAPIDate(goAAClient:sGetDateDerniereVisite()))
+	sJ+=","+sAPIPaire("typeVersion",NumériqueVersChaîne(nVersion))
+	sJ+=","+sAPIPaire("typeVersionLibelle",sAPITexte(sLibelle))
+	sJ+=","+sAPIPaire("licences","{"+...
+		sAPIPaire("egAchat",NumériqueVersChaîne(stLic:m_nEGAchat))+","+...
+		sAPIPaire("egLocation",NumériqueVersChaîne(stLic:m_nEGLocat))+","+...
+		sAPIPaire("eplansOrAchat",NumériqueVersChaîne(stLic:m_nEPlansOrA))+","+...
+		sAPIPaire("eplansOrLocation",NumériqueVersChaîne(stLic:m_nEPlansOrL))+","+...
+		sAPIPaire("eplansMonoAchat",NumériqueVersChaîne(stLic:m_nEPlans1A))+","+...
+		sAPIPaire("eplansMonoLocation",NumériqueVersChaîne(stLic:m_nEPlans1L))+","+...
+		sAPIPaire("eplansMultiAchat",NumériqueVersChaîne(stLic:m_nEPlansMA))+","+...
+		sAPIPaire("eplansMultiLocation",NumériqueVersChaîne(stLic:m_nEPlansML))+","+...
+		sAPIPaire("totalEG",NumériqueVersChaîne(stLic:m_nTotEG))+","+...
+		sAPIPaire("totalEPlans",NumériqueVersChaîne(stLic:m_nTotEP))+","+...
+		sAPIPaire("location",sAPIBool(stLic:m_bLocation))+"}")
+	sJ+=","+sAPIPaire("options","{"+...
+		sAPIPaire("catalogue",sAPIBool(goAAClient:isAbonnementCatalogue()))+","+...
+		sAPIPaire("eplans",sAPIBool(goAAClient:isOptionEPlans()))+","+...
+		sAPIPaire("tplans",sAPIBool(goAAClient:isOptionTPlans()))+","+...
+		sAPIPaire("echeancier",sAPIBool(goAAClient:isOptionEcheancier()))+","+...
+		sAPIPaire("comparatif",sAPIBool(goAAClient:isOptionComparatif()))+","+...
+		sAPIPaire("ventilation",sAPIBool(goAAClient:isOptionVentilation()))+","+...
+		sAPIPaire("repartition",sAPIBool(goAAClient:isOptionRepartition()))+","+...
+		sAPIPaire("invitation",sAPIBool(goAAClient:isOptionInvitation()))+","+...
+		sAPIPaire("salleDePlans",sAPIBool(stLic:m_bSDP))+"}")
+	sJ+=","+sAPIPaire("montantMAJ",sAPIMontant(goAAClient:mGetMontantMAJ()))
+	sJ+="}"
+	RENVOYER sJ
+
+
+// ==== Procédure sAPILire ====
+PROCEDURE sAPILire(sLogin est une chaîne)
+	SI PAS goAAClient:isExistLogin(sLogin) ALORS RENVOYER sAPIErreur("LOGIN_INCONNU","Login inconnu")
+	RENVOYER "{"+sAPIPaire("ok","true")+","+sAPIPaire("client",sAPIJSONClient())+"}"
+
+
+// ==== Procédure sAPIRenouveler ====
+// Écrit uniquement les dates fournies (dates absolues : rejouer la même requête ne change rien).
+// Reprend la séquence de la fiche client (AAFicheClient2, EcranVersFichierX) :
+// Set... puis SetLastModif puis bModifie. Abonnement est remis à Vrai avec DateFinAbonnement,
+// sinon LoginClient/LocationExpire le repasseraient à Faux.
+PROCEDURE sAPIRenouveler(sLogin est une chaîne,sIdDemande est une chaîne,sIP est une chaîne,sFicLog est une chaîne)
+	sDateAbo	est une chaîne=SansEspace(PageParamètre("DateFinAbonnement"))
+	sDateEG		est une chaîne=SansEspace(PageParamètre("DateFinEG"))
+	sDateEP		est une chaîne=SansEspace(PageParamètre("DateFinEPlans"))
+	sErreur		est une chaîne
+	sAvant		est une chaîne
+	sApres		est une chaîne
+	bChange		est un booléen
+
+	SI sDateAbo="" _ET_ sDateEG="" _ET_ sDateEP="" ALORS
+		RENVOYER sAPIErreur("AUCUNE_DONNEE","Aucune date à modifier")
+	FIN
+	// Toutes les dates sont contrôlées avant toute écriture
+	SI sDateAbo<>"" ALORS sErreur+=sAPIControleDate("DateFinAbonnement",sDateAbo)+" "
+	SI sDateEG<>"" ALORS sErreur+=sAPIControleDate("DateFinEG",sDateEG)+" "
+	SI sDateEP<>"" ALORS sErreur+=sAPIControleDate("DateFinEPlans",sDateEP)+" "
+	sErreur=SansEspace(sErreur)
+	SI sErreur<>"" ALORS RENVOYER sAPIErreur("DATE_INVALIDE",sErreur)
+
+	SI PAS goAAClient:isExistLogin(sLogin) ALORS RENVOYER sAPIErreur("LOGIN_INCONNU","Login inconnu")
+
+	sAvant=sAPIJSONClient()
+	goAAClient:SetModifEnreg(Faux)
+	SI sDateAbo<>"" ALORS
+		goAAClient:SetDateFinAbonnement(sDateAbo)
+		goAAClient:SetAbonnement(Vrai)
+	FIN
+	SI sDateEG<>"" ALORS goAAClient:SetDateFinEG(sDateEG)
+	SI sDateEP<>"" ALORS goAAClient:SetdateFinEPlans(sDateEP)	// « d » minuscule : nom réel de la méthode
+
+	bChange=goAAClient:isModifEnreg()
+	SI bChange ALORS
+		goAAClient:SetLastModif(DateSys()+HeureSys())
+		SI PAS goAAClient:bModifie() ALORS
+			CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"renouveler"+TAB+sLogin+TAB+sIdDemande+TAB+"ERREUR bModifie "+HErreurInfo())
+			RENVOYER sAPIErreur("ERREUR_INTERNE","Écriture impossible")
+		FIN
+	FIN
+	sApres=sAPIJSONClient()
+	CBasicObjet::LogGeneric(sFicLog,sIP+TAB+"renouveler"+TAB+sLogin+TAB+sIdDemande+TAB+...
+		"Abo="+sDateAbo+" EG="+sDateEG+" EP="+sDateEP+TAB+"modifie="+bChange+TAB+"avant="+sAvant)
+	RENVOYER "{"+sAPIPaire("ok","true")+","+sAPIPaire("modifie",sAPIBool(bChange))+","+...
+		sAPIPaire("avant",sAvant)+","+sAPIPaire("apres",sApres)+"}"
+
+
+// ==== Procédure TraiteAPILicence ====
+// Point d'entrée, appelé par le CAS "apilic" du code d'initialisation du projet.
+// Paramètres HTTP (POST conseillé) : Action, Cle, Login, IdDemande,
+// DateFinAbonnement, DateFinEG, DateFinEPlans.
+PROCEDURE TraiteAPILicence()
+	sIP			est une chaîne=NavigateurAdresseIP(Faux)	// adresse de connexion (non falsifiable)
+	sAction		est une chaîne=Minuscule(SansEspace(PageParamètre("Action")))
+	sLogin		est une chaîne=SansEspace(PageParamètre("Login"))
+	sIdDemande	est une chaîne=Gauche(SansEspace(PageParamètre("IdDemande")),64)
+	sFicLog		est une chaîne=ComplèteRep(fExtraitChemin(gsLogFiche,fDisque+fRépertoire))+"AALogAPI.log"
+	sJSON		est une chaîne
+
+	SI PAS bAPIAccesAutorise(sIP,sFicLog) ALORS
+		APIEnvoie(sAPIErreur("AUTH","Accès refusé"))
+		RETOUR
+	FIN
+	SI PAS goAAClient:bSetAlias(Faux,goConfig:m_sRepBase,PASS_CLIENT) ALORS
+		CBasicObjet::LogGeneric(sFicLog,sIP+TAB+sAction+TAB+"ERREUR ouverture AAClient "+goConfig:m_sRepBase)
+		APIEnvoie(sAPIErreur("ERREUR_INTERNE","Base indisponible"))
+		RETOUR
+	FIN
+	SELON sAction
+		CAS "ping"
+			sJSON="{"+sAPIPaire("ok","true")+","+sAPIPaire("ping",sAPITexte("pong"))+","+sAPIPaire("version",sAPITexte("1"))+"}"
+		CAS "lire"
+			sJSON=sAPILire(sLogin)
+		CAS "renouveler"
+			sJSON=sAPIRenouveler(sLogin,sIdDemande,sIP,sFicLog)
+		AUTRE CAS
+			sJSON=sAPIErreur("ACTION_INCONNUE","Action inconnue : "+sAction)
+	FIN
+	CBasicObjet::LogGeneric(sFicLog,sIP+TAB+sAction+TAB+sLogin+TAB+sIdDemande+TAB+Gauche(sJSON,120))
+	APIEnvoie(sJSON)

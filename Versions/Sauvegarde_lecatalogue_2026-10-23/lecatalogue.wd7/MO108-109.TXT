@@ -1,0 +1,3 @@
+//MO108-109.TXT ANA00108 TO ANA00109
+AAClient		TAR	1329	nouvelle taille enregistrement : 1329
+AAClient	NBLICEPLANS	RUB+		NBLICEPLANS est une nouvelle rubrique

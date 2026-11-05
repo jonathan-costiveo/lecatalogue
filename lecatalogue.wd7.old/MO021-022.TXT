@@ -1,0 +1,2 @@
+//MO021-022.TXT ANA00021 TO ANA00022
+Itemcat	CLE_PARENT	CLEN*		la rubrique CLE_PARENT est maintenant une clé

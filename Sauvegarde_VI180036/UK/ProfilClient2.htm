@@ -1,0 +1,721 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- ProfilClient2 05/11/2026 00:33 WebDev 18 18.0.95.8 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%ProfilClient2..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PROFILCLIENT2..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js"></script>
+<script type="text/javascript">
+var _UC0_="[%NOMCAT..DNDSOURCE%]";
+var _UC1_="[%NOMCAT..DNDCIBLE%]";
+var _UC2_="[%MODELE_LIEN2..DNDSOURCE%]";
+var _UC3_="[%MODELE_LIEN2..DNDCIBLE%]";
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL=[];_COL[9]="#f1c494";_COL[66]="#353535";
+// STD_ChaineVersDate
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	d : chaine contenant la date
+//	f : format de la chaine
+function _CVD(d,f)
+{
+	// Normalise le masque
+	f = f.replace(/D/g, "J").replace(/Y/g, "A");
+	// Gere les format pour lesquel il manque une composante
+	var j = (-1 != f.indexOf("J")) ? "" : "01";
+	var m = (-1 != f.indexOf("M")) ? "" : "01";
+	var a = (-1 != f.indexOf("A")) ? "" : "" + (new Date()).getUTCFullYear();
+
+	// Traite caractere par caractere le masque
+	var nF = 0;
+	var nD = 0;
+	var fParseJM = function(c)
+	{
+		var s;
+		// Compte le nombre de caracteres
+		if (f.charAt(nF + 1) == c)
+		{
+			s = d.substr(nD, 2);
+			nF++;
+			nD++;
+		}
+		else if (isNaN(parseInt(d.charAt(nD + 1), 10)))
+		{
+			s = "0" + d.charAt(nD);
+		}
+		else
+		{
+			s = d.substr(nD, 2);
+			nD++;
+		}
+		return s;
+	};
+	for(;nF<f.length;nF++,nD++)
+	{
+		switch(f.charAt(nF))
+		{
+		case "J":
+			j = fParseJM("J");
+			break;
+
+		case "M":
+			m = fParseJM("M");
+			break;
+
+		case "A":
+		case "Y":
+			// Sur 2 ou sur 4 ?
+			if (f.indexOf("AAAA")==nF)
+			{
+				a = d.substr(nD, 4);
+				nF+=3;
+				nD+=3;
+			}
+			else
+			{
+				a = d.substr(nD, 2);
+				a= (parseInt(a)>50?"19":"20")+a;
+				nF++;
+				nD++;
+			}
+			break;
+		}
+	}
+
+	var sRes=a+m+j;
+	return (sRes.length==8)?sRes:"";
+}
+// MakeDateFromWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend une date au format AAAAMMJJHHMMSS avec MM dans 1..12 et retourne un objet date
+// La chaine peut etre tronquee a la date auquel cas l'heure sera nulle
+// Parametres :
+//	c : chaine contenant la date 
+// Variables locales :
+//	a : annee
+//	d : date resultat
+function _WMD(c)
+{
+	// on recupere l'annee
+	var a=c.substring(0,4);
+	// on construit la date
+	var d=new Date(a,parseInt(c.substring(4,6), 10) - 1,c.substring(6,8),c.substring(8,10),c.substring(10,12),c.substring(12,14),c.substring(14,16)+"0");
+	// si l'annee est inferieure a 100, on construit l'annee complete
+	if (parseInt(a, 10) < 100)
+	{
+		d.setFullYear(a);
+	}
+	// on renvoie la date resultat
+	return d;
+}
+// JS_DateToWD
+// ------------------------------------------------------------------------------------------------
+// Cette fonction prend un objet Date et retourne une date au format WL AAAAMMJJ (avec MM dans 1..12)
+// Parametres :
+//	d : objet Date 
+// Variables locales :
+//	s : date en chaine au format WL
+//	m : mois en entier entre 1 et 12
+//	j : j en entier
+function _JDTW(d)
+{
+	// Calcule l'annee
+	var s = d.getFullYear();
+	// Calcule le mois en chaine
+	var m = d.getMonth() + 1;
+	s += ((m < 10) ? "0" : "") + m;
+	// Calcule le jour en chaine
+	var j = d.getDate();
+	s += ((j < 10) ? "0" : "") + j;
+	// Renvoie la date resultat
+	return s;
+}
+// STD_DateVersChaineInterne
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	v : chaine contenant une partie de la valeur
+//	r : format courant de la chaine
+//	tf : Tableau des formats : tableau de couples format, longueur de chaine courte
+function _DVCI(v,r,tf)
+{
+	for (var i = 0; i < tf.length; i++)
+	{
+		// Recherche la position du jour dans le format
+		var j = r.indexOf(tf[i][0]);
+		if(j > -1)
+		{
+			// Supprime les 0 non significatifs
+			while ((v.charAt(0) == "0") && (tf[i][1] > 0))
+			{
+				v = v.substring(1);
+				tf[i][1]--;
+			}
+			// Retourne la chaine
+			return r.substring(0,j) + v + r.substring(j + tf[i][0].length, r.length);
+		}
+	}
+	return r;
+}
+// STD_DateVersChaine
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	d : chaine contenant la date au format AAAAMMJJ
+//	f : format de la chaine
+// Variables locales :
+//	r : resultat
+// 	a : position des annees
+//	m : position des mois
+//	j : position des jours
+function _DVC(d,f)
+{
+	if(d=="")return"";
+	var r=f;
+
+	r = _DVCI(d.substring(6,8),r,[["JJ", 0], ["DD", 0], ["J", 1], ["D", 1]]);
+	r = _DVCI(d.substring(4,6),r,[["MM", 0], ["M", 1]]);
+
+	var a=r.indexOf("AAAA");
+	if(a==-1)a=r.indexOf("YYYY");
+	if(a>-1)return r.substring(0,a)+d.substring(0,4)+r.substring(a+4,r.length);
+	a=r.indexOf("AA");
+	if(a==-1)a=r.indexOf("YY");
+	return r.substring(0,a)+d.substring(2,4)+r.substring(a+2,r.length);
+}
+// v : Date au format du champ
+// f : format de la date du champ
+// d : Nombre de jour du d�clage
+function _JDJ(v,f,d)
+{
+	v=_CVD(v,f);
+	v=_WMD(v);
+	v.setTime(v.getTime()+d*86400000);
+	v=_JDTW(v);
+	return _DVC(v,f);
+}
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+// EXE_SansEspace
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : chaine a traiter
+//	o : option indiquant de quel cote on doit retirer les espaces
+//						  1 = a gauche , 2 = a droite , 3 = les deux
+// Variables locales :
+//	d : position de debut de la chaine resultat desiree
+//	f : position de fin de la chaine resultat desiree
+function _SAE(c,o)
+{
+	var d=0;
+	// On force la conversion en chaine
+	c += ""
+	var f=c.length-1;
+	// Si on a demande sans espace a gauche
+	if(o&1)while(c.charAt(d)==" ")d++;
+	// Si on a demande sans espace a droite
+	if(o&2)while(c.charAt(f)==" ")f--;
+	// Securite si la chaine n'ets faite que d'espaces
+	if (f < d) f= d;
+	// On decoupe la sous chaine
+	return c.substring(d,f+1);
+}
+// EXE_Remplace
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	c : chaine de base
+//	o : chaine d'origine recherchee
+//	r : chaine de remplacement
+// Variables locales :
+//	s : chaine resultat
+//	p,t : variables de parcours
+function _RMP(c,o,r)
+{
+	// Position dans c
+	var p=0;
+	// Position dans c du prochaine trouve
+	var t;
+	var s=[];
+	// Tant qu'on trouve des occurrences
+	while (-1!=(t=c.indexOf(o,p)))
+	{
+		s.push(c.substring(p,t));
+		s.push(r);
+		p=t+o.length;
+	}
+	// On colle le reliquat de la chaine
+	s.push(c.substring(p));
+	return s.join("");
+}
+// JSI_NumericToWL
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	v : valeur
+//	s : separateur decimal
+// Variables locales :
+function _JNW(v,s)
+{
+	if((escape(v)=="")||(isNaN(v)))
+	{
+		return"";
+	}
+	return _RMP(""+eval(v),".",s);
+}
+// EXE_Max
+// -----------------------------------------------------------------------------------
+// Parametres :
+//	a : premier element
+//	b : deuxieme element
+function _MA(a,b){return a>b?a:b}
+// STD_DateVersEntier
+// ------------------------------------------------------------------------------------------------
+// Entrees :
+//	d : chaine contenant la date au format AAAAMMJJ
+function _DVE(d){return Math.round(((_WMD(d)-_WMD('18000101'))/(1000*3600*24))+1)}
+// STD_DateSys
+// ------------------------------------------------------------------------------------------------
+// Variables locales :
+//	d : date du jour
+//	m : mois
+//	j : jour
+function _DS()
+{
+	return _JDTW(new Date());
+}
+// JSI_WLToNumeric
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	v : valeur en entree
+//	s : separateur decimal
+// Variables locales :
+//	r : chaine intermediaire ne contenant que les carcteres numeriques
+//	c : caractere en cours de traitement
+function _JWN(v,s)
+{
+	if(v.length==0)
+	{
+		return 0;
+	}
+	var r="";
+	for(var i=0;i<v.length;i++)
+	{
+		var c=v.charAt(i);
+		if(c==s)
+		{
+			r+=".";
+		}
+		else if((c>='0'&&c<='9')||c=='+'||c=='-')
+		{
+			r+=c;
+		}
+	}
+	return parseFloat(r);
+}
+function _GET_MODELE_LIEN2_1()
+{
+	return _JCIR(_JGE("MODELE_LIEN2",document));
+}
+function _SET_MODELE_LIEN2_1(v)
+{
+	_JGE("MODELE_LIEN2",document).innerHTML=clWDEncode.sEncodeInnerHTML((v)+"",true,false);
+}
+function _GET_NOMCAT_1()
+{
+	return _JCIR(_JGE("zrl_"+_PAGE_.LISTCATUSER.value+"_XCAT",document));
+}
+function _SET_NOMCAT_1(v)
+{
+	_JGE("zrl_"+_PAGE_.LISTCATUSER.value+"_XCAT",document).innerHTML=clWDEncode.sEncodeInnerHTML((v)+"",true,false);
+}
+function _PROFILCLIENT2_LOD_0(event)
+{
+	{
+}
+}
+function _PROFILCLIENT2_LOD(event)
+{
+	_PROFILCLIENT2_LOD_0(event);
+	{
+}
+}
+function _BOUTON2_CLI(event)
+{
+	{
+	if((_SAE(_PAGE_.SUJET.value,3)==""))
+	{
+		alert("Le sujet est vide... veuillez le remplir.");
+		return;
+	}
+	if((!confirm(clWDEncode.sEncodeCharset(unescape("Confirmez-vous l\'envoi du courriel ? ")))))
+	{
+		return;
+	}
+}
+{
+		_JSL(_PAGE_,"BOUTON2","_self","","");}
+}
+function _BTN_ACCEPT_CLI(event)
+{
+	{
+	if((_SAE(_PAGE_.NOM.value,3)==""))
+	{
+		alert(clWDEncode.sEncodeCharset(unescape("Veuillez saisir le nom de l\'entreprise")));
+		return;
+	}
+	if((_SAE(_PAGE_.COURRIEL.value,3)==""))
+	{
+		alert("Veuillez saisir un courriel");
+		return;
+	}
+	if((_PAGE_.LOGIN.value.length<6))
+	{
+		alert("Veuillez saisir un Login de plus de 6 caractères");
+		return;
+	}
+	if((_PAGE_.MOT_DE_PASSE.value.length<6))
+	{
+		alert("Veuillez saisir un Login de plus de 6 caractères");
+		return;
+	}
+}
+{
+		_JSL(_PAGE_,"BTN_ACCEPT","_self","","");}
+}
+function _DATEFIN_BLU(event)
+{
+	{
+	if((_CVD(_PAGE_.DATEFIN.value,"JJ/MM/AAAA")!=""))
+	{
+		_PAGE_.JOUR.value=__reinitNombre(_JNW(_MA((_DVE(_CVD(_PAGE_.DATEFIN.value,"JJ/MM/AAAA"))-_DVE(_DS())),0),_WW_SEPDECIMAL_),"9999",false);
+		if((_JWN(_PAGE_.JOUR.value,_WW_SEPDECIMAL_)>0))
+		{
+			_PAGE_.ABONNEMENT[1].checked=1;
+		}
+		else {
+			_PAGE_.ABONNEMENT[1].checked=0;
+		}
+	}
+	else {
+		_PAGE_.ABONNEMENT[1].checked=0;
+	}
+}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("NOMCAT","LISTCATUSER",_UC0_,_UC1_,_JGEN("NOMCAT",document,false),[_GET_NOMCAT_1],[_SET_NOMCAT_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("MODELE_LIEN2","",_UC2_,_UC3_,_JGEN("MODELE_LIEN2",document,false),[_GET_MODELE_LIEN2_1],[_SET_MODELE_LIEN2_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.NOM!=null)try{_PAGE_.NOM.focus();}catch(e){}
+
+
+}
+</script>
+<style type="text/css">.wblien {}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css">
+<link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;}#page { min-height:1161px;height:auto !important;height:1161px;min-width:1403px;width:auto !important;width:1403px;}.l-2 {background-image:url([%_PROJET_WEB_%]res/bgcolor2_722B80CC_.gif);}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:9pt;color:#999999;}
+
+#CELLULE1,#bzCELLULE1 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#MODELE_IMAGE1 {width:900px;height:106px;}
+.dzMODELE_IMAGE1 {width:900px;height:106px;;overflow-x:hidden;overflow-y:hidden;position:relative}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#MODELE_LIEN2,#tzMODELE_LIEN2 {  [%SI%]MODELE_LIEN2..COULEUR!=-1[%ALORS%]color:#[%MODELE_LIEN2..COULEUR%][%FIN%];  [%SI%]MODELE_LIEN2..COULEURFOND!=-1[%ALORS%]background-color:#[%MODELE_LIEN2..COULEURFOND%][%FIN%];font-weight:[%MODELE_LIEN2..POLICEGRAS;4%];font-style:[%MODELE_LIEN2..POLICEITALIQUE;5%];[%SI%]MODELE_LIEN2..POLICENOM!=[%ALORS%]font-family:[%MODELE_LIEN2..POLICENOM%];[%FIN%][%SI%]MODELE_LIEN2..POLICETAILLE!=0[%ALORS%]font-size:[%MODELE_LIEN2..POLICETAILLE;7%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEH!=-1[%ALORS%]text-align:[%MODELE_LIEN2..CADRAGEH;9%];[%FIN%][%SI%]MODELE_LIEN2..CADRAGEV!=-1[%ALORS%]vertical-align:[%MODELE_LIEN2..CADRAGEV;10%];[%FIN%][%SI%]MODELE_LIEN2..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%MODELE_LIEN2..OPACITE%]);zoom:1;opacity:[%MODELE_LIEN2..OPACITE;8%];[%FIN%]}
+#CELLULE5,#bzCELLULE5 {border-style:solid;border-width:1px;border-color:#0000CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#SUJET {width:479px;height:22px;}
+
+#TEXTECOURRIEL {width:776px;height:106px;}
+
+#BOUTON2 {width:156px;height:24px;}
+#CELLULE4,#bzCELLULE4 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+
+#COMBO1 {width:479px;height:22px;}
+
+
+
+#CELLULE8,#bzCELLULE8 {border-style:solid;border-width:1px;border-color:#0000CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#CELLULE9,#bzCELLULE9 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+
+<CONTENEUR NAME="[%LISTCATUSER..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->
+
+#fzNOMCAT,#tzNOMCAT {  [%SI%]NOMCAT..COULEUR!=-1[%ALORS%]color:#[%NOMCAT..COULEUR%][%FIN%];  [%SI%]NOMCAT..COULEURFOND!=-1[%ALORS%]background-color:#[%NOMCAT..COULEURFOND%][%FIN%];font-weight:[%NOMCAT..POLICEGRAS;4%];font-style:[%NOMCAT..POLICEITALIQUE;5%];[%SI%]NOMCAT..POLICENOM!=[%ALORS%]font-family:[%NOMCAT..POLICENOM%];[%FIN%]text-decoration:[%NOMCAT..POLICESOULIGNEE;6%];[%SI%]NOMCAT..POLICETAILLE!=0[%ALORS%]font-size:[%NOMCAT..POLICETAILLE;7%];[%FIN%][%SI%]NOMCAT..CADRAGEH!=-1[%ALORS%]text-align:[%NOMCAT..CADRAGEH;9%];[%FIN%][%SI%]NOMCAT..CADRAGEV!=-1[%ALORS%]vertical-align:[%NOMCAT..CADRAGEV;10%];[%FIN%][%SI%]NOMCAT..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%NOMCAT..OPACITE%]);zoom:1;opacity:[%NOMCAT..OPACITE;8%];[%FIN%]}
+<!--/REPEAT-->
+</CONTENEUR>.reglette							{list-style:none;padding:0;margin:0;display:inline-block;}
+.reglette li							{display:table-cell;vertical-align:top;*display:inline;*float:left;}
+.reglette li span, .reglette li a	{display:table-cell;*display:block;*float:left;}
+.reglette							{width:100%;}
+.reglette							{display:block;}
+#REGLETTELISTCAT .premier a,#REGLETTELISTCAT .premier span,#REGLETTELISTCAT .precedent a,#REGLETTELISTCAT .precedent span,#REGLETTELISTCAT .suivant a,#REGLETTELISTCAT .suivant span,#REGLETTELISTCAT .dernier a,#REGLETTELISTCAT .dernier span,#REGLETTELISTCAT .indice a,#REGLETTELISTCAT .indice span {width:0;}
+.REGLETTELISTCAT-sty10621 {font-weight:bold;}
+#REGLETTELISTCAT li a, #REGLETTELISTCAT li span {height:20px;}
+
+#CELLULE7,#bzCELLULE7 {border-style:solid;border-width:1px;border-color:#0000CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+#CELLULE6,#bzCELLULE6 {border-bottom:solid 1px #0033CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+
+#BOUTON3 {width:204px;height:24px;}
+#BTN_ACCEPT {width:204px;height:24px;}
+
+#DATEACHAT {width:95px;height:22px;}
+
+#DATEFIN {width:95px;height:22px;}
+
+#JOUR {width:47px;height:22px;}
+
+#BATCH,#tzBATCH,.BATCH {vertical-align:middle;}
+#DATEDERNIEREVISITE {width:95px;height:22px;}
+
+
+#COURRIEL {width:259px;height:22px;}
+
+#MOT_DE_PASSE {width:186px;height:22px;}
+
+#CONTACT {width:259px;height:22px;}
+
+#LOGIN {width:186px;height:22px;}
+
+#NOM {width:259px;height:22px;}
+
+
+#BTN_SAUVEFERME {width:204px;height:24px;}
+#INTMASTER,#tzINTMASTER,.INTMASTER {vertical-align:middle;  [%SI%]INTMASTER..COULEUR!=-1[%ALORS%]color:#[%INTMASTER..COULEUR%][%FIN%];  [%SI%]INTMASTER..COULEURFOND!=-1[%ALORS%]background-color:#[%INTMASTER..COULEURFOND%][%FIN%];font-weight:[%INTMASTER..POLICEGRAS;4%];font-style:[%INTMASTER..POLICEITALIQUE;5%];[%SI%]INTMASTER..POLICENOM!=[%ALORS%]font-family:[%INTMASTER..POLICENOM%];[%FIN%]text-decoration:[%INTMASTER..POLICESOULIGNEE;6%];[%SI%]INTMASTER..POLICETAILLE!=0[%ALORS%]font-size:[%INTMASTER..POLICETAILLE;7%];[%FIN%][%SI%]INTMASTER..CADRAGEH!=-1[%ALORS%]text-align:[%INTMASTER..CADRAGEH;9%];[%FIN%][%SI%]INTMASTER..CADRAGEV!=-1[%ALORS%]vertical-align:[%INTMASTER..CADRAGEV;10%];[%FIN%][%SI%]INTMASTER..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%INTMASTER..OPACITE%]);zoom:1;opacity:[%INTMASTER..OPACITE;8%];[%FIN%]}
+#ABONNEMENT,#tzABONNEMENT,.ABONNEMENT {vertical-align:middle;}
+#COURRIEL2 {width:259px;height:22px;}
+
+#COURRIEL3 {width:259px;height:22px;}
+
+#TELEPHONE {width:153px;height:22px;}
+
+#FAX1 {width:153px;height:22px;}
+
+#COMBO2 {width:155px;height:24px;}
+
+#INT_FACTURATION,#tzINT_FACTURATION,.INT_FACTURATION {vertical-align:middle;}
+#SAI_NOTEGEN {width:726px;height:129px;}
+
+
+</style>
+</head>
+<body style="  background-color:#FFFFFF;" onload="chfocus();[%_CodeInfoError_%];_LOD_COM(event);_PROFILCLIENT2_LOD(event)" onunload="_UNL_COM(event);">
+<script type="text/javascript">var bPCSFR=false;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS"></script><form name="PROFILCLIENT2" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.PROFILCLIENT2</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:1403">
+<div id="dwwCELLULE1" style="position:absolute;left:0px;top:0px;width:969px;height:107px;z-index:0;"><table id="CELLULE1" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="106" width="969" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELEIMAGE1" style="position:absolute;left:0px;top:0px;width:900px;height:106px;z-index:0;"><div class="dzMODELE_IMAGE1" id="dzMODELE_IMAGE1"><img src="[%_PROJET_WEB_%][%MODELE_IMAGE1..VALEUR%]" width=900 height=106 hspace=0 vspace=0 border=0 alt="" name="MODELE_IMAGE1" id="MODELE_IMAGE1" class="l-1 padding effet"></div></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE2" style="position:absolute;left:0px;top:107px;width:969px;height:24px;z-index:1;"><table id="CELLULE2" style="position:relative;">
+<tr><td height="24" width="969" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwMODELELIEN1" style="position:absolute;left:28px;top:4px;width:51px;height:16px;z-index:0;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN1','_self','','')}" id="MODELE_LIEN1" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Accueil</a></div>
+<div id="dwwMODELELIEN3" style="position:absolute;left:194px;top:4px;width:72px;height:16px;z-index:1;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN3','_self','','')}" id="MODELE_LIEN3" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Conditions</a></div>
+<div id="dwwMODELELIEN4" style="position:absolute;left:401px;top:4px;width:95px;height:16px;z-index:2;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN4','_self','','')}" id="MODELE_LIEN4" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Nous joindre</a></div>
+<div id="dwwMODELELIEN7" style="position:absolute;left:288px;top:4px;width:96px;height:16px;z-index:3;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN7','_self','','')}" id="MODELE_LIEN7" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Notre Mission</a></div>
+<div id="dwwMODELELIEN8" style="position:absolute;left:511px;top:4px;width:78px;height:16px;z-index:4;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN8','_self','','')}" id="MODELE_LIEN8" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Partenaires</a></div>
+<div id="dwwMODELELIEN6" style="position:absolute;left:716px;top:4px;width:78px;height:16px;z-index:5; [%SI%]MODELE_LIEN6..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN6','_self','','')}" id="MODELE_LIEN6" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Webmaster</a></div>
+<div id="dwwMODELELIEN9" style="position:absolute;left:610px;top:4px;width:84px;height:16px;z-index:6;"><a href="javascript:{_JSL(_PAGE_,'MODELE_LIEN9','_self','','')}" id="MODELE_LIEN9" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Commander</a></div>
+<div id="MODELE_LIBELLE1" style="position:absolute;left:87px;top:6px;width:9px;height:13px;z-index:7;" class="Verdana-9">|</div>
+<div id="MODELE_LIEN5" style="position:absolute;left:913px;top:4px;width:44px;height:16px;z-index:8; [%SI%]MODELE_LIEN5..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="Lien">Panier</div>
+<div id="MODELE_LIBELLE7" style="position:absolute;left:799px;top:5px;width:44px;height:14px;z-index:9; [%SI%]MODELE_LIBELLE7..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Panier</div>
+<div id="MODELE_LIBELLE5" style="position:absolute;left:386px;top:6px;width:9px;height:13px;z-index:10;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE4" style="position:absolute;left:273px;top:6px;width:9px;height:13px;z-index:11;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE2" style="position:absolute;left:181px;top:6px;width:9px;height:13px;z-index:12;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE8" style="position:absolute;left:11px;top:6px;width:9px;height:13px;z-index:13;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE9" style="position:absolute;left:498px;top:6px;width:9px;height:13px;z-index:14;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE10" style="position:absolute;left:595px;top:6px;width:9px;height:13px;z-index:15;" class="Verdana-9">|</div>
+<div id="MODELE_LIBELLE11" style="position:absolute;left:696px;top:6px;width:9px;height:13px;z-index:16;" class="Verdana-9">|</div>
+<div id="LIB_CATGRIS" style="position:absolute;left:103px;top:5px;width:69px;height:14px;z-index:17; [%SI%]LIB_CATGRIS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]" class="l-3">Catalogue</div>
+<div id="dwwMODELELIEN2" style="position:absolute;left:[%MODELE_LIEN2..X%]px;top:[%MODELE_LIEN2..Y%]px;z-index:18; [%SI%]MODELE_LIEN2..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]MODELE_LIEN2..CURSEURSOURIS!=auto[%ALORS%]cursor:[%MODELE_LIEN2..CURSEURSOURIS%];[%FIN%]"><table width="70px" style="height:16px;"><tr><td class="Lien" valign="middle" id="tzMODELE_LIEN2">[%MODELE_LIEN2..HTMLAVANT%]<a[%SI%]MODELE_LIEN2..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}"[%FIN%] id="MODELE_LIEN2" class="Lien wblien padding effet"  style="_height:16px;" TITLE="[%MODELE_LIEN2..BULLE%]" TABINDEX="1"[%SI%]MODELE_LIEN2..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]MODELE_LIEN2..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="MODELE_LIEN2"  href="javascript:{_JSL(_PAGE_,'MODELE_LIEN2','_self','','')}">[%MODELE_LIEN2..LIBELLE%]</a>[%MODELE_LIEN2..HTMLAPRES%]</td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE3" style="position:absolute;left:0px;top:132px;width:969px;height:1029px;z-index:2;"><table id="CELLULE3" style="position:relative;">
+<tr><td height="1029" width="969" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;">
+ <TR>
+  <td colspan=4 height=761></td>
+ </TR>
+ <TR>
+  <td rowspan=2 style="width:613px"></td>
+  <TD width="162px"><table><tr><td align="center" style="width:156px;height:24px"><a href="javascript:{_JSL(_PAGE_,'BTN_PRE','_self','','')}" id="BTN_PRE" class="Btn-Std wblien padding effet"  style=" [%SI%]BTN_PRE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]_height:24px;text-decoration:none;background-image:none;display:block;" TABINDEX="59"><span id="z_BTN_PRE_IMG" style="display:table;_display:block;width:100%;width:156px;height:24px;overflow:hidden;cursor:pointer;"><span style="display:block;line-height:14px;margin-top:5px;">Client précédent</span></span></a></td></tr></table></TD>
+  <TD width="156px"><table><tr><td align="center" style="width:156px;height:24px"><a href="javascript:{_JSL(_PAGE_,'BTN_SUC','_self','','')}" id="BTN_SUC" class="Btn-Std wblien padding effet"  style=" [%SI%]BTN_SUC..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]_height:24px;text-decoration:none;background-image:none;display:block;" TABINDEX="58"><span id="z_BTN_SUC_IMG" style="display:table;_display:block;width:100%;width:156px;height:24px;overflow:hidden;cursor:pointer;"><span style="display:block;line-height:14px;margin-top:5px;">Client suivant</span></span></a></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR>
+  <TD width="162px"></TD>
+  <TD width="156px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+<div id="dwwCELLULE5" style="position:absolute;left:17px;top:530px;width:912px;height:225px;z-index:0;"><table id="CELLULE5" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="223" width="912" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwSUJET" style="position:absolute;left:119px;top:79px;width:479px;height:24px;z-index:0;"><INPUT TYPE="text" SIZE="36" NAME="SUJET" VALUE="[%SUJET%]" id="SUJET" class="Btn-Std padding effet" TABINDEX="54"></div>
+<div id="dwwlzSUJET" style="position:absolute;left:16px;top:79px;z-index:0;"><table width="103px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzSUJET">Sujet</td></tr></table></div>
+<div id="dwwTEXTECOURRIEL" style="position:absolute;left:119px;top:109px;width:776px;height:108px;z-index:1;"><textarea name="TEXTECOURRIEL" cols="58" rows="6" id="TEXTECOURRIEL" class="Btn-Std padding effet" TABINDEX="55">[%TEXTECOURRIEL%]</textarea></div>
+<div id="dwwlzTEXTECOURRIEL" style="position:absolute;left:16px;top:109px;width:103px;height:108px;z-index:1;" class="Btn-Std">Texte pour Courriel</div>
+<div id="dwwBOUTON2" style="position:absolute;left:736px;top:43px;width:156px;height:24px;z-index:2;"><input TYPE="button" NAME="BOUTON2" VALUE="Envoi un courriel" onclick="_BOUTON2_CLI(event)" id="BOUTON2" class="Btn-Std padding effet" TABINDEX="56"></div>
+<div id="dwwCELLULE4" style="position:absolute;left:0px;top:0px;width:912px;height:24px;z-index:3;"><table id="CELLULE4" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="23" width="912" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="LIBELLE2" style="position:absolute;left:9px;top:5px;width:182px;height:14px;z-index:0;" class="Btn-Std">Envoyer un courriel au client</div>
+</div></td></tr></table></div>
+<div id="tzCOMBO1" style="position:absolute;left:119px;top:49px;z-index:4;" class="Verdana-9">
+<select NAME="[%COMBO1..ALIAS%]" SIZE=1 id="COMBO1" class="Verdana-9 padding effet" TABINDEX="53">  <option [%COMBO1..SELECTED%] VALUE="[%COMBO1%]">[%COMBO1..VALEUR;1%]</option>
+
+</select></div>
+<div id="dwwlzCOMBO1" style="position:absolute;left:15px;top:49px;z-index:4;"><table width="104px" style="height:24px;"><tr><td class="Verdana-9 padding effet" id="lzCOMBO1">Courriel(s)</td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE8" style="position:absolute;left:17px;top:892px;width:912px;height:125px;z-index:3; [%SI%]CELLULE8..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table id="CELLULE8" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="123" width="912" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwCELLULE9" style="position:absolute;left:0px;top:0px;width:912px;height:24px;z-index:0;"><table id="CELLULE9" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="23" width="912" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="ALIAS0" style="position:absolute;left:9px;top:5px;width:182px;height:14px;z-index:0;" class="Btn-Std">Accès au catalogue du client</div>
+</div></td></tr></table></div>
+<div id="dwwLISTCATUSER" style="position:absolute;left:106px;top:48px;width:697px;z-index:1; [%SI%]LISTCATUSER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input type=hidden name="LISTCATUSER" value="[%LISTCATUSER%]"><input type=hidden name="LISTCATUSER_DEB" value="[%LISTCATUSER..PREMIERVISIBLE%]"><input type=hidden name="_LISTCATUSER_OCC" value="[%LISTCATUSER..OCCURRENCE%]"><CONTENEUR NAME="[%LISTCATUSER..ALIAS%]"><table id="con-LISTCATUSER" style="position:relative;">
+<!--REPEAT GENERATION_CORPS--><tr><td height="26" width="697" [%SI%]XSEL..COULEURFOND!=-1[%ALORS%]bgcolor="[%XSEL..COULEURFOND%]"[%FIN%] valign="top"><div style="position:relative;  [%SI%]XSEL..COULEURFOND!=-1[%ALORS%]background-color:[%XSEL..COULEURFOND%][%FIN%];" id="LISTCATUSER_[%LISTCATUSER%]"><div id="dwwzrl[%LISTCATUSER%]XSEL" style="position:absolute;left:12px;top:4px;width:27px;height:20px;z-index:3; [%SI%]INTSEL..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input type="hidden" name="zrl_[%LISTCATUSER%]_XSEL" value=""><table class="l-0" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:27px;"><label for="zrl_[%LISTCATUSER%]_XSEL_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="zrl_[%LISTCATUSER%]_XSEL" value="1" id="zrl_[%LISTCATUSER%]_XSEL_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%SI%]XSEL..VALEUR="1"[%ALORS%] CHECKED [%FIN%]></label></td></tr></table></div>
+<div id="dwwNOMCAT" style="position:absolute;left:[%NOMCAT..X%]px;top:[%NOMCAT..Y%]px;z-index:4; [%SI%]NOMCAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]NOMCAT..CURSEURSOURIS!=auto[%ALORS%]cursor:[%NOMCAT..CURSEURSOURIS%];[%FIN%]"><table width="597px" style="height:18px;"><tr><td class="Verdana-9 padding effet"
+ style=" [%SI%]NOMCAT..COULEUR!=-1[%ALORS%]color:#[%NOMCAT..COULEUR%][%FIN%]; [%SI%]NOMCAT..COULEURFOND!=-1[%ALORS%]background-color:#[%NOMCAT..COULEURFOND%][%FIN%];font-weight:[%NOMCAT..POLICEGRAS;4%];font-style:[%NOMCAT..POLICEITALIQUE;5%];[%SI%]NOMCAT..POLICENOM!=[%ALORS%]font-family:[%NOMCAT..POLICENOM%];[%FIN%]text-decoration:[%NOMCAT..POLICESOULIGNEE;6%];[%SI%]NOMCAT..POLICETAILLE!=0[%ALORS%]font-size:[%NOMCAT..POLICETAILLE;7%];[%FIN%][%SI%]NOMCAT..CADRAGEH!=-1[%ALORS%]text-align:[%NOMCAT..CADRAGEH;9%];[%FIN%][%SI%]NOMCAT..CADRAGEV!=-1[%ALORS%]vertical-align:[%NOMCAT..CADRAGEV;10%];[%FIN%][%SI%]NOMCAT..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%NOMCAT..OPACITE%]);zoom:1;opacity:[%NOMCAT..OPACITE;8%];[%FIN%]">[%NOMCAT..HTMLAVANT%]<div id="zrl_[%LISTCATUSER%]_XCAT">[%XCAT%]</div>[%NOMCAT..HTMLAPRES%]</td></tr></table></div>
+</div></td></tr><!--/REPEAT--></table></CONTENEUR></div>
+<div id="tzREGLETTELISTCAT" style="position:absolute;left:285px;top:80px;width:350px;height:20px;z-index:2; [%SI%]REGLETTELISTCAT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><ol class="reglette">[%REGLETTELISTCAT;2%]</ol></div>
+</div></td></tr></table></div>
+</div></td></tr></table></div>
+<div id="dwwCELLULE7" style="position:absolute;left:19px;top:143px;width:911px;height:501px;z-index:3;"><table id="CELLULE7" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="499" width="911" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwCELLULE6" style="position:absolute;left:0px;top:0px;width:911px;height:24px;z-index:0;"><table id="CELLULE6" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="23" width="911" class="l-2" valign="top"><div class="ff3fix63895rel" style=""><div id="LIBELLE5" style="position:absolute;left:9px;top:5px;width:182px;height:14px;z-index:0;" class="Btn-Std">Profil du client</div>
+</div></td></tr></table></div>
+<div id="dwwBOUTON3" style="position:absolute;left:689px;top:287px;width:204px;height:24px;z-index:1; [%SI%]BOUTON3..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON3" VALUE="Fermer la fenêtre" onclick="{_JSL(_PAGE_,'BOUTON3','_self','','')}" id="BOUTON3" class="Btn-Std padding effet" TABINDEX="49"></div>
+<div id="dwwBTNACCEPT" style="position:absolute;left:479px;top:287px;width:204px;height:24px;z-index:2;"><input TYPE="button" NAME="BTN_ACCEPT" VALUE="Accepter les informations" onclick="_BTN_ACCEPT_CLI(event)" id="BTN_ACCEPT" class="Btn-Std padding effet" TABINDEX="48"></div>
+<div id="LIBELLE4" style="position:absolute;left:265px;top:234px;width:74px;height:13px;z-index:3;" class="Verdana-9">JJ/MM/AAAA</div>
+<div id="dwwDATEACHAT" style="position:absolute;left:164px;top:229px;width:95px;height:24px;z-index:4;"><INPUT TYPE="text" SIZE="7" NAME="DATEACHAT" VALUE="[%DATEACHAT%]" onkeypress="return JJMMAA(event,'DD/MM/YYYY');" onblur="reinit(event,'DD/MM/YYYY');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');" onfocus="var b=(this.value.length==0);init(event,'DD/MM/YYYY');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="DATEACHAT" class="Btn-Std padding effet" TABINDEX="37"></div>
+<div id="dwwlzDATEACHAT" style="position:absolute;left:19px;top:229px;z-index:4;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzDATEACHAT">Date Achat</td></tr></table></div>
+<div id="dwwDATEFIN" style="position:absolute;left:164px;top:259px;width:95px;height:24px;z-index:5;"><INPUT TYPE="text" SIZE="7" NAME="DATEFIN" VALUE="[%DATEFIN%]" onkeypress="return JJMMAA(event,'DD/MM/YYYY');" onblur="reinit(event,'DD/MM/YYYY');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');_DATEFIN_BLU(event)" onfocus="var b=(this.value.length==0);init(event,'DD/MM/YYYY');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="DATEFIN" class="Btn-Std padding effet" TABINDEX="38"></div>
+<div id="dwwlzDATEFIN" style="position:absolute;left:19px;top:259px;z-index:5;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzDATEFIN">Date de Fin</td></tr></table></div>
+<div id="dwwJOUR" style="position:absolute;left:164px;top:289px;width:47px;height:24px;z-index:6;"><INPUT TYPE="text" SIZE="3" NAME="JOUR" VALUE="[%JOUR%]" onkeypress="return VerifSaisieNombre(event,'9999');" onblur="reinitNombre(event,'9999');VerifRegExp(this,'^(\\d|'+_WW_SEPMILLIER_+'){1,4}$');" onfocus="var b=(this.value.length==0);initNombre(event,'9999');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="JOUR" class="Btn-Std padding effet" TABINDEX="39" READONLY></div>
+<div id="dwwlzJOUR" style="position:absolute;left:19px;top:289px;z-index:6;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzJOUR">Jour(s) Restant</td></tr></table></div>
+<div id="dwwBATCH" style="position:absolute;left:479px;top:224px;width:411px;height:20px;z-index:7;"><input type="hidden" name="BATCH" value=""><table class="Btn-Std" id="tzBATCH" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:411px;"><label for="BATCH_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="BATCH" value="1" id="BATCH_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%BATCH[1]..CHECKED%] TABINDEX="46">&nbsp;&#32;Ne pas envoyer de courriel dans l'envoi en &quot;batch&quot;</label></td></tr></table></div>
+<div id="dwwDATEDERNIEREVISITE" style="position:absolute;left:164px;top:199px;width:95px;height:24px;z-index:8;"><INPUT TYPE="text" SIZE="7" NAME="DATEDERNIEREVISITE" VALUE="[%DATEDERNIEREVISITE%]" onkeypress="return JJMMAA(event,'DD/MM/YYYY');" onblur="reinit(event,'DD/MM/YYYY');VerifRegExp(this,'^([1-9]|[0-2]\\d|3[0-1])\\/((0){0,1}[1-9]|1[0-2])\\/\\d{1,4}$');" onfocus="var b=(this.value.length==0);init(event,'DD/MM/YYYY');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="DATEDERNIEREVISITE" class="Btn-Std padding effet" TABINDEX="36"></div>
+<div id="dwwlzDATEDERNIEREVISITE" style="position:absolute;left:19px;top:199px;z-index:8;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzDATEDERNIEREVISITE">Date Dernière Visite</td></tr></table></div>
+<div id="LIBELLE3" style="position:absolute;left:265px;top:204px;width:74px;height:13px;z-index:9;" class="Verdana-9">JJ/MM/AAAA</div>
+<div id="dwwCOURRIEL" style="position:absolute;left:164px;top:107px;width:259px;height:24px;z-index:10;"><INPUT TYPE="text" SIZE="19" MAXLENGTH="60" NAME="COURRIEL" VALUE="[%COURRIEL%]" id="COURRIEL" class="Btn-Std padding effet" TABINDEX="33"></div>
+<div id="dwwlzCOURRIEL" style="position:absolute;left:19px;top:107px;z-index:10;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzCOURRIEL">Courriel prioritaire</td></tr></table></div>
+<div id="dwwMOTDEPASSE" style="position:absolute;left:627px;top:77px;width:186px;height:24px;z-index:11;"><INPUT TYPE="text" SIZE="14" MAXLENGTH="10" NAME="MOT_DE_PASSE" VALUE="[%MOT_DE_PASSE%]" id="MOT_DE_PASSE" class="Btn-Std padding effet" TABINDEX="42"></div>
+<div id="dwwlzMOTDEPASSE" style="position:absolute;left:482px;top:77px;z-index:11;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzMOT_DE_PASSE">Mot de Passe</td></tr></table></div>
+<div id="dwwCONTACT" style="position:absolute;left:164px;top:77px;width:259px;height:24px;z-index:12;"><INPUT TYPE="text" SIZE="19" MAXLENGTH="60" NAME="CONTACT" VALUE="[%CONTACT%]" id="CONTACT" class="Btn-Std padding effet" TABINDEX="32"></div>
+<div id="dwwlzCONTACT" style="position:absolute;left:19px;top:77px;z-index:12;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzCONTACT">Contact</td></tr></table></div>
+<div id="dwwLOGIN" style="position:absolute;left:627px;top:47px;width:186px;height:24px;z-index:13;"><INPUT TYPE="text" SIZE="14" MAXLENGTH="20" NAME="LOGIN" VALUE="[%LOGIN%]" id="LOGIN" class="Btn-Std padding effet" TABINDEX="41"></div>
+<div id="dwwlzLOGIN" style="position:absolute;left:482px;top:47px;z-index:13;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzLOGIN">Login</td></tr></table></div>
+<div id="dwwNOM" style="position:absolute;left:164px;top:47px;width:259px;height:24px;z-index:14;"><INPUT TYPE="text" SIZE="19" MAXLENGTH="60" NAME="NOM" VALUE="[%NOM%]" id="NOM" class="Btn-Std padding effet" TABINDEX="31"></div>
+<div id="dwwlzNOM" style="position:absolute;left:19px;top:47px;z-index:14;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzNOM">Nom de l'entreprise</td></tr></table></div>
+<div id="LIBELLE6" style="position:absolute;left:265px;top:264px;width:74px;height:13px;z-index:15;" class="Verdana-9">JJ/MM/AAAA</div>
+<div id="dwwBTNSAUVEFERME" style="position:absolute;left:689px;top:317px;width:204px;height:24px;z-index:16;"><input TYPE="button" NAME="BTN_SAUVEFERME" VALUE="Sauver et fermer" onclick="{_JSL(_PAGE_,'BTN_SAUVEFERME','_self','','')}" id="BTN_SAUVEFERME" class="Btn-Std padding effet" TABINDEX="61"></div>
+<div id="dwwINTMASTER" style="position:absolute;left:[%INTMASTER..X%]px;top:[%INTMASTER..Y%]px;width:[%INTMASTER..LARGEUR%]px;height:[%INTMASTER..HAUTEUR%]px;z-index:17; [%SI%]INTMASTER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]INTMASTER..CURSEURSOURIS!=auto[%ALORS%]cursor:[%INTMASTER..CURSEURSOURIS%];[%FIN%]">[%INTMASTER..HTMLAVANT%]<input type="hidden" name="INTMASTER" value=""><table class="Btn-Std" id="tzINTMASTER" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:264px;"><label for="INTMASTER_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="INTMASTER" value="1" id="INTMASTER_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%INTMASTER[1]..CHECKED%] TITLE="[%INTMASTER..BULLE%]" TABINDEX="47"[%SI%]INTMASTER..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]INTMASTER..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%INTMASTER[1]..LIBELLE%]</label></td></tr></table>[%INTMASTER..HTMLAPRES%]</div>
+<div id="dwwABONNEMENT" style="position:absolute;left:220px;top:291px;width:119px;height:20px;z-index:18;"><input type="hidden" name="ABONNEMENT" value=""><table class="Btn-Std" id="tzABONNEMENT" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:119px;"><label for="ABONNEMENT_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="ABONNEMENT" value="1" id="ABONNEMENT_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%ABONNEMENT[1]..CHECKED%] TABINDEX="40">&nbsp;&#32;Abonnement</label></td></tr></table></div>
+<div id="dwwCOURRIEL2" style="position:absolute;left:164px;top:137px;width:259px;height:24px;z-index:19;"><INPUT TYPE="text" SIZE="19" MAXLENGTH="60" NAME="COURRIEL2" VALUE="[%COURRIEL2%]" id="COURRIEL2" class="Btn-Std padding effet" TABINDEX="34"></div>
+<div id="dwwlzCOURRIEL2" style="position:absolute;left:19px;top:137px;z-index:19;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzCOURRIEL2">Courriel #2</td></tr></table></div>
+<div id="dwwCOURRIEL3" style="position:absolute;left:164px;top:167px;width:259px;height:24px;z-index:20;"><INPUT TYPE="text" SIZE="19" MAXLENGTH="60" NAME="COURRIEL3" VALUE="[%COURRIEL3%]" id="COURRIEL3" class="Btn-Std padding effet" TABINDEX="35"></div>
+<div id="dwwlzCOURRIEL3" style="position:absolute;left:19px;top:167px;z-index:20;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzCOURRIEL3">Courriel #3</td></tr></table></div>
+<div id="dwwTELEPHONE" style="position:absolute;left:627px;top:159px;width:153px;height:24px;z-index:21;"><INPUT TYPE="text" SIZE="11" MAXLENGTH="26" NAME="TELEPHONE" VALUE="[%TELEPHONE%]" id="TELEPHONE" class="Btn-Std padding effet" TABINDEX="44"></div>
+<div id="dwwlzTELEPHONE" style="position:absolute;left:482px;top:159px;z-index:21;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzTELEPHONE">Téléphone</td></tr></table></div>
+<div id="dwwFAX1" style="position:absolute;left:627px;top:189px;width:153px;height:24px;z-index:22;"><INPUT TYPE="text" SIZE="11" MAXLENGTH="26" NAME="FAX1" VALUE="[%FAX1%]" id="FAX1" class="Btn-Std padding effet" TABINDEX="45"></div>
+<div id="dwwlzFAX1" style="position:absolute;left:482px;top:189px;z-index:22;"><table width="145px" style="height:24px;"><tr><td class="Btn-Std padding effet" id="lzFAX1">Fax</td></tr></table></div>
+<div id="tzCOMBO2" style="position:absolute;left:626px;top:128px;z-index:23;" class="Btn-Std">
+<select NAME="[%COMBO2..ALIAS%]" SIZE=1 id="COMBO2" class="Btn-Std padding effet" TABINDEX="43">  <option [%COMBO2..SELECTED%] VALUE="[%COMBO2%]">[%COMBO2..VALEUR;1%]</option>
+
+</select></div>
+<div id="dwwlzCOMBO2" style="position:absolute;left:482px;top:128px;z-index:23;"><table width="144px" style="height:26px;"><tr><td class="Btn-Std padding effet" id="lzCOMBO2">Provient de</td></tr></table></div>
+<div id="dwwINTFACTURATION" style="position:absolute;left:220px;top:317px;width:214px;height:20px;z-index:24;"><input type="hidden" name="INT_FACTURATION" value=""><table class="Btn-Std" id="tzINT_FACTURATION" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:214px;"><label for="INT_FACTURATION_1" style="position:relative;padding-left:20px;"><input type="CHECKBOX" name="INT_FACTURATION" value="1" id="INT_FACTURATION_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%INT_FACTURATION[1]..CHECKED%] TABINDEX="60">&nbsp;&#32;Facturation automatique</label></td></tr></table></div>
+<div id="dwwSAINOTEGEN" style="position:absolute;left:164px;top:351px;width:726px;height:132px;z-index:25;"><textarea name="SAI_NOTEGEN" cols="54" rows="7" id="SAI_NOTEGEN" class="Btn-Std padding effet" TABINDEX="62">[%SAI_NOTEGEN%]</textarea></div>
+<div id="dwwlzSAINOTEGEN" style="position:absolute;left:19px;top:351px;width:145px;height:132px;z-index:25;" class="Btn-Std">General not</div>
+</div></td></tr></table></div>
+</div>
+<div id="dwwLIENDEMO" style="position:absolute;left:1295px;top:115px;width:108px;height:16px;z-index:4; [%SI%]LIENDEMO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:{_JSL(_PAGE_,'LIENDEMO','_self','','')}" id="LIENDEMO" class="Lien wblien padding effet"  style="_height:16px;" TABINDEX="1">Démonstrations</a></div>
+
+</form>
+[%ProfilClient2..HTMLFINPAGE%]</body>
+</html>
+<!--233623-->

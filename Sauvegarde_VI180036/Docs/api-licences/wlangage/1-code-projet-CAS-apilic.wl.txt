@@ -1,0 +1,12 @@
+// À COLLER dans le CODE D'INITIALISATION DU PROJET lecatalogue.
+// Endroit : dans le bloc  SELON Minuscule(AAType)  (dossier technique p. 131),
+//           juste APRÈS la ligne  SELON Minuscule(AAType)
+//           et AVANT la ligne     CAS "conference","commestim","contestim":
+//
+// Sans ce CAS, une commande Type=apilic serait traitée comme « commande inconnue »
+// et l'IP d'estimation.ca finirait bannie dans la table INTRUSION (isIntrus).
+
+    CAS "apilic":   // API licences pour estimation.ca (docs/api-licences)
+        TraiteAPILicence()
+        FermeTout()
+        RETOUR

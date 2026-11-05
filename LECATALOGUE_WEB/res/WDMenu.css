@@ -1,0 +1,152 @@
+/*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*/
+/* Onglets													*/
+/* L'ordre a un importance : onglet puis menu vertical !!!	*/
+/*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*/
+
+/*	*	*	*	*	*	*	*/
+/* Elements principaux		*/
+/*	*	*	*	*	*	*	*/
+
+/* Style de l'onglet racine */
+TABLE.WDOngletMain
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Style des du conteneur de sous menu */
+DIV.WDSousOnglet
+{
+	position: relative;
+}
+
+/* Style des sous menu popup */
+DIV.WDSousOnglet TABLE
+{
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 1px;
+	margin: 0px;
+	padding: 0px;
+}
+
+TR.WDOngletOptionB
+{
+	height: 0px;
+}
+
+TR.WDOngletOptionB DIV.WDSousOnglet
+{
+	height: 0px;
+}
+/*	*	*	*	*	*	*	*/
+/* Option d'onglet			*/
+/*	*	*	*	*	*	*	*/
+
+TD.WDOngletOptionG
+{
+	background-repeat: no-repeat;
+}
+TD.WDOngletOptionM
+{
+	background-repeat: repeat-x;
+	vertical-align: middle;
+	text-align: center;
+}
+TD.WDOngletOptionD
+{
+	background-repeat: no-repeat;
+}
+/* Style des liens */
+TD.WDOngletOptionM A
+{
+	white-space: nowrap;
+	text-decoration: none;
+	width: 100%;
+}
+
+/*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*/
+/* Menu vertical											*/
+/*	*	*	*	*	*	*	*	*	*	*	*	*	*	*	*/
+
+/*	*	*	*	*	*	*	*/
+/* Elements principaux		*/
+/*	*	*	*	*	*	*	*/
+
+/* Style du menu racine */
+TABLE.WDMenuMain
+{
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Style des du conteneur de sous menu */
+DIV.WDSousMenu
+{
+	position: relative;
+}
+
+/* Style des sous menu popup */
+DIV.WDSousMenu TABLE
+{
+	display: none;
+	position: absolute;
+	left: 15px;
+	top: 0px;
+	margin: 0px;
+	padding: 0px;
+}
+
+/*	*	*	*	*	*	*	*/
+/* Options de menu			*/
+/*	*	*	*	*	*	*	*/
+
+/* Style d'une ligne d'option de menu */
+TR.WDMenuOption
+{
+}
+
+/* Style de la première cellule (avec l'image) */
+TD.WDMenuTDImage
+{
+	padding-left: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+/* Style du DIV qui force la largeur de la colonne */
+/* La taille dépend du menu et est fixé dans le fichier */
+TD.WDMenuTDImage DIV
+{
+	height: 1px
+}
+
+/* Style de la seconde cellule (avec le lien) */
+TD.WDMenuTDLien
+{
+	width: 100%
+}
+/* Style des liens */
+TD.WDMenuTDLien A
+{
+	white-space: nowrap;
+	text-decoration: none;
+	width: 100%;
+}
+
+/* Style de la troisième cellule (avec l'image popup) */
+TD.WDMenuTDPopup
+{
+	width : 0%;
+	vertical-align: middle;
+}
+
+TR.WDMenuSepHaut TD, TR.WDMenuSepHaut DIV
+{
+	height: 2px;
+}
+
+TR.WDMenuSepBas TD, TR.WDMenuSepBas DIV
+{
+	height: 2px;
+}

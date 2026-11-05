@@ -1,0 +1,11 @@
+//MO037-038.TXT ANA00037 TO ANA00038
+LienAsmb		TAR	96	nouvelle taille enregistrement : 96
+LienAsmb	NoLigne	RUB+		NoLigne est une nouvelle rubrique
+LienAsmb	Cat_Unite	RUB+		Cat_Unite est une nouvelle rubrique
+LienAsmb	Cat_MainOeuvre	RUB+		Cat_MainOeuvre est une nouvelle rubrique
+LienAsmb	Cat_Cout	RUB+		Cat_Cout est une nouvelle rubrique
+LienAsmb	Cat_SousTraitant	RUB+		Cat_SousTraitant est une nouvelle rubrique
+LienAsmb	Cat_Temps	RUB+		Cat_Temps est une nouvelle rubrique
+LienAsmb	T_TUCleUnik	RUB+		T_TUCleUnik est une nouvelle rubrique
+LienAsmb	PROTECT	RUB+		PROTECT est une nouvelle rubrique
+LienAsmb	FLAGS	RUB+		FLAGS est une nouvelle rubrique

@@ -1,0 +1,3 @@
+//MO086-087.TXT ANA00086 TO ANA00087
+AAClient		TAR	1546	nouvelle taille enregistrement : 1546
+AAClient	RBQInterdit	RUB+		RBQInterdit est une nouvelle rubrique

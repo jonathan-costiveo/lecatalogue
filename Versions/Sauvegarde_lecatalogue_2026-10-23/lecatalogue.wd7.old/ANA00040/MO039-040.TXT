@@ -1,0 +1,4 @@
+//MO039-040.TXT ANA00039 TO ANA00040
+RBQ_HISTO	RBQ_ENTREP	CLEN*		la rubrique RBQ_ENTREP est maintenant une clé
+RBQ_HISTO	RBQ_ADDRIP	CLEN*		la rubrique RBQ_ADDRIP est maintenant une clé
+RBQ_HISTO	RBQ_DATE	CLEN*		la rubrique RBQ_DATE est maintenant une clé

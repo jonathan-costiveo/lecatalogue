@@ -1,0 +1,8 @@
+//MO077-078.TXT ANA00077 TO ANA00078
+SDPFIC		TAR	47	nouvelle taille enregistrement : 47
+SDPFIC	SDPSIZEFIC	CNW	Entier sur 8 octets$Entier sur 4 octets	la rubrique SDPSIZEFIC a pour nouveau type Entier sur 8 octets
+SDPSTAT		TAR	60	nouvelle taille enregistrement : 60
+SDPSTAT	SDPSIZEFIC	CNW	Entier sur 8 octets$Entier sur 4 octets	la rubrique SDPSIZEFIC a pour nouveau type Entier sur 8 octets
+SDPINFO		TAR	102	nouvelle taille enregistrement : 102
+SDPINFO	SDP_LANGUE	CNW	Entier non signé sur 2 octets$Entier sur 4 octets	la rubrique SDP_LANGUE a pour nouveau type Entier non signé sur 2 octets
+SDPINFO	SDP_SIZE	CNW	Entier sur 8 octets$Entier sur 4 octets	la rubrique SDP_SIZE a pour nouveau type Entier sur 8 octets

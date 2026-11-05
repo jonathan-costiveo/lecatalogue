@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- AADownload 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%AADOWNLOAD..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%AADOWNLOAD..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _UC0_="[%LIBELLE1..DNDSOURCE%]";
+var _UC1_="[%LIBELLE1..DNDCIBLE%]";
+var _UC2_="[%BTN_VALIDER..DNDSOURCE%]";
+var _UC3_="[%BTN_VALIDER..DNDCIBLE%]";
+var _UC4_="[%BTN_WEBMASTER..DNDSOURCE%]";
+var _UC5_="[%BTN_WEBMASTER..DNDCIBLE%]";
+var _UC6_="[%B_OUBLI..DNDSOURCE%]";
+var _UC7_="[%B_OUBLI..DNDCIBLE%]";
+var _UC8_="[%BTN_ESTIME..DNDSOURCE%]";
+var _UC9_="[%BTN_ESTIME..DNDCIBLE%]";
+var _UC10_="[%BTN_MODULE..DNDSOURCE%]";
+var _UC11_="[%BTN_MODULE..DNDCIBLE%]";
+var _UC12_="[%BTN_TRANSPLAN..DNDSOURCE%]";
+var _UC13_="[%BTN_TRANSPLAN..DNDCIBLE%]";
+var _UC14_="[%LIBELLE3..DNDSOURCE%]";
+var _UC15_="[%LIBELLE3..DNDCIBLE%]";
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// EXE_Remplace
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	c : chaine de base
+//	o : chaine d'origine recherchee
+//	r : chaine de remplacement
+// Variables locales :
+//	s : chaine resultat
+//	p,t : variables de parcours
+function _RMP(c,o,r)
+{
+	// Position dans c
+	var p=0;
+	// Position dans c du prochaine trouve
+	var t;
+	var s=[];
+	// Tant qu'on trouve des occurrences
+	while (-1!=(t=c.indexOf(o,p)))
+	{
+		s.push(c.substring(p,t));
+		s.push(r);
+		p=t+o.length;
+	}
+	// On colle le reliquat de la chaine
+	s.push(c.substring(p));
+	return s.join("");
+}
+// EXE_Repete
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : chaine de base
+//	n : nombre de repetitions
+// Variables locales :
+//	s : chaine resultat
+//	i : compteur de boucle
+function _REP(c,n)
+{
+	// On alloue la nouvelle chaine
+	var s=new String();
+	// On concatene la chaine de base
+	for(var i=0;i<n;i++)s+=c;
+	// On retourne le tout
+	return s;
+}
+// v : valeur
+function _JRA(v)
+{
+	return (v>9?"":"0")+v
+}
+// m : message
+function _MES(m)
+{
+	var d=new Date();
+	if(m.indexOf("HH:MM:SS")!=-1)
+	{
+		m=_RMP(m,"HH:MM:SS",d.getHours()+":"+_JRA(d.getMinutes())+":"+_JRA(d.getSeconds()));
+	}
+	if(m.indexOf("HH:MM")!=-1)
+	{
+		m=_RMP(m,"HH:MM",d.getHours()+":"+_JRA(d.getMinutes()));
+	}
+	return m;
+}
+var _MS_;
+var _NS_;
+var _TS_;
+function _JTS()
+{
+	clearTimeout(_TS_); window.status="";
+}
+function _JIS(m,e)
+{
+	_JTS();if(e==0)e=m.length;_MS_=m+_REP(" ",e);_NS_=0;_JDS();
+}
+function _JDS()
+{
+	var m=_MES(_MS_);window.status=m.substring(_NS_,m.length)+m.substring(0,_NS_);_NS_++;if(_NS_==_MS_.length)_NS_=0;_TS_=setTimeout("_JDS()",200);
+}
+function _JUS()
+{
+	var m=_MES(_MS_);window.status=m;_TS_=setTimeout("_JUS()",200);
+}
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On détecte les balises DispHTMLUnknownElement par la propriété canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas très logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+// JS_NavigateurOuvre
+function _NAO(p)
+{
+	if(p==0||p>127)return "toolbar=0,location=0,status=0,scrollbars=0,directories=0,menubar=0,resizable=0";
+	var o="";
+	if(p&1)o+="toolbar=1,";
+	if(p&2)o+="location=1,";
+	if(p&4)o+="status=1,";
+	if(p&8)o+="menubar=1,";
+	if(p&16)o+="scrollbars=1,";
+	if(p&32)o+="resizable=1,";
+	if(p&64)o+="directories=1,";
+	if(o.length>0)o=o.substr(0, o.length-1);
+	return o;
+}
+function _GET_LIBELLE3_1()
+{
+	return _JCIR(_JGE("LIBELLE3",document));
+}
+function _SET_LIBELLE3_1()
+{
+	_JGE("LIBELLE3",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _GET_LIBELLE1_1()
+{
+	return _JCIR(_JGE("LIBELLE1",document));
+}
+function _SET_LIBELLE1_1()
+{
+	_JGE("LIBELLE1",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _GET_BTN_VALIDER_1()
+{
+	return _JGEN("z_BTN_VALIDER_IMG",document,false).src;
+}
+function _SET_BTN_VALIDER_1()
+{
+	_JGEN("z_BTN_VALIDER_IMG",document,false).src=arguments[0];
+}
+function _GET_BTN_WEBMASTER_1()
+{
+	return _JGEN("z_BTN_WEBMASTER_IMG",document,false).src;
+}
+function _SET_BTN_WEBMASTER_1()
+{
+	_JGEN("z_BTN_WEBMASTER_IMG",document,false).src=arguments[0];
+}
+function _GET_B_OUBLI_1()
+{
+	return _JCIR(_JGE("B_OUBLI",document));
+}
+function _SET_B_OUBLI_1()
+{
+	_JGE("B_OUBLI",document).innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function _GET_BTN_ESTIME_1()
+{
+	return _JGEN("z_BTN_ESTIME_IMG",document,false).src;
+}
+function _SET_BTN_ESTIME_1()
+{
+	_JGEN("z_BTN_ESTIME_IMG",document,false).src=arguments[0];
+}
+function _GET_BTN_MODULE_1()
+{
+	return _JGEN("z_BTN_MODULE_IMG",document,false).src;
+}
+function _SET_BTN_MODULE_1()
+{
+	_JGEN("z_BTN_MODULE_IMG",document,false).src=arguments[0];
+}
+function _GET_BTN_TRANSPLAN_1()
+{
+	return _JGEN("z_BTN_TRANSPLAN_IMG",document,false).src;
+}
+function _SET_BTN_TRANSPLAN_1()
+{
+	_JGEN("z_BTN_TRANSPLAN_IMG",document,false).src=arguments[0];
+}
+function _AADOWNLOAD_LOD(event)
+{
+	{
+	_JIS("Centre de mise Ã  jour",5);
+}
+}
+function _AADOWNLOAD_KPR(event)
+{
+	return clWDUtil.bOnKeyPressPage(arguments,this,[{bEntree:1,tabValidation:[],pfFonction:_BTN_VALIDER_CLI}],{})}
+function _BTN_VALIDER_CLI(event)
+{
+	{
+}
+{
+		_JSL(_PAGE_,"BTN_VALIDER","_self","","");}
+}
+function _BTN_ESTIME_CLI(event)
+{
+	{
+	_PAGE_.VER_ESTIME.value=_PAGE_.SAI_ESTIME.value;
+	clWDUtil.oGetCurrentStyleIdName("VER_ESTIME",document,true,false,false).color="#FFFFFF";
+}
+{
+		_JSL(_PAGE_,"BTN_ESTIME","_blank","",_NAO(0)+",width="+250+",height="+150+",left="+1+",top="+1);}
+}
+function _BTN_MODULE_CLI(event)
+{
+	{
+	_PAGE_.VER_MODULE.value=_PAGE_.SAI_MODULE.value;
+	clWDUtil.oGetCurrentStyleIdName("VER_MODULE",document,true,false,false).color="#FFFFFF";
+}
+{
+		_JSL(_PAGE_,"BTN_MODULE","_blank","",_NAO(0)+",width="+250+",height="+150+",left="+1+",top="+1);}
+}
+function _BTN_TRANSPLAN_CLI(event)
+{
+	{
+	_PAGE_.VER_EPLAN.value=_PAGE_.SAI_EPLAN.value;
+	clWDUtil.oGetCurrentStyleIdName("VER_EPLAN",document,true,false,false).color="#FFFFFF";
+}
+{
+		_JSL(_PAGE_,"BTN_TRANSPLAN","_blank","",_NAO(0)+",width="+250+",height="+150+",left="+1+",top="+1);}
+}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LIBELLE1","",_UC0_,_UC1_,_JGEN("LIBELLE1",document,false),[_GET_LIBELLE1_1],[_SET_LIBELLE1_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_VALIDER","",_UC2_,_UC3_,_JGEN("BTN_VALIDER",document,false),[_GET_BTN_VALIDER_1],[_SET_BTN_VALIDER_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_WEBMASTER","",_UC4_,_UC5_,_JGEN("BTN_WEBMASTER",document,false),[_GET_BTN_WEBMASTER_1],[_SET_BTN_WEBMASTER_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("B_OUBLI","",_UC6_,_UC7_,_JGEN("B_OUBLI",document,false),[_GET_B_OUBLI_1],[_SET_B_OUBLI_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_ESTIME","",_UC8_,_UC9_,_JGEN("BTN_ESTIME",document,false),[_GET_BTN_ESTIME_1],[_SET_BTN_ESTIME_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_MODULE","",_UC10_,_UC11_,_JGEN("BTN_MODULE",document,false),[_GET_BTN_MODULE_1],[_SET_BTN_MODULE_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("BTN_TRANSPLAN","",_UC12_,_UC13_,_JGEN("BTN_TRANSPLAN",document,false),[_GET_BTN_TRANSPLAN_1],[_SET_BTN_TRANSPLAN_1]);
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LIBELLE3","",_UC14_,_UC15_,_JGEN("LIBELLE3",document,false),[_GET_LIBELLE3_1],[_SET_LIBELLE3_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">function chfocus()
+{
+[%SI%]SAISIE1..VISIBLE=1[%ALORS%]
+window.focus();if(_PAGE_.SAISIE1!=null)try{_PAGE_.SAISIE1.focus();}catch(e){}
+
+[%FIN%]
+}
+</script>
+<style type="text/css">.wblien {text-align:center;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;width:100%;margin:0;}#page { min-height:509px;height:auto !important;height:509px;min-width:826px;width:auto !important;width:826px;}.l-1 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;font-weight:bold;color:#333333;text-align:right;vertical-align:middle;}
+.l-2 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;color:#2D2D2D;}
+.l-3 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;color:#2D2D2D;}
+.l-4 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;font-weight:bold;color:#000000;text-align:left;}
+.l-5,.l-12 {color:#FFFFFF;}
+.l-6 {background-image:url([%_PROJET_WEB_%]navTile.gif);}
+.l-7 {font-family:Arial, Helvetica, sans-serif;font-size:15px;font-style:italic;font-weight:bold;color:#FFFFFF;text-align:left;vertical-align:middle;}
+.l-8 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;color:#FFFFFF;text-align:left;background-color:#0099CC;}
+.l-9 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;font-weight:normal;text-align:left;}
+.l-10 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;font-weight:normal;text-align:left;vertical-align:middle;}
+.l-11,.l-13 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;color:#FFFFFF;text-align:left;background-color:#3366CC;}
+.l-14 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;font-weight:bold;color:#333333;text-align:left;}
+#SAI_EPLAN {width:235px;height:22px;  [%SI%]SAI_EPLAN..COULEUR!=-1[%ALORS%]color:#[%SAI_EPLAN..COULEUR%][%FIN%];  [%SI%]SAI_EPLAN..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_EPLAN..COULEURFOND%][%FIN%];}#SAI_ESTIME {width:235px;height:22px;  [%SI%]SAI_ESTIME..COULEUR!=-1[%ALORS%]color:#[%SAI_ESTIME..COULEUR%][%FIN%];  [%SI%]SAI_ESTIME..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_ESTIME..COULEURFOND%][%FIN%];}#fzLIBELLE3,#tzLIBELLE3 {  [%SI%]LIBELLE3..COULEUR!=-1[%ALORS%]color:#[%LIBELLE3..COULEUR%][%FIN%];  [%SI%]LIBELLE3..COULEURFOND!=-1[%ALORS%]background-color:#[%LIBELLE3..COULEURFOND%][%FIN%];font-weight:[%LIBELLE3..POLICEGRAS;4%];font-style:[%LIBELLE3..POLICEITALIQUE;5%];[%SI%]LIBELLE3..POLICENOM!=[%ALORS%]font-family:[%LIBELLE3..POLICENOM%];[%FIN%]text-decoration:[%LIBELLE3..POLICESOULIGNEE;6%];[%SI%]LIBELLE3..POLICETAILLE!=0[%ALORS%]font-size:[%LIBELLE3..POLICETAILLE;7%];[%FIN%][%SI%]LIBELLE3..CADRAGEH!=-1[%ALORS%]text-align:[%LIBELLE3..CADRAGEH;9%];[%FIN%][%SI%]LIBELLE3..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIBELLE3..CADRAGEV;10%];[%FIN%][%SI%]LIBELLE3..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIBELLE3..OPACITE%]);zoom:1;opacity:[%LIBELLE3..OPACITE;8%];[%FIN%]}#SAI_MODULE {width:235px;height:22px;  [%SI%]SAI_MODULE..COULEUR!=-1[%ALORS%]color:#[%SAI_MODULE..COULEUR%][%FIN%];  [%SI%]SAI_MODULE..COULEURFOND!=-1[%ALORS%]background-color:#[%SAI_MODULE..COULEURFOND%][%FIN%];}#fzLIBELLE1,#tzLIBELLE1 {  [%SI%]LIBELLE1..COULEUR!=-1[%ALORS%]color:#[%LIBELLE1..COULEUR%][%FIN%];  [%SI%]LIBELLE1..COULEURFOND!=-1[%ALORS%]background-color:#[%LIBELLE1..COULEURFOND%][%FIN%];font-weight:[%LIBELLE1..POLICEGRAS;4%];font-style:[%LIBELLE1..POLICEITALIQUE;5%];[%SI%]LIBELLE1..POLICENOM!=[%ALORS%]font-family:[%LIBELLE1..POLICENOM%];[%FIN%]text-decoration:[%LIBELLE1..POLICESOULIGNEE;6%];[%SI%]LIBELLE1..POLICETAILLE!=0[%ALORS%]font-size:[%LIBELLE1..POLICETAILLE;7%];[%FIN%][%SI%]LIBELLE1..CADRAGEH!=-1[%ALORS%]text-align:[%LIBELLE1..CADRAGEH;9%];[%FIN%][%SI%]LIBELLE1..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIBELLE1..CADRAGEV;10%];[%FIN%][%SI%]LIBELLE1..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIBELLE1..OPACITE%]);zoom:1;opacity:[%LIBELLE1..OPACITE;8%];[%FIN%]}#BTN_VALIDER {  [%SI%]BTN_VALIDER..COULEUR!=-1[%ALORS%]color:#[%BTN_VALIDER..COULEUR%][%FIN%];  [%SI%]BTN_VALIDER..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_VALIDER..COULEURFOND%][%FIN%];font-weight:[%BTN_VALIDER..POLICEGRAS;4%];font-style:[%BTN_VALIDER..POLICEITALIQUE;5%];[%SI%]BTN_VALIDER..POLICENOM!=[%ALORS%]font-family:[%BTN_VALIDER..POLICENOM%];[%FIN%]text-decoration:[%BTN_VALIDER..POLICESOULIGNEE;6%];[%SI%]BTN_VALIDER..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_VALIDER..POLICETAILLE;7%];[%FIN%][%SI%]BTN_VALIDER..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_VALIDER..CADRAGEH;9%];[%FIN%][%SI%]BTN_VALIDER..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_VALIDER..CADRAGEV;10%];[%FIN%][%SI%]BTN_VALIDER..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_VALIDER..OPACITE%]);zoom:1;opacity:[%BTN_VALIDER..OPACITE;8%];[%FIN%]}#CELLULE1 {height:20px;}
+.dzCELLULE1 {width:773px;height:20px;;overflow-x:hidden;overflow-y:hidden;position:relative}#LIBELLE2,#tzLIBELLE2 {width:453px;height:17px;}
+.dzLIBELLE2 {width:453px;height:17px;;overflow-x:hidden;overflow-y:hidden;position:relative}#VER_EPLAN {width:321px;height:83px;  [%SI%]VER_EPLAN..COULEUR!=-1[%ALORS%]color:#[%VER_EPLAN..COULEUR%][%FIN%];  [%SI%]VER_EPLAN..COULEURFOND!=-1[%ALORS%]background-color:#[%VER_EPLAN..COULEURFOND%][%FIN%];}#SAISIE1 {width:134px;height:22px;}#VER_ESTIME {width:321px;height:83px;  [%SI%]VER_ESTIME..COULEUR!=-1[%ALORS%]color:#[%VER_ESTIME..COULEUR%][%FIN%];  [%SI%]VER_ESTIME..COULEURFOND!=-1[%ALORS%]background-color:#[%VER_ESTIME..COULEURFOND%][%FIN%];}#VER_MODULE {width:321px;height:83px;  [%SI%]VER_MODULE..COULEUR!=-1[%ALORS%]color:#[%VER_MODULE..COULEUR%][%FIN%];  [%SI%]VER_MODULE..COULEURFOND!=-1[%ALORS%]background-color:#[%VER_MODULE..COULEURFOND%][%FIN%];}#BTN_WEBMASTER {  [%SI%]BTN_WEBMASTER..COULEUR!=-1[%ALORS%]color:#[%BTN_WEBMASTER..COULEUR%][%FIN%];  [%SI%]BTN_WEBMASTER..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_WEBMASTER..COULEURFOND%][%FIN%];font-weight:[%BTN_WEBMASTER..POLICEGRAS;4%];font-style:[%BTN_WEBMASTER..POLICEITALIQUE;5%];[%SI%]BTN_WEBMASTER..POLICENOM!=[%ALORS%]font-family:[%BTN_WEBMASTER..POLICENOM%];[%FIN%]text-decoration:[%BTN_WEBMASTER..POLICESOULIGNEE;6%];[%SI%]BTN_WEBMASTER..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_WEBMASTER..POLICETAILLE;7%];[%FIN%][%SI%]BTN_WEBMASTER..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_WEBMASTER..CADRAGEH;9%];[%FIN%][%SI%]BTN_WEBMASTER..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_WEBMASTER..CADRAGEV;10%];[%FIN%][%SI%]BTN_WEBMASTER..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_WEBMASTER..OPACITE%]);zoom:1;opacity:[%BTN_WEBMASTER..OPACITE;8%];[%FIN%]}#B_OUBLI,#tzB_OUBLI {  [%SI%]B_OUBLI..COULEUR!=-1[%ALORS%]color:#[%B_OUBLI..COULEUR%][%FIN%];  [%SI%]B_OUBLI..COULEURFOND!=-1[%ALORS%]background-color:#[%B_OUBLI..COULEURFOND%][%FIN%];font-weight:[%B_OUBLI..POLICEGRAS;4%];font-style:[%B_OUBLI..POLICEITALIQUE;5%];[%SI%]B_OUBLI..POLICENOM!=[%ALORS%]font-family:[%B_OUBLI..POLICENOM%];[%FIN%][%SI%]B_OUBLI..POLICETAILLE!=0[%ALORS%]font-size:[%B_OUBLI..POLICETAILLE;7%];[%FIN%][%SI%]B_OUBLI..CADRAGEH!=-1[%ALORS%]text-align:[%B_OUBLI..CADRAGEH;9%];[%FIN%][%SI%]B_OUBLI..CADRAGEV!=-1[%ALORS%]vertical-align:[%B_OUBLI..CADRAGEV;10%];[%FIN%][%SI%]B_OUBLI..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%B_OUBLI..OPACITE%]);zoom:1;opacity:[%B_OUBLI..OPACITE;8%];[%FIN%]}#BTN_ESTIME {  [%SI%]BTN_ESTIME..COULEUR!=-1[%ALORS%]color:#[%BTN_ESTIME..COULEUR%][%FIN%];  [%SI%]BTN_ESTIME..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_ESTIME..COULEURFOND%][%FIN%];font-weight:[%BTN_ESTIME..POLICEGRAS;4%];font-style:[%BTN_ESTIME..POLICEITALIQUE;5%];[%SI%]BTN_ESTIME..POLICENOM!=[%ALORS%]font-family:[%BTN_ESTIME..POLICENOM%];[%FIN%]text-decoration:[%BTN_ESTIME..POLICESOULIGNEE;6%];[%SI%]BTN_ESTIME..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_ESTIME..POLICETAILLE;7%];[%FIN%][%SI%]BTN_ESTIME..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_ESTIME..CADRAGEH;9%];[%FIN%][%SI%]BTN_ESTIME..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_ESTIME..CADRAGEV;10%];[%FIN%][%SI%]BTN_ESTIME..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_ESTIME..OPACITE%]);zoom:1;opacity:[%BTN_ESTIME..OPACITE;8%];[%FIN%]}#BTN_MODULE {  [%SI%]BTN_MODULE..COULEUR!=-1[%ALORS%]color:#[%BTN_MODULE..COULEUR%][%FIN%];  [%SI%]BTN_MODULE..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_MODULE..COULEURFOND%][%FIN%];font-weight:[%BTN_MODULE..POLICEGRAS;4%];font-style:[%BTN_MODULE..POLICEITALIQUE;5%];[%SI%]BTN_MODULE..POLICENOM!=[%ALORS%]font-family:[%BTN_MODULE..POLICENOM%];[%FIN%]text-decoration:[%BTN_MODULE..POLICESOULIGNEE;6%];[%SI%]BTN_MODULE..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_MODULE..POLICETAILLE;7%];[%FIN%][%SI%]BTN_MODULE..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_MODULE..CADRAGEH;9%];[%FIN%][%SI%]BTN_MODULE..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_MODULE..CADRAGEV;10%];[%FIN%][%SI%]BTN_MODULE..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_MODULE..OPACITE%]);zoom:1;opacity:[%BTN_MODULE..OPACITE;8%];[%FIN%]}#BTN_TRANSPLAN {  [%SI%]BTN_TRANSPLAN..COULEUR!=-1[%ALORS%]color:#[%BTN_TRANSPLAN..COULEUR%][%FIN%];  [%SI%]BTN_TRANSPLAN..COULEURFOND!=-1[%ALORS%]background-color:#[%BTN_TRANSPLAN..COULEURFOND%][%FIN%];font-weight:[%BTN_TRANSPLAN..POLICEGRAS;4%];font-style:[%BTN_TRANSPLAN..POLICEITALIQUE;5%];[%SI%]BTN_TRANSPLAN..POLICENOM!=[%ALORS%]font-family:[%BTN_TRANSPLAN..POLICENOM%];[%FIN%]text-decoration:[%BTN_TRANSPLAN..POLICESOULIGNEE;6%];[%SI%]BTN_TRANSPLAN..POLICETAILLE!=0[%ALORS%]font-size:[%BTN_TRANSPLAN..POLICETAILLE;7%];[%FIN%][%SI%]BTN_TRANSPLAN..CADRAGEH!=-1[%ALORS%]text-align:[%BTN_TRANSPLAN..CADRAGEH;9%];[%FIN%][%SI%]BTN_TRANSPLAN..CADRAGEV!=-1[%ALORS%]vertical-align:[%BTN_TRANSPLAN..CADRAGEV;10%];[%FIN%][%SI%]BTN_TRANSPLAN..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%BTN_TRANSPLAN..OPACITE%]);zoom:1;opacity:[%BTN_TRANSPLAN..OPACITE;8%];[%FIN%]}
+</style>
+</head>
+<body style="   background-color:#FFFFFF;" onkeypress="_AADOWNLOAD_KPR(event)" onload="chfocus();[%_CodeInfoError_%];_LOD_COM(event);_AADOWNLOAD_LOD(event)">
+<table align=center  width="773px"><tr align=left valign=top><td><div style="position:relative">
+<form name="AADOWNLOAD" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.AADOWNLOAD</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="BTN_VALIDER">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:773">
+<TABLE style="position:relative;left:278;">
+ <TR>
+  <td colspan=3 height=200></td>
+ </TR>
+ <TR>
+  <TD width="286px"><table id="tzSEL_VERSIONEG" class="l-3" style="[%SI%]SEL_VERSIONEG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><tr style="vertical-align:middle"><td style="vertical-align:middle;height:20px;width:83px;"><label for="SEL_VERSIONEG_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_VERSIONEG" value="1" id="SEL_VERSIONEG_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_VERSIONEG[1]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_VERSIONEG','_self','','')}" TABINDEX="17"[%SI%]SEL_VERSIONEG..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_VERSIONEG..ETAT=4[%ALORS%] DISABLED[%FIN%]>Version 12</label></td><td style="vertical-align:middle;height:20px;width:83px;"><label for="SEL_VERSIONEG_2" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_VERSIONEG" value="2" id="SEL_VERSIONEG_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_VERSIONEG[2]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_VERSIONEG','_self','','')}" TABINDEX="17"[%SI%]SEL_VERSIONEG..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_VERSIONEG..ETAT=4[%ALORS%] DISABLED[%FIN%]>Version 14</label></td></tr></table></TD>
+  <TD width="209px"></TD>
+  <TD height="211px"></TD>
+ </TR>
+ <TR>
+  <TD width="286px"></TD>
+  <TD class="l-1" valign="middle" id="tzLIEN_REGLE" width="209"><a href="javascript:{_JSL(_PAGE_,'LIEN_REGLE','_blank','','')}" id="LIEN_REGLE" class="l-1 wblien padding" TABINDEX="16">Privacy policies</a></TD>
+  <TD height="20px"></TD>
+ </TR>
+ <TR>
+  <TD width="286px"></TD>
+  <TD width="209px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+<div id="dwwSAIEPLAN" style="position:absolute;left:81px;top:425px;width:338px;height:24px;z-index:0; [%SI%]SAI_EPLAN..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="338" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;left:0;">
+ <TR>
+  <TD class="l-0 padding" id="lzSAI_EPLAN" width="103">e-Plans</TD>
+  <TD width="235"><table width="235px" style="height:24px;"><tr><td valign="middle" id="tzSAI_EPLAN"><INPUT TYPE="text" SIZE="15" NAME="SAI_EPLAN" VALUE="[%SAI_EPLAN%]" id="SAI_EPLAN" class="l-0 padding" TABINDEX="7"[%SI%]SAI_EPLAN..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]SAI_EPLAN..ETAT=4[%ALORS%] DISABLED[%FIN%]></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="103px"></TD>
+  <TD width="235px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIESTIME" style="position:absolute;left:81px;top:455px;width:338px;height:24px;z-index:3; [%SI%]SAI_ESTIME..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="338" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;left:0;">
+ <TR>
+  <TD class="l-0 padding" id="lzSAI_ESTIME" width="103">Estimator</TD>
+  <TD width="235"><table width="235px" style="height:24px;"><tr><td valign="middle" id="tzSAI_ESTIME"><INPUT TYPE="text" SIZE="15" NAME="SAI_ESTIME" VALUE="[%SAI_ESTIME%]" id="SAI_ESTIME" class="l-0 padding" TABINDEX="8"[%SI%]SAI_ESTIME..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]SAI_ESTIME..ETAT=4[%ALORS%] DISABLED[%FIN%]></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="103px"></TD>
+  <TD width="235px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwSAIMODULE" style="position:absolute;left:81px;top:485px;width:338px;height:24px;z-index:5; [%SI%]SAI_MODULE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="338" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;left:0;">
+ <TR>
+  <TD class="l-0 padding" id="lzSAI_MODULE" width="103">Module</TD>
+  <TD width="235"><table width="235px" style="height:24px;"><tr><td valign="middle" id="tzSAI_MODULE"><INPUT TYPE="text" SIZE="15" NAME="SAI_MODULE" VALUE="[%SAI_MODULE%]" id="SAI_MODULE" class="l-0 padding" TABINDEX="14"[%SI%]SAI_MODULE..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]SAI_MODULE..ETAT=4[%ALORS%] DISABLED[%FIN%]></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="103px"></TD>
+  <TD width="235px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="dwwCELLULE2" style="position:absolute;left:0px;top:341px;width:773px;height:20px;z-index:8;"><table id="CELLULE2">
+<tr><td height="20" width="773" class="l-6" valign="top"></td></tr></table></div>
+<div id="dwwCELLULE1" style="position:absolute;left:0px;top:31px;width:773px;height:20px;z-index:9;"><div class="dzCELLULE1" id="dzCELLULE1"><table id="CELLULE1" style="position:relative;">
+<tr><td height="20" width="773" class="l-6" valign="top"><div class="ff3fix63895rel" style=""><div id="dwwLIBELLE2" style="position:absolute;left:2px;top:1px;z-index:0;"><div class="dzLIBELLE2" id="dzLIBELLE2"><table style="height:17px;"><tr><td width="453px" class="l-7 padding" id="tzLIBELLE2">&nbsp;&#32; GENERAL ESTIMATOR UPDATE CENTER</td></tr></table></div></div>
+</div></td></tr></table></div></div>
+<div id="tzVEREPLAN" style="position:absolute;left:452px;top:223px;z-index:10;" class="l-8"><textarea name="VER_EPLAN" cols="23" rows="3" id="VER_EPLAN" class="l-8 padding" TABINDEX="10">[%VER_EPLAN%]</textarea></div>
+<div id="dwwSAISIE1" style="position:absolute;left:1px;top:308px;width:237px;height:24px;z-index:11; [%SI%]SAISIE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table style="position:relative;">
+<tr><td height="24" width="237" valign="top"><div class="ff3fix63895rel" style=""><TABLE style="position:relative;left:0;">
+ <TR>
+  <TD class="l-9 padding" id="lzSAISIE1" width="103">Password</TD>
+  <TD width="134px"><table width="134px" style="height:24px;"><tr><td valign="middle" id="tzSAISIE1"><INPUT TYPE="password" SIZE="10" MAXLENGTH="15" NAME="SAISIE1" VALUE="[%SAISIE1%]" id="SAISIE1" class="l-10 padding" TABINDEX="1"></td></tr></table></TD>
+  <TD height="24px"></TD>
+ </TR>
+ <TR class=d-0>
+  <TD width="103px"></TD>
+  <TD width="134px"></TD>
+  <TD></TD>
+ </TR>
+</TABLE>
+</div></td></tr></table></div>
+<div id="tzVERESTIME" style="position:absolute;left:452px;top:53px;z-index:12;" class="l-11"><textarea name="VER_ESTIME" cols="23" rows="3" id="VER_ESTIME" class="l-11 padding" TABINDEX="11">[%VER_ESTIME%]</textarea></div>
+<div id="tzVERMODULE" style="position:absolute;left:452px;top:138px;z-index:13;" class="l-13"><textarea name="VER_MODULE" cols="23" rows="3" id="VER_MODULE" class="l-13 padding" TABINDEX="12">[%VER_MODULE%]</textarea></div>
+</div>
+<div id="dwwLIBELLE3" style="position:absolute;left:[%LIBELLE3..X%]px;top:[%LIBELLE3..Y%]px;z-index:4; [%SI%]LIBELLE3..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]LIBELLE3..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIBELLE3..CURSEURSOURIS%];[%FIN%]"><table width="[%LIBELLE3..LARGEUR%]px" style="height:20px;"><tr><td class="Style6 padding" id="tzLIBELLE3">[%LIBELLE3..HTMLAVANT%][%LIBELLE3%][%LIBELLE3..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwLIBELLE1" style="position:absolute;left:[%LIBELLE1..X%]px;top:[%LIBELLE1..Y%]px;z-index:6; [%SI%]LIBELLE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]LIBELLE1..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIBELLE1..CURSEURSOURIS%];[%FIN%]"><table width="[%LIBELLE1..LARGEUR%]px" style="height:140px;"><tr><td class="l-4 padding" id="tzLIBELLE1">[%LIBELLE1..HTMLAVANT%][%LIBELLE1%][%LIBELLE1..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwBTNVALIDER" style="position:absolute;left:[%BTN_VALIDER..X%]px;top:[%BTN_VALIDER..Y%]px;width:[%BTN_VALIDER..LARGEUR%]px;height:[%BTN_VALIDER..HAUTEUR%]px;z-index:7; [%SI%]BTN_VALIDER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_VALIDER..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_VALIDER..CURSEURSOURIS%];[%FIN%]">[%BTN_VALIDER..HTMLAVANT%]<a[%SI%]BTN_VALIDER..ETAT=0[%ALORS%] href="javascript:_BTN_VALIDER_CLI()"[%FIN%] onmouseout="document.getElementById('z_BTN_VALIDER_IMG').src='[%_PROJET_WEB_%]res/bleu0205_Enter_8276510_.PNG';" onmouseover="document.getElementById('z_BTN_VALIDER_IMG').src='[%_PROJET_WEB_%]res/_Enter_8276510_.PNG';" id="BTN_VALIDER" class="l-5 wblien padding"  style="_height:24px;" TITLE="[%BTN_VALIDER..BULLE%]" TABINDEX="4"[%SI%]BTN_VALIDER..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_VALIDER..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="BTN_VALIDER"  href="javascript:_BTN_VALIDER_CLI()"><img id="z_BTN_VALIDER_IMG" src="[%_PROJET_WEB_%]res/bleu0205_Enter_8276510_.PNG" alt="[%BTN_VALIDER..BULLE%]" style="width:93px;height:24px;"></a>[%BTN_VALIDER..HTMLAPRES%]</div>
+<div id="dwwBTNWEBMASTER" style="position:absolute;left:[%BTN_WEBMASTER..X%]px;top:[%BTN_WEBMASTER..Y%]px;width:[%BTN_WEBMASTER..LARGEUR%]px;height:[%BTN_WEBMASTER..HAUTEUR%]px;z-index:14; [%SI%]BTN_WEBMASTER..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_WEBMASTER..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_WEBMASTER..CURSEURSOURIS%];[%FIN%]">[%BTN_WEBMASTER..HTMLAVANT%]<a[%SI%]BTN_WEBMASTER..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'BTN_WEBMASTER','_self','','')}"[%FIN%] onmouseout="document.getElementById('z_BTN_WEBMASTER_IMG').src='[%_PROJET_WEB_%]res/bleu0202_Webmaster_94E77540_.PNG';" onmouseover="document.getElementById('z_BTN_WEBMASTER_IMG').src='[%_PROJET_WEB_%]res/_Webmaster_94E77540_.PNG';" id="BTN_WEBMASTER" class="l-5 wblien padding"  style="_height:24px;" TITLE="[%BTN_WEBMASTER..BULLE%]" TABINDEX="5"[%SI%]BTN_WEBMASTER..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_WEBMASTER..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="BTN_WEBMASTER"  href="javascript:{_JSL(_PAGE_,'BTN_WEBMASTER','_self','','')}"><img id="z_BTN_WEBMASTER_IMG" src="[%_PROJET_WEB_%]res/bleu0202_Webmaster_94E77540_.PNG" alt="[%BTN_WEBMASTER..BULLE%]" style="width:93px;height:24px;"></a>[%BTN_WEBMASTER..HTMLAPRES%]</div>
+<div id="dwwBOUBLI" style="position:absolute;left:[%B_OUBLI..X%]px;top:[%B_OUBLI..Y%]px;z-index:15; [%SI%]B_OUBLI..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]B_OUBLI..CURSEURSOURIS!=auto[%ALORS%]cursor:[%B_OUBLI..CURSEURSOURIS%];[%FIN%]"><table width="297px" style="height:12px;"><tr><td class="l-14" valign="middle" id="tzB_OUBLI">[%B_OUBLI..HTMLAVANT%]<a[%SI%]B_OUBLI..ETAT=0[%ALORS%] href="javascript:{_JSL(_PAGE_,'B_OUBLI','_self','','')}"[%FIN%] id="B_OUBLI" class="l-14 wblien padding" TITLE="[%B_OUBLI..BULLE%]" TABINDEX="1"[%SI%]B_OUBLI..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]B_OUBLI..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="B_OUBLI"  href="javascript:{_JSL(_PAGE_,'B_OUBLI','_self','','')}">[%B_OUBLI%]</a>[%B_OUBLI..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwBTNESTIME" style="position:absolute;left:[%BTN_ESTIME..X%]px;top:[%BTN_ESTIME..Y%]px;width:[%BTN_ESTIME..LARGEUR%]px;height:[%BTN_ESTIME..HAUTEUR%]px;z-index:16; [%SI%]BTN_ESTIME..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_ESTIME..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_ESTIME..CURSEURSOURIS%];[%FIN%]">[%BTN_ESTIME..HTMLAVANT%]<a[%SI%]BTN_ESTIME..ETAT=0[%ALORS%] href="javascript:_BTN_ESTIME_CLI()"[%FIN%] onmouseout="document.getElementById('z_BTN_ESTIME_IMG').src='[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG';" onmouseover="document.getElementById('z_BTN_ESTIME_IMG').src='[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG';" id="BTN_ESTIME" class="l-5 wblien padding"  style="_height:24px;" TITLE="[%BTN_ESTIME..BULLE%]" TABINDEX="2"[%SI%]BTN_ESTIME..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_ESTIME..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="BTN_ESTIME"  href="javascript:_BTN_ESTIME_CLI()"><img id="z_BTN_ESTIME_IMG" src="[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG" alt="[%BTN_ESTIME..BULLE%]" style="width:93px;height:24px;"></a>[%BTN_ESTIME..HTMLAPRES%]</div>
+<div id="dwwBTNMODULE" style="position:absolute;left:[%BTN_MODULE..X%]px;top:[%BTN_MODULE..Y%]px;width:[%BTN_MODULE..LARGEUR%]px;height:[%BTN_MODULE..HAUTEUR%]px;z-index:17; [%SI%]BTN_MODULE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_MODULE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_MODULE..CURSEURSOURIS%];[%FIN%]">[%BTN_MODULE..HTMLAVANT%]<a[%SI%]BTN_MODULE..ETAT=0[%ALORS%] href="javascript:_BTN_MODULE_CLI()"[%FIN%] onmouseout="document.getElementById('z_BTN_MODULE_IMG').src='[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG';" onmouseover="document.getElementById('z_BTN_MODULE_IMG').src='[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG';" id="BTN_MODULE" class="l-5 wblien padding"  style="_height:24px;" TITLE="[%BTN_MODULE..BULLE%]" TABINDEX="13"[%SI%]BTN_MODULE..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_MODULE..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="BTN_MODULE"  href="javascript:_BTN_MODULE_CLI()"><img id="z_BTN_MODULE_IMG" src="[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG" alt="[%BTN_MODULE..BULLE%]" style="width:93px;height:24px;"></a>[%BTN_MODULE..HTMLAPRES%]</div>
+<div id="dwwBTNTRANSPLAN" style="position:absolute;left:[%BTN_TRANSPLAN..X%]px;top:[%BTN_TRANSPLAN..Y%]px;width:[%BTN_TRANSPLAN..LARGEUR%]px;height:[%BTN_TRANSPLAN..HAUTEUR%]px;z-index:18; [%SI%]BTN_TRANSPLAN..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]BTN_TRANSPLAN..CURSEURSOURIS!=auto[%ALORS%]cursor:[%BTN_TRANSPLAN..CURSEURSOURIS%];[%FIN%]">[%BTN_TRANSPLAN..HTMLAVANT%]<a[%SI%]BTN_TRANSPLAN..ETAT=0[%ALORS%] href="javascript:_BTN_TRANSPLAN_CLI()"[%FIN%] onmouseout="document.getElementById('z_BTN_TRANSPLAN_IMG').src='[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG';" onmouseover="document.getElementById('z_BTN_TRANSPLAN_IMG').src='[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG';" id="BTN_TRANSPLAN" class="l-5 wblien padding"  style="_height:24px;" TITLE="[%BTN_TRANSPLAN..BULLE%]" TABINDEX="15"[%SI%]BTN_TRANSPLAN..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]BTN_TRANSPLAN..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="BTN_TRANSPLAN"  href="javascript:_BTN_TRANSPLAN_CLI()"><img id="z_BTN_TRANSPLAN_IMG" src="[%_PROJET_WEB_%]res/bleu0202_Download_7B79F473_.PNG" alt="[%BTN_TRANSPLAN..BULLE%]" style="width:93px;height:24px;"></a>[%BTN_TRANSPLAN..HTMLAPRES%]</div>
+
+</form>
+</div></td></tr></table>
+<script type="text/javascript">
+	if ( document.images )
+	{
+		[%SI%]BTN_VALIDER..VISIBLESTOCKE=1[%ALORS%]_BTN_VALIDER_js = new Image(); _BTN_VALIDER_js.src="[%_PROJET_WEB_%]res/_Enter_8276510_.PNG";[%FIN%]
+		[%SI%]BTN_WEBMASTER..VISIBLESTOCKE=1[%ALORS%]_BTN_WEBMASTER_js = new Image(); _BTN_WEBMASTER_js.src="[%_PROJET_WEB_%]res/_Webmaster_94E77540_.PNG";[%FIN%]
+		[%SI%]BTN_ESTIME..VISIBLESTOCKE=1[%ALORS%]_BTN_ESTIME_js = new Image(); _BTN_ESTIME_js.src="[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG";[%FIN%]
+		[%SI%]BTN_MODULE..VISIBLESTOCKE=1[%ALORS%]_BTN_MODULE_js = new Image(); _BTN_MODULE_js.src="[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG";[%FIN%]
+		[%SI%]BTN_TRANSPLAN..VISIBLESTOCKE=1[%ALORS%]_BTN_TRANSPLAN_js = new Image(); _BTN_TRANSPLAN_js.src="[%_PROJET_WEB_%]res/_Download_7B79F473_.PNG";[%FIN%]
+	}
+</script>
+[%AADOWNLOAD..HTMLFINPAGE%]</body>
+</html>
+<!--87484-->

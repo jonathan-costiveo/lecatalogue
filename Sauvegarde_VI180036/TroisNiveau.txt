@@ -1,0 +1,245 @@
+Procédure bCatalogueTroisNiveaux(lnMUCleUnik,nFic,lnMax,nNbrColonne,nNumCode,cSep,nIndDesc,nTabNum,sProtect,sTabRub,bTexte,nMax,bSousSection,bImportPremiere)
+
+//  lnMUCleUnik	est la cle du catalogue
+//	nFic 		est le handle du fichier. on a deja lu la premiere ligne
+//	lnMax		Taille totale du fichier (pour gérer la jauge)
+//	nNbrColonne	Nombre de colonnes à récupérer
+//  nNumCode 	Numero de colonne du code catalogue dans la ligne
+//	cSep		Separateur des colonnes dans le fichier texte
+//	nIndDesc	Indice de la colonne description dans le fichier texte
+//	nTabNum		Table des numeros de colonne
+//	sProtect	Table des noms de colonnes protection
+//	sTabRub		Table des noms de colonnes
+//	bTexte		Table des indicateurs de colonnes texte
+//	nMax		Nom de d'élements alimentés dans les 4 tableaux précédents
+//	bSousSection	Indique qu'on a créé des sous sections
+
+	sLigne 		est une chaine
+	bOK			est un booleen=Vrai
+	nNumLigne	est un entier=0
+	nX 			est un entier=0
+	lnCurrent 	est un entier long=0
+	nRes		est un entier=1 // pour rentrer dans la boucle...
+	sCatCode2	est une chaine
+	sCatPoint	est une chaine
+	nTemp		est un entier
+	sSectCat	est une chaine	// section
+	sSectSous	est une chaine	// sous section
+	bSousSect	est un booleen	// indique si sous section
+	bSect		est un booleen	// indique section
+	sTemp		est une chaine
+	nPos		est un entier
+	bTrouve		est un booleen	
+	i			est un entier
+	sRight 		est une chaine
+	sDescSection est une chaine
+	
+	si pas bImportPremiere alors nNumLigne++
+	
+	lnLastSection	est un entier long
+	sLastSection	est une chaine
+	
+	lnLastSousSection	est un entier long
+	sLastSousSection	est une chaine
+
+	bSousSection=Vrai // pour le flag du catalogue
+	
+	sLigne=fLitLigne(nFic)
+	tantque sLigne<>EOT et bOK et nRes<>0
+		nX++
+		si nX>20 alors
+			Multitache()
+			nX=0
+			jauge(lnCurrent,lnMax)
+		fin			
+		
+		nNumLigne++
+		lnCurrent+=Taille(sLigne)+Taille(RC)
+		
+		si pas sLigne~="" alors
+			
+			si ExtraitChaine(sLigne,nNbrColonne,cSep)=EOT alors
+				// si oui
+				si nRes=1 alors
+					sBouton est une chaine=MessTraduit(52)   //52:Ignorer
+					nRes=Ouvre("CATALOGUE_ERR",CUtils::cRemplacerParam(MessTraduit(51),nNumLigne,sLigne,sBouton),sBouton)   //51:La ligne ~ ne contient pas le bon nombre de colonne...
+				fin				
+			FIN
+		
+		
+			sCatCode2=""
+			si nRes<>0 alors sCatCode2=SansEspace(ExtraitChaine(sLigne,nNumCode,cSep))
+		
+			si sCatCode2<>"" alors
+		
+				sCatPoint=Remplace(sCatCode2,",",".")
+				// détermine si code section
+				si goCatalog:isNumerik(sCatPoint) alors
+					nTemp=Val(sCatPoint)/1000
+					si nTemp=0 alors
+						sSectCat="0000"
+					SINON
+						sSectCat=NumeriqueVersChaine(nTemp*1000)
+					FIN								
+				SINON
+					sSectCat=MessTraduit(49)   //49:Divers
+				FIN		
+				sSectSous=ExtraitChaine(sCatPoint,1,".")
+		
+				// détermine si sous section
+				nPos=Position(sCatPoint,".")
+				si nPos>0 alors //11/11/2004
+					sRight=Milieu(sCatPoint,nPos+1)
+					// si que des zeros dans la partie droite
+					si sRight=Repete("0",Taille(sRight)) alors
+						// si multiple de 1000 dans la partie gauche
+						si sSectCat=sSectSous alors
+							bSect=Vrai
+							bSousSect=Faux
+						SINON
+							bSect=Faux
+							bSousSect=Vrai
+						FIN
+					SINON
+						bSect=Faux
+						bSousSect=Faux
+					FIN
+//					// si c'est une sous section
+//					si bSousS et sSectCat=Gauche(sCatPoint,nPos-1) alors 
+//						sCatPoint=sSectCat
+//						nPos=0
+//					FIN
+				SINON
+					bSect=Vrai
+					bSousSect=Faux
+				fin
+			
+				si sLastSection<>sSectCat ou bSect alors
+					
+					si bSect alors
+						sDescSection=ExtraitChaine(sLigne,nTabNum[nIndDesc],cSep)
+						sDescSection=Remplace(sDescSection,"#","")
+						sDescSection=Remplace(sDescSection,"*","")
+						sDescSection=SansEspace(sDescSection)
+					SINON
+						sDescSection=CUtils::cRemplacerParam(MessTraduit(48),sSectCat)
+					FIN
+					
+					// Si la section de catalogue n'existe pas
+					si pas goCatalog:isExistCode(lnMUCleUnik,sSectCat,CCatalog::CAT_SECTION) alors
+						// creer la section
+						goCatalog:RazEnreg()	
+						goCatalog:SetTypeItem(CCatalog::CAT_SECTION)
+						goCatalog:SetDateRevision(DateSys())
+						goCatalog:SetCatCode(sSectCat)
+						goCatalog:SetCleMultiCat(lnMUCleUnik)
+						goCatalog:SetDescription(sDescSection)
+						goCatalog:bAjoute()
+					SINON
+						// si on est en creation de section
+						si bSect alors
+							// juste la modification avec le nouveau libelle
+							goCatalog:SetDescription(sDescSection)
+							goCatalog:bModifie()
+						fin
+					FIN
+		
+					lnLastSection=goCatalog:lnClePP()	// cle de la section
+					sLastSection=sSectCat
+				fin
+	
+				// si c'est une sous section ou un item
+				si nPos>0 et pas bSect alors
+					si sLastSousSection<>sSectSous ou bSousSect alors
+						si bSousSect alors
+							sDescSection=ExtraitChaine(sLigne,nTabNum[nIndDesc],cSep)
+							sDescSection=Remplace(sDescSection,"#","")
+							sDescSection=Remplace(sDescSection,"*","")
+							sDescSection=SansEspace(sDescSection)
+						SINON
+							sDescSection=CUtils::cRemplacerParam(MessTraduit(50),sCatPoint)
+						FIN
+						sLastSousSection=sSectSous	//ExtraitChaine(sCatPoint,1,".")
+						bTrouve=goCatalog:isExistCode(lnMUCleUnik,sLastSousSection,CCatalog::CAT_SOUSSECTION) 
+						si pas bTrouve alors goCatalog:RazEnreg()	
+						goCatalog:SetModifEnreg(Faux)
+						si pas bTrouve alors
+							// on récupère la description
+							goCatalog:SetDescription(sDescSection)
+						SINON
+							si bSousSect alors
+								goCatalog:SetDescription(sDescSection)
+							fin							
+						FIN
+						si goCatalog:isModifEnreg() alors
+							goCatalog:SetDateRevision(DateSys())
+						fin
+						si pas bTrouve alors
+							goCatalog:SetTypeItem   (CCatalog::CAT_SOUSSECTION)
+							goCatalog:SetCatCode    (ExtraitChaine(sCatPoint,1,"."))
+							goCatalog:SetCleMultiCat(lnMUCleUnik)
+							goCatalog:SetCleParent  (lnLastSection)
+							goCatalog:bAjoute()
+						SINON						
+							si goCatalog:lnGetCleParent()<>lnLastSection alors
+								STOP
+							FIN
+							goCatalog:bModifie()
+						FIN
+						lnLastSousSection=goCatalog:lnClePP()
+					fin
+				
+					// si item
+					// si sRight<>Repete("0",Taille(sRight)) alors
+					si pas bSect et pas bSousSect alors	
+						// si l'item existe deja
+						si goCatalog:isExistCode(lnMUCleUnik,sCatPoint) alors
+							si goCatalog:lnGetCleParent()<>lnLastSousSection alors STOP
+							goCatalog:SetModifEnreg(Faux)
+							goCatalog:SetDateRevision("") 	// annuler la date de revision. Permet de savoir si elle est aliment/e par le
+															// chargement
+							pour i=1 a nMax
+								si nTabNum[i]<>nNumCode alors
+									// si cellule non protégée
+									si sProtect[i]="" ou goCatalog:GetValeur(sProtect[i])<>1 alors
+										sTemp=ExtraitChaine(sLigne,nTabNum[i],cSep)
+										sTemp=goCatalog:cTraiteValeur(bTexte[i],sTemp)
+										goCatalog:SetValeur(sTabRub[i],sTemp)
+									SINON
+										sTrace("Protection "+sCatPoint+" "+sProtect[i])
+									fin				
+								fin
+							FIN
+							goCatalog:SetCleParent(lnLastSousSection)
+							si goCatalog:isModifEnreg() alors
+								si pas goCatalog:isDateAlim() alors
+									goCatalog:SetDateRevision(DateSys())
+								fin
+								bOK=goCatalog:bModifie()
+							fin				
+						SINON
+							goCatalog:RazEnreg()
+							pour i=1 a nMax
+								sTemp=ExtraitChaine(sLigne,nTabNum[i],cSep)
+								// si type numerique
+								sTemp=goCatalog:cTraiteValeur(bTexte[i],sTemp)
+								goCatalog:SetValeur(sTabRub[i],sTemp)
+							FIN
+							goCatalog:SetCleParent(lnLastSousSection)
+							goCatalog:SetTypeItem(CCatalog::CAT_ITEM)
+							si pas goCatalog:isDateAlim() alors
+								goCatalog:SetDateRevision(DateSys())
+							fin
+							goCatalog:SetCatCode(sCatPoint)
+							goCatalog:SetCleMultiCat(lnMUCleUnik)
+							bOK=goCatalog:bAjoute()
+						FIN
+					FIN
+				fin
+			fin
+		fin
+		sLigne=fLitLigne(nFic)
+	FIN
+	jauge()
+
+	renvoyer bOK

@@ -1,0 +1,4 @@
+//MO118-119.TXT ANA00118 TO ANA00119
+Version		TAR	1526	nouvelle taille enregistrement : 1526
+Version	Version_14	RUB+		Version_14 est une nouvelle rubrique
+Version	NomVersion_14	RUB+		NomVersion_14 est une nouvelle rubrique

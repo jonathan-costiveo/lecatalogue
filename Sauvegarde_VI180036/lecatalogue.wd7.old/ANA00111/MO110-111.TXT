@@ -1,0 +1,4 @@
+//MO110-111.TXT ANA00110 TO ANA00111
+AAClient		TAR	1348	nouvelle taille enregistrement : 1348
+AAClient	AUTHIPMULTI	RUB+		AUTHIPMULTI est une nouvelle rubrique
+AAClient	FILTREIP	RUB+		FILTREIP est une nouvelle rubrique

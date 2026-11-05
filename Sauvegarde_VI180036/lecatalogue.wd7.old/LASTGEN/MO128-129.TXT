@@ -1,0 +1,10 @@
+//MO128-129.TXT ANA00128 TO ANA00129
+AAClient		TAR	1459	nouvelle taille enregistrement : 1459
+AAClient	B_MIGREVERSION	RUB+		B_MIGREVERSION est une nouvelle rubrique
+AAClient	EGACHAT	RUB+		EGACHAT est une nouvelle rubrique
+AAClient	EGLOCAT	RUB+		EGLOCAT est une nouvelle rubrique
+AAClient	EPLMONOACHAT	RUB+		EPLMONOACHAT est une nouvelle rubrique
+AAClient	EPLMULTIACHAT	RUB+		EPLMULTIACHAT est une nouvelle rubrique
+AAClient	EPLMONOLOCAT	RUB+		EPLMONOLOCAT est une nouvelle rubrique
+AAClient	EPLMULTILOCAT	RUB+		EPLMULTILOCAT est une nouvelle rubrique
+AAClient	AJUSTEMENT	RUB+		AJUSTEMENT est une nouvelle rubrique

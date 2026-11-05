@@ -1,0 +1,4 @@
+//MO032-033.TXT ANA00032 TO ANA00033
+Itemcat		TAR	571	nouvelle taille enregistrement : 571
+Itemcat	Cat_Description	TAI+	20	la rubrique Cat_Description a comme nouvelle taille 101 au lieu de 81
+Itemcat	DESC_MAJ	TAI+	20	la rubrique DESC_MAJ a comme nouvelle taille 101 au lieu de 81

@@ -1,0 +1,5 @@
+//MO040-041.TXT ANA00040 TO ANA00041
+RBQ_ENTREP		NFI		nouveau fichier
+RBQ_HISTO		TAR	471	nouvelle taille enregistrement : 471
+RBQ_HISTO	RBQ_VERSION	RUB+		RBQ_VERSION est une nouvelle rubrique
+RBQ_ENTREP		FRN		

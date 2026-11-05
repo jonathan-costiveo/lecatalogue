@@ -1,0 +1,13 @@
+//MO105-106.TXT ANA00105 TO ANA00106
+SDPSTAT		TAR	103	nouvelle taille enregistrement : 103
+SDPSTAT	SDPADDRIP_S	RUB+		SDPADDRIP_S est une nouvelle rubrique
+AAClient		TAR	1327	nouvelle taille enregistrement : 1327
+AAClient	DateFinEG	RUB+		DateFinEG est une nouvelle rubrique
+AAClient	DateFinEPlan	RUB+		DateFinEPlan est une nouvelle rubrique
+AAClient	IGNORECOMMON	RUB+		IGNORECOMMON est une nouvelle rubrique
+CACHEOPER		TAR	265	nouvelle taille enregistrement : 265
+CACHEOPER	ADDRIP_S	RUB+		ADDRIP_S est une nouvelle rubrique
+REPCOMMON		TAR	472	nouvelle taille enregistrement : 472
+REPCOMMON	ADDR_IP	TAI+	10	la rubrique ADDR_IP a comme nouvelle taille 41 au lieu de 31
+REPCOMMON	DateFin	RUB+		DateFin est une nouvelle rubrique
+REPCOMMON	DateCreat	RUB+		DateCreat est une nouvelle rubrique

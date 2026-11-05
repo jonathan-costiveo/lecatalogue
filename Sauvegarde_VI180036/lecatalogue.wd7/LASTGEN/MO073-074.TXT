@@ -1,0 +1,10 @@
+//MO073-074.TXT ANA00073 TO ANA00074
+TRADES		TAR	392	nouvelle taille enregistrement : 392
+TRADES	INVARIANT	RUB+		INVARIANT est une nouvelle clé
+LienAsmb		TAR	960	nouvelle taille enregistrement : 960
+LienAsmb	IDTRADES	RUB+		IDTRADES est une nouvelle clé
+LienAsmb	MO_NBRUNIT	RUB+		MO_NBRUNIT est une nouvelle rubrique
+LienAsmb	TAUX_VAL	RUB+		TAUX_VAL est une nouvelle rubrique
+Itemcat		TAR	1161	nouvelle taille enregistrement : 1161
+Itemcat	PROTECT	RUB+		PROTECT est une nouvelle rubrique
+Itemcat	MO_NBRUNIT	RUB+		MO_NBRUNIT est une nouvelle rubrique

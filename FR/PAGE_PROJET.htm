@@ -1,0 +1,1154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- PAGE_PROJET 05/11/2026 09:23 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%PAGE_PROJET..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%PAGE_PROJET..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDChamp.js?11219ce6" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDXML.js?f52e3206" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js?06fed023" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDAJAX.js?bf6b10bd" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?216d8a9f"></script>
+<script type="text/javascript">
+var _UC0_="[%LNK_NOMFIC..DNDSOURCE%]";
+var _UC1_="[%LNK_NOMFIC..DNDCIBLE%]";
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var gnTimer=0;
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// JS_ConvCoordPage
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	x : position
+//	o : champ
+//	l : Left ou Top
+//	s : + ou -
+// Variables locales :
+//	p : parent courant
+function _JCCP(x,o,l,s)
+{
+	var b=o.ownerDocument.body
+	// Parcours des parents
+	while(1)
+	{
+		// Parent suivant
+		var pt=o.offsetParent;
+		o=pt?pt:o.parentNode;
+		if (!o||(o==b))
+		{
+			break;
+		}
+
+		// Recupere la valeur
+		var v=l?o.offsetLeft:o.offsetTop;
+		// Ajoute a valeur de retour
+		if(v!==undefined)
+		{
+			x+=s?v:-v;
+		}
+	}
+	// Valeur de retour
+	return x;
+}
+// JSI_WLToNumeric
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	v : valeur en entree
+//	s : separateur decimal
+// Variables locales :
+//	r : chaine intermediaire ne contenant que les carcteres numeriques
+//	c : caractere en cours de traitement
+function _JWN(v,s)
+{
+	if(v.length==0)
+	{
+		return 0;
+	}
+	var r="";
+	for(var i=0;i<v.length;i++)
+	{
+		var c=v.charAt(i);
+		if(c==s)
+		{
+			r+=".";
+		}
+		else if((c>='0'&&c<='9')||c=='+'||c=='-')
+		{
+			r+=c;
+		}
+	}
+	return parseFloat(r);
+}
+// EXE_Remplace
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	c : chaine de base
+//	o : chaine d'origine recherchee
+//	r : chaine de remplacement
+// Variables locales :
+//	s : chaine resultat
+//	p,t : variables de parcours
+function _RMP(c,o,r)
+{
+	// Position dans c
+	var p=0;
+	// Position dans c du prochaine trouve
+	var t;
+	var s=[];
+	// Tant qu'on trouve des occurrences
+	while (-1!=(t=c.indexOf(o,p)))
+	{
+		s.push(c.substring(p,t));
+		s.push(r);
+		p=t+o.length;
+	}
+	// On colle le reliquat de la chaine
+	s.push(c.substring(p));
+	return s.join("");
+}
+// JSI_NumericToWL
+// ------------------------------------------------------------------------------------------------
+// Entrees : 
+//	v : valeur
+//	s : separateur decimal
+// Variables locales :
+function _JNW(v,s)
+{
+	if((escape(v)=="")||(isNaN(v)))
+	{
+		return"";
+	}
+	return _RMP(""+eval(v),".",s);
+}
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE ne quirks transforme les balises semantiques inconnue en deux balises
+		// On détecte les balises DispHTMLUnknownElement par la propriété canHaveChildren
+		// (et en plus, lire le contenu d'une balise qui ne peut pas avoir de fils n'est pas très logique)
+		if (c.canHaveChildren === false)
+		{
+			c = c.parentNode;
+		}
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+// p : page
+// d : debut zone répétée
+// z : occurrence zone répétée
+// n : nom de l'attribut à accéder
+// i : indice de l'élément à accéder
+// b : par id
+function _JAT(p,d,z,n,i,b)
+{
+	i = parseInt(i, 10);
+	d = parseInt(d.value, 10);
+	z = parseInt(z.value, 10) + d - 1;
+	if ((i < d) || (z < i))
+	{
+		i = z;
+	}
+	n = "zrl_" + i + "_" + n;
+	return b ? _JGE(n, p) : p[n];
+}
+// EXE_SansEspace
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : chaine a traiter
+//	o : option indiquant de quel cote on doit retirer les espaces
+//						  1 = a gauche , 2 = a droite , 3 = les deux
+// Variables locales :
+//	d : position de debut de la chaine resultat desiree
+//	f : position de fin de la chaine resultat desiree
+function _SAE(c,o)
+{
+	var d=0;
+	// On force la conversion en chaine
+	c += ""
+	var f=c.length-1;
+	// Si on a demande sans espace a gauche
+	if(o&1)while(c.charAt(d)==" ")d++;
+	// Si on a demande sans espace a droite
+	if(o&2)while(c.charAt(f)==" ")f--;
+	// Securite si la chaine n'ets faite que d'espaces
+	if (f < d) f= d;
+	// On decoupe la sous chaine
+	return c.substring(d,f+1);
+}
+function _GET_LNK_NOMFIC_1()
+{
+	return _JCIR(_PAGE_["zrl_"+_PAGE_.ZR_SOUSTITRE.value+"_ZNOMFIC"]);
+}
+function _SET_LNK_NOMFIC_1()
+{
+	_PAGE_["zrl_"+_PAGE_.ZR_SOUSTITRE.value+"_ZNOMFIC"].innerHTML=clWDEncode.sEncodeInnerHTML((arguments[0])+"",true,false);
+}
+function TransfertFichier()
+{
+	{
+	if((_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)>=0))
+	{
+		_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)+1,_WW_SEPDECIMAL_),"+9999",false);
+		while(((_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)<=_JWN(_PAGE_.SAI_MAX.value,_WW_SEPDECIMAL_))&&(!_JAT(_PAGE_,_PAGE_.ZR_SOUSTITRE_DEB,_PAGE_._ZR_SOUSTITRE_OCC,"ZSELECT",_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_),false)[1].checked)))
+		{
+			_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)+1,_WW_SEPDECIMAL_),"+9999",false);
+		}
+		if((_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)<=_JWN(_PAGE_.SAI_MAX.value,_WW_SEPDECIMAL_)))
+		{
+			if(_JAT(_PAGE_,_PAGE_.ZR_SOUSTITRE_DEB,_PAGE_._ZR_SOUSTITRE_OCC,"ZSELECT",_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_),false)[1].checked)
+			{
+				_LNK_NOMFIC1_CLI();
+			}
+		}
+		else {
+			_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(-1,_WW_SEPDECIMAL_),"+9999",false);
+		}
+	}
+}
+}
+function DownLoadOne()
+{
+	{
+	_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)+1,_WW_SEPDECIMAL_),"+9999",false);
+	while(((_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)<=_JWN(_PAGE_.SAI_MAX.value,_WW_SEPDECIMAL_))&&(!_JAT(_PAGE_,_PAGE_.ZR_SOUSTITRE_DEB,_PAGE_._ZR_SOUSTITRE_OCC,"ZSELECT",_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_),false)[1].checked)))
+	{
+		_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)+1,_WW_SEPDECIMAL_),"+9999",false);
+	}
+	if((_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_)<=_JWN(_PAGE_.SAI_MAX.value,_WW_SEPDECIMAL_)))
+	{
+		if(_JAT(_PAGE_,_PAGE_.ZR_SOUSTITRE_DEB,_PAGE_._ZR_SOUSTITRE_OCC,"ZSELECT",_JWN(_PAGE_.SAI_NUMLIG.value,_WW_SEPDECIMAL_),false)[1].checked)
+		{
+			_LNK_NOMFIC1_CLI();
+		}
+	}
+	else {
+		_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(-1,_WW_SEPDECIMAL_),"+9999",false);
+	}
+}
+}
+function _PAGE_PROJET_LOD(event)
+{
+	{
+	gnTimer=0;
+	gnTimer=clWDUtil.oConversionType(setInterval("TransfertFichier()",(130)*10),8,0,8,0);
+	clWDUtil.oGetCurrentStyleIdName("BTN_EPLANSEN",document,true,true,false).left=_JCCP(_JCCP(_JGEN("z_BTN_EPLANS_IMG",document,true,false).offsetLeft,_JGEN("BTN_EPLANS",document,true),true,true),_JGEN("BTN_EPLANSEN",document,true),true,false)+"px";
+	clWDUtil.oGetCurrentStyleIdName("BTN_EPLANSEN",document,true,true,false).top=_JCCP(_JCCP(_JGEN("z_BTN_EPLANS_IMG",document,true,false).offsetTop,_JGEN("BTN_EPLANS",document,true),false,true),_JGEN("BTN_EPLANSEN",document,true),false,false)+"px";
+	var V0D3DB420=_JWN(_PAGE_.NUM_POSFEN.value,_WW_SEPDECIMAL_);
+	if(V0D3DB420==0){
+	}
+	else if(V0D3DB420==1){
+		window.document.location="#"+"CELL_BANDEAU";
+		_PAGE_.NUM_POSFEN.value=__reinitNombre(_JNW(0,_WW_SEPDECIMAL_),"9999",false);
+	}
+	else if(V0D3DB420==2){
+		window.document.location="#"+"tzLIB_ANCRE";
+		_PAGE_.NUM_POSFEN.value=__reinitNombre(_JNW(0,_WW_SEPDECIMAL_),"9999",false);
+	}
+}
+}
+function _PAGE_PROJET_UNL(event)
+{
+	{
+	clearTimeout(gnTimer);
+}
+}
+function _PAGE_PROJET_KPR(event)
+{
+	return clWDUtil.bOnKeyPressPage(arguments,this,[{bEntree:1,tabValidation:[],pfFonction:_BTN_ENVOI_CLI}],{})}
+function _LNK_SITEWEB_CLI(event)
+{
+	{
+	var VsLien=clWDUtil.oConversionType(_JCIR(_JGE("LNK_SITEWEB",document)),19,0,31,0);
+	if((VsLien!=""))
+	{
+		if((!(_SAE(VsLien.substring(0,7),3).toUpperCase()==_SAE("http://",3).toUpperCase())))
+		{
+			VsLien=("http://"+VsLien);
+		}
+		window.open(VsLien,'');
+	}
+}
+{
+		_JSL(_PAGE_,"LNK_SITEWEB","_self","","");}
+}
+function _LIB_COURRIEL_CLI(event)
+{
+	{
+	if((_JCIR(_JGE("LIB_COURRIEL",document))!=""))
+	{
+		window.open(("mailto:"+_JCIR(_JGE("LIB_COURRIEL",document))),'');
+	}
+}
+}
+function _BTN_EPLANS_CLI(event)
+{
+	{
+	window.open("http://www.e-plans.ca",'');
+}
+{
+		_JSL(_PAGE_,"BTN_EPLANS","_self","","");}
+}
+function _BTN_EPLANSEN_CLI(event)
+{
+	{
+	window.open("http://www.e-plans.ca",'');
+}
+{
+		_JSL(_PAGE_,"BTN_EPLANSEN","_self","","");}
+}
+function _LNK_TRANSFERT_CLI(event)
+{
+	{
+	_PAGE_.SAI_NUMLIG.value=__reinitNombre(_JNW(0,_WW_SEPDECIMAL_),"+9999",false);
+}
+{
+		_JAEE(_PAGE_,"LNK_TRANSFERT",16,2);}
+}
+function _LIEN_REPONSE_CLI(event)
+{
+	{
+	_PAGE_.NUM_POSFEN.value=__reinitNombre(_JNW(2,_WW_SEPDECIMAL_),"9999",false);
+	window.document.location="#"+"tzLIB_ANCRE";
+}
+{
+		_JSL(_PAGE_,"LIEN_REPONSE","_self","","");}
+}
+function _BTN_ENVOI_CLI(event)
+{
+	{
+}
+{
+		_JSL(_PAGE_,"BTN_ENVOI","_self","","");}
+}
+function _LNK_NOMFIC1_CLI(event){{_JSL(_PAGE_,"LNK_NOMFIC1","_self","","")}}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LNK_NOMFIC","ZR_SOUSTITRE",_UC0_,_UC1_,_JGEN("LNK_NOMFIC",document,false),[_GET_LNK_NOMFIC_1],[_SET_LNK_NOMFIC_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-109674720-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+ 
+  gtag('config', 'UA-109674720-1');
+</script>
+ 
+ 
+<!-- Facebook Pixel Code -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '362026814243909');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=362026814243909&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Facebook Pixel Code -->
+
+<script type="text/javascript">function chfocus()
+{
+[%SI%]SEL_REPONSE..VISIBLE=1[%ALORS%]
+[%SI%]SEL_REPONSE..ETAT=0[%ALORS%]window.focus();if(_PAGE_.SEL_REPONSE[1]!=null)try{_PAGE_.SEL_REPONSE[1].focus();}catch(e){}
+[%FIN%]
+[%FIN%]
+}
+</script>
+<style type="text/css">.wblien {text-align:center;  color:#379DC3;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?20e65aba">
+<link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?20e65aba">
+<style type="text/css">
+body{overflow:auto;height:100%;width:100%;margin:0;  color:#2D2D2D;}#page {  background-color:#FFFFFF;}html, form {height:100%;}.l-2 {background-image:url([%_PROJET_WEB_%]res/00010404_334de3dd_wwcb1.png);background-repeat:repeat;background-size:100% 100% !important;}
+.l-3 {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;}
+.l-4 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:8pt;color:#0000FF;}
+.l-5 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:x-small;font-weight:bold;}
+.l-6 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;color:#2D2D2D;}
+.l-7 {font-family:Verdana, Arial, Helvetica, sans-serif;font-size:10px;font-weight:bold;color:#333333;text-align:center;vertical-align:middle;}
+.l-8 {background-color:#336699;}
+.l-9 {background-color:#F1F1CF;}
+.l-10 {background-color:#F4F4F4;}
+.l-11 {background-color:#E2E2E2;}
+.l-12 {background-color:#FFFFFF;}
+#CELL_BANDEAU,#bzCELL_BANDEAU {border-style:solid;border-width:1px;border-color:#0066CC;border-collapse:collapse;empty-cells:show;border-spacing:0;}#fzLIB_COMPAGNIE,#tzLIB_COMPAGNIE {font-size:11pt;}#IMG_LOGO {width:[%IMG_LOGO..LARGEUR%]px;height:[%IMG_LOGO..HAUTEUR%]px;  [%SI%]IMG_LOGO..COULEUR!=-1[%ALORS%]color:#[%IMG_LOGO..COULEUR%][%FIN%];  [%SI%]IMG_LOGO..COULEURFOND!=-1[%ALORS%]background-color:#[%IMG_LOGO..COULEURFOND%][%FIN%];}
+.dzIMG_LOGO {width:[%IMG_LOGO..LARGEUR%]px;height:[%IMG_LOGO..HAUTEUR%]px;;overflow-x:hidden;overflow-y:hidden;position:relative}#fzLIB_REFERENCE,#tzLIB_REFERENCE {font-size:medium;font-weight:bold;color:#2B2B2B;text-align:right;}#fzLIB_REF,#tzLIB_REF {font-size:11pt;text-align:right;}#LNK_AUTRESALLE,#tzLNK_AUTRESALLE {color:#000000;text-align:right;}
+#con-ZR_SOUSTITRE{height:61px;}
+.czHAUTRUPTURE1 {border-style:solid;border-width:1px;border-color:#183D78;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+<CONTENEUR NAME="[%ZR_SOUSTITRE..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->.czHAUTRUPTURE1 {border-style:solid;border-width:1px;border-color:#183D78;border-collapse:collapse;empty-cells:show;border-spacing:0;}#fzc-[%ZR_SOUSTITRE%]-LIB-TAILLE,#tzc-[%ZR_SOUSTITRE%]-LIB-TAILLE {text-align:right;}#c-[%ZR_SOUSTITRE%]-LNK-NOMFIC,#tzc-[%ZR_SOUSTITRE%]-LNK-NOMFIC {  [%SI%]LNK_NOMFIC..COULEUR!=-1[%ALORS%]color:#[%LNK_NOMFIC..COULEUR%][%FIN%];  [%SI%]LNK_NOMFIC..COULEURFOND!=-1[%ALORS%]background-color:#[%LNK_NOMFIC..COULEURFOND%][%FIN%];font-weight:[%LNK_NOMFIC..POLICEGRAS;4%];font-style:[%LNK_NOMFIC..POLICEITALIQUE;5%];[%SI%]LNK_NOMFIC..POLICENOM!=[%ALORS%]font-family:[%LNK_NOMFIC..POLICENOM%];[%FIN%][%SI%]LNK_NOMFIC..POLICETAILLE!=0[%ALORS%]font-size:[%LNK_NOMFIC..POLICETAILLE;7%];[%FIN%][%SI%]LNK_NOMFIC..CADRAGEH!=-1[%ALORS%]text-align:[%LNK_NOMFIC..CADRAGEH;9%];[%FIN%][%SI%]LNK_NOMFIC..CADRAGEV!=-1[%ALORS%]vertical-align:[%LNK_NOMFIC..CADRAGEV;10%];[%FIN%][%SI%]LNK_NOMFIC..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LNK_NOMFIC..OPACITE%]);zoom:1;opacity:[%LNK_NOMFIC..OPACITE;8%];[%FIN%][%SI%]LNK_NOMFIC..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LNK_NOMFIC..CURSEURSOURIS%];[%FIN%]}#c-[%ZR_SOUSTITRE%]-LNK-NOMFIC:hover,#tzc-[%ZR_SOUSTITRE%]-LNK-NOMFIC:hover {[%SI%]LNK_NOMFIC..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LNK_NOMFIC..CURSEURSOURIS%];[%FIN%]}#c-[%ZR_SOUSTITRE%]-LNK-NOMFIC:active,#tzc-[%ZR_SOUSTITRE%]-LNK-NOMFIC:active {[%SI%]LNK_NOMFIC..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LNK_NOMFIC..CURSEURSOURIS%];[%FIN%]}#fzc-[%ZR_SOUSTITRE%]-LIB-SENT,#tzc-[%ZR_SOUSTITRE%]-LIB-SENT {text-align:right;}#c-[%ZR_SOUSTITRE%]-INT-SELECT,#tzc-[%ZR_SOUSTITRE%]-INT-SELECT,.zrl_[%ZR_SOUSTITRE%]_ZSELECT {font-size:xx-small;text-align:center;vertical-align:middle;}
+<!--/REPEAT-->
+</CONTENEUR>#fzLIB_NUMPROJET,#tzLIB_NUMPROJET {font-size:medium;font-weight:bold;color:#2B2B2B;}
+#con-ZR_OPTIONS{height:20px;}
+#con-ZR_OPTIONS,#bzcon-ZR_OPTIONS {border-style:solid;border-width:1px;border-color:#C0C0C0;border-collapse:collapse;empty-cells:show;border-spacing:0;}
+<CONTENEUR NAME="[%ZR_OPTIONS..ALIAS%]">
+<!--REPEAT GENERATION_STYLE-->#c-[%ZR_OPTIONS%]-LIB-NOMOPTION,#tzc-[%ZR_OPTIONS%]-LIB-NOMOPTION {font-size:7pt;vertical-align:middle;}#c-[%ZR_OPTIONS%]-LIB-VALOPTION,#tzc-[%ZR_OPTIONS%]-LIB-VALOPTION {font-size:7pt;vertical-align:middle;}#c-[%ZR_OPTIONS%]-LIB-VALOPTION2,#tzc-[%ZR_OPTIONS%]-LIB-VALOPTION2 {font-size:7pt;vertical-align:middle;}
+<!--/REPEAT-->
+</CONTENEUR>#fzLIB_NOMPROJET,#tzLIB_NOMPROJET {font-size:small;font-weight:bold;color:#2B2B2B;background-color:#FFFFFF;}#SAI_NUMLIG {text-align:right;width:96px;height:21px;}#SAI_MAX {text-align:right;width:96px;height:21px;}#LNK_TRANSFERT,#tzLNK_TRANSFERT {font-size:8pt;color:#0000FF;  [%SI%]LNK_TRANSFERT..COULEUR!=-1[%ALORS%]color:#[%LNK_TRANSFERT..COULEUR%][%FIN%];  [%SI%]LNK_TRANSFERT..COULEURFOND!=-1[%ALORS%]background-color:#[%LNK_TRANSFERT..COULEURFOND%][%FIN%];}#fzLIB_TAILLETOT,#tzLIB_TAILLETOT {font-weight:bold;text-align:right;background-color:#FFFFFF;}#fzLIB_SIZETOT,#tzLIB_SIZETOT {text-align:right;background-color:#FFFFFF;}#LNK_DECONNECTE,#tzLNK_DECONNECTE {color:#000000;text-align:right;}#fzLIB_SENT1,#tzLIB_SENT1 {font-weight:bold;text-align:center;}#fzLIB_TAILLE1,#tzLIB_TAILLE1 {font-weight:bold;text-align:right;}#lzSAI_ADDR,#lztzSAI_ADDR {font-family:Arial, Helvetica, sans-serif;font-size:10pt;font-weight:normal;vertical-align:middle;}#SAI_ADDR {width:61px;height:21px;}#LNK_LANGUE,#tzLNK_LANGUE {color:#000000;text-align:right;}#LIB_ANCRE,#tzLIB_ANCRE {color:#FFFFFF;}#CELL_REPONSE,#bzCELL_REPONSE {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#fzLIB_DESTCOMPANY,#tzLIB_DESTCOMPANY {font-weight:normal;}#fzLIB_DESTTELEPHONE,#tzLIB_DESTTELEPHONE {font-weight:normal;}#fzLIB_DESTRESP,#tzLIB_DESTRESP {font-weight:normal;}#fzLIB_DESTMAIL,#tzLIB_DESTMAIL {font-weight:normal;}#BTN_ENVOI {text-align:center;vertical-align:middle;}#SAI_CAPTCHA {width:103px;height:21px;}#BTN_REFRESHCAPTCHA,#tzBTN_REFRESHCAPTCHA {background-image:url([%_PROJET_WEB_%]actualiser24.png);background-repeat:no-repeat;}#SEL_REPONSE,#tzSEL_REPONSE,#bzSEL_REPONSE,.SEL_REPONSE {  [%SI%]SEL_REPONSE..COULEUR!=-1[%ALORS%]color:#[%SEL_REPONSE..COULEUR%][%FIN%];  [%SI%]SEL_REPONSE..COULEURFOND!=-1[%ALORS%]background-color:#[%SEL_REPONSE..COULEURFOND%][%FIN%];border-style:solid;border-width:1px;border-color:#C0C0C0;border-collapse:collapse;empty-cells:show;border-spacing:0;font-weight:[%SEL_REPONSE..POLICEGRAS;4%];font-style:[%SEL_REPONSE..POLICEITALIQUE;5%];[%SI%]SEL_REPONSE..POLICENOM!=[%ALORS%]font-family:[%SEL_REPONSE..POLICENOM%];[%FIN%]text-decoration:[%SEL_REPONSE..POLICESOULIGNEE;6%];[%SI%]SEL_REPONSE..POLICETAILLE!=0[%ALORS%]font-size:[%SEL_REPONSE..POLICETAILLE;7%];[%FIN%][%SI%]SEL_REPONSE..CADRAGEH!=-1[%ALORS%]text-align:[%SEL_REPONSE..CADRAGEH;9%];[%FIN%][%SI%]SEL_REPONSE..CADRAGEV!=-1[%ALORS%]vertical-align:[%SEL_REPONSE..CADRAGEV;10%];[%FIN%][%SI%]SEL_REPONSE..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%SEL_REPONSE..OPACITE%]);zoom:1;opacity:[%SEL_REPONSE..OPACITE;8%];[%FIN%][%SI%]SEL_REPONSE..CURSEURSOURIS!=auto[%ALORS%]cursor:[%SEL_REPONSE..CURSEURSOURIS%];[%FIN%]}#CAPTCHA1 {font-size:x-large;font-weight:bold;text-align:left;background-color:#E0E0E0;  [%SI%]CAPTCHA1..COULEUR!=-1[%ALORS%]color:#[%CAPTCHA1..COULEUR%][%FIN%];  [%SI%]CAPTCHA1..COULEURFOND!=-1[%ALORS%]background-color:#[%CAPTCHA1..COULEURFOND%][%FIN%];[%SI%]CAPTCHA1..CURSEURSOURIS!=auto[%ALORS%]cursor:[%CAPTCHA1..CURSEURSOURIS%];[%FIN%]}#NUM_POSFEN {text-align:right;width:96px;height:21px;}
+</style>
+</head>
+<body style="  background-color:#D3D3D3;" onkeypress="_PAGE_PROJET_KPR(event)" onload="chfocus();[%_CodeInfoError_%];_LOD_COM(event);_PAGE_PROJET_LOD(event)" onunload="_PAGE_PROJET_UNL(event);_UNL_COM(event);">
+<script type="text/javascript">var bPCSFR=true;</script><script type="text/javascript" charset="iso-8859-1" src="[%_PROJET_WEB_%]res/WDLIB.JS?c2bdf26"></script><form name="PAGE_PROJET" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.PAGE_PROJET</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="BTN_ENVOI">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+
+<table style="width:100.00%;height:100.00%">
+	<tr valign="top" style="height:6px">
+		<td style="width:1040px">
+		
+		</td>
+	
+	</tr>
+	<tr valign="top" style="height:100.00%">
+		<td style="width:100.00%"><table style="width:100%;height:100%;"><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);width:10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);height:10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% 0px;width:10px;"></td></tr><tr style="height:100%"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td><td id="page" style="width:100%;">
+			<table style="width:100.00%;height:100.00%">
+				<tr valign="top" style="height:166px">
+					<td style="width:100.00%"><table width="100%" id="CELL_BANDEAU" bgcolor="#336699" style="border-collapse:separate;position:relative;" cellspacing=0>
+<tr><td height="164" bgcolor="#336699" valign="top"><div class="ff3fix63895rel" style="">
+						<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+							<tr style="height:100%">
+								<td>
+									<!--[if !IE]>-->
+										<table style="height:100%;width:100%">
+											<tr valign="top" style="height:100%">
+												<td>
+													<!--<![endif]-->
+														<table style="width:100.00%;height:164px">
+															<tr valign="top" style="height:164px">
+																<td style="width:394px">
+																	<div style="height:100%;min-width:394px;width:auto !important;width:394px;" class="lh0">
+																	
+																	</div>
+																
+																</td>
+																<td style="width:318px">
+																	<div style="height:100%;min-width:318px;width:auto !important;width:318px;" class="lh0">
+																		<div  style="clear:left;float:left;margin:25px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Titre padding" id="tzLIB_COMPAGNIE">[%LIB_COMPAGNIE%]</td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																		<div  style="clear:left;float:left;margin:6px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Normal padding" id="tzLIB_ADRESSE">[%LIB_ADRESSE%]</td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																		<div  style="clear:left;float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Normal padding" id="tzLIB_VILLECP">[%LIB_VILLECP%]</td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																		<div  style="clear:left;float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Normal padding" id="tzLIB_TELFAX">[%LIB_TELFAX%]</td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																		<div  style="clear:left;float:left;margin:5px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Normal" valign="middle" id="tzLIB_COURRIEL"><a href="javascript:_LIB_COURRIEL_CLI()" id="LIB_COURRIEL" class="Bandeau-Normal wblien padding">[%LIB_COURRIEL%]</a></td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																		<div  style="clear:left;float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																			<div  style="min-width:318px;width:auto !important;width:318px;"><table width="318px" style="height:20px;"><tr><td class="Bandeau-Normal" valign="middle" id="tzLNK_SITEWEB"><a href="javascript:_LNK_SITEWEB_CLI()" id="LNK_SITEWEB" class="Bandeau-Normal wblien padding">[%LNK_SITEWEB%]</a></td></tr></table>
+																			
+																			</div>
+																		
+																		</div>
+																	
+																	</div>
+																
+																</td>
+																<td style="width:100.00%"></td>
+																<td style="width:6px">
+																	<div style="height:100%;min-width:6px;width:auto !important;width:6px;" class="lh0">
+																	
+																	</div>
+																
+																</td>
+																<td style="width:300px">
+																	<div style="height:100%;min-width:300px;width:auto !important;width:300px;" class="lh0"><table width="300px" style="text-align:left;height:164px;"><tr><td class="Btn-Std" valign="middle" bgcolor="#336699" id="tzBTN_EPLANS" style="[%SI%]BTN_EPLANS..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table><tr><td style="width:300px;height:164px;"><a href="javascript:_BTN_EPLANS_CLI()" onmouseout="document.getElementById('z_BTN_EPLANS_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/e-plans-corner_03__BF836AF2_.PNG)';" onmouseover="document.getElementById('z_BTN_EPLANS_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/e-plans-corner_03__BF836AF2_.PNG)';" id="BTN_EPLANS" class="Btn-Std wblien padding"  style="_height:164px;text-decoration:none;background-image:none;display:block;"><span id="z_BTN_EPLANS_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/e-plans-corner_03__BF836AF2_.PNG);;height:164px;overflow:hidden;cursor:pointer;"><span style="line-height:14px;"></span></span></a></td></tr></table></td></tr></table>
+																	
+																	</div>
+																
+																</td>
+															
+															</tr>
+														
+														</table>
+													
+													<!--[if !IE]>-->
+												
+												</td>
+											
+											</tr>
+										
+										</table>
+									
+									<!--<![endif]-->
+								
+								</td>
+							
+							</tr>
+								<tr style="height:1px">
+									
+									<td><div id="dwwBTNEPLANSEN" style="position:absolute;left:[%BTN_EPLANSEN..X%]px;top:[%BTN_EPLANSEN..Y%]px;z-index:7; [%SI%]BTN_EPLANSEN..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table width="300px" style="text-align:left;height:164px;"><tr><td class="Btn-Std" valign="middle" bgcolor="#336699" id="tzBTN_EPLANSEN"><table><tr><td style="width:300px;height:164px;"><a href="javascript:_BTN_EPLANSEN_CLI()" onmouseout="document.getElementById('z_BTN_EPLANSEN_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/e-plans-corner_en__3913809E_.PNG)';" onmouseover="document.getElementById('z_BTN_EPLANSEN_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/e-plans-corner_en__3913809E_.PNG)';" id="BTN_EPLANSEN" class="Btn-Std wblien padding"  style="_height:164px;text-decoration:none;background-image:none;display:block;"><span id="z_BTN_EPLANSEN_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/e-plans-corner_en__3913809E_.PNG);;height:164px;overflow:hidden;cursor:pointer;"><span style="line-height:14px;"></span></span></a></td></tr></table></td></tr></table></div>
+<div id="dwwIMGLOGO" style="position:absolute;left:[%IMG_LOGO..X%]px;top:[%IMG_LOGO..Y%]px;width:[%IMG_LOGO..LARGEUR%]px;height:[%IMG_LOGO..HAUTEUR%]px;z-index:8; [%SI%]IMG_LOGO..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]IMG_LOGO..CURSEURSOURIS!=auto[%ALORS%]cursor:[%IMG_LOGO..CURSEURSOURIS%];[%FIN%]"><div class="dzIMG_LOGO" id="dzIMG_LOGO"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;IMG_LOGO=[%IMG_LOGO..NOCACHE%]" width="[%IMG_LOGO..LARGEUR%]" height="[%IMG_LOGO..HAUTEUR%]" hspace=0 vspace=0 border=0 alt="[%IMG_LOGO%]" name="IMG_LOGO" id="IMG_LOGO" class="l-1 padding" TITLE="[%IMG_LOGO..BULLE%]"[%SI%]IMG_LOGO..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]IMG_LOGO..ETAT=4[%ALORS%] DISABLED[%FIN%]></div></div>
+
+								
+								</td>
+							
+							</tr>
+						
+						</table></div></td></tr></table>
+					
+					</td>
+				
+				</tr>
+				<tr valign="top" style="height:100.00%">
+					<td style="width:100.00%">
+						<table style="width:100.00%;height:100.00%">
+							<tr valign="top" style="height:100%">
+								<td style="width:8px">
+									<div style="height:100%;min-width:8px;width:auto !important;width:8px;" class="lh0">
+									
+									</div>
+								
+								</td>
+								<td style="width:103px">
+									<div style="height:100%;min-width:103px;width:auto !important;width:103px;" class="lh0">
+										<div  style="clear:left;float:left;margin:54px 0 0;display:inline;min-height:23px;height:auto !important;height:23px;">
+											<div  style="min-width:103px;width:auto !important;width:103px;"><INPUT TYPE="text" SIZE="8" NAME="SAI_NUMLIG" VALUE="[%SAI_NUMLIG%]" onkeypress="return VerifSaisieNombre(event,'+9999');" onblur="reinitNombre(event,'+9999');VerifRegExp(this,'^^(\\+|\\-){0,1}(\\d|'+_WW_SEPMILLIER_+'){1,4}$');" onfocus="var b=(this.value.length==0);initNombre(event,'+9999');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_NUMLIG" class="Verdana-9 padding"  style="[%SI%]SAI_NUMLIG..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+											
+											</div>
+										
+										</div>
+										<div  style="clear:left;float:left;margin:6px 0 0;display:inline;min-height:23px;height:auto !important;height:23px;">
+											<div  style="min-width:103px;width:auto !important;width:103px;"><INPUT TYPE="text" SIZE="8" NAME="SAI_MAX" VALUE="[%SAI_MAX%]" onkeypress="return VerifSaisieNombre(event,'9999');" onblur="reinitNombre(event,'9999');VerifRegExp(this,'^(\\d|'+_WW_SEPMILLIER_+'){1,4}$');" onfocus="var b=(this.value.length==0);initNombre(event,'9999');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="SAI_MAX" class="Verdana-9 padding"  style="[%SI%]SAI_MAX..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+											
+											</div>
+										
+										</div>
+										<div  style="clear:left;float:left;margin:6px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+											<div  style="min-width:103px;width:auto !important;width:103px;"><table width="103px" style="height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzLNK_NOMFIC1" style="[%SI%]LNK_NOMFIC1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:_LNK_NOMFIC1_CLI()" id="LNK_NOMFIC1" class="Link-Left-Bold wblien padding">Nom du fichier</a></td></tr></table>
+											
+											</div>
+										
+										</div>
+										<div  style="clear:left;float:left;margin:12px 0 0 6px;display:inline;min-height:23px;height:auto !important;height:23px;">
+											<div  style="min-width:97px;width:auto !important;width:97px;"><TABLE width="86">
+ <TR>
+  <TD width="86px"><table id="czSAI_ADDR" style="[%SI%]SAI_ADDR..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+<tr><td height="23" width="86" valign="top"><TABLE width="86">
+ <TR>
+  <TD class="l-3 padding" id="lzSAI_ADDR" width="25" height="23">IP</TD>
+  <TD width="61px"><INPUT TYPE="text" SIZE="4" NAME="SAI_ADDR" VALUE="[%SAI_ADDR%]" id="SAI_ADDR" class="Verdana padding"></TD>
+ </TR>
+</TABLE>
+</td></tr></table></TD>
+ </TR>
+</TABLE>
+
+											
+											</div>
+										
+										</div>
+										<div  style="clear:left;float:left;margin:10px 0 0 6px;display:inline;min-height:23px;height:auto !important;height:23px;">
+											<div  style="min-width:97px;width:auto !important;width:97px;"><INPUT TYPE="text" SIZE="8" NAME="NUM_POSFEN" VALUE="[%NUM_POSFEN%]" onkeypress="return VerifSaisieNombre(event,'9999');" onblur="reinitNombre(event,'9999');VerifRegExp(this,'^(\\d|'+_WW_SEPMILLIER_+'){1,4}$');" onfocus="var b=(this.value.length==0);initNombre(event,'9999');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" id="NUM_POSFEN" class="Verdana-9 padding"  style="[%SI%]NUM_POSFEN..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+											
+											</div>
+										
+										</div>
+									
+									</div>
+								
+								</td>
+								<td style="width:100.00%">
+									<table style="width:100.00%;height:100.00%">
+										<tr valign="top" style="height:83px">
+											<td style="width:100.00%">
+												<table style="width:100.00%;height:83px">
+													<tr valign="top" style="height:83px">
+														<td style="width:14px">
+															<div style="height:100%;min-width:14px;width:auto !important;width:14px;" class="lh0">
+															
+															</div>
+														
+														</td>
+														<td style="width:601px">
+															<div style="height:100%;min-width:601px;width:auto !important;width:601px;" class="lh0">
+																<div  style="clear:left;float:left;display:inline;min-width:601px;width:auto !important;width:601px;min-height:28px;height:auto !important;height:28px;">
+																	<div  style="float:left;display:inline;min-height:28px;height:auto !important;height:28px;">
+																		<div  style="min-width:164px;width:auto !important;width:164px;"><table width="164px" style="height:28px;"><tr><td class="Verdana-9 padding" id="tzLIB_NUMPROJET">[%LIB_NUMPROJET%]</td></tr></table>
+																		
+																		</div>
+																	
+																	</div>
+																	<div  style="float:left;margin:4px 0 4px 249px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																		<div  style="min-width:39px;width:auto !important;width:39px;"><table width="39px" style="height:20px;"><tr><td class="Verdana padding" id="tzLIB_REF">[%LIB_REF%]</td></tr></table>
+																		
+																		</div>
+																	
+																	</div>
+																	<div  style="float:left;display:inline;min-height:28px;height:auto !important;height:28px;">
+																		<div  style="min-width:149px;width:auto !important;width:149px;"><table width="149px" style="height:28px;"><tr><td class="Verdana-9 padding" id="tzLIB_REFERENCE">[%LIB_REFERENCE%]</td></tr></table>
+																		
+																		</div>
+																	
+																	</div>
+																
+																</div>
+																<div  style="clear:left;float:left;margin:1px 0 0;display:inline;min-height:28px;height:auto !important;height:28px;">
+																	<div  style="min-width:601px;width:auto !important;width:601px;"><table width="600px" style="height:28px;"><tr><td class="Verdana-9 padding" id="tzLIB_NOMPROJET">[%LIB_NOMPROJET%]</td></tr></table>
+																	
+																	</div>
+																
+																</div>
+																<div  style="clear:left;float:left;margin:6px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																	<div  style="min-width:601px;width:auto !important;width:601px;"><table width="477px" style="height:20px;"><tr><td class="l-4" valign="middle" id="tzLIEN_REPONSE" style="[%SI%]LIEN_REPONSE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a href="javascript:_LIEN_REPONSE_CLI()" id="LIEN_REPONSE" class="l-4 wblien padding">[%LIEN_REPONSE%]</a></td></tr></table>
+																	
+																	</div>
+																
+																</div>
+															
+															</div>
+														
+														</td>
+														<td style="width:100.00%"></td>
+														<td style="width:128px">
+															<div style="height:100%;min-width:128px;width:auto !important;width:128px;" class="lh0">
+															
+															</div>
+														
+														</td>
+														<td style="width:161px">
+															<div style="height:100%;min-width:161px;width:auto !important;width:161px;" class="lh0">
+																<div  style="clear:left;float:left;margin:4px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																	<div  style="min-width:161px;width:auto !important;width:161px;"><table width="161px" style="text-align:left;height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzLNK_AUTRESALLE"><a href="javascript:{_JSL(_PAGE_,'LNK_AUTRESALLE','_self','','')}" id="LNK_AUTRESALLE" class="Link-Left-Bold wblien padding">[%LNK_AUTRESALLE%]</a></td></tr></table>
+																	
+																	</div>
+																
+																</div>
+																<div  style="clear:left;float:left;margin:2px 0 0 61px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																	<div  style="min-width:100px;width:auto !important;width:100px;"><table width="100px" style="text-align:left;height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzLNK_DECONNECTE"><a href="javascript:{_JSL(_PAGE_,'LNK_DECONNECTE','_self','','')}" id="LNK_DECONNECTE" class="Link-Left-Bold wblien padding">[%LNK_DECONNECTE%]</a></td></tr></table>
+																	
+																	</div>
+																
+																</div>
+																<div  style="clear:left;float:left;margin:2px 0 0 61px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																	<div  style="min-width:100px;width:auto !important;width:100px;"><table width="100px" style="text-align:left;height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzLNK_LANGUE"><a href="javascript:{_JSL(_PAGE_,'LNK_LANGUE','_self','','')}" id="LNK_LANGUE" class="Link-Left-Bold wblien padding">[%LNK_LANGUE%]</a></td></tr></table>
+																	
+																	</div>
+																
+																</div>
+															
+															</div>
+														
+														</td>
+														<td style="width:5px">
+															<div style="height:100%;min-width:5px;width:auto !important;width:5px;" class="lh0">
+															
+															</div>
+														
+														</td>
+													
+													</tr>
+												
+												</table>
+											
+											</td>
+										
+										</tr>
+										<tr valign="top" style="height:6px">
+											<td style="width:909px">
+											
+											</td>
+										
+										</tr>
+										<tr valign="top" style="height:20px">
+											<td style="width:909px">
+												<div style="height:100%;min-width:909px;width:auto !important;width:909px;" class="lh0">
+													<div  style="clear:left;float:left;margin:0 0 0 18px;display:inline;">
+														<div  style="min-width:654px;width:auto !important;width:654px;" class="lh0"><input type=hidden name="ZR_OPTIONS" value="[%ZR_OPTIONS%]"><input type=hidden name="ZR_OPTIONS_DEB" value="[%ZR_OPTIONS..PREMIERVISIBLE%]"><input type=hidden name="_ZR_OPTIONS_OCC" value="[%ZR_OPTIONS..OCCURRENCE%]"><CONTENEUR NAME="[%ZR_OPTIONS..ALIAS%]"><table id="con-ZR_OPTIONS" bgcolor="#E0E0E0" class="l-2" style="border-collapse:separate;position:relative;" cellspacing=0>
+<!--REPEAT GENERATION_CORPS--><tr style="height:20px"><td width="652" style=" [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZR_OPTIONS..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_OPTIONS..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZR_OPTIONS..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_OPTIONS..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZR_OPTIONS..LIGNEPAIRE!=1[%ALORS%]l-12[%FIN%][%SI%]ZR_OPTIONS..LIGNEPAIRE=1[%ALORS%]l-12[%FIN%] padding"><div style="position:relative;  [%SI%]ATTRIBUT1..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZR_OPTIONS..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_OPTIONS..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_OPTIONS..COULEURFOND!=FFFFFF[%ALORS%]#[%ATTRIBUT1..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZR_OPTIONS_[%ZR_OPTIONS%]">
+															<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+																<tr style="height:100%">
+																	<td>
+																	
+																	</td>
+																
+																</tr>
+																	<tr style="height:1px">
+																		
+																		<td><div id="dwwzrl[%ZR_OPTIONS%]LIBNOMOPTION" style="position:absolute;left:-1px;top:-1px;z-index:3;"><table width="196px" style="height:20px;"><tr><td class="Verdana-9 padding" bgcolor="#E0E0E0" id="tzc-[%ZR_OPTIONS%]-LIB-NOMOPTION"><div id="zrl_[%ZR_OPTIONS%]_ATTRIBUT1">[%ATTRIBUT1%]</div></td></tr></table></div>
+<div id="dwwzrl[%ZR_OPTIONS%]LIBVALOPTION" style="position:absolute;left:198px;top:-1px;z-index:4;"><table width="308px" style="height:20px;"><tr><td class="Verdana-9 padding" id="tzc-[%ZR_OPTIONS%]-LIB-VALOPTION"><div id="zrl_[%ZR_OPTIONS%]_ATTRIBUT2">[%ATTRIBUT2%]</div></td></tr></table></div>
+<div id="dwwzrl[%ZR_OPTIONS%]LIBVALOPTION2" style="position:absolute;left:508px;top:-1px;z-index:5;"><table width="141px" style="height:20px;"><tr><td class="Verdana-9 padding" id="tzc-[%ZR_OPTIONS%]-LIB-VALOPTION2"><div id="zrl_[%ZR_OPTIONS%]_ATTRIBUT3">[%ATTRIBUT3%]</div></td></tr></table></div>
+
+																	
+																	</td>
+																
+																</tr>
+															
+															</table></div></td></tr><!--/REPEAT--></table></CONTENEUR>
+														
+														</div>
+													
+													</div>
+												
+												</div>
+											
+											</td>
+										
+										</tr>
+										<tr valign="top" style="height:100.00%">
+											<td style="width:909px">
+												<div style="height:100%;min-width:909px;width:auto !important;width:909px;" class="lh0">
+													<div class="lh0 vbox" style="padding-left:17px;padding-right:192px">
+														<!--[if !IE]>-->
+															<table style="height:100%;width:100%">
+																<tr valign="top" style="height:100%">
+																	<td>
+																		<!--<![endif]-->
+																			<table style="width:700px;height:100.00%">
+																				<tr valign="top" style="height:9px">
+																					<td style="width:700px">
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:20px">
+																					<td style="width:700px">
+																						<div style="height:100%;min-width:700px;width:auto !important;width:700px;" class="lh0">
+																							<div  style="float:left;margin:0 0 0 490px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																								<div  style="min-width:86px;width:auto !important;width:86px;"><table width="86px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzLIB_SENT1">[%LIB_SENT1%]</td></tr></table>
+																								
+																								</div>
+																							
+																							</div>
+																							<div  style="float:left;margin:0 0 0 3px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																								<div  style="min-width:68px;width:auto !important;width:68px;"><table width="68px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzLIB_TAILLE1">[%LIB_TAILLE1%]</td></tr></table>
+																								
+																								</div>
+																							
+																							</div>
+																						
+																						</div>
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:1px">
+																					<td style="width:700px">
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:61px">
+																					<td style="width:700px">
+																						<div style="height:100%;min-width:700px;width:auto !important;width:700px;" class="lh0">
+																							<div  style="clear:left;float:left;margin:0 0 0 1px;display:inline;">
+																								<div  style="min-width:654px;width:auto !important;width:654px;" class="lh0"><input type=hidden name="ZR_SOUSTITRE" value="[%ZR_SOUSTITRE%]"><input type=hidden name="ZR_SOUSTITRE_DEB" value="[%ZR_SOUSTITRE..PREMIERVISIBLE%]"><input type=hidden name="_ZR_SOUSTITRE_OCC" value="[%ZR_SOUSTITRE..OCCURRENCE%]"><CONTENEUR NAME="[%ZR_SOUSTITRE..ALIAS%]"><table width="654" id="con-ZR_SOUSTITRE" bgcolor="#FFFFFF" style="position:relative;">
+<!--REPEAT GENERATION_CORPS-->[%SI%]ZR_SOUSTITRE..INCLURE_HAUTRUPTURE0=1[%ALORS%]<tr><td><table id="ZR_SOUSTITRE-H-0-[%ZR_SOUSTITRE%]" bgcolor="#F1F1CF" class="czHAUTRUPTURE1" style="border-collapse:separate;clear:left;" cellspacing=0>
+<tr><td height="24" width="652" bgcolor="#F1F1CF" valign="top">
+<div  style="float:left;margin:3px 0 0 4px;display:inline;min-width:648px;width:auto !important;width:648px;min-height:20px;height:auto !important;height:20px;">
+	<div  style="float:left;margin:3px 0;display:inline;min-height:14px;height:auto !important;height:14px;" class="lh0">
+		<div  style="min-width:15px;width:auto !important;width:15px;" class="lh0"><table><tr><td style="width:15px;height:14px;"><a href="javascript:_PAGE_.ZR_SOUSTITRE.value=[%ZR_SOUSTITRE%];javascript:{_JAEE(_PAGE_,'BTN_COCHE',16,2);}" onmouseout="document.getElementById('z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Coche12__E269F03F_.PNG)';" onmouseover="document.getElementById('z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Coche12__E269F03F_.PNG)';" id="c-[%ZR_SOUSTITRE%]-zrl_[%ZR_SOUSTITRE%]_BTN_COCHE" class="Btn-Std wblien padding"  style="_height:14px;text-decoration:none;background-image:none;display:block;"><span id="z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/Coche12__E269F03F_.PNG);;height:14px;overflow:hidden;cursor:pointer;"><span style="line-height:14px;"></span></span></a></td></tr></table>
+		
+		</div>
+	
+	</div>
+	<div  style="float:left;margin:3px 0;display:inline;min-height:14px;height:auto !important;height:14px;" class="lh0">
+		<div  style="min-width:15px;width:auto !important;width:15px;" class="lh0"><table><tr><td style="width:15px;height:14px;"><a href="javascript:_PAGE_.ZR_SOUSTITRE.value=[%ZR_SOUSTITRE%];javascript:{_JAEE(_PAGE_,'BTN_COCHE1',16,2);}" onmouseout="document.getElementById('z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE1_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/DeCoche12__F15431C7_.PNG)';" onmouseover="document.getElementById('z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE1_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/DeCoche12__F15431C7_.PNG)';" id="c-[%ZR_SOUSTITRE%]-zrl_[%ZR_SOUSTITRE%]_BTN_COCHE1" class="Btn-Std wblien padding"  style="_height:14px;text-decoration:none;background-image:none;display:block;"><span id="z_zrl_[%ZR_SOUSTITRE%]_BTN_COCHE1_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/DeCoche12__F15431C7_.PNG);;height:14px;overflow:hidden;cursor:pointer;"><span style="line-height:14px;"></span></span></a></td></tr></table>
+		
+		</div>
+	
+	</div>
+	<div  style="float:left;margin:0 0 0 5px;display:inline;min-height:20px;height:auto !important;height:20px;">
+		<div  style="min-width:449px;width:auto !important;width:449px;"><table width="449px" style="height:20px;"><tr><td class="Simple-Italic padding" id="tzc-[%ZR_SOUSTITRE%]-LIB-SOUSTITRE"><div id="zrl_[%ZR_SOUSTITRE%]_ZSOUSTITRE">[%ZSOUSTITRE%]</div></td></tr></table>
+		
+		</div>
+	
+	</div>
+
+</div></td></tr></table></td></tr>[%FIN%][%SI%]ZR_SOUSTITRE..LIGNEREPLIEE=0[%ALORS%]<tr style="height:27px"><td width="654" style=" [%SI%]ZSELECT..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZR_SOUSTITRE..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=F4F4F4[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_SOUSTITRE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=E2E2E2[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%][%FIN%];" [%SI%]ZSELECT..COULEURFOND!=-1[%ALORS%]bgcolor="[%SI%]ZR_SOUSTITRE..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=F4F4F4[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_SOUSTITRE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=E2E2E2[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%]"[%FIN%] valign="top" class="[%SI%]ZR_SOUSTITRE..LIGNEPAIRE!=1[%ALORS%]l-11[%FIN%][%SI%]ZR_SOUSTITRE..LIGNEPAIRE=1[%ALORS%]l-10[%FIN%] padding"><div style="position:relative;  [%SI%]ZSELECT..COULEURFOND!=-1[%ALORS%]background-color:[%SI%]ZR_SOUSTITRE..LIGNEPAIRE=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=F4F4F4[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%][%SI%]ZR_SOUSTITRE..LIGNEPAIRE!=1[%ALORS%][%SI%]ZR_SOUSTITRE..COULEURFOND!=E2E2E2[%ALORS%]#[%ZSELECT..COULEURFOND%][%FIN%][%FIN%][%FIN%];" id="ZR_SOUSTITRE_[%ZR_SOUSTITRE%]">
+																									<table style="position:relative;width:100%;height:100%;margin-bottom:-3px">
+																										<tr style="height:100%">
+																											<td>
+																												<table style="width:654px">
+																													<tr valign="top" style="height:4px">
+																														<td style="width:654px">
+																														
+																														</td>
+																													
+																													</tr>
+																													<tr valign="top">
+																														<td style="width:654px">
+																															<div style="height:100%;min-width:654px;width:auto !important;width:654px;" class="lh0">
+																																<div  style="float:left;margin:0 0 0 42px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																																	<div  style="min-width:443px;width:auto !important;width:443px;"><table width="443px" style="height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzc-[%ZR_SOUSTITRE%]-LNK-NOMFIC" style="[%SI%]LNK_NOMFIC..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">[%LNK_NOMFIC..HTMLAVANT%]<a[%SI%]LNK_NOMFIC..ETAT=0[%ALORS%] href="javascript:_PAGE_.ZR_SOUSTITRE.value=[%ZR_SOUSTITRE%];javascript:{_JSL(_PAGE_,'LNK_NOMFIC','_self','','')}"[%FIN%] id="c-[%ZR_SOUSTITRE%]-LNK-NOMFIC" class="Link-Left-Bold wblien padding" TITLE="[%LNK_NOMFIC..BULLE%]"[%SI%]LNK_NOMFIC..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]LNK_NOMFIC..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="zrl_[%ZR_SOUSTITRE%]_LNK_NOMFIC"  href="javascript:_PAGE_.ZR_SOUSTITRE.value=[%ZR_SOUSTITRE%];javascript:{_JSL(_PAGE_,'LNK_NOMFIC','_self','','')}">[%ZNOMFIC%]</a>[%LNK_NOMFIC..HTMLAPRES%]</td></tr></table>
+																																	
+																																	</div>
+																																
+																																</div>
+																																<div  style="float:left;margin:0 0 0 4px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																																	<div  style="min-width:86px;width:auto !important;width:86px;"><table width="86px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzc-[%ZR_SOUSTITRE%]-LIB-SENT"><div id="zrl_[%ZR_SOUSTITRE%]_ZENVOI">[%ZENVOI%]</div></td></tr></table>
+																																	
+																																	</div>
+																																
+																																</div>
+																																<div  style="float:left;margin:0 0 0 1px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																																	<div  style="min-width:73px;width:auto !important;width:73px;"><table width="73px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzc-[%ZR_SOUSTITRE%]-LIB-TAILLE"><div id="zrl_[%ZR_SOUSTITRE%]_ZTAILLE">[%ZTAILLE%]</div></td></tr></table>
+																																	
+																																	</div>
+																																
+																																</div>
+																															
+																															</div>
+																														
+																														</td>
+																													
+																													</tr>
+																													<tr valign="top" style="height:3px">
+																														<td style="width:654px">
+																														
+																														</td>
+																													
+																													</tr>
+																												
+																												</table>
+																											
+																											</td>
+																										
+																										</tr>
+																											<tr style="height:1px">
+																												
+																												<td><div id="dwwzrl[%ZR_SOUSTITRE%]ZSELECT" style="position:absolute;left:11px;top:5px;width:27px;height:21px;z-index:10;"><input type="hidden" name="zrl_[%ZR_SOUSTITRE%]_ZSELECT" value=""><table class="Verdana-9 zrl_[%ZR_SOUSTITRE%]_ZSELECT" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:21px;width:27px;"><label for="zrl_[%ZR_SOUSTITRE%]_ZSELECT_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="CHECKBOX" name="zrl_[%ZR_SOUSTITRE%]_ZSELECT" value="1" id="zrl_[%ZR_SOUSTITRE%]_ZSELECT_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;top:-1px !important;_top:-4px !important;"[%SI%]ZSELECT..VALEUR="1"[%ALORS%] CHECKED [%FIN%] onclick="_PAGE_.ZR_SOUSTITRE.value=[%ZR_SOUSTITRE%];{_JAEE(_PAGE_,'INT_SELECT',47,2);}">Â </label></td></tr></table></div>
+
+																											
+																											</td>
+																										
+																										</tr>
+																									
+																									</table></div></td></tr>[%FIN%][%SI%]ZR_SOUSTITRE..INCLURE_BASRUPTURE0=1[%ALORS%]<tr><td><table id="ZR_SOUSTITRE-B-0-[%ZR_SOUSTITRE%]" class="czBASRUPTURE1" style="clear:left;">
+<tr><td height="8" width="654" valign="top"></td></tr></table></td></tr>[%FIN%]<!--/REPEAT--></table></CONTENEUR>
+																								
+																								</div>
+																							
+																							</div>
+																						
+																						</div>
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:1px">
+																					<td style="width:700px">
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:20px">
+																					<td style="width:700px">
+																						<div style="height:100%;min-width:700px;width:auto !important;width:700px;" class="lh0">
+																							<div  style="float:left;margin:0 0 0 35px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																								<div  style="min-width:254px;width:auto !important;width:254px;"><table width="254px" style="height:20px;"><tr><td class="Link-Left-Bold" valign="middle" id="tzLNK_TRANSFERT" style="[%SI%]LNK_TRANSFERT..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a[%SI%]LNK_TRANSFERT..ETAT=0[%ALORS%] href="javascript:_LNK_TRANSFERT_CLI()"[%FIN%] id="LNK_TRANSFERT" class="Link-Left-Bold wblien padding"[%SI%]LNK_TRANSFERT..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]LNK_TRANSFERT..ETAT=4[%ALORS%] DISABLED[%FIN%]><DYN_HREF name="LNK_TRANSFERT"  href="javascript:_LNK_TRANSFERT_CLI()">[%LNK_TRANSFERT%]</a></td></tr></table>
+																								
+																								</div>
+																							
+																							</div>
+																							<div  style="float:left;margin:0 0 0 215px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																								<div  style="min-width:61px;width:auto !important;width:61px;"><table width="61px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzLIB_TAILLETOT">[%LIB_TAILLETOT%]</td></tr></table>
+																								
+																								</div>
+																							
+																							</div>
+																							<div  style="float:left;margin:0 0 0 1px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																								<div  style="min-width:84px;width:auto !important;width:84px;"><table width="84px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzLIB_SIZETOT">[%LIB_SIZETOT%]</td></tr></table>
+																								
+																								</div>
+																							
+																							</div>
+																						
+																						</div>
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr>
+																					<td></td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:16px">
+																					<td style="width:700px">
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:145px">
+																					<td style="width:700px">
+																						<div style="height:100%;min-width:700px;width:auto !important;width:700px;" class="lh0"><table id="CELL_REPONSE" bgcolor="#FFFFFF" style="[%SI%]CELL_REPONSE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]border-collapse:separate;" cellspacing=0>
+<tr><td height="143" width="698" bgcolor="#FFFFFF" valign="top">
+																							<div  style="float:left;margin:7px 0 17px 11px;display:inline;min-width:687px;width:auto !important;width:687px;min-height:119px;height:auto !important;height:119px;">
+																								<div  style="float:left;margin:6px 0 9px;display:inline;min-width:354px;width:auto !important;width:354px;min-height:104px;height:auto !important;height:104px;">
+																									<div  style="clear:left;float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="min-width:354px;width:auto !important;width:354px;"><table width="100px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_DESTINATAIRE">[%LIB_DESTINATAIRE%]</td></tr></table>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:1px 0 0 16px;display:inline;min-width:338px;width:auto !important;width:338px;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:79px;width:auto !important;width:79px;"><table width="79px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_DESTCOMPANY">[%LIB_DESTCOMPANY%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																										<div  style="float:left;margin:0 0 0 2px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:257px;width:auto !important;width:257px;"><table width="257px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzSAI_DESTCOMPANY">[%SAI_DESTCOMPANY%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:1px 0 0 16px;display:inline;min-width:338px;width:auto !important;width:338px;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:79px;width:auto !important;width:79px;"><table width="79px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_DESTTELEPHONE">[%LIB_DESTTELEPHONE%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																										<div  style="float:left;margin:0 0 0 2px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:257px;width:auto !important;width:257px;"><table width="257px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzSAI_DESTTELEPHONE">[%SAI_DESTTELEPHONE%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:1px 0 0 16px;display:inline;min-width:338px;width:auto !important;width:338px;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:79px;width:auto !important;width:79px;"><table width="79px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_DESTMAIL">[%LIB_DESTMAIL%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																										<div  style="float:left;margin:0 0 0 2px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:257px;width:auto !important;width:257px;"><table width="257px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzSAI_DESTMAIL">[%SAI_DESTMAIL%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:1px 0 0 16px;display:inline;min-width:338px;width:auto !important;width:338px;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="float:left;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:79px;width:auto !important;width:79px;"><table width="79px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_DESTRESP">[%LIB_DESTRESP%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																										<div  style="float:left;margin:0 0 0 2px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																											<div  style="min-width:257px;width:auto !important;width:257px;"><table width="257px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzSAI_DESTRESP">[%SAI_DESTRESP%]</td></tr></table>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</div>
+																								
+																								</div>
+																								<div  style="float:left;margin:6px 0 1px 4px;display:inline;min-width:153px;width:auto !important;width:153px;min-height:112px;height:auto !important;height:112px;">
+																									<div  style="clear:left;float:left;margin:0 0 0 1px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="min-width:152px;width:auto !important;width:152px;"><table width="100px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_REPONSE">[%LIB_REPONSE%]</td></tr></table>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:6px 0 0;display:inline;min-height:86px;height:auto !important;height:86px;">
+																										<div  style="min-width:153px;width:auto !important;width:153px;">[%SEL_REPONSE..HTMLAVANT%]<table id="tzSEL_REPONSE" class="l-6" style="[%SI%]SEL_REPONSE..VISIBLESTOCKE=0[%ALORS%] [%SI%]SEL_REPONSE..COULEURFOND!=-1[%ALORS%]background-color:#[%SEL_REPONSE..COULEURFOND%][%FIN%];visibility:hidden;[%FIN%]"><tr style="vertical-align:middle"><td style="vertical-align:middle;height:21px;width:153px;"><label for="SEL_REPONSE_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_REPONSE" value="1" id="SEL_REPONSE_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_REPONSE[1]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_REPONSE','_self','','')}" TITLE="[%SEL_REPONSE..BULLE%]"[%SI%]SEL_REPONSE..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_REPONSE..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%SEL_REPONSE[1]..LIBELLE%]</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:21px;width:153px;"><label for="SEL_REPONSE_2" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_REPONSE" value="2" id="SEL_REPONSE_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_REPONSE[2]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_REPONSE','_self','','')}" TITLE="[%SEL_REPONSE..BULLE%]"[%SI%]SEL_REPONSE..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_REPONSE..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%SEL_REPONSE[2]..LIBELLE%]</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:21px;width:153px;"><label for="SEL_REPONSE_3" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_REPONSE" value="3" id="SEL_REPONSE_3" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_REPONSE[3]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_REPONSE','_self','','')}" TITLE="[%SEL_REPONSE..BULLE%]"[%SI%]SEL_REPONSE..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_REPONSE..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%SEL_REPONSE[3]..LIBELLE%]</label></td></tr><tr style="vertical-align:middle"><td style="vertical-align:middle;height:21px;width:153px;"><label for="SEL_REPONSE_4" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SEL_REPONSE" value="4" id="SEL_REPONSE_4" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SEL_REPONSE[4]..CHECKED%] onclick="{_JSL(_PAGE_,'SEL_REPONSE','_self','','')}" TITLE="[%SEL_REPONSE..BULLE%]"[%SI%]SEL_REPONSE..ETAT=1[%ALORS%] DISABLED[%FIN%][%SI%]SEL_REPONSE..ETAT=4[%ALORS%] DISABLED[%FIN%]>[%SEL_REPONSE[4]..LIBELLE%]</label></td></tr><tr><td style="height:2px"></td></tr></table>[%SEL_REPONSE..HTMLAPRES%]
+																										
+																										</div>
+																									
+																									</div>
+																								
+																								</div>
+																								<div  style="float:left;margin:0 0 0 8px;display:inline;min-width:129px;width:auto !important;width:129px;min-height:119px;height:auto !important;height:119px;">
+																									<div  style="clear:left;float:left;display:inline;min-height:47px;height:auto !important;height:47px;">
+																										<div  style="min-width:129px;width:auto !important;width:129px;"><img src="[%URL()%]?WD_ACTION_=IMAGE&amp;CAPTCHA1=[%CAPTCHA1..NOCACHE%]" width="129" height="47" hspace=0 vspace=0 border=0 alt="" name="CAPTCHA1" id="CAPTCHA1" class="Verdana-9 padding" TITLE="[%CAPTCHA1..BULLE%]"[%SI%]CAPTCHA1..ETAT=1[%ALORS%] READONLY[%FIN%][%SI%]CAPTCHA1..ETAT=4[%ALORS%] DISABLED[%FIN%] style="[%SI%]CAPTCHA1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:2px 0 0 25px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																										<div  style="min-width:104px;width:auto !important;width:104px;"><table width="100px" style="height:20px;"><tr><td class="Note-Italic-2 padding" id="tzLIB_CODEVERIF" style="[%SI%]LIB_CODEVERIF..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]">[%LIB_CODEVERIF%]</td></tr></table>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:1px 0 0 22px;display:inline;min-height:23px;height:auto !important;height:23px;">
+																										<div  style="min-width:107px;width:auto !important;width:107px;"><table width="103px" style="height:23px;"><tr><td valign="middle" id="tzSAI_CAPTCHA" style="[%SI%]SAI_CAPTCHA..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><INPUT TYPE="text" SIZE="7" MAXLENGTH="5" NAME="SAI_CAPTCHA" VALUE="[%SAI_CAPTCHA%]" onkeypress="ToutEnMaj(event);" onblur="reinit(event,'');" onfocus="var b=(this.value.length==0);init(event,'');var s=this.value;if(b=(b&&(s.length>0)))this.value='';;if(b&&(this.value.length==0)){this.value=s;SetPositionCaret(this,0);}" onchange="value=value.toUpperCase();" id="SAI_CAPTCHA" class="Verdana padding"></td></tr></table>
+																										
+																										</div>
+																									
+																									</div>
+																									<div  style="clear:left;float:left;margin:2px 0 0 37px;display:inline;min-height:24px;height:auto !important;height:24px;">
+																										<div  style="min-width:92px;width:auto !important;width:92px;"><table><tr><td style="width:80px;height:24px;"><a href="javascript:_BTN_ENVOI_CLI()" onmouseout="document.getElementById('z_BTN_ENVOI_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Btn01_ActivXP__D59F037B_.PNG)';" onmouseover="document.getElementById('z_BTN_ENVOI_IMG').style.backgroundImage='url([%_PROJET_WEB_%]res/Btn02_ActivXP__55DA5531_.PNG)';" id="BTN_ENVOI" class="Btn-Std wblien padding"  style="_height:24px;text-decoration:none;background-image:none;display:block;"><span id="z_BTN_ENVOI_IMG" style="display:table;_display:block;width:100%;background-image:url([%_PROJET_WEB_%]res/Btn01_ActivXP__D59F037B_.PNG);;height:24px;overflow:hidden;cursor:pointer;"><span class="btnvalignmiddle" style="line-height:14px;">[%BTN_ENVOI%]</span></span></a></td></tr></table>
+																										
+																										</div>
+																									
+																									</div>
+																								
+																								</div>
+																								<div  style="float:left;margin:69px 0 27px 5px;display:inline;min-height:23px;height:auto !important;height:23px;">
+																									<div  style="min-width:27px;width:auto !important;width:27px;"><table width="27px" style="height:23px;"><tr><td class="Btn-Std" valign="middle" id="tzBTN_REFRESHCAPTCHA" style="[%SI%]BTN_REFRESHCAPTCHA..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><table><tr><td style="width:27px;height:23px;"><a href="javascript:{_JSL(_PAGE_,'BTN_REFRESHCAPTCHA','_self','','')}" onmouseout="window.status='';" onmouseover="window.status='GÃ©nÃ¨re un autre code';;return true;" onblur="window.status='';" onfocus="window.status='GÃ©nÃ¨re un autre code';" id="BTN_REFRESHCAPTCHA" class="Btn-Std wblien padding"  style="_height:23px;display:block;background-image:none;text-decoration:none;background-image:none;" TITLE="GÃ©nÃ¨re un autre code"><span id="z_BTN_REFRESHCAPTCHA_IMG" style="display:table;_display:block;width:100%;;height:23px;overflow:hidden;cursor:pointer;"><span style="line-height:14px;"></span></span></a></td></tr></table></td></tr></table>
+																									
+																									</div>
+																								
+																								</div>
+																							
+																							</div></td></tr></table>
+																						
+																						</div>
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr valign="top" style="height:100.00%">
+																					<td style="width:700px">
+																						<div style="height:100%;min-width:700px;width:auto !important;width:700px;" class="lh0">
+																							<table style="width:700px;height:100.00%">
+																								<tr valign="top" style="height:100%">
+																									<td style="width:100px">
+																										<div style="height:100%;min-width:100px;width:auto !important;width:100px;" class="lh0">
+																											<div  style="float:left;margin:6px 0 0;display:inline;min-height:20px;height:auto !important;height:20px;">
+																												<div  style="min-width:100px;width:auto !important;width:100px;"><table width="100px" style="height:20px;"><tr><td class="Link-Left-Bold padding" id="tzLIB_ANCRE" style="[%SI%]LIB_ANCRE..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><a id="LIB_ANCRE" class="Link-Left-Bold padding">Ancre</a></td></tr></table>
+																												
+																												</div>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</td>
+																									<td style="width:600px">
+																										<div style="height:100%;min-width:600px;width:auto !important;width:600px;" class="lh0">
+																											<div  style="float:left;margin:6px 0 0 97px;display:inline;min-height:20px;height:auto !important;height:20px;">
+																												<div  style="min-width:503px;width:auto !important;width:503px;"><table width="297px" style="height:20px;"><tr><td class="l-7" valign="middle" id="tzLIEN_REGLE"><a href="javascript:{_JSL(_PAGE_,'LIEN_REGLE','_blank','','')}" id="LIEN_REGLE" class="l-7 wblien padding">RÃ¨gles de confidentialitÃ©</a></td></tr></table>
+																												
+																												</div>
+																											
+																											</div>
+																										
+																										</div>
+																									
+																									</td>
+																								
+																								</tr>
+																							
+																							</table>
+																						
+																						</div>
+																					
+																					</td>
+																				
+																				</tr>
+																				<tr>
+																					<td></td>
+																				
+																				</tr>
+																			
+																			</table>
+																		
+																		<!--[if !IE]>-->
+																	
+																	</td>
+																
+																</tr>
+															
+															</table>
+														
+														<!--<![endif]-->
+													
+													</div>
+												
+												</div>
+											
+											</td>
+										
+										</tr>
+									
+									</table>
+								
+								</td>
+							
+							</tr>
+						
+						</table>
+					
+					</td>
+				
+				</tr>
+			
+			</table></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8v.png);background-position:100% 0px;background-size:200% 100%;"><div style="width:10px;font-size:1px"></div></td></tr><tr style="height:10px"><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:0px -10px;height:10px;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8h.png);background-position:0px 100%;height:-10px;background-size:100% 200%;"></td><td style="background-image:url([%_PROJET_WEB_%]res/02030405_b724fe27_wwcb8c.png);background-position:100% -10px;"></td></tr></table>
+		
+		</td>
+	
+	</tr>
+
+</table>
+</form>
+<input type="hidden" name="ZWW_POSITION_" id="ZWW_POSITION_" onclick="window.document.location='#'+ZWW_POSITION_.value" /><script type="text/javascript">setTimeout("if (bIsNetscape()){		[%SI%]SAI_CAPTCHA..VISIBLESTOCKE=1[%ALORS%]_PAGE_.SAI_CAPTCHA.onkeypress = ToutEnMaj;[%FIN%]}",1);</script>[%PAGE_PROJET..HTMLFINPAGE%]</body>
+</html>
+<!--384227-->

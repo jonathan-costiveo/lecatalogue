@@ -1,0 +1,18 @@
+; Section à AJOUTER À LA MAIN dans lecatalogue.ini
+;   - production : C:\WebSite\lecatalogue\LECATALOGUE_WEB\lecatalogue.ini
+;     (gsFicINI = goConfig:m_sRepDisk + "lecatalogue.ini", code projet p. 121)
+;   - test (GO dans WebDev) : H:\Mes Sites\lecatalogue\Exe\lecatalogue.ini
+;     (chemin codé en dur pour EnModeTest() ; à adapter si ton projet est ailleurs)
+;
+; CleAPI : 32 caractères aléatoires minimum, différente en test et en production.
+;          Générer par exemple avec :  openssl rand -hex 32
+;          Ne jamais la copier dans le code, un courriel, un ticket ou un journal.
+;          La même valeur va dans la configuration secrète d'estimation.ca (variable d'environnement).
+; IPAutorisees : adresses IP (séparées par ;) d'où estimation.ca appelle l'API.
+;          Vide = toute IP acceptée (à éviter en production).
+; Actif :  1 = API ouverte, 0 = API fermée (coupe-circuit immédiat, sans redéploiement).
+
+[APILIC]
+Actif=0
+CleAPI=
+IPAutorisees=

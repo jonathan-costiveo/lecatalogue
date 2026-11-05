@@ -1,0 +1,3 @@
+//MO136-137.TXT ANA00136 TO ANA00137
+Client		TAR	866	nouvelle taille enregistrement : 866
+Client	NBHFORM	RUB+		NBHFORM est une nouvelle rubrique

@@ -1,0 +1,5 @@
+//MO064-065.TXT ANA00064 TO ANA00065
+SDPINFO		TAR	100	nouvelle taille enregistrement : 100
+SDPINFO	SDP_DATELIMITE	RUB+		SDP_DATELIMITE est une nouvelle clé
+SDPINFO	TEMPS_CONSERVE	RUB-		la rubrique TEMPS_CONSERVE est supprimée
+SDPINFO	TEMPS_ADD	RUB-		la rubrique TEMPS_ADD est supprimée

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- GestBan2 23/10/2026 08:02 WebDev 18 18.0.216.0 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%GESTBAN2..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%GESTBAN2..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js?00e1c838" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js?3cf903fc" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js?00481aff" charset="windows-1252"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js?62431d27"></script>
+<script type="text/javascript">
+var _WW_SEPMILLIER_="[%_gszSEPMIL%]";
+var _WW_SEPDECIMAL_="[%_gszSEPDEC%]";
+<!--
+var _PAGE_=null;
+var _COL={9:"#f1c494",66:"#353535"};
+// EXE_SansEspace
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : chaine a traiter
+//	o : option indiquant de quel cote on doit retirer les espaces
+//						  1 = a gauche , 2 = a droite , 3 = les deux
+// Variables locales :
+//	d : position de debut de la chaine resultat desiree
+//	f : position de fin de la chaine resultat desiree
+function _SAE(c,o)
+{
+	var d=0;
+	// On force la conversion en chaine
+	c += ""
+	var f=c.length-1;
+	// Si on a demande sans espace a gauche
+	if(o&1)while(c.charAt(d)==" ")d++;
+	// Si on a demande sans espace a droite
+	if(o&2)while(c.charAt(f)==" ")f--;
+	// Securite si la chaine n'ets faite que d'espaces
+	if (f < d) f= d;
+	// On decoupe la sous chaine
+	return c.substring(d,f+1);
+}
+function _BOUTON1_CLI(event)
+{
+	{
+	if((_SAE(_PAGE_.NOM1.value,3)==""))
+	{
+		alert("Vous devez entrer un nom.");
+		clWDUtil.DonneFocus(_PAGE_.NOM1);
+		clWDUtil.bStopPropagation(event||{});
+		return;
+	}
+	if((_SAE(_PAGE_.BAN.value,3)==""))
+	{
+		alert("Vous devez sélectionner une image.");
+		clWDUtil.DonneFocus(_PAGE_.BAN);
+		clWDUtil.bStopPropagation(event||{});
+		return;
+	}
+	if((_SAE(_PAGE_.LIEN1.value,3)==""))
+	{
+		alert("Vous devez entrer un lien.");
+		clWDUtil.DonneFocus(_PAGE_.LIEN1);
+		clWDUtil.bStopPropagation(event||{});
+		return;
+	}
+}
+{
+		_JSL(_PAGE_,"BOUTON1","_self","","");}
+}
+function _LOD_COM(event)
+{
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+[%GESTBAN2..HTMLENTETE%]<script type="text/javascript">function chfocus()
+{
+
+window.focus();if(_PAGE_.BOUTON1!=null)try{_PAGE_.BOUTON1.focus();}catch(e){}
+
+
+}
+</script>
+<style type="text/css">.wblien {text-align:center;  color:#379DC3;}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css?58d704f8">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;margin:0;  color:#2D2D2D;}#page {  background-color:#FFFFFF;height:361px;width:841px;}
+#b-TABLE_BANNIERE2 {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#ctzTABLE_BANNIERE2 {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#lzTABLE_BANNIERE2 {border-style:solid;border-width:1px;border-color:#000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#ttNOM,.ttNOM,#ttIMAGE,.ttIMAGE,#ttLIENURL,.ttLIENURL,#ttPOURCENTAGE,.ttPOURCENTAGE {border-right:solid 1px #000000;border-bottom:solid 1px #000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}.communbc-NOM {border-right:solid 1px #000000;border-bottom:solid 1px #000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}.communbc-IMAGE {border-right:solid 1px #000000;border-bottom:solid 1px #000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}.communbc-LIENURL {border-right:solid 1px #000000;border-bottom:solid 1px #000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}.communbc-POURCENTAGE {border-bottom:solid 1px #000000;border-collapse:collapse;empty-cells:show;border-spacing:0;}#POURCENTAGE1 {width:103px;height:22px;}#BAN {width:392px;height:22px;}#LIEN1 {width:559px;height:22px;}#NOM1 {width:175px;height:22px;}#BOUTON1 {width:80px;height:24px;}#BOUTON2 {width:80px;height:24px;}
+</style>
+</head>
+<body style="   background-color:#FFFFFF;" onload="chfocus();[%_CodeInfoError_%]">
+<form name="GESTBAN2" enctype="multipart/form-data" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.GESTBAN2</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:861">
+<div id="dwwTABLEBANNIERE2" style="position:absolute;left:26px;top:201px;width:835px;height:186px;z-index:0;"><input type=hidden name="TABLE_BANNIERE2" value="[%TABLE_BANNIERE2%]"><input type=hidden name="TABLE_BANNIERE2_DEB" value="[%TABLE_BANNIERE2..PREMIERVISIBLE%]"><input type=hidden name="_TABLE_BANNIERE2_OCC" value="[%TABLE_BANNIERE2..OCCURRENCE%]"><CONTENEUR NAME="[%TABLE_BANNIERE2..ALIAS%]"><table id="ctzTABLE_BANNIERE2" cellspacing=0 cellpadding=0 width="835">
+ <tr><td></td><td colspan=[%TABLE_BANNIERE2..NBCOLVISIBLE%]  align="center" class="Verdana padding" id="lzTABLE_BANNIERE2">Bannière 468 x 60</td></tr>
+ <tr style="border:0" class="Style14 padding" id="ttTABLE_BANNIERE2">
+<td ID="b-TABLE_BANNIERE2"></td>
+  <td width="204" class="Style14 padding" id="ttNOM">Nom</td>
+  <td width="148" class="Style14 padding" id="ttIMAGE">Image</td>
+  <td width="372" class="Style14 padding" id="ttLIENURL">LienURL</td>
+  <td width="89" class="Style14 padding" id="ttPOURCENTAGE" style="border-right-width:0;">Pourcentage</td>
+ </tr>
+<!--REPEAT GENERATION_CORPS-->
+ <tr[%SI%]TABLE_BANNIERE2..LIGNEPAIRE!=1[%ALORS%] class="FondJB padding"[%FIN%][%SI%]TABLE_BANNIERE2..LIGNEPAIRE=1[%ALORS%] class="FondJB padding"[%FIN%] id="TABLE_BANNIERE2_[%TABLE_BANNIERE2%]">
+  <td ID="b-TABLE_BANNIERE2"><input type="radio" name="__TABLE_BANNIERE2__" VALUE="[%TABLE_BANNIERE2%]" [%SI%]TABLE_BANNIERE2..SELECTED= SELECTED[%ALORS%]CHECKED[%FIN%] onclick="_PAGE_.TABLE_BANNIERE2.value='[%TABLE_BANNIERE2%]'"></td>
+  <td height="18" width="204" class="l-0 communbc-NOM padding" id="c[%TABLE_BANNIERE2%]-NOM">[%NOM%]</td>
+  <td height="18" width="148" class="l-1 communbc-IMAGE padding" id="c[%TABLE_BANNIERE2%]-IMAGE">[%IMAGE%]</td>
+  <td height="18" width="372" class="l-1 communbc-LIENURL padding" id="c[%TABLE_BANNIERE2%]-LIENURL">[%LIENURL%]</td>
+  <td height="18" width="89" class="l-1 communbc-POURCENTAGE padding" id="c[%TABLE_BANNIERE2%]-POURCENTAGE">[%POURCENTAGE%]</td>
+ </tr>
+<!--/REPEAT-->
+</table></CONTENEUR></div>
+<div id="dwwPOURCENTAGE1" style="position:absolute;left:160px;top:124px;width:103px;height:24px;z-index:1;"><INPUT TYPE="text" SIZE="6" NAME="POURCENTAGE1" VALUE="[%POURCENTAGE1%]" id="POURCENTAGE1" class="l-1 padding"></div>
+<div id="dwwlzPOURCENTAGE1" style="position:absolute;left:26px;top:124px;z-index:1;"><table width="134px" style="height:24px;"><tr><td class="l-1 padding" id="lzPOURCENTAGE1">Pourcentage</td></tr></table></div>
+<div id="dwwBAN" style="position:absolute;left:160px;top:94px;width:392px;height:24px;z-index:2;"><INPUT TYPE="file" SIZE="46" NAME="BAN" VALUE="[%BAN%]" id="BAN" class="l-1 padding"></div>
+<div id="dwwlzBAN" style="position:absolute;left:26px;top:94px;z-index:2;"><table width="134px" style="height:24px;"><tr><td class="l-1 padding" id="lzBAN">Image de la bannière</td></tr></table></div>
+<div id="dwwLIEN1" style="position:absolute;left:65px;top:64px;width:559px;height:24px;z-index:3;"><INPUT TYPE="text" SIZE="37" NAME="LIEN1" VALUE="[%LIEN1%]" id="LIEN1" class="l-1 padding"></div>
+<div id="dwwlzLIEN1" style="position:absolute;left:26px;top:64px;z-index:3;"><table width="39px" style="height:24px;"><tr><td class="l-1 padding" id="lzLIEN1">Lien</td></tr></table></div>
+<div id="dwwNOM1" style="position:absolute;left:65px;top:34px;width:175px;height:24px;z-index:4;"><INPUT TYPE="text" SIZE="11" NAME="NOM1" VALUE="[%NOM1%]" id="NOM1" class="l-1 padding"></div>
+<div id="dwwlzNOM1" style="position:absolute;left:26px;top:34px;z-index:4;"><table width="39px" style="height:24px;"><tr><td class="l-1 padding" id="lzNOM1">Nom</td></tr></table></div>
+<div id="dwwSELECTEUR1" style="position:absolute;left:269px;top:34px;width:169px;height:24px;z-index:5;"><table id="tzSELECTEUR1" class="l-1" width="169" style=""><tr style="vertical-align:middle"><td style="vertical-align:middle;height:24px;width:84px;"><label for="SELECTEUR1_1" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SELECTEUR1" value="1" id="SELECTEUR1_1" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SELECTEUR1[1]..CHECKED%]>Image</label></td><td style="vertical-align:middle;height:24px;width:84px;"><label for="SELECTEUR1_2" style="display:block;height:15px;position:relative;padding-left:20px;"><input type="RADIO" name="SELECTEUR1" value="2" id="SELECTEUR1_2" style="position:absolute;left:0;margin-top:2px;_margin-top:1px;left:-1px;_top:-3px !important;_left:0;"[%SELECTEUR1[2]..CHECKED%]>Flash</label></td></tr></table></div>
+</div>
+<div id="dwwBOUTON1" style="position:absolute;left:26px;top:154px;width:80px;height:24px;z-index:6;"><input TYPE="button" NAME="BOUTON1" VALUE="Ajouter" onclick="_BOUTON1_CLI(event)" id="BOUTON1" class="l-1 padding"></div>
+<div id="dwwBOUTON2" style="position:absolute;left:124px;top:154px;width:80px;height:24px;z-index:7;"><input TYPE="button" NAME="BOUTON2" VALUE="Supprimer" onclick="{_JSL(_PAGE_,'BOUTON2','_self','','')}" id="BOUTON2" class="l-1 padding"></div>
+
+</form>
+<script type="text/javascript">
+<!--
+	if (navigator.appName == "Microsoft Internet Explorer") {
+		allInps = _PAGE_.all.tags("INPUT");
+		for (i=0;i<allInps.length;i++) {
+			tempInp = allInps(i);
+			if(tempInp.type.toUpperCase()=="FILE") {
+				if((tempInp.offsetWidth>tempInp.style.pixelWidth)&&(tempInp.style.pixelWidth>0)){
+					widthDiff = tempInp.offsetWidth-tempInp.style.pixelWidth;
+					tempInp.style.pixelWidth-=widthDiff;
+				}
+			}
+		}
+	}
+//-->
+</script>
+[%GESTBAN2..HTMLFINPAGE%]</body>
+</html>
+<!--28136-->

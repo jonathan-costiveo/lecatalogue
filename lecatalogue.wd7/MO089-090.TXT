@@ -1,0 +1,3 @@
+//MO089-090.TXT ANA00089 TO ANA00090
+REPCOMMON		TAR	413	nouvelle taille enregistrement : 413
+REPCOMMON	IDAAClient	RUB+		IDAAClient est une nouvelle clé

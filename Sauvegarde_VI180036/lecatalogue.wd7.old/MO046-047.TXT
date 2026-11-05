@@ -1,0 +1,34 @@
+//MO046-047.TXT ANA00046 TO ANA00047
+TRADES		NFI		nouveau fichier
+LienAsmb		TAR	938	nouvelle taille enregistrement : 938
+LienAsmb	TYPEITEM	RUB+		TYPEITEM est une nouvelle clé
+LienAsmb	Cat_Code	RUB+		Cat_Code est une nouvelle clé
+LienAsmb	Cat_Description_fr	RUB+		Cat_Description_fr est une nouvelle rubrique
+LienAsmb	Cat_description_en	RUB+		Cat_description_en est une nouvelle rubrique
+LienAsmb	Cat_description_es	RUB+		Cat_description_es est une nouvelle rubrique
+LienAsmb	Cat_MontantDivers	RUB+		Cat_MontantDivers est une nouvelle rubrique
+LienAsmb	Cat_poids	RUB+		Cat_poids est une nouvelle rubrique
+LienAsmb	P_TUCLEUNIK	RUB+		P_TUCLEUNIK est une nouvelle rubrique
+LienAsmb	Cat_Volume	RUB+		Cat_Volume est une nouvelle rubrique
+LienAsmb	V_TUCLEUNIK	RUB+		V_TUCLEUNIK est une nouvelle rubrique
+LienAsmb	Cat_Ratio	RUB+		Cat_Ratio est une nouvelle rubrique
+LienAsmb	Cat_Carton	RUB+		Cat_Carton est une nouvelle rubrique
+LienAsmb	FLAGMODECALC	RUB+		FLAGMODECALC est une nouvelle rubrique
+LienAsmb	RATCART	RUB+		RATCART est une nouvelle rubrique
+LienAsmb	Cat_DescMaj_FR	RUB+		Cat_DescMaj_FR est une nouvelle rubrique
+LienAsmb	Cat_DescMaj_EN	RUB+		Cat_DescMaj_EN est une nouvelle rubrique
+LienAsmb	Cat_DescMaj_ES	RUB+		Cat_DescMaj_ES est une nouvelle rubrique
+LienAsmb	CLE_PARENTIMLIG	RUB+		CLE_PARENTIMLIG est une nouvelle clé
+Itemcat		TAR	1149	nouvelle taille enregistrement : 1149
+Itemcat	TYPEITEM	CLEN*		la rubrique TYPEITEM est maintenant une clé
+Itemcat	FLAGMODECALC	RUB+		FLAGMODECALC est une nouvelle rubrique
+Itemcat	Cat_MontantDivers	RUB+		Cat_MontantDivers est une nouvelle rubrique
+Itemcat	Cat_P_MontantDivers	RUB+		Cat_P_MontantDivers est une nouvelle rubrique
+Itemcat	DDN2007	RUB+		DDN2007 est une nouvelle rubrique
+Itemcat	IDTRADES	RUB+		IDTRADES est une nouvelle clé
+Itemcat	DESC_MAJ_FR	CLE-*		la rubrique DESC_MAJ_FR n'est plus une clé
+Itemcat	CLE_MUTRADES	RUB+		CLE_MUTRADES est une nouvelle clé
+Itemcat	CleComp5	RUB-		la clé CleComp5 est supprimée
+TRADESTX		NFI		nouveau fichier
+TRADES		FRN		
+TRADESTX		FRN		

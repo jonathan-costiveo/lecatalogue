@@ -1,0 +1,5 @@
+//MO034-035.TXT ANA00034 TO ANA00035
+PROVENANCE		TAR	681	nouvelle taille enregistrement : 681
+PROVENANCE	Telephone	RUB+		Telephone est une nouvelle rubrique
+PROVENANCE	TelSansFrais	RUB+		TelSansFrais est une nouvelle rubrique
+PROVENANCE	Flags	RUB+		Flags est une nouvelle rubrique

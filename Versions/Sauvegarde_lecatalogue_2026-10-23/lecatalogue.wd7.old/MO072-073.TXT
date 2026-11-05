@@ -1,0 +1,3 @@
+//MO072-073.TXT ANA00072 TO ANA00073
+NOTE_CLIENT		TAR	76	nouvelle taille enregistrement : 76
+NOTE_CLIENT	TimeStamp	RUB+		TimeStamp est une nouvelle clé

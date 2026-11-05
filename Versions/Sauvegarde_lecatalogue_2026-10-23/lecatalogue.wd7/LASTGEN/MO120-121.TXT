@@ -1,0 +1,3 @@
+//MO120-121.TXT ANA00120 TO ANA00121
+REPCOMMON		TAR	542	nouvelle taille enregistrement : 542
+REPCOMMON	TimeStamp	RUB+		TimeStamp est une nouvelle clé

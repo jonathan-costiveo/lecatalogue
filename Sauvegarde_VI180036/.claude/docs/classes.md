@@ -1,0 +1,69 @@
+# Classes (.wdc) — noms de méthodes
+
+Généré par `.claude/scripts/gen_index.py`. Extrait de l'en-tête binaire des .wdc : seuls les noms sont lisibles, pas le code ni les signatures. « (compressé) » = en-tête illisible, ouvrir dans WebDev.
+Préfixes hongrois : b=booléen, s=chaîne, n/ln=entier, d=réel, c=caractère, dw=entier s.s., is=test, Set/Get=accesseurs.
+
+- **CAAClient.wdc** — isExistLogin, sGetLogin, sGetMotDePasse, sGetVersion3, SetVersion3, nGetNbrLicence, SetNbrLicence, sGetNom
+- **CAAEmail.wdc** — bEnvoiMessage
+- **CBanniere.wdc** — (compressé)
+- **CBanniere2.wdc** — (compressé)
+- **CBASICGROUPE7.WDC** — bCalcExpression
+- **CBasicHF.WDC** — AffErreur, AssignRep, bActiveFiltre, bAjoute, bBloqueEnreg, bBloqueFichier, bDesactiveFiltre, bLit, bLitDernier, bLitPrecedent, bLitPremier, bLitPremierVue, bLitRecherche, bLitSuivant, bLitSuivantVue, bLitSupprime, bModifie, bPrecedent, bRecherche, bReindexe, bSauveEnreg, bSetAlias, bSetModeSilencieux, bSuivant, bSupprime, bSupprimeCle, bSupprimeVue, bTestBlocage, cGetNomTable, cGetRep, CopieEnreg, Creation, CreationSiInexistant, DebloqueEnreg, DebloqueFichier, DeSerialize, DetruitVue, dwAddrEnreg, dwCreeVue, dwSizeEnreg, FermeFic, FichierVersStructure, GetValeur, GetValRub, HNbrEnr, isBloque, isExist, isFichierHF, isHBloque, isModifEnreg, isRubriqueExiste, isRubTexte, lnClePP, lnGetNbrEnr, lnGetNumEnr, nDupEnreg, nGetTypeRub, nReindexe, RazEnreg, RestaureEnreg, RetourPosition, SauvePosition, Serialize, SetClePP, SetModifEnreg, SetValeur, sGetTypeHF, StructureVersFichier, isCleExiste
+- **CBasicObjet.WDC** — bCopieFichier, isFichierHF, MsgException, sRemplaceValeur, TraceLog
+- **CCacheDico.wdc** — (compressé)
+- **CCacheOper.wdc** — (compressé)
+- **CCatalog.WDC** — AjoutErreur, AjoutItem, AlimTabRubImport, bAddRubImport, bAjoutAssemblage, bAjoutItem, bAjoutSection, bAjoutSousSect2, bAjoutSousSection, bCatalogue2niveaux, bCatalogue3niveaux, bCatalogueNniveaux, bCatRubrique, bExportBloc, bGetAssemblage, bItemSuivant, bPremierItem, bSetAlias, bSupprime, CatJauge, cGetCatCode, cGetCatCodeD, cGetCatCodeG, cGetDateRevision, cGetDescMajFR, cGetDescriptionFR, cGetEscompte, cGetUnite, cTraiteDescription, cTraiteValeur, dCalcEscompte, dGetPoids, dGetTemps, dGetVolume, FermeFic, InitImport, InitRubImport, isAssemblage, isCatalog, isDateAlim, isEmpty, isExistCode, isExistFils, isItem, isNumerik, isProtected, lnGetCleMultiCat, lnGetCleParent, lnGetClePP, lnRestaureCompteur, mGetCarton, mGetCartonAchat, mGetCartonPose, mGetCout, mGetMainOeuvre, mGetPrixAchat, mGetPrixPose, mGetRatio, mGetRatioAchat, mGetRatioPose, mGetSousTraitant, nGetTypeItem, nLitCatalogue, ParseCode, ResetImportWWW, ResetRep, sConstruitLigne, sConstruitLigSect, sCourtCatCode, sCourtCle, sCourtDescription, sElimineDecor, SetCarton, SetCartonAchat, SetCartonPose, SetCatCode, SetCleCadrage, SetCleMultiCat, SetCleParent, SetCleTemps, SetCout, SetDateCreation, SetDateModif, SetDateRevision, SetDescMajFR, SetDescriptionFR, SetEscompte, SetMainOeuvre, SetMajWWW, SetNbrElem, SetParamParcours, SetPoids, SetProtected, SetRatio, SetRatioAchat, SetRatioPose, SetSousTraitant, SetTemps, SetTypeItem, SetUnite, SetValeur, SetVolume, sGenereLigne, sGetBlancSiZero, sGetCleTri, sLigneExport, sLongInfo, SupprimeTout, cGetDescriptionEN, cGetDescriptionES, mGetEquipement, SetEquipement, cGetDescMajEN, cGetdescMajES, SetDescriptionEN, SetDescMajEN, SetDescMajES, SetDescriptionES, dGetEscompte, lnGetCleMetier, sGetDDN2007
+- **CClient.wdc** — lnGetIdClient, isExistUser, SetCondition, isCondition, SetLogin, SetWebMaster, lnGetProvenance, isExistNom, sGetLogin, isWebMaster, SetPassword, SetProvenance, sGetPassword, isPassCrypte, SetPassCrypte, isExistEMail, SetCourriel, sGetNom, SetNom, sGetMail, SetProspect, isProspect, SetTelephone, SetFax, sGetTelephone, sGetFax, sGetNomMaj, sGetContact, sGetDateDerniereVisite, isExpire, sGetDateFin, SetDateFin, SetDateDerniereVisite, SetBatch, isBatch, SetContact, SetDateAchat, nGetJourRestant, sGetDateAchat, SetAbonnement, isAbonne, sGetSujet, sGetTexteMemo, SetTexteMemo, SetSujet, isExistMail123
+- **CClientCat.wdc** — isAutorise, bGetCatalogue, lnGetIdClient, lnGetCleMulticat, isCatalogExist, bAjoutCatalogue
+- **CClientDemo.wdc** — (compressé)
+- **CCommande.wdc** — SetNom, SetPrenom, SetNomSociete, SetAdresse, SetTelephone, SetFonction, SetTelecopie, SetCourriel, isExistNom, sgetNom, sGetCourriel
+- **CCommon.wdc** — (compressé)
+- **CConfigCat.wdc** — SetProvenance, cGetBanniere, cGetDestinataire, cGetProvenance, cGetTitre, cGetAddrContact, sGetLogin, SetLogin, sGetProvFax, isNousMeme, sGetMailNousMeme, sGetMailNomUser, lnGetIdClient, SetIdClient, cGetBonCommandePDF, EtatEntete, isWebMaster, SetWebMaster
+- **CCourriels.wdc** — (compressé)
+- **CCryptFic.WDC** — bCreation, bCryptFlush, bCryptInit, bEcritLigne, bFerme, bGetCle, bLitLigne, bOuvre, isIdentOK, sCreatCle, sGetPassword, sGetUser
+- **CDllNotify.WDC** — bAddNotification, bCryptAlloc, bCryptCopie, bCryptFree, bFinNotification, bFinNotify, bGetInfoNotification, cFormatIdent, cGetError, isNotifyExist, lnCrypte, lnDecrypte, Parsing, InitCriticalSection, DelCriticalSection, CriticalSection
+- **CDllUtils.wdc** — CDllUtils
+- **cemail.wdc** — bAjoutCC, bAjoutDestinataire, bAjoutFichierAttache, bEnvoyerMail, cGetDestinataire, cGetEntreprise, cGetExpediteur, cGetMsgErr, cGetProfil, cGetTelephone, ExtractMess, ResetMail, SetExpediteur, SetInfoEntreprise, SetParamPOP3, SetProfil, sNomFicPass
+- **CEnvoi.wdc** — (compressé)
+- **CEnvoiEMail.wdc** — bCreationMessage, bRevisionAbonnement, bEcritType, bEcritSujet, bEcritParam, bEcritMessage, sGetMsgErr, SetMsgErr, bDemarre, bDifferenceClient
+- **CEquipElem.wdc** — (compressé)
+- **CEstimeHF.WDC** — bAjustementApresAjout, bAttachTableMem, bFichierVersLigne, bFichierVersTable, bFiltreAjoutTable, bLigneVersFichier, bRecuperer, bSetAlias, bSetTableSupprimeTout, bTableVersFichier, cConstruitAlias, cGetColFromRub, cGetRubFromCol, cGetSection, DelZone, DeSerialize, DetachTableMem, dGetPoids, dGetTemps, dGetVolume, FlechesParcours, GetValeurColonne, GetValeurRubrique, isCatalog, isExistPHSect, isModif, isModifFichier, isRepCommon, isRepDefaut, isRepDossier, lnGetClePoids, lnGetCleTemps, lnGetCleVolume, lnGetFlags, nListeSousTraitant, ResetRep, sClePHSect, sCreatPHSect, Serialize, SetClePoids, SetCleTemps, SetCleVolume, SetColSpecial, SetFiltreAjout, SetFlag, SetFlags, SetPoids, SetRedraw, SetTemps, SetVolume
+- **CFichier.WDC** — bBloque, bCreation, bDebloque, bEcrit, bEcritBuffer, bEcritLigne, bFerme, bLitBuffer, bLitLigne, bOuvre, dwGetDuree, dwGetTaille, isOuvert, sGetNomFic
+- **CGROUPEUNITE7.WDC** — bInit, bListeFonction, bPremiereUnite, bSetAlias, bUniteSuivante, cGetLib, cGetLibType, cGetMotReserve, cGetNom, dGetValConv, GetInfoUnite, GetListeReserve, isExistMot, isExistUnite, isFichierHF, isLibUnite, isRepDefaut, isUniteDef, isUniteNonDefinie, nGetIndicePVT, RemplitCombo, RemplitComboPoids, RemplitCombos, RemplitComboTemps, RemplitComboType, RemplitComboUnite, RemplitComboVolume, ResetRep, SelectUnite, sGetValConv
+- **CHistoDemo.wdc** — (compressé)
+- **CHistorique.wdc** — bAjout, sGetTypeAction, lnGetIdClient, nGetTypeAction, sGetTimeStamp, sGetTable, lnGetCleTable, nGetNoLigne, sGetDescAction
+- **CInfoEcole.wdc** — (compressé)
+- **CInterven.wdc** — (compressé)
+- **CIntrusion.wdc** — (compressé)
+- **CIPAddress.wdc** — (compressé)
+- **CLangue.wdc** — cGetCLang, ExtractMess, nGetCLang, RemplitCombo, SelectLangue
+- **clibpng.wdc** — bCreatPNG, bSetTabulation, ResetTabulation, SetPolice, SetSizeImage
+- **CLienAsmb.WDC** — bAjout, bSupprimeTout, GetInfo, lnGetCleParent
+- **CListeChaine.wdc** — bAjoutElem, bGetElem, bSupprime, DispElem, FusionListe, isEmpty, ListeElem, lnGetNbrElem, ResetListe, sGetTriListe
+- **CListForm.wdc** — (compressé)
+- **CLogVersion.wdc** — (compressé)
+- **CMulticat.WDC** — bAjoutItem, bCreeCatalog, bDispatch, bExportation, bSetAlias, cGetDateRev, cGetLigneCommande, cGetNom, cGetNomExec, cGetNomFic, cGetNomMaj, isCadrageG, isCatalog, isDefaut, isDesactiveExec, isDescNiveaux, isExistCatalog, isExistDefaut, isExistFic, isNoAffCode, isSousSection, lnGetNbrItem, lnGetNumRev, nGetTypeCat, ResetRep, SetCadrageG, SetDateRev, SetDesactiveExec, SetDescNiveaux, SetLigneCommande, SetNbrItem, SetNoAffCode, SetNom, SetNomExec, SetNomFic, SetNumRev, SetSousSection, SetTypecat, SupprimeTout
+- **CNoteCatClient.wdc** — (compressé)
+- **CNoteClient.wdc** — (compressé)
+- **CParcours.wdc** — bLitPremier, bLitSuivant, bLitPrecedent, bLitDernier, SetTotal, SetBoutons, bGarder, ZoneAjoute, bPremierePage, bPageSuivante, bPagePrecedente, bDernierePage, EtatBoutons
+- **CParcoursTous.wdc** — bPremierePage, ZoneAjoute, bGarder, SetRech, bPageSuivante, ZoneReset, SetRep, bPagePrecedente, bDernierePage, fnThreadParcours, SetFinParcours, isFinParcours, xTrace, AjoutMemZone, CreatMemZone, AlimPage, DelMemZone, AfficheCompteur, isZoneOK, CriticalSection, sConstruitLigne
+- **CPays.WDC** — cFormatTelephone, cGetPays, cUnformatTelephone, nGetIndice, nGetPays, nPaysFromIndice, RemplitCombo, SelectPays, SetSeparateur
+- **CProvenance.wdc** — B, bInitTable, SetAbrev, SetDescription, sGetDescription, sGetAbrev, isExistAbrev, RemplitCombo, SetCourriel, sGetCourriel, SetAdresse, SetTelephone, SetTelecopie, SetSansFrais, sGetTelephone, sGetTelecopie, sGetSansFrais, sGetAdresse, sGetRue, sGetCodePostal, sGetVille, SetActif, isActif, B, bInitTable, SetAbrev, SetDescription, sGetDescription, sGetAbrev, isExistAbrev, RemplitCombo, SetCourriel, sGetCourriel, SetAdresse, SetTelephone, SetTelecopie, SetSansFrais, sGetTelephone, sGetTelecopie, sGetSansFrais, sGetAdresse, sGetRue, sGetCodePostal, sGetVille, SetActif, isActif
+- **CRBQEntrep.wdc** — sGetNomEntreprise, SetCumul, isInterdit, nGetLimite, nGetAddrIP, SetAddrIP, SetNomEntreprise, SetLimite, sGetAddrIP, nGetCumul, SetInterdit, sGetNomEntreprise, SetCumul, isInterdit, nGetLimite, nGetAddrIP, SetAddrIP, SetNomEntreprise, SetLimite, sGetAddrIP, nGetCumul, SetInterdit
+- **CRBQHisto.wdc** — SetDate, SetHeure, SetNomEntreprise, SetAddrIP, SetCumul, SetCommande, Setversion, nGetAddrIP, sGetDate, sGetHeure, sGetAddrIP, sGetNomEntreprise, nGetCumul, sGetVersion, sGetRequete
+- **CRC32.wdc** — dwCalcCRC32, dwCRCChaine, InitTable
+- **CSDPDesc.wdc** — (compressé)
+- **CSDPFic.wdc** — (compressé)
+- **CSDPInfo.wdc** — (compressé)
+- **CSdpIntrus.wdc** — (compressé)
+- **CSDPStat.wdc** — (compressé)
+- **CTrades.wdc** — SupprimeTout, bSetAlias, FermeFic, ResetRep, dGetTaux, lnGetCleTemps, sGetDesc, sGetCode, sGetUser, sGetDate
+- **CTradesTx.wdc** — (compressé)
+- **CTReserve.WDC** — bAddMot, bInitTable, GetListeMot, isExistMot, nGetLangue, SetDescription, SetLangue, SetMot, SetSyntaxe, SetValeur, sGetDescription, sGetMot, sGetSyntaxe
+- **CTTabConv.WDC** — bAddConversion, cGetSValConv, dGetValConv, isExistConv, SetCle1, SetCle2, SetSValConv, SetValConv
+- **CTTypeUnite.WDC** — bAddType, bInitTypes, cGetLib, cGetLibFR, cGetLibGB, cGetLibType, RemplitCombo
+- **CTUnite.WDC** — A, bAddUnite, bCalcTable, bInitTables, bSetAlias, cGetLib, cGetLibFR, cGetLibGB, cGetNom, cGetSValConv, cGetSymbole, cGetType, cLitLib, dGetValConv, isExistConv, isExistUnite, lnGetCleUnite, nGetCateg, nGetTypUnit, RemplitCombo, ResetRep, SetCateg, SetLibFR, SetLibGB, SetNom, SetSymbole, SetType
+- **CUtils.WDC** — AddCar, ArbreChemin, ArbreListe, bAddConnect, bBinaireSauve, bCancelConnect, bCompacte, bDecompacte, bEcritRegistre, bFree, bGetFreeDrive, bListeFille, bLoadCursor, bMoveDir, bRepCree, bSetActiveLog, bSupprimeFic, cAjouteSlash, cControlePoint, cEnleveExtension, cEnleveSlash, cGetDDEErreur, cGetDrive, cGetExt, cGetRepSys, cLastSubRep, cPremiereMajus, cRemoveLastSubRep, cRemplaceExtension, cRemplacerParam, DeplaceColonne, DestroyCursor, dwContrastColor, ElimineCacheSysteme, FixeColonne, GetLastError, GetRectColonnes, GetRectText, GetWindowPos, GraphCreePolice, hDecorTable, hGetAscHorizontal, hGetAscVertical, isActiveLog, isBouton, isChampExiste, isChiffre, isCtrlEnfonce, isDriveReseau, isFicExiste, isFonctionExiste, isLettre, isListe, isMultiSel, isNombre, isRepExiste, isTable, isTypeChaine, isTypeEntierLong, Libere, lnSetFlag, MyInfoObjet, MyInfoObjet2, MyInfoObjet3, nGetHauLigneListe, nGetTailleChaine, nTableIndiceColonne, pMalloc, RestaureMultiSel, sARecuperer, SauveMultiSel, sBinaireInfo, sDispEtat, SepareNom, SetColFixSize, SetWindowPos, sGetChamp, sGetChampSurvol, sGetColonneSurvol, sGetEtat, sGetMessAPIErr, sGetOnglet, sGetParent, sReelVersChaine, sRemplacePuissance, sRemplaceValeur, sSansAccent, sTrace, sTransformeNom, sTypeChamp, TraceLog, TransfertChaineZ, WNetGetLastError, xTrace, TraceFic, cGetNomSeul
+- **CVersion.wdc** — SetVersion
+- **CWinAPI.WDC** — bBitBlt, bDeleteObject, hCreateFontIndirect, hGetDC, hSelectObject, lnGetLastError, lnSetMapMode, lnSetTextColor, ReleaseDC
+- **CZoneMem.wdc** — (compressé)

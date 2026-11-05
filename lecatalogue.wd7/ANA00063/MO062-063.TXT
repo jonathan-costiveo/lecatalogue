@@ -1,0 +1,3 @@
+//MO062-063.TXT ANA00062 TO ANA00063
+AAClient		TAR	1478	nouvelle taille enregistrement : 1478
+AAClient	SDP_CURSIZE	RUB+		SDP_CURSIZE est une nouvelle rubrique

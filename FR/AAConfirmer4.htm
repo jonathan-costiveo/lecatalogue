@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><!-- AAConfirmer4 13/08/2018 15:58 WebDev 18 18.0.95.8 -->
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>[%AAConfirmer4..TITRE%]</title>
+<meta name="generator" content="WEBDEV">
+<meta http-equiv="X-UA-Compatible" content="IE=5"><script type="text/javascript">var _bUTF8_=[%AACONFIRMER4..MODEUTF8%];</script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/StdAction.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDUtil.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDDrag.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/WDStd.js" charset="ISO-8859-1"></script>
+<script type="text/javascript" src="[%_PROJET_WEB_%]res/Procedures_globales_de_lecatalogue_Navigateur.js"></script>
+<script type="text/javascript">
+var _UC0_="[%LIBELLE1..DNDSOURCE%]";
+var _UC1_="[%LIBELLE1..DNDCIBLE%]";
+<!--
+var _PAGE_=null;
+var _COL=[];_COL[9]="#f1c494";_COL[66]="#353535";
+// JS_ConvInnerTextRet
+// ------------------------------------------------------------------------------------------------
+// Parametres :
+//	c : champ
+//	f : fils
+//	t : tableau du contenu
+//	Retour : valeur
+function _JCIR(c)
+{
+	if (bIE)
+	{
+		// IE => innerText
+		return c.innerText;
+	}
+	else
+	{
+		// Autres => il faut parcourir les noeuds
+		var f = c.firstChild;
+		var t = [];
+		while (f)
+		{
+			if (f.nodeName == "#text")
+			{
+				t.push(f.textContent);
+			}
+			else if (clWDUtil.bBaliseEstTag(f,"br"))
+			{
+				t.push("\r\n");
+			}
+			f = f.nextSibling
+		}
+		return t.join("");
+	}
+}
+function _GET_LIBELLE1_1()
+{
+	return _JCIR(_JGE("LIBELLE1",document));
+}
+function _SET_LIBELLE1_1(v)
+{
+	_JGE("LIBELLE1",document).innerHTML=clWDEncode.sEncodeInnerHTML((v)+"",true,false);
+}
+function _AACONFIRMER4_LOD(event)
+{
+	{
+	_BOUTON1_CLI(event);
+}
+}
+function _LIEN1_CLI(event)
+{
+	window.close()
+
+{
+	_JSL(_PAGE_,"LIEN1","_self","","");}
+}
+function _BOUTON1_CLI(event){_JCL("http://www.estimation.qc.ca/version/news/InstallSRV.exe","_self","","")}
+function _LOD_COM(event)
+{
+	WDDnDNatifChamp.prototype.s_DeclareChamp("LIBELLE1","",_UC0_,_UC1_,_JGEN("LIBELLE1",document,false),[_GET_LIBELLE1_1],[_SET_LIBELLE1_1]);
+}
+function _UNL_COM(event)
+{
+}
+//-->
+</script>
+
+<!-- DEBUT DU SCRIPT -->
+<script LANGUAGE="Javascript">
+<!--
+// ***********************************************
+// ***********************************************
+var isNS = (navigator.appName == "Netscape") ? 1 : 0;
+var EnableRightClick = 0;
+if(isNS) document.captureEvents(Event.MOUSEDOWN||Event.MOUSEUP);
+function mischandler()
+{ if(EnableRightClick==1)
+{ return true; }
+else {return false; }}
+function mousehandler(e)
+{ if(EnableRightClick==1){ return true; }
+var myevent = (isNS) ? e : event;
+var eventbutton = (isNS) ? myevent.which : myevent.button;
+if((eventbutton==2)||(eventbutton==3)) return false;}
+function keyhandler(e) { var myevent = (isNS) ? e : window.event;
+if (myevent.keyCode==96) EnableRightClick = 1;
+return;}document.oncontextmenu = mischandler;
+document.onkeypress = keyhandler;
+document.onmousedown = mousehandler;
+document.onmouseup = mousehandler;
+//-->
+</script>
+<!-- FIN DU SCRIPT -->
+<style type="text/css">.wblien {}a:active{}a:visited{}</style><link rel="stylesheet" type="text/css" href="[%_PROJET_WEB_%]ActivXP.css">
+<style type="text/css">@-moz-document url-prefix() { @media print { body { overflow:visible !important; } } } 
+body{overflow:auto;width:100%;margin:0;}#page { min-height:105px;height:auto !important;height:105px;min-width:229px;width:auto !important;width:229px;}
+#fzLIBELLE1,#tzLIBELLE1 {  [%SI%]LIBELLE1..COULEUR!=-1[%ALORS%]color:#[%LIBELLE1..COULEUR%][%FIN%];  [%SI%]LIBELLE1..COULEURFOND!=-1[%ALORS%]background-color:#[%LIBELLE1..COULEURFOND%][%FIN%];font-weight:[%LIBELLE1..POLICEGRAS;4%];font-style:[%LIBELLE1..POLICEITALIQUE;5%];[%SI%]LIBELLE1..POLICENOM!=[%ALORS%]font-family:[%LIBELLE1..POLICENOM%];[%FIN%]text-decoration:[%LIBELLE1..POLICESOULIGNEE;6%];[%SI%]LIBELLE1..POLICETAILLE!=0[%ALORS%]font-size:[%LIBELLE1..POLICETAILLE;7%];[%FIN%][%SI%]LIBELLE1..CADRAGEH!=-1[%ALORS%]text-align:[%LIBELLE1..CADRAGEH;9%];[%FIN%][%SI%]LIBELLE1..CADRAGEV!=-1[%ALORS%]vertical-align:[%LIBELLE1..CADRAGEV;10%];[%FIN%][%SI%]LIBELLE1..OPACITE!=100[%ALORS%]filter:alpha(opacity=[%LIBELLE1..OPACITE%]);zoom:1;opacity:[%LIBELLE1..OPACITE;8%];[%FIN%]}
+#BOUTON1 {width:100px;height:24px;}
+
+</style>
+</head>
+<body style="  background-color:#3366CC;" onload="[%_CodeInfoError_%];_LOD_COM(event);_AACONFIRMER4_LOD(event)">
+<table align=center  width="184px"><tr align=left valign=top><td><div style="position:relative">
+<form name="AACONFIRMER4" action="[%_URL_ACTION_%]" target="_self" method="post">
+<script type="text/javascript">_PAGE_=document.AACONFIRMER4</script>
+<div class="h-0">
+<input type="hidden" name="WD_BUTTON_CLICK_" value="">
+<input type="hidden" name="WD_ACTION_" value="">
+</div>
+<div id="divform" style="position:absolute;left:0;top:0;z-index:0;width:184">
+</div>
+<div id="dwwLIBELLE1" style="position:absolute;left:[%LIBELLE1..X%]px;top:[%LIBELLE1..Y%]px;z-index:0; [%SI%]LIBELLE1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%][%SI%]LIBELLE1..CURSEURSOURIS!=auto[%ALORS%]cursor:[%LIBELLE1..CURSEURSOURIS%];[%FIN%]"><table width="[%LIBELLE1..LARGEUR%]px" style="height:20px;"><tr><td class="l-0 padding effet" id="tzLIBELLE1">[%LIBELLE1..HTMLAVANT%][%LIBELLE1%][%LIBELLE1..HTMLAPRES%]</td></tr></table></div>
+<div id="dwwBOUTON1" style="position:absolute;left:0px;top:55px;width:100px;height:24px;z-index:1; [%SI%]BOUTON1..VISIBLESTOCKE=0[%ALORS%]visibility:hidden;[%FIN%]"><input TYPE="button" NAME="BOUTON1" VALUE="Télécharger" onclick="_BOUTON1_CLI(event)" id="BOUTON1" class="l-0 padding effet" TABINDEX="1"></div>
+<div id="dwwLIEN1" style="position:absolute;left:0px;top:85px;width:100px;height:20px;z-index:2;"><a href="javascript:_LIEN1_CLI()" id="LIEN1" class="l-0 wblien padding effet"  style="_height:20px;" TABINDEX="1">Fermer</a></div>
+
+</form>
+</div></td></tr></table>
+[%AAConfirmer4..HTMLFINPAGE%]</body>
+</html>
+<!--6294-->

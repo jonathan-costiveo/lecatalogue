@@ -1,0 +1,3 @@
+//MO074-075.TXT ANA00074 TO ANA00075
+SDPSTAT		TAR	52	nouvelle taille enregistrement : 52
+SDPSTAT	SDPCLEDOSS	RUB+		SDPCLEDOSS est une nouvelle rubrique

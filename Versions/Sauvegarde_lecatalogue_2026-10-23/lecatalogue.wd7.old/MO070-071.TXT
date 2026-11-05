@@ -1,0 +1,4 @@
+//MO070-071.TXT ANA00070 TO ANA00071
+NOTE_CLIENT		TAR	57	nouvelle taille enregistrement : 57
+NOTE_CLIENT	NOTE_DATE	NNR	NOTE_TS	ATTENTION : la rubrique NOTE_TS a pour nouveau nom NOTE_DATE
+NOTE_CLIENT	NOTE_DATE	CNW	Date (aaaammjj)$Chaîne	la rubrique NOTE_DATE a pour nouveau type Date (aaaammjj)

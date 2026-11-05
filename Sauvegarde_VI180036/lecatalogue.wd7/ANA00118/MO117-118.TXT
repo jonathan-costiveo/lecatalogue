@@ -1,0 +1,3 @@
+//MO117-118.TXT ANA00117 TO ANA00118
+AAClient		TAR	1349	nouvelle taille enregistrement : 1349
+AAClient	VERSION14	RUB+		VERSION14 est une nouvelle rubrique

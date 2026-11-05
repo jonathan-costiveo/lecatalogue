@@ -1,0 +1,2 @@
+//MO138-139.TXT ANA00138 TO ANA00139
+Client	LoginMaj	CLEN*		la rubrique LoginMaj est maintenant une clé

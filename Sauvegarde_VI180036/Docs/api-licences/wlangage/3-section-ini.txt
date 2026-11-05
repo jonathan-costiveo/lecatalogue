@@ -1,0 +1,65 @@
+; Section à AJOUTER À LA MAIN dans lecatalogue.ini
+;   - production : C:\WebSite\lecatalogue\LECATALOGUE_WEB\lecatalogue.ini
+;     (gsFicINI = goConfig:m_sRepDisk + "lecatalogue.ini", code projet p. 121)
+;   - test (GO dans WebDev) : H:\Mes Sites\lecatalogue\Exe\lecatalogue.ini
+;     (chemin codé en dur pour EnModeTest() ; à adapter si ton projet est ailleurs)
+;
+; CleAPI : 32 caractères aléatoires minimum, différente en test et en production.
+;          Générer par exemple avec :  openssl rand -hex 32
+;          Ne jamais la copier dans le code, un courriel, un ticket ou un journal.
+;          La même valeur va dans la configuration secrète d'estimation.ca (variable d'environnement).
+; IPAutorisees : adresses IP (séparées par ;) d'où estimation.ca appelle l'API.
+;          Vide = toute IP acceptée (à éviter en production).
+; Actif :  1 = API ouverte, 0 = API fermée (coupe-circuit immédiat, sans redéploiement).
+; Creation : 1 = Action=creer permise (création de fiches clients), 0 ou absent = refusée
+;          (CREATION_INACTIVE). Coupe-circuit propre à la création ; les autres actions restent ouvertes.
+
+[APILIC]
+Actif=0
+CleAPI=
+IPAutorisees=
+Creation=0
+
+; ---------------------------------------------------------------------------------------
+; TEST LOCAL SEULEMENT (GO dans WebDev) : à mettre dans l'INI de test, JAMAIS en production.
+; En mode test, les paramètres d'URL n'arrivent pas au code du projet : l'API les lit ici
+; (procédure sAPIParam, active seulement si EnModeTest()). Change Action/Login/Courriel/dates puis refais GO.
+; Il faut aussi, dans le bloc  SI EnModeTest() ALORS  du code projet, mettre en commentaire
+;     AADownLoad="philippe"
+; et ajouter à sa place
+;     AAType="apilic"
+; (à remettre comme avant après les tests).
+
+[APILIC_TEST]
+Action=ping
+Cle=<la même valeur que CleAPI>
+Login=
+Courriel=
+DateFinAbonnement=
+DateFinEG=
+DateFinEPlans=
+IdDemande=test-local
+; Action=creer (voir contrat.md). Changer IdDemande à chaque nouvelle création ;
+; garder la même pour vérifier le rejeu ("cree":false).
+Nom=
+Contact=
+Courriel2=
+Courriel3=
+Telephone=
+Telephone2=
+TypeVersion=
+EGAchat=
+EGLocation=
+EPlansMonoAchat=
+EPlansMonoLocation=
+EPlansMultiAchat=
+EPlansMultiLocation=
+Echeancier=
+Comparatif=
+Ventilation=
+Repartition=
+Invitation=
+Catalogue=
+SalleDePlans=
+AbonnementMensuel=
+Forcer=

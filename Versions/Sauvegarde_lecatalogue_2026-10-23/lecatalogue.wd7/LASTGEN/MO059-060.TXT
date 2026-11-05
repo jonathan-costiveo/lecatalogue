@@ -1,0 +1,4 @@
+//MO059-060.TXT ANA00059 TO ANA00060
+SDPINFO		TAR	99	nouvelle taille enregistrement : 99
+SDPINFO	SDP_SIZE	RUB+		SDP_SIZE est une nouvelle rubrique
+SDPINFO	SDP_NBRFIC	RUB+		SDP_NBRFIC est une nouvelle rubrique

@@ -1,0 +1,6 @@
+//MO080-081.TXT ANA00080 TO ANA00081
+SDPINFO		TAR	113	nouvelle taille enregistrement : 113
+SDPINFO	DATE_DELETE	NNR	TIMESTAMP_DELETE	ATTENTION : la rubrique TIMESTAMP_DELETE a pour nouveau nom DATE_DELETE
+SDPINFO	DATE_DELETE	CNW	Date (aaaammjj)$Chaîne	la rubrique DATE_DELETE a pour nouveau type Date (aaaammjj)
+SDPINFO	SDP_DELFIC	RUB+		SDP_DELFIC est une nouvelle rubrique
+SDPINFO	ClE_DELFIC	RUB+		ClE_DELFIC est une nouvelle clé
